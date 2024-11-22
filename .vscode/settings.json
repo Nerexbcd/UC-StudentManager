@@ -2,5 +2,6 @@
     "files.associations": {
         "*.ino": "arduino-output",
         "txt_files.h": "c"
-    }
+    },
+    "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe"
 }
