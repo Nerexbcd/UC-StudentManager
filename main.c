@@ -4,7 +4,10 @@
 
 int main(void)
 {
-    printf("Sum of 7 and 3 is %d\n", Batata(7, 3));
+    txtFile txt = txt_files_init("/home/user/documents/file.txt");
+    printf("Filepath: %s\n", txt.filepath);
+    printf("Filename: %s\n", txt.filename);
+
 
     printf("Hello, World!\n");
     return 0;

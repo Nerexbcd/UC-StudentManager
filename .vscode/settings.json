@@ -1,7 +1,9 @@
 {
     "files.associations": {
         "*.ino": "arduino-output",
-        "txt_files.h": "c"
+        "txt_files.h": "c",
+        "string.h": "c",
+        "stdio.h": "c"
     },
     "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe",
     "lonberg.editorButtonRunTask": {
