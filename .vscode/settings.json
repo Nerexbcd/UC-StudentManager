@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.ino": "arduino-output",
+        "txt_files.h": "c"
+    }
+}
