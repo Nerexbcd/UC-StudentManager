@@ -10,7 +10,7 @@
                 "${workspaceFolder}//main.c",
                 "${workspaceFolder}/libs//**//**.c",
                 "-o",
-                "${fileDirname}/build/UC-StudentManager",
+                "${workspaceFolder}/build/UC-StudentManager",
                 "-lm"
             ],
             "options": {
