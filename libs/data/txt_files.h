@@ -2,9 +2,10 @@
 #define TXT_FILES_H_INCLUDED
 
 typedef struct txtFile {
-    char *filename;
-    char *filepath;
-    FILE file;
+    char *fileName;
+    char *fileDir;
+    char *loaded;
+    char **data;
 } txtFile;
 
 
@@ -12,6 +13,9 @@ typedef struct txtFile {
 struct txtFile txt_files_init(char *path);
 
 /* Load txt files in to Program */
-int load_txt_file(const char *filename);
+int txt_load_file(txtFile *txt);
+
+/* Unload txt files from Program */
+int txt_unload_file(txtFile *txt);
 
 #endif

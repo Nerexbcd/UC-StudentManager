@@ -3,7 +3,10 @@
         "*.ino": "arduino-output",
         "txt_files.h": "c",
         "string.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "string_util.h": "c",
+        "colors.h": "c",
+        "tools.h": "c"
     },
     "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe",
     "lonberg.editorButtonRunTask": {
