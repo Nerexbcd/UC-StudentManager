@@ -26,18 +26,27 @@
             "preLaunchTask": "Build Program (Linux)",
             "miDebuggerPath": "/usr/bin/gdb"
         },
+
+
         {
-            "name": "Run Program (Windows)",
-            "type": "cppvsdbg",
+            "name": "Run Program",
+            "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}\\build\\UC-StudentManager.exe",
+            "windows": {
+                "program": "${workspaceFolder}\\build\\UC-StudentManager.exe",
+                "preLaunchTask": "Build Program (Windows)",
+            },
+            "linux": {
+                "program": "${fileDirname}/build/UC-StudentManager",
+                "preLaunchTask": "Build Program (Linux)",
+            },
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "console": "integratedTerminal",
-            "preLaunchTask": "Build Program (Windows)",
+            "externalConsole": false,
+            
         }
     ],
-    "version": "2.0.0"
+    "version": "0.2.0"
 }
