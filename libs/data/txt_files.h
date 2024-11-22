@@ -7,6 +7,7 @@ int txt_files_init();
 /* Load txt files in to Program */
 int load_txt_file(const char *filename);
 
-Sumw(int a, int b)
+/* Load txt files in to Program */
+int Batata(int a, int b);
 
 #endif

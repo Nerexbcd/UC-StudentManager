@@ -3,5 +3,8 @@
         "*.ino": "arduino-output",
         "txt_files.h": "c"
     },
-    "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe"
+    "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe",
+    "lonberg.editorButtonRunTask": {
+        "c": "Run Program (Windows)"
+    }
 }

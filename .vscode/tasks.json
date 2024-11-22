@@ -1,28 +1,45 @@
 {
     "tasks": [
         {
-            "type": "cppbuild",
-            "label": "C/C++: gcc build active file",
-            "command": "/usr/bin/gcc",
-            "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "${workspaceFolder}//main.c",
-                "${workspaceFolder}/libs//**//**.c",
-                "-o",
-                "${fileDirname}/build/UC-StudentManager",
-                "-lm"
-            ],
+            "label": "Build Program",
+            "linux": {
+                "command": "/usr/bin/gcc",
+                "args": [
+                    "-fdiagnostics-color=always",
+                    "-g",
+                    "${workspaceFolder}//main.c",
+                    "${workspaceFolder}/libs//**//**.c",
+                    "-o",
+                    "${fileDirname}/build/UC-StudentManager",
+                    "-lm"
+                ]
+            },
+            "windows": {
+                "command": "C:\\MinGW\\bin\\gcc.exe",
+                "args": [
+                    "-fdiagnostics-color=always",
+                    "-g",
+                    "${workspaceFolder}\\main.c",
+                    "${workspaceFolder}\\libs\\**\\**.c",
+                    "-o",
+                    "${workspaceFolder}\\build\\UC-StudentManager.exe",
+                ]
+            },
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [
                 "$gcc"
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
+            "group": "build",
+            "detail": "Task created by Nerexbcd"
+        },
+        {
+            "label": "Run Program (Windows)",
+            "type": "shell",
+            "command": "${workspaceFolder}\\build\\UC-StudentManager.exe",
+            "dependsOn":"Build Program",
+            "group": "test",
             "detail": "Task created by Nerexbcd"
         }
     ],
