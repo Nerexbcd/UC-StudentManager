@@ -8,7 +8,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${workspaceFolder}//main.c",
-                "${fileDirname}/libs//**//**.c",
+                "${workspaceFolder}/libs//**//**.c",
                 "-o",
                 "${fileDirname}/build/UC-StudentManager",
                 "-lm"
