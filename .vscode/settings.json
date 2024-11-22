@@ -5,6 +5,6 @@
     },
     "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe",
     "lonberg.editorButtonRunTask": {
-        "c": "Run Program (Windows)"
+        "c": "Run Program"
     }
 }

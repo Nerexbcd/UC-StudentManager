@@ -4,7 +4,7 @@
 
 int main(void)
 {
-    printf("Sum of 2 and 3 is %d\n", Batata(2, 3));
+    printf("Sum of 7 and 3 is %d\n", Batata(7, 3));
 
     printf("Hello, World!\n");
     return 0;
