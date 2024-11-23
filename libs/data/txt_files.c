@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "txt_files.h"
 #include "../utils/string_util.h"
 #include "../style/colors.h"

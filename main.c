@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+#include "libs/style/tools.h"
 #include "libs/data/txt_files.h"
 #include "libs/style/colors.h"
 #include "libs/style/tools.h"
@@ -18,9 +20,10 @@ int main(void)
         return 1;
     }
 
+    txt_load_file(&txt);
     printf("Data: %s\n", txt.data[0]);
-    // txt_unload_file(&txt);
-    // printf("Data: %s\n", txt.data[0]);
+    //txt_unload_file(&txt);
+    //printf("Data: %s\n", txt.data[0]);
 
 
     printf("Hello, World!\n");
