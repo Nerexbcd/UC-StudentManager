@@ -5,18 +5,24 @@
 #include "../utils/string_util.h"
 #include "../style/colors.h"
 
-
+#ifdef _WIN32
+    #define PATH_SEPARATOR_CHAR '\\'
+    #define PATH_SEPARATOR_STR  "\\"
+#elif __linux__
+    #define PATH_SEPARATOR_CHAR '/'
+    #define PATH_SEPARATOR_STR  "/"
+#endif
 
 struct txtFile txt_files_init(char path[]) {
     struct txtFile txt;
     txt.fileDir = strdup("");
-    char** tokens = str_split(strdup(path), '\\');
+    char** tokens = str_split(strdup(path), PATH_SEPARATOR_CHAR);
 
     for (int i = 0; *(tokens + i); i++) {
         if (*(tokens + i + 1) == NULL) {
             txt.fileName = *(tokens + i);
         } else {
-            txt.fileDir = *(tokens + i);
+            strcat(strcat(txt.fileDir, *(tokens + i)) , PATH_SEPARATOR_STR);
         }  
     }
     return txt;
@@ -34,7 +40,6 @@ int txt_load_file(txtFile *txt){
     fseek(file, 0, SEEK_END);
     long fileSize = ftell(file);
     rewind(file);
-
 
     char *string = malloc(fileSize + 1);
     fread(string, fileSize, 1, file);

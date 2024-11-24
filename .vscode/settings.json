@@ -6,7 +6,8 @@
         "stdio.h": "c",
         "string_util.h": "c",
         "colors.h": "c",
-        "tools.h": "c"
+        "tools.h": "c",
+        "stdlib.h": "c"
     },
     "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe",
     "lonberg.editorButtonRunTask": {
