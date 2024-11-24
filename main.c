@@ -30,7 +30,21 @@ int main(void)
     //txt_unload_file(&txt);
     //printf("Data: %s\n", txt.data);
 
+    //Menu principal
+   /*
+   do
+    {
+        load ficheiro 1
+        atribuir atributos do ficheiro 1 ao struct aluno
+        load ficheiro 2
+        atribuir atributos do ficheiro 2 ao struct aluno
 
+        escolhas do utilizador (com outros menus)
+
+        saida - break
+    } while (1);
+    */
+    
   
     return 0;
 }

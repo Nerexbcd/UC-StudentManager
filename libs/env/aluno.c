@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "aluno.h"
+#include "../data/txt_files.h"
+#include "../utils/string_util.h"
+#include "../style/colors.h"
 
-void inserir_estudante(ALUNO *lista_estudantes,int i)
+void inserir_estudante(ALUNO *lista_estudantes,int i,txtFile *txt)
 {
     int j;
     for (j=0;j<=sizeof(lista_estudantes);j++) {
