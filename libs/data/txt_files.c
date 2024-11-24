@@ -47,7 +47,7 @@ int txt_load_file(txtFile *txt){
 
     string[fileSize] = 0;
 
-    w_txt.data = str_split(string, '\n');
+    w_txt.data = str_split(string, ' ');
 
     *txt = w_txt;
 
