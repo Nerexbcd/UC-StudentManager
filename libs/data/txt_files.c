@@ -10,13 +10,13 @@
 struct txtFile txt_files_init(char path[]) {
     struct txtFile txt;
     txt.fileDir = strdup("");
-    char** tokens = str_split(strdup(path), '/');
+    char** tokens = str_split(strdup(path), '\\');
 
     for (int i = 0; *(tokens + i); i++) {
         if (*(tokens + i + 1) == NULL) {
             txt.fileName = *(tokens + i);
         } else {
-            strcat(strcat(txt.fileDir, *(tokens + i)) ,"/");
+            txt.fileDir = *(tokens + i);
         }  
     }
     return txt;

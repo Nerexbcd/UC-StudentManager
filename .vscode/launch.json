@@ -1,5 +1,6 @@
 {
     "configurations": [
+        
         {
             "name": "Run Program (Linux)",
             "type": "cppdbg",
@@ -36,7 +37,7 @@
             "cwd": "${workspaceFolder}",
             "environment": [],
             "console": "integratedTerminal",
-            "preLaunchTask": "Build Program (Windows)",
+            "preLaunchTask": "Build Program (Windows)"
         },
     ],
     "version": "2.0.0"
