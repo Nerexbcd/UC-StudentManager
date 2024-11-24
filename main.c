@@ -24,11 +24,11 @@ int main(void)
 
     if (strcmp(OS, "W") == 0)
     {
-        path_estudantes = "data\\estudantes.txt";
+        path_estudantes = ".\\data\\estudantes.txt";
     }
     else if (strcmp(OS, "L") == 0)
     {
-        path_estudantes = "data/estudantes.txt";
+        path_estudantes = "./data/estudantes.txt";
     }
 
     txtFile txt = txt_files_init(path_estudantes);
