@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include <string.h>
 #include "txt_files.h"
 #include "../utils/string_util.h"
@@ -13,7 +14,7 @@
     #define PATH_SEPARATOR_STR  "/"
 #endif
 
-struct txtFile txt_files_init(char path[]) {
+txtFile txt_files_init(char path[]) {
     struct txtFile txt;
     txt.fileDir = strdup("");
     char** tokens = str_split(strdup(path), PATH_SEPARATOR_CHAR);
@@ -47,7 +48,7 @@ int txt_load_file(txtFile *txt){
 
     string[fileSize] = 0;
 
-    w_txt.data = str_split(string, ' ');
+    w_txt.data = str_split(string, '\n');
 
     *txt = w_txt;
 

@@ -10,7 +10,7 @@ typedef struct txtFile {
 
 
 /* Initialize txt file data array */
-struct txtFile txt_files_init(char *path);
+txtFile txt_files_init(char *path);
 
 /* Load txt files in to Program */
 int txt_load_file(txtFile *txt);
