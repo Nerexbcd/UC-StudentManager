@@ -22,7 +22,7 @@ void seek_data();
 ALUNO * criar_lista(int i);
 
 //Permite adicionar um aluno à lista
-void inserir_estudante(ALUNO *lista_estudantes,int i);
+void inserir_estudante(ALUNO *lista_estudantes,int i,char *txt);
 
 //Permite remover um aluno da lista
 void remover_estudante(ALUNO *lista_estudantes,int i);
