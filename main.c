@@ -24,7 +24,7 @@ int main(void)
 
     if (strcmp(OS, "W") == 0)
     {
-        path_estudantes = ".\\data\\estudantes.txt";
+        path_estudantes = "\\data\\estudantes.txt";
     }
     else if (strcmp(OS, "L") == 0)
     {
@@ -35,22 +35,22 @@ int main(void)
     printf("FileDir: %s\n", txt.fileDir);
     printf("Filename: %s\n", txt.fileName);
 
-    printf("a");
+    puts("a");
   
     if (txt_load_file(&txt)!=0)
     {
         printf(CYAN("Exiting...\n"));
         return 1;
     }
-    else {printf("d");}
+    else {puts("d");}
 
-    printf("B");
+    puts("B");
 
     // O data lido do TXT é um array de strings em que cada string é uma linha do ficheiro
     // por exemplo está a dar print da primeira linha
     printf("Data: %s\n", txt.data[0]);
     
-    printf("c");
+    puts("c");
     // Podes usar a função sizeof para saber quantas linhas tem
     printf("Size: %u\n", sizeof(txt.data));
     //txt_unload_file(&txt);

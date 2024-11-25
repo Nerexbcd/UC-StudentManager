@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #include <string.h>
 #include "txt_files.h"
 #include "../utils/string_util.h"
@@ -32,12 +31,14 @@ txtFile txt_files_init(char path[]) {
 int txt_load_file(txtFile *txt){
     txtFile w_txt = *txt; 
     char *filePath = strcat(strdup(w_txt.fileDir), strdup(w_txt.fileName));
+    printf("%s","data\\estudantes.txt");
     FILE *file = fopen(filePath, "r");
     if (file == NULL) {
         fprintf(stderr,RED("Error: Could not open file %s\n"), filePath);
         return 1;
     }
 
+    puts("ccccc");
     fseek(file, 0, SEEK_END);
     long fileSize = ftell(file);
     rewind(file);
