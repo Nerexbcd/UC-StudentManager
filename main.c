@@ -17,7 +17,6 @@ int main(void)
 {
     clearConsole();
 
-
     printf(CYAN("Starting...\n\n"));
 
     char *path_estudantes;
@@ -31,28 +30,22 @@ int main(void)
         path_estudantes = "./data/estudantes.txt";
     }
 
-    txtFile txt = txt_files_init(path_estudantes);
-    printf("FileDir: %s\n", txt.fileDir);
-    printf("Filename: %s\n", txt.fileName);
 
-    puts("a");
+
+    txtFile txt_estudantes = txt_files_init(path_estudantes);
+    printf("FileDir: %s\n", txt_estudantes.fileDir);
+    printf("Filename: %s\n", txt_estudantes.fileName);
+
+    // txt_load_file(&txt_estudantes);
   
-    if (txt_load_file(&txt)!=0)
-    {
-        printf(CYAN("Exiting...\n"));
-        return 1;
-    }
-    else {puts("d");}
-
-    puts("B");
-
-    // O data lido do TXT é um array de strings em que cada string é uma linha do ficheiro
-    // por exemplo está a dar print da primeira linha
-    printf("Data: %s\n", txt.data[0]);
-    
-    puts("c");
     // Podes usar a função sizeof para saber quantas linhas tem
-    printf("Size: %u\n", sizeof(txt.data));
+    printf("Size: %u\n", txt_get_size(txt_estudantes));
+
+    for (int i = 0; i < txt_get_size(txt_estudantes) ; i++)
+    {
+        printf("Data: %s\n", txt_get_data(txt_estudantes)[i]);
+    }
+
     //txt_unload_file(&txt);
     //printf("Data: %s\n", txt.data);
 

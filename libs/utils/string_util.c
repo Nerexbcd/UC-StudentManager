@@ -4,7 +4,7 @@
 #include <assert.h>
 #include "string_util.h"
 
-char** str_split(char str[], char separator) {
+char** str_split(char str[], char separator, size_t *size) {
     char **result = 0;
     size_t count = 0;
     char *tmp = str;
@@ -42,6 +42,9 @@ char** str_split(char str[], char separator) {
         }
         *(result + idx) = 0;
     }
+
+    if (size != NULL) *size = count - 1;
+
 
     return result;
 }

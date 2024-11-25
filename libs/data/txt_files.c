@@ -15,30 +15,31 @@
 
 txtFile txt_files_init(char path[]) {
     struct txtFile txt;
+    txt.path = strdup(path);
+    txt.size = 0;
+    txt.loaded = 0;
+    char** pathParts = str_split(strdup(path), PATH_SEPARATOR_CHAR, NULL);
     txt.fileDir = strdup("");
-    char** tokens = str_split(strdup(path), PATH_SEPARATOR_CHAR);
 
-    for (int i = 0; *(tokens + i); i++) {
-        if (*(tokens + i + 1) == NULL) {
-            txt.fileName = *(tokens + i);
+    for (int i = 0; *(pathParts + i); i++) {
+        if (*(pathParts + i + 1) == NULL) {
+            txt.fileName = *(pathParts + i);
         } else {
-            strcat(strcat(txt.fileDir, *(tokens + i)) , PATH_SEPARATOR_STR);
+            strcat(strcat(txt.fileDir, *(pathParts + i)) , PATH_SEPARATOR_STR);
         }  
     }
     return txt;
 }
 
-int txt_load_file(txtFile *txt){
+void txt_load_file(txtFile *txt){
     txtFile w_txt = *txt; 
-    char *filePath = strcat(strdup(w_txt.fileDir), strdup(w_txt.fileName));
-    printf("%s","data\\estudantes.txt");
-    FILE *file = fopen(filePath, "r");
+    FILE *file = fopen(w_txt.path, "r");
     if (file == NULL) {
-        fprintf(stderr,RED("Error: Could not open file %s\n"), filePath);
-        return 1;
+        fprintf(stderr,RED("Error: Could not open file %s\n"), w_txt.path);
+        printf(CYAN("Exiting...\n"));
+        exit(1);
     }
 
-    puts("ccccc");
     fseek(file, 0, SEEK_END);
     long fileSize = ftell(file);
     rewind(file);
@@ -47,22 +48,41 @@ int txt_load_file(txtFile *txt){
     fread(string, fileSize, 1, file);
     fclose(file);
 
+    printf(CYAN("File %s loaded\n"), w_txt.path);
+
     string[fileSize] = 0;
 
-    w_txt.data = str_split(string, '\n');
+    w_txt.data = str_split(string, '\n', &w_txt.size);
+    free(string);
+    w_txt.loaded = 1;
 
     *txt = w_txt;
-
-    return 0;
 }
 
-int txt_unload_file(txtFile *txt){
+void txt_unload_file(txtFile *txt){
     txtFile w_txt = *txt;
     for (int i = 0; *(w_txt.data + i); i++) {
         free(*(w_txt.data + i));
     }
     free(w_txt.data);
-    
-    return 0;
+    w_txt.loaded = 0;
+    *txt = w_txt;
 }
 
+char** txt_get_data(txtFile txt){
+    if (txt.loaded == 0) {
+        fprintf(stderr,RED("Error: File %s not loaded\n"), txt.path);
+        printf(CYAN("Exiting...\n"));
+        exit(1);
+    }
+    return txt.data;
+}
+
+size_t txt_get_size(txtFile txt){
+    if (txt.loaded == 0) {
+        fprintf(stderr,RED("Error: File %s not loaded\n"), txt.path);
+        printf(CYAN("Exiting...\n"));
+        exit(1);
+    }
+    return txt.size;
+}
