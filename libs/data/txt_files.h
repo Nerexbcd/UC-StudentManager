@@ -22,4 +22,6 @@ void txt_unload_file(txtFile *txt);
 
 char** txt_get_data(txtFile txt);
 
+size_t txt_get_size(txtFile txt);
+
 #endif

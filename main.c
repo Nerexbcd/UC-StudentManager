@@ -39,15 +39,13 @@ int main(void)
     txt_load_file(&txt_estudantes);
   
     // Podes usar a função sizeof para saber quantas linhas tem
-    //printf("Size: %u\n", txt_get_size(txt_estudantes));
+    printf("Size: %u\n", txt_get_size(txt_estudantes));
 
-    //for (int i = 0; i < txt_get_size(txt_estudantes) ; i++)
-       
-       if (strcmp(OS, "W") == 0) {
-        printf("Data: %s\n", txt_estudantes.data[0]);
-       }
+    for (int i = 0; i < txt_get_size(txt_estudantes) ; i++) {
+        printf("Data: %s\n", txt_estudantes.data[i]);
+    }
 
-    //txt_unload_file(&txt);
+    txt_unload_file(&txt_estudantes);
     //printf("Data: %s\n", txt.data);
 
     //Menu principal
