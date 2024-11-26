@@ -42,12 +42,15 @@ void seek_data(char *path_ficheiro_estu, char *path_ficheiro_situacao, ALUNO *ba
                 kk++;
                 string = NULL;
                 a=0;
-                string = &(linha[kk+1]);
-                while (linha[kk] != '\t') 
+                string = &(linha[kk]);
+                while (linha[kk-1] != '\t') 
                 {
+                    if (linha[kk-1] != ' ') {
                         *(string+a) = linha[kk];
                         kk++;
                         a++;
+                    }
+                    else (*(string+a)=' ');
                 }
                 *(string+kk)='\0';
                 base_dados[i].nome = strdup(string);
