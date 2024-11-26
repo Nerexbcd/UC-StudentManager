@@ -17,7 +17,7 @@ typedef struct aluno
 }ALUNO;
 
 //Transfere os dados dos ficheiros para a struct base de dados do tipo ALUNO
-void seek_data(char *ficheiro_estu, /*char *ficheiro_situacao, */ALUNO *base_dados);
+void seek_data(char *path_ficheiro_estu, char *path_ficheiro_situacao, ALUNO *base_dados);
 
 //Cria e inicializa a lista de estudantes
 ALUNO * criar_lista(int i);

@@ -19,39 +19,46 @@ int main(void)
 
     printf(CYAN("Starting...\n\n"));
 
-    char *path_estudantes;
+    char *path_estudantes_a;
+    char *path_estudantes_b;
 
     if (strcmp(OS, "W") == 0)
     {
-        path_estudantes = "data\\situacao_Escolar_Estudantes.txt";
+        path_estudantes_b = "data\\situacao_Escolar_Estudantes.txt";
+        path_estudantes_a= "data\\estudantes.txt";
     }
     else if (strcmp(OS, "L") == 0)
     {
-        path_estudantes = "./data/estudantes.txt";
+        path_estudantes_a = "./data/estudantes.txt";
+        path_estudantes_b = "./data/situacao_Escolar_Estudantes.txt";
     }
 
 
 
-    txtFile txt_estudantes = txt_files_init(path_estudantes);
-    printf("FileDir: %s\n", txt_estudantes.fileDir);
-    printf("Filename: %s\n", txt_estudantes.fileName);
+    txtFile txt_estudantes_a = txt_files_init(path_estudantes_a);
+    txtFile txt_estudantes_b = txt_files_init(path_estudantes_b);
+    printf("FileDir: %s\n", txt_estudantes_a.fileDir);
+    printf("Filename: %s\n", txt_estudantes_a.fileName);
 
-    txt_load_file(&txt_estudantes);
+    txt_load_file(&txt_estudantes_a);
   
     // Podes usar a função sizeof para saber quantas linhas tem
-    printf("Size: %u\n", txt_get_size(txt_estudantes));
+    printf("Size: %u\n", txt_get_size(txt_estudantes_a));
 
-    for (int i = 0; i < txt_get_size(txt_estudantes) ; i++) {
-        printf("Data: %s\n", txt_estudantes.data[i]);
+    for (int i = 0; i < txt_get_size(txt_estudantes_a) ; i++) {
+        printf("Data: %s\n", txt_estudantes_a.data[i]);
     }
 
-    txt_unload_file(&txt_estudantes);
+    txt_unload_file(&txt_estudantes_a);
 
-    ALUNO aaa[1];
+    ALUNO aaa[4];
     aaa[0].ocupado=0;
+    aaa[1].ocupado=0;
+    aaa[2].ocupado=0;
+    aaa[3].ocupado=0;
     aaa[0].codigo=001;
 
-    seek_data(path_estudantes, /*char *path_ficheiro_situacao,*/ aaa);
+    seek_data(path_estudantes_a, path_estudantes_b, aaa);
     printf("\ncodigo: %d",aaa[0].codigo);
 
 

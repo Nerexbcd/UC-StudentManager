@@ -8,75 +8,126 @@
 
 
 
-void seek_data(char *path_ficheiro_estu, /*char *path_ficheiro_situacao,*/ ALUNO *base_dados)
+void seek_data(char *path_ficheiro_estu, char *path_ficheiro_situacao, ALUNO *base_dados)
 {
     txtFile txt_estudantes = txt_files_init(path_ficheiro_estu);
     txt_load_file(&txt_estudantes);
     int num_linhas = txt_get_size(txt_estudantes);
 
-    
+    //Atribuição dos dados do ficheiro estudantes.txt à struct
     for (int i=0; i < num_linhas ; i++) {
         if ((base_dados[i]).ocupado==0) {
             
             (base_dados[i]).ocupado=1;
 
             char *linha = txt_estudantes.data[i];
-            int k=0;
+            int kk;
             char * string = NULL;
             int lin_size = sizeof(txt_estudantes.data[i]);
-
-            string = &(linha[0]);
-
-            printf("\n%d",k);
+            int what;
             
+            kk=0;
+            string = &(linha[kk]);
             
-            while (linha[k] != '\t')
+            while (linha[kk] != '\t')
             {
-                *(string+k)=linha[k];
-                k++;
+                *(string+kk)=linha[kk];
+                kk++;
             }
             base_dados[i].codigo= atoi(strdup(string));
+            printf("\ncodigo:%d\n",base_dados[i].codigo);
 
-
-            k++;
-            string = &(linha[k]);
-            while (linha[k] != '\t')
+            kk++;
+            string = &(linha[kk]);
+            while (linha[kk+1] != '\t') 
             {
-                *(string+k)=*(linha+k);
-                k++;
+                    string[kk] = linha[kk+1];
+                    kk++;
             }
             base_dados[i].nome = strdup(string);
+            printf("nome:%send",base_dados[i].nome);
 
 
-            k++;    
-            string = &(linha[k]);
-            while (linha[k] != '\t')
+            kk++;    
+            string = &(linha[kk]);
+            while (linha[kk] != '\t')
             {
-                *(string+k)=*(linha+k);
-                k++;
+                *(string+kk)=*(linha+kk);
+                kk++;
             }
             base_dados[i].data_n= strdup(string);
-            
 
-            k++;
-            string = &(linha[k]);
-            while (linha[k] < lin_size)
+
+            kk++;
+            string = &(linha[kk]);
+            while (linha[kk] < lin_size)
             {
-                *(string+k)=*(linha+k);
-                k++;
+                *(string+kk)=*(linha+kk);
+                kk++;
             }
             base_dados[i].nacionalidade = strdup(string);
-            puts("ccc");
         }
     }
     txt_unload_file(&txt_estudantes);
 
-    /*txt_estudantes = txt_files_init(path_ficheiro_situacao);
+    //Atribuição dos dados do ficheiro situaçao_Escolar_Estudantes.txt à struct
+    //É efetuada a sua correta colocação por comparação dos números de código
+    puts ("\ncccc");
+    txt_estudantes = txt_files_init(path_ficheiro_estu);
     txt_load_file(&txt_estudantes);
-        for (int i=0; i < txt_get_size(txt_estudantes) ; i++) {
+    int num_linhas_b = txt_get_size(txt_estudantes);
 
+    for (int i=0; i < num_linhas ; i++) {
+        if ((base_dados[i]).ocupado=1) {
+            puts("\naaaa");
+            for (int j=0 ; j<num_linhas_b ; j++) {
+                puts("\nbbbb");
+                char *linha = txt_estudantes.data[i];
+                int k=0;
+                char * string = NULL;
+
+                string = &(linha[k]);
+
+                while (linha[k] != '\t') {
+                *(string+k)=linha[k];
+                k++;
+                }
+
+                if (base_dados[i].codigo == atoi(strdup(string))) {
+                    k++;    
+                    string = &(linha[k]);
+                    while (linha[k] != '\t')
+                    {
+                        *(string+k)=*(linha+k);
+                        k++;
+                    }
+                    base_dados[i].n_matriculas= atoi(strdup(string));
+
+                    while (linha[k] != '\t')
+                    {
+                        *(string+k)=*(linha+k);
+                        k++;
+                    }
+                    base_dados[i].ects_concluidos= atoi(strdup(string));
+
+                    while (linha[k] != '\t')
+                    {
+                        *(string+k)=*(linha+k);
+                        k++;
+                    }
+                    base_dados[i].ano_curso= atoi(strdup(string));
+
+                        while (linha[k] != '\t')
+                    {
+                        *(string+k)=*(linha+k);
+                        k++;
+                    }
+                    base_dados[i].media_atual= atof(strdup(string));
+                }
+            }
         }
-    txt_unload_file(&txt_estudantes);*/
+    }
+    txt_unload_file(&txt_estudantes);
 }
 
 
