@@ -23,7 +23,7 @@ int main(void)
 
     if (strcmp(OS, "W") == 0)
     {
-        path_estudantes = "\\data\\estudantes.txt";
+        path_estudantes = "data\\situacao_Escolar_Estudantes.txt";
     }
     else if (strcmp(OS, "L") == 0)
     {
@@ -36,15 +36,16 @@ int main(void)
     printf("FileDir: %s\n", txt_estudantes.fileDir);
     printf("Filename: %s\n", txt_estudantes.fileName);
 
-    // txt_load_file(&txt_estudantes);
+    txt_load_file(&txt_estudantes);
   
     // Podes usar a função sizeof para saber quantas linhas tem
-    printf("Size: %u\n", txt_get_size(txt_estudantes));
+    //printf("Size: %u\n", txt_get_size(txt_estudantes));
 
-    for (int i = 0; i < txt_get_size(txt_estudantes) ; i++)
-    {
-        printf("Data: %s\n", txt_get_data(txt_estudantes)[i]);
-    }
+    //for (int i = 0; i < txt_get_size(txt_estudantes) ; i++)
+       
+       if (strcmp(OS, "W") == 0) {
+        printf("Data: %s\n", txt_estudantes.data[0]);
+       }
 
     //txt_unload_file(&txt);
     //printf("Data: %s\n", txt.data);
