@@ -37,31 +37,24 @@ void seek_data(char *path_ficheiro_estu, char *path_ficheiro_situacao, ALUNO *ba
                 base_dados[i].codigo= atoi(strdup(string));
                 printf("\ncodigo:%d\n",base_dados[i].codigo);
 
-                ////
-                //???????????????????????????????????
+
                 kk++;
                 string = NULL;
                 a=0;
                 string = &(linha[kk]);
-                while (linha[kk-1] != '\t') 
+                while (string[kk] != '\t') 
                 {
-                    if (linha[kk-1] != ' ') {
-                        *(string+a) = linha[kk];
-                        kk++;
-                        a++;
-                    }
-                    else (*(string+a)=' ');
+                    kk++;
                 }
-                *(string+kk)='\0';
+                string[kk]='\0';
                 base_dados[i].nome = strdup(string);
                 printf("nome:%send",base_dados[i].nome);
-                //???????????????????????????????????????????????
+                
 
                 kk++;    
                 string=NULL;
                 a=1;
                 string = &(linha[kk]);
-                puts("cc");
                 while (linha[kk] != '\t')
                 {
                     *(string+a)=*(linha+kk);
