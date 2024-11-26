@@ -24,48 +24,62 @@ void seek_data(char *path_ficheiro_estu, char *path_ficheiro_situacao, ALUNO *ba
             int kk;
             char * string = NULL;
             int lin_size = sizeof(txt_estudantes.data[i]);
-            int what;
+            int a;
             
             kk=0;
             string = &(linha[kk]);
-            
-            while (linha[kk] != '\t')
-            {
-                *(string+kk)=linha[kk];
-                kk++;
-            }
-            base_dados[i].codigo= atoi(strdup(string));
-            printf("\ncodigo:%d\n",base_dados[i].codigo);
-
-            kk++;
-            string = &(linha[kk]);
-            while (linha[kk+1] != '\t') 
-            {
-                    string[kk] = linha[kk+1];
+            while (kk <= lin_size) {
+                while (linha[kk] != '\t')
+                {
+                    *(string+kk)=linha[kk];
                     kk++;
-            }
-            base_dados[i].nome = strdup(string);
-            printf("nome:%send",base_dados[i].nome);
+                }
+                base_dados[i].codigo= atoi(strdup(string));
+                printf("\ncodigo:%d\n",base_dados[i].codigo);
 
-
-            kk++;    
-            string = &(linha[kk]);
-            while (linha[kk] != '\t')
-            {
-                *(string+kk)=*(linha+kk);
+                ////
+                //???????????????????????????????????
                 kk++;
-            }
-            base_dados[i].data_n= strdup(string);
+                string = NULL;
+                a=0;
+                string = &(linha[kk+1]);
+                while (linha[kk] != '\t') 
+                {
+                        *(string+a) = linha[kk];
+                        kk++;
+                        a++;
+                }
+                *(string+kk)='\0';
+                base_dados[i].nome = strdup(string);
+                printf("nome:%send",base_dados[i].nome);
+                //???????????????????????????????????????????????
 
+                kk++;    
+                string=NULL;
+                a=1;
+                string = &(linha[kk]);
+                puts("cc");
+                while (linha[kk] != '\t')
+                {
+                    *(string+a)=*(linha+kk);
+                    kk++;
+                    a++;
+                }
+                base_dados[i].data_n= strdup(string);
+                puts("bb");
 
-            kk++;
-            string = &(linha[kk]);
-            while (linha[kk] < lin_size)
-            {
-                *(string+kk)=*(linha+kk);
                 kk++;
-            }
-            base_dados[i].nacionalidade = strdup(string);
+                //string=NULL;
+                a=1;
+                string = &(linha[kk]);
+                while (linha[kk] < lin_size)
+                {
+                    *(string+a)=*(linha+kk);
+                    kk++;
+                    a++;
+                }
+                base_dados[i].nacionalidade = strdup(string);
+        }
         }
     }
     txt_unload_file(&txt_estudantes);

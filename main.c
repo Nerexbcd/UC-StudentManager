@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <locale.h>
 #include "libs/style/tools.h"
 #include "libs/data/txt_files.h"
 #include "libs/env/aluno.h"
@@ -16,6 +17,8 @@
 int main(void)
 {
     clearConsole();
+
+    setlocale(LC_ALL, "Portuguese");
 
     printf(CYAN("Starting...\n\n"));
 
@@ -59,7 +62,7 @@ int main(void)
     aaa[0].codigo=001;
 
     seek_data(path_estudantes_a, path_estudantes_b, aaa);
-    printf("\ncodigo: %d",aaa[0].codigo);
+    printf("\ncodigo: %d",aaa[1].codigo);
 
 
     //printf("Data: %s\n", txt.data);
