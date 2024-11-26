@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "aluno.h"
+#include "../data/txt_files.h"
 #include "../utils/string_util.h"
 #include "../style/colors.h"
 
@@ -21,6 +22,40 @@ void inserir_estudante(ALUNO *lista_estudantes,int i,char *txt)
         break;
         }
     }
+}
+
+void seek_data(FILE *path_ficheiro_estu, FILE *path_ficheiro_situacao,ALUNO *base_dados)
+{
+    int k=0;
+    txtFile txt_estudantes = txt_files_init(path_ficheiro_estu);
+    txt_load_file(&txt_estudantes);
+    for (int i=0,j=0; i < txt_get_size(txt_estudantes) ; i++) {
+        if ((base_dados[j]).ocupado==0) {
+            (base_dados[j]).ocupado=1;
+            while (txt_estudantes.data != "\n") {
+                k=0;
+                while (txt_estudantes.data != "\t") {
+                    switch (k) {
+                    case 0:
+                    break;
+                    case 1:
+                    //etc;
+                    default:
+                    }
+                    k++;
+                }
+            }
+        j++;
+        }
+    }
+    txt_unload_file(&txt_estudantes);
+
+    txtFile txt_estudantes = txt_files_init(path_ficheiro_situacao);
+    txt_load_file(&txt_estudantes);
+        for (int i=0; i < txt_get_size(txt_estudantes) ; i++) {
+
+        }
+    txt_unload_file(&txt_estudantes);
 }
 
 void remover_estudante(ALUNO *lista_estudantes,int i)
