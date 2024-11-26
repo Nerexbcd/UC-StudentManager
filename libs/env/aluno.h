@@ -11,19 +11,19 @@ typedef struct aluno
     int ects_concluidos;
     int ano_curso;
     float media_atual;
-    char nome[100];
-    char nacionalidade[100];
-    char data_n[10];
+    char * nome;
+    char * nacionalidade;
+    char * data_n;
 }ALUNO;
 
 //Transfere os dados dos ficheiros para a struct base de dados do tipo ALUNO
-void seek_data(char *ficheiro_estu, char *ficheiro_situacao, ALUNO *base_dados);
+void seek_data(char *ficheiro_estu, /*char *ficheiro_situacao, */ALUNO *base_dados);
 
 //Cria e inicializa a lista de estudantes
 ALUNO * criar_lista(int i);
 
 //Permite adicionar um aluno à lista
-void inserir_estudante(ALUNO *lista_estudantes,int i,char *txt);
+void inserir_estudante(ALUNO *lista_estudantes,int i);
 
 //Permite remover um aluno da lista
 void remover_estudante(ALUNO *lista_estudantes,int i);

@@ -46,6 +46,15 @@ int main(void)
     }
 
     txt_unload_file(&txt_estudantes);
+
+    ALUNO aaa[1];
+    aaa[0].ocupado=0;
+    aaa[0].codigo=001;
+
+    seek_data(path_estudantes, /*char *path_ficheiro_situacao,*/ aaa);
+    printf("\ncodigo: %d",aaa[0].codigo);
+
+
     //printf("Data: %s\n", txt.data);
 
     //Menu principal
