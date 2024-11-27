@@ -24,16 +24,12 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
             char **dados = str_split(linha, '\t', NULL);
 
             base_dados[i].codigo = atoi(strdup(dados[0]));
-            printf("codigo:%d \n",base_dados[i].codigo);
 
             base_dados[i].nome = strdup(dados[1]);
-            printf("nome:%s \n",base_dados[i].nome);
 
             base_dados[i].data_n= strdup(dados[2]);
-            printf("ndata_n:%s \n",(base_dados[i]).data_n);
 
             base_dados[i].nacionalidade = strdup(dados[3]);
-            printf("nacionalidade:%s \n\n",base_dados[i].nacionalidade);
 
             wrt_size_alunos++;
         }
@@ -51,19 +47,14 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
         
         for (int j=0 ; j<wrt_size_alunos ; j++) {
             if (atoi(dados[0]) == base_dados[j].codigo) {
-                printf("codigo:%d \n",base_dados[j].codigo);
 
                 base_dados[i].n_matriculas= atoi(strdup(dados[1]));
-                printf("n_matriculas:%d \n",base_dados[i].n_matriculas);
 
                 base_dados[i].ects_concluidos= atoi(strdup(dados[2]));
-                printf("ects_concluidos:%d \n",base_dados[i].ects_concluidos);
 
                 base_dados[i].ano_curso= atoi(strdup(dados[3]));
-                printf("ano_curso:%d \n",base_dados[i].ano_curso);
 
                 base_dados[i].media_atual= atof(strdup(dados[4]));
-                printf("media_atual:%f \n\n",base_dados[i].media_atual);
             }
         }
     }
@@ -110,27 +101,45 @@ void remover_estudante(ALUNO *lista_estudantes,int i)
 
 
 
-void atualizar_estudante(ALUNO *lista_estudantes,int i)
+void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes)
 {
-    setlocale(LC_ALL, "Portuguese"); //não funciona?
+    //setlocale(LC_ALL, "Portuguese"); //não funciona?
+    int i;
+    int k; //código do estudante
+    int j; //posição do aluno com código k na lista
 
-    int j = sizeof(lista_estudantes);
+
+    printf("Qual o codigo do estudante?");
+    fflush(stdin);
+    scanf(" %d",&k);
+
+    for(int t=0;t<sizeof(lista_estudantes);t++) {
+        if(lista_estudantes[t].codigo==k) {
+            j=t;
+            break;
+        }
+    }
+
+    printf("O que pretende alterar? Escreva um numero.\n0 - codigo\n1 - ECTS concluidos\n2 - Ano do curso\n3 - Media atual\n4 - Nome\n5 - Nacionalidade\n6 - Data de nascimento\n7 - Numero de matriculas");
+    fflush(stdin);
+    scanf(" %d",&i);
+
     switch (i) {
-        //i indica qual field a mudar
+        //i indica qual elemento da estrutura a mudar, fornecido pelo utilizador
         case 0:
-            printf("Qual é o novo código do estudante número %d?\n",(lista_estudantes[j]).codigo);
+            printf("Qual o novo codigo do estudante numero %d?\n",(lista_estudantes[j]).codigo);
             scanf("%d",&(lista_estudantes[j]).codigo);
             break;
         case 1:
-            printf("Qual é o novo número de ECTS concluídos do estudante número %d?\n",(lista_estudantes[j]).codigo);
+            printf("Qual o novo numero de ECTS concluidos do estudante numero %d?\n",(lista_estudantes[j]).codigo);
             scanf("%d",&(lista_estudantes[j]).ects_concluidos);
             break;
         case 2:
-            printf("Qual é o novo ano de curso do estudante número %d?\n",(lista_estudantes[j]).codigo);
+            printf("Qual o novo ano de curso do estudante número %d?\n",(lista_estudantes[j]).codigo);
             scanf("%d",&(lista_estudantes[j]).ano_curso);
             break;
         case 3:
-            printf("Qual é a nova média do estudante número %d?\n",(lista_estudantes[j]).codigo);
+            printf("Qual a nova media do estudante numero %d?\n",(lista_estudantes[j]).codigo);
             scanf("%f",&(lista_estudantes[j]).media_atual);
             break;
         case 4:
@@ -147,7 +156,7 @@ void atualizar_estudante(ALUNO *lista_estudantes,int i)
             //(lista_estudantes[j]).data_n;
             break;
         case 7:
-            printf("Qual é o novo número de matrículas do estudante número %d?\n",(lista_estudantes[j]).codigo);
+            printf("Qual o novo numero de matriculas do estudante numero %d?\n",(lista_estudantes[j]).codigo);
             scanf("%d",&(lista_estudantes[j]).n_matriculas);
             break;
     }
@@ -174,20 +183,35 @@ int calcular_tam_lista(ALUNO *lista_estudantes) {
 
 
 void mostrar_lista(ALUNO *lista_estudantes) {
-    setlocale(LC_ALL, "Portuguese");
 
-    //temos de fazer caso para páginas, vou ver como mais tarde
-    for (int i=0; i<sizeof(lista_estudantes);i++) {
-        if ((lista_estudantes[i].ocupado)==1) {
-            printf("Código: %d\n",lista_estudantes[i].codigo);
+    for (int i=0, ele_pag=0; i<sizeof(lista_estudantes);i++) {
+        if (ele_pag<3) {
+            if ((lista_estudantes[i].ocupado)==1) {
+                printf("Codigo: %d\n",lista_estudantes[i].codigo);
+                printf("Nome: %s\n",lista_estudantes[i].nome);
+                printf("Nacionalidade: %s\n",lista_estudantes[i].nacionalidade);
+                printf("Data de nascimento: %s\n",lista_estudantes[i].data_n);
+                printf("Numero de matriculas: %d\n",lista_estudantes[i].n_matriculas);
+                printf("Ano do curso: %d\n",lista_estudantes[i].ano_curso);
+                printf("Media atual: %.1f\n",lista_estudantes[i].media_atual);
+                printf("ECTS concluidos: %d\n\n",lista_estudantes[i].ects_concluidos);
+            }
+            ele_pag++;
+        }
+        else {
+            printf("Pagina seguinte ->");
+            fflush(stdin);
+            getchar();
+            puts("\n");
+            printf("Codigo: %d\n",lista_estudantes[i].codigo);
             printf("Nome: %s\n",lista_estudantes[i].nome);
             printf("Nacionalidade: %s\n",lista_estudantes[i].nacionalidade);
             printf("Data de nascimento: %s\n",lista_estudantes[i].data_n);
-            printf("Número de matrículas: %d\n",lista_estudantes[i].n_matriculas);
+            printf("Numero de matriculas: %d\n",lista_estudantes[i].n_matriculas);
             printf("Ano do curso: %d\n",lista_estudantes[i].ano_curso);
-            printf("Média atual: %.1f\n",lista_estudantes[i].media_atual);
-            printf("ECTS concluídos: %d\n\n",lista_estudantes[i].ects_concluidos);
-
+            printf("Media atual: %.1f\n",lista_estudantes[i].media_atual);
+            printf("ECTS concluidos: %d\n\n",lista_estudantes[i].ects_concluidos);
+            ele_pag=1;
         }
     }
 }

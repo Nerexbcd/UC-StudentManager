@@ -30,7 +30,7 @@ void inserir_estudante(ALUNO *lista_estudantes);
 void remover_estudante(ALUNO *lista_estudantes,int i);
 
 //Permite alterar um dos dados do aluno
-void atualizar_estudante(ALUNO *lista_estudantes,int i);
+void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes);
 
 //Permite calcular o número de posições ocupadas, ou seja, com lista_estudantes[i].ocupado==1
 int calcular_tam_lista(ALUNO *lista_estudantes);
