@@ -35,6 +35,7 @@ void atualizar_estudante(ALUNO *lista_estudantes,int i);
 //Permite calcular o número de posições ocupadas, ou seja, com lista_estudantes[i].ocupado==1
 int calcular_tam_lista(ALUNO *lista_estudantes);
 
+//Faz display da struct (apenas os membros com ocupado=1)
 void mostrar_lista(ALUNO *lista_estudantes);
 
 #endif

@@ -73,6 +73,8 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
 }
 
 
+
+
 void inserir_estudante(ALUNO *lista_estudantes)
 {
     for (int j=0;j<sizeof(lista_estudantes);j++) {
@@ -94,6 +96,8 @@ void inserir_estudante(ALUNO *lista_estudantes)
 }
 
 
+
+
 void remover_estudante(ALUNO *lista_estudantes,int i)
 {
     (lista_estudantes[i]).ocupado=0;
@@ -102,6 +106,9 @@ void remover_estudante(ALUNO *lista_estudantes,int i)
     (*(lista_estudantes+i)).nacionalidade=NULL;
     (*(lista_estudantes+i)).data_n=NULL;
 }
+
+
+
 
 void atualizar_estudante(ALUNO *lista_estudantes,int i)
 {
@@ -147,6 +154,9 @@ void atualizar_estudante(ALUNO *lista_estudantes,int i)
 }
 
 
+
+
+
 int calcular_tam_lista(ALUNO *lista_estudantes) {
     //pode ser útil
     int tam = 0;
@@ -157,6 +167,10 @@ int calcular_tam_lista(ALUNO *lista_estudantes) {
     }
     return tam;
 }
+
+
+
+
 
 
 void mostrar_lista(ALUNO *lista_estudantes) {
