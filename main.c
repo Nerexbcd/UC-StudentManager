@@ -60,14 +60,27 @@ int main(void)
     aaa[1].ocupado=0;
     aaa[2].ocupado=0;
     aaa[3].ocupado=0;
+    aaa[4].ocupado=0;
     aaa[0].codigo=001;
 
     size_t size_alunos = 0;
 
     seek_data(txt_estudantes, txt_situacao, aaa,&size_alunos);
-    printf("codigo: %d\n",aaa[1].codigo);
+    printf("codigo: %d\n",aaa[2].codigo);
 
     printf("Size: %u\n", size_alunos);
+
+    inserir_estudante(aaa);
+    printf("codigo: %d\n",aaa[2].codigo);
+    printf("codigo: %d\n",aaa[3].codigo);
+    printf("nome: %s\n",aaa[3].nome);
+    printf("%d\n",calcular_tam_lista(aaa));
+    printf("n_mat: %d\n",aaa[2].n_matriculas);
+    printf("n_mat: %d\n",aaa[3].n_matriculas);
+
+    mostrar_lista(aaa);
+
+
 
 
     //printf("Data: %s\n", txt.data);

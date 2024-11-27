@@ -24,12 +24,17 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
 ALUNO * criar_lista(int i);
 
 //Permite adicionar um aluno à lista
-void inserir_estudante(ALUNO *lista_estudantes,int i);
+void inserir_estudante(ALUNO *lista_estudantes);
 
 //Permite remover um aluno da lista
 void remover_estudante(ALUNO *lista_estudantes,int i);
 
 //Permite alterar um dos dados do aluno
 void atualizar_estudante(ALUNO *lista_estudantes,int i);
+
+//Permite calcular o número de posições ocupadas, ou seja, com lista_estudantes[i].ocupado==1
+int calcular_tam_lista(ALUNO *lista_estudantes);
+
+void mostrar_lista(ALUNO *lista_estudantes);
 
 #endif
