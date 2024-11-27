@@ -78,6 +78,8 @@ void inserir_estudante(ALUNO *lista_estudantes)
     for (int j=0;j<sizeof(lista_estudantes);j++) {
         if ((lista_estudantes[j]).ocupado==0) {
             (lista_estudantes[j]).ocupado=1;
+
+            //Temporário, pede ao utilizador
             (lista_estudantes[j]).codigo=352;
             (lista_estudantes[j]).ects_concluidos=3;
             (lista_estudantes[j]).ano_curso=4;
@@ -103,10 +105,11 @@ void remover_estudante(ALUNO *lista_estudantes,int i)
 
 void atualizar_estudante(ALUNO *lista_estudantes,int i)
 {
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese"); //não funciona?
 
     int j = sizeof(lista_estudantes);
     switch (i) {
+        //i indica qual field a mudar
         case 0:
             printf("Qual é o novo código do estudante número %d?\n",(lista_estudantes[j]).codigo);
             scanf("%d",&(lista_estudantes[j]).codigo);
@@ -145,6 +148,7 @@ void atualizar_estudante(ALUNO *lista_estudantes,int i)
 
 
 int calcular_tam_lista(ALUNO *lista_estudantes) {
+    //pode ser útil
     int tam = 0;
     for (int i=0; i<sizeof(lista_estudantes) ;i++) {
         if (lista_estudantes[i].ocupado==1) {
@@ -158,6 +162,7 @@ int calcular_tam_lista(ALUNO *lista_estudantes) {
 void mostrar_lista(ALUNO *lista_estudantes) {
     setlocale(LC_ALL, "Portuguese");
 
+    //temos de fazer caso para páginas, vou ver como mais tarde
     for (int i=0; i<sizeof(lista_estudantes);i++) {
         if ((lista_estudantes[i].ocupado)==1) {
             printf("Código: %d\n",lista_estudantes[i].codigo);
