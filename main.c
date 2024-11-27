@@ -7,20 +7,35 @@
 #include "libs/env/aluno.h"
 #include "libs/style/colors.h"
 #include "libs/style/tools.h"
+#include "libs/style/program.h"
+#include "libs/style/menu.h"
 
-    #ifdef _WIN32
-        #define OS "W"
-    #elif __linux__
-        #define OS "L"
-    #endif
+#ifdef _WIN32
+    #define OS "W"
+    #include<windows.h>
+#elif __linux__
+    #define OS "L"
+    #include<unistd.h>
+#endif
 
 int main(void)
 {
-    clearConsole();
+    
 
     setlocale(LC_ALL, "Portuguese");
 
-    printf(CYAN("Starting...\n\n"));
+    for (int i = 0; i < 10; i++)
+    {
+        clearConsole();
+        program_header();
+        printf(CYAN("Starting..."));
+        for (int j = 1; j < i; j++) {
+            printf(CYAN("."));
+        }
+        if (i == 9) printf(CYAN(" [✓]"));
+        printf("\n");
+        sleep(1);
+    }
 
     char *path_estudantes;
     char *path_situacao;
@@ -37,23 +52,25 @@ int main(void)
         path_situacao   = "./data/situacao_Escolar_Estudantes.txt";
     }
 
-
-
     txtFile txt_estudantes = txt_files_init(path_estudantes);
     txtFile txt_situacao   = txt_files_init(path_situacao);
-    printf("FileDir: %s\n", txt_estudantes.fileDir);
-    printf("Filename: %s\n", txt_estudantes.fileName);
 
-    txt_load_file(&txt_estudantes);
+
+
+
+    // printf("FileDir: %s\n", txt_estudantes.fileDir);
+    // printf("Filename: %s\n", txt_estudantes.fileName);
+
+    // txt_load_file(&txt_estudantes);
   
-    // Podes usar a função sizeof para saber quantas linhas tem
-    printf("Size: %u\n", txt_get_size(txt_estudantes));
+    // // Podes usar a função sizeof para saber quantas linhas tem
+    // printf("Size: %u\n", txt_get_size(txt_estudantes));
 
-    for (int i = 0; i < txt_get_size(txt_estudantes) ; i++) {
-        printf("Data: %s\n", txt_estudantes.data[i]);
-    }
+    // for (int i = 0; i < txt_get_size(txt_estudantes) ; i++) {
+    //     printf("Data: %s\n", txt_estudantes.data[i]);
+    // }
 
-    txt_unload_file(&txt_estudantes);
+    // txt_unload_file(&txt_estudantes);
 
     ALUNO aaa[10];
     aaa[0].ocupado=0;

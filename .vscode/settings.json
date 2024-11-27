@@ -8,7 +8,8 @@
         "colors.h": "c",
         "tools.h": "c",
         "stdlib.h": "c",
-        "assert.h": "c"
+        "assert.h": "c",
+        "menu.h": "c"
     },
     "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe",
     "lonberg.editorButtonRunTask": {
