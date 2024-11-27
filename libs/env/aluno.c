@@ -35,47 +35,49 @@ void seek_data(char *path_ficheiro_estu, char *path_ficheiro_situacao, ALUNO *ba
                     kk++;
                 }
                 base_dados[i].codigo= atoi(strdup(string));
-                printf("\ncodigo:%d\n",base_dados[i].codigo);
+                printf("\ncodigo:%d",base_dados[i].codigo);
 
 
                 kk++;
                 string = NULL;
-                a=0;
+                string = &(linha[kk]);
+                while (string[kk] != '\t') 
+                {
+                    kk++;
+                }
+                string[kk-1]='\0';
+                base_dados[i].nome = strdup(string);
+                printf("\nnome:%s end",base_dados[i].nome);
+                
+
+                for (int i=0;i<6;i++) {
+                    kk++;
+                }
+                printf("%c",linha[kk]);
+                string=NULL;
                 string = &(linha[kk]);
                 while (string[kk] != '\t') 
                 {
                     kk++;
                 }
                 string[kk]='\0';
-                base_dados[i].nome = strdup(string);
-                printf("nome:%send",base_dados[i].nome);
-                
-
-                kk++;    
-                string=NULL;
-                a=1;
-                string = &(linha[kk]);
-                while (linha[kk] != '\t')
-                {
-                    *(string+a)=*(linha+kk);
-                    kk++;
-                    a++;
-                }
                 base_dados[i].data_n= strdup(string);
-                puts("bb");
+                printf("\nndata_n:%s end",(base_dados[i]).data_n);
 
-                kk++;
-                //string=NULL;
-                a=1;
-                string = &(linha[kk]);
-                while (linha[kk] < lin_size)
-                {
-                    *(string+a)=*(linha+kk);
+                for (int i=0;i<11;i++) {
                     kk++;
-                    a++;
                 }
+                string=NULL;
+                string = &(linha[kk]);
+                printf("%c",string[0]);
+                while (string[kk] != '\t') 
+                {
+                    kk++;
+                }
+                string[kk]='\0';
                 base_dados[i].nacionalidade = strdup(string);
-        }
+                printf("\nnacionalidade:%s end",base_dados[i].nacionalidade);
+            }
         }
     }
     txt_unload_file(&txt_estudantes);

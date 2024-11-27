@@ -54,7 +54,7 @@ int main(void)
 
     txt_unload_file(&txt_estudantes_a);
 
-    ALUNO aaa[4];
+    ALUNO aaa[10];
     aaa[0].ocupado=0;
     aaa[1].ocupado=0;
     aaa[2].ocupado=0;
