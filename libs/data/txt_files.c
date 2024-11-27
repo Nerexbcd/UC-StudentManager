@@ -14,10 +14,30 @@
 #endif
 
 
+// ------------------------------ TXT File Error Handling
+
+void txt_error_open_file(char *path) {
+    fprintf(stderr,RED("Error: Could not open file %s\n"), path);
+    printf(CYAN("Exiting...\n"));
+    exit(1);
+}
+
+void txt_error_not_loaded(char *path) {
+    fprintf(stderr,RED("Error: File %s not loaded\n"), path);
+    printf(CYAN("Exiting...\n"));
+    exit(1);
+}
+
+void txt_error_index_out_of_bounds() {
+    fprintf(stderr,RED("Error: Index out of bounds\n"));
+    printf(CYAN("Exiting...\n"));
+    exit(1);
+}
+
 
 // ------------------------------ TXT File Initialization
 
-txtFile txt_files_init(char path[]) {
+txtFile txt_files_init(char *path) {
     struct txtFile txt;
     txt.path = strdup(path);
     txt.size = 0;
@@ -40,11 +60,8 @@ txtFile txt_files_init(char path[]) {
 void txt_load_file(txtFile *txt){
     txtFile w_txt = *txt; 
     FILE *file = fopen(w_txt.path, "r");
-    if (file == NULL) {
-        fprintf(stderr,RED("Error: Could not open file %s\n"), w_txt.path);
-        printf(CYAN("Exiting...\n"));
-        exit(1);
-    }
+
+    if (file == NULL) txt_error_open_file(w_txt.path);
 
     fseek(file, 0, SEEK_END);
     long fileSize = ftell(file);
@@ -79,27 +96,24 @@ void txt_unload_file(txtFile *txt){
 // ------------------------------ TXT File Infos
 
 size_t txt_get_size(txtFile txt){
-    if (txt.loaded == 0) {
-        fprintf(stderr,RED("Error: File %s not loaded\n"), txt.path);
-        printf(CYAN("Exiting...\n"));
-        exit(1);
-    }
+    if (txt.loaded == 0) txt_error_not_loaded(txt.path);
+
     return txt.size;
 }
 
 // ------------------------------ TXT Data Manipulation
 
 char** txt_get_data(txtFile txt){
-    if (txt.loaded == 0) {
-        fprintf(stderr,RED("Error: File %s not loaded\n"), txt.path);
-        printf(CYAN("Exiting...\n"));
-        exit(1);
-    }
+    if (txt.loaded == 0) txt_error_not_loaded(txt.path);
+
     return txt.data;
 }
 
 void txt_append_data(txtFile *txt, char *data){
     txtFile w_txt = *txt;
+
+    if (w_txt.loaded == 0) txt_error_not_loaded(w_txt.path);
+    
     w_txt.data = realloc(w_txt.data, (w_txt.size + 1) * sizeof(char*));
     *(w_txt.data + w_txt.size) = strdup(data);
     w_txt.size++;
@@ -108,11 +122,11 @@ void txt_append_data(txtFile *txt, char *data){
 
 void txt_update_data(txtFile *txt, char *data, size_t index){
     txtFile w_txt = *txt;
-    if (index >= w_txt.size) {
-        fprintf(stderr,RED("Error: Index out of bounds\n"));
-        printf(CYAN("Exiting...\n"));
-        exit(1);
-    }
+
+    if (w_txt.loaded == 0) txt_error_not_loaded(w_txt.path);
+    
+    if (index >= w_txt.size) txt_error_index_out_of_bounds();
+
     free(*(w_txt.data + index));
     *(w_txt.data + index) = strdup(data);
     *txt = w_txt;
@@ -120,11 +134,11 @@ void txt_update_data(txtFile *txt, char *data, size_t index){
 
 void txt_remove_data(txtFile *txt, size_t index){
     txtFile w_txt = *txt;
-    if (index >= w_txt.size) {
-        fprintf(stderr,RED("Error: Index out of bounds\n"));
-        printf(CYAN("Exiting...\n"));
-        exit(1);
-    }
+
+    if (w_txt.loaded == 0) txt_error_not_loaded(w_txt.path);
+    
+    if (index >= w_txt.size) txt_error_index_out_of_bounds();
+
     free(*(w_txt.data + index));
     for (int i = index; i < w_txt.size - 1; i++) {
         *(w_txt.data + i) = *(w_txt.data + i + 1);
@@ -138,17 +152,13 @@ void txt_remove_data(txtFile *txt, size_t index){
 // ------------------------------ TXT File Save
 
 void txt_save_file(txtFile txt){
-    if (txt.loaded == 0) {
-        fprintf(stderr,RED("Error: File %s not loaded\n"), txt.path);
-        printf(CYAN("Exiting...\n"));
-        exit(1);
-    }
+
+    if (txt.loaded == 0) txt_error_not_loaded(txt.path);
+    
     FILE *file = fopen(txt.path, "w");
-    if (file == NULL) {
-        fprintf(stderr,RED("Error: Could not open file %s\n"), txt.path);
-        printf(CYAN("Exiting...\n"));
-        exit(1);
-    }
+
+    if (file == NULL) txt_error_open_file(txt.path);
+    
     for (int i = 0; i < txt.size; i++) {
         fprintf(file, "%s\n", *(txt.data + i));
     }

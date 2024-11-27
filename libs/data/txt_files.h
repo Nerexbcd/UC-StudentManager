@@ -11,6 +11,18 @@ typedef struct txtFile {
 } txtFile;
 
 
+// ------------------------------ TXT File Error Handling
+
+/* Error File Openning */
+void txt_error_open_file(char *path);
+
+/* Error File Data Not Loaded */
+void txt_error_not_loaded(char *path);
+
+/* Error Index Out Of Bounds */
+void txt_error_index_out_of_bounds();
+
+
 // ------------------------------ TXT File Initialization
 
 /* Initialize txt file data array */
