@@ -1,5 +1,6 @@
 #ifndef ALUNO_H_INCLUDED
 #define ALUNO_H_INCLUDED
+#include "../data/txt_files.h"
 
 //Define a estrutura aluno, de modo a organizar a informação de cada aluno.
 //Parâmetro ocupado indica se há um aluno ou não nessa posição da estrutura; permite a eliminação de alunos.
@@ -17,7 +18,7 @@ typedef struct aluno
 }ALUNO;
 
 //Transfere os dados dos ficheiros para a struct base de dados do tipo ALUNO
-void seek_data(char *path_ficheiro_estu, char *path_ficheiro_situacao, ALUNO *base_dados);
+void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, size_t *size_alunos);
 
 //Cria e inicializa a lista de estudantes
 ALUNO * criar_lista(int i);

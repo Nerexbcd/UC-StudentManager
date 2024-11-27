@@ -22,37 +22,38 @@ int main(void)
 
     printf(CYAN("Starting...\n\n"));
 
-    char *path_estudantes_a;
-    char *path_estudantes_b;
+    char *path_estudantes;
+    char *path_situacao;
 
     if (strcmp(OS, "W") == 0)
     {
-        path_estudantes_b = "data\\situacao_Escolar_Estudantes.txt";
-        path_estudantes_a= "data\\estudantes.txt";
+
+        path_estudantes = "data\\estudantes.txt";
+        path_situacao   = "data\\situacao_Escolar_Estudantes.txt";
     }
     else if (strcmp(OS, "L") == 0)
     {
-        path_estudantes_a = "./data/estudantes.txt";
-        path_estudantes_b = "./data/situacao_Escolar_Estudantes.txt";
+        path_estudantes = "./data/estudantes.txt";
+        path_situacao   = "./data/situacao_Escolar_Estudantes.txt";
     }
 
 
 
-    txtFile txt_estudantes_a = txt_files_init(path_estudantes_a);
-    txtFile txt_estudantes_b = txt_files_init(path_estudantes_b);
-    printf("FileDir: %s\n", txt_estudantes_a.fileDir);
-    printf("Filename: %s\n", txt_estudantes_a.fileName);
+    txtFile txt_estudantes = txt_files_init(path_estudantes);
+    txtFile txt_situacao   = txt_files_init(path_situacao);
+    printf("FileDir: %s\n", txt_estudantes.fileDir);
+    printf("Filename: %s\n", txt_estudantes.fileName);
 
-    txt_load_file(&txt_estudantes_a);
+    txt_load_file(&txt_estudantes);
   
     // Podes usar a função sizeof para saber quantas linhas tem
-    printf("Size: %u\n", txt_get_size(txt_estudantes_a));
+    printf("Size: %u\n", txt_get_size(txt_estudantes));
 
-    for (int i = 0; i < txt_get_size(txt_estudantes_a) ; i++) {
-        printf("Data: %s\n", txt_estudantes_a.data[i]);
+    for (int i = 0; i < txt_get_size(txt_estudantes) ; i++) {
+        printf("Data: %s\n", txt_estudantes.data[i]);
     }
 
-    txt_unload_file(&txt_estudantes_a);
+    txt_unload_file(&txt_estudantes);
 
     ALUNO aaa[10];
     aaa[0].ocupado=0;
@@ -61,8 +62,12 @@ int main(void)
     aaa[3].ocupado=0;
     aaa[0].codigo=001;
 
-    seek_data(path_estudantes_a, path_estudantes_b, aaa);
-    printf("\ncodigo: %d",aaa[1].codigo);
+    size_t size_alunos = 0;
+
+    seek_data(txt_estudantes, txt_situacao, aaa,&size_alunos);
+    printf("codigo: %d\n",aaa[1].codigo);
+
+    printf("Size: %u\n", size_alunos);
 
 
     //printf("Data: %s\n", txt.data);
