@@ -32,10 +32,14 @@ void remover_estudante(ALUNO *lista_estudantes,int i);
 //Permite alterar um dos dados do aluno
 void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes);
 
+//Faz display da struct (apenas os membros com ocupado=1)
+void mostrar_toda_lista(ALUNO *lista_estudantes);
+
 //Permite calcular o número de posições ocupadas, ou seja, com lista_estudantes[i].ocupado==1
 int calcular_tam_lista(ALUNO *lista_estudantes);
 
-//Faz display da struct (apenas os membros com ocupado=1)
-void mostrar_lista(ALUNO *lista_estudantes);
+//Determina média do número de matrículas dos estudantes, em geral e por nacionalidade
+int media_mat(ALUNO *lista_estudantes,char *nacion);
+
 
 #endif

@@ -68,22 +68,24 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
 
 void inserir_estudante(ALUNO *lista_estudantes)
 {
-    for (int j=0;j<sizeof(lista_estudantes);j++) {
-        if ((lista_estudantes[j]).ocupado==0) {
-            (lista_estudantes[j]).ocupado=1;
-
-            //Temporário, pede ao utilizador
-            (lista_estudantes[j]).codigo=352;
-            (lista_estudantes[j]).ects_concluidos=3;
-            (lista_estudantes[j]).ano_curso=4;
-            (lista_estudantes[j]).n_matriculas=2;
-            (lista_estudantes[j]).media_atual=12.3;
-            (lista_estudantes[j]).nome="EU";
-            (lista_estudantes[j]).nacionalidade="ANGOLA";
-            (lista_estudantes[j]).data_n="23-06-2938";
-            break;
-        }
+    int j=(-1);
+    do {
+        j++;
     }
+    while(((lista_estudantes[j]).ocupado==1) && (j<sizeof(lista_estudantes)));
+
+    //Temporário, pede ao utilizador
+    (lista_estudantes[j]).ocupado=1;
+    printf("codigo: \n");
+    fflush(stdin);
+    scanf(" %d",&((lista_estudantes[j]).codigo));
+    (lista_estudantes[j]).ects_concluidos=3;
+    (lista_estudantes[j]).ano_curso=4;
+    (lista_estudantes[j]).n_matriculas=2;
+    (lista_estudantes[j]).media_atual=12.3;
+    (lista_estudantes[j]).nome="EU";
+    (lista_estudantes[j]).nacionalidade="ANGOLA";
+    (lista_estudantes[j]).data_n="23-06-2938";
 }
 
 
@@ -182,27 +184,20 @@ int calcular_tam_lista(ALUNO *lista_estudantes) {
 
 
 
-void mostrar_lista(ALUNO *lista_estudantes) {
+void mostrar_toda_lista(ALUNO *lista_estudantes) {//corta elementos????
 
-    for (int i=0, ele_pag=0; i<sizeof(lista_estudantes);i++) {
-        if (ele_pag<3) {
-            if ((lista_estudantes[i].ocupado)==1) {
-                printf("Codigo: %d\n",lista_estudantes[i].codigo);
-                printf("Nome: %s\n",lista_estudantes[i].nome);
-                printf("Nacionalidade: %s\n",lista_estudantes[i].nacionalidade);
-                printf("Data de nascimento: %s\n",lista_estudantes[i].data_n);
-                printf("Numero de matriculas: %d\n",lista_estudantes[i].n_matriculas);
-                printf("Ano do curso: %d\n",lista_estudantes[i].ano_curso);
-                printf("Media atual: %.1f\n",lista_estudantes[i].media_atual);
-                printf("ECTS concluidos: %d\n\n",lista_estudantes[i].ects_concluidos);
-            }
-            ele_pag++;
-        }
-        else {
+    for (int i=0; i<sizeof(lista_estudantes);i++) {
+        if ((lista_estudantes[i].ocupado)==1) {
+            
+            if ((i != 0) && (i%3==0)) {
             printf("Pagina seguinte ->");
             fflush(stdin);
             getchar();
+            fflush(stdin);
             puts("\n");
+            fflush(stdin);
+            }
+
             printf("Codigo: %d\n",lista_estudantes[i].codigo);
             printf("Nome: %s\n",lista_estudantes[i].nome);
             printf("Nacionalidade: %s\n",lista_estudantes[i].nacionalidade);
@@ -211,7 +206,35 @@ void mostrar_lista(ALUNO *lista_estudantes) {
             printf("Ano do curso: %d\n",lista_estudantes[i].ano_curso);
             printf("Media atual: %.1f\n",lista_estudantes[i].media_atual);
             printf("ECTS concluidos: %d\n\n",lista_estudantes[i].ects_concluidos);
-            ele_pag=1;
+            fflush(stdin);
         }
+    }
+}
+
+
+
+
+int media_mat(ALUNO *lista_estudantes,char *nacion) {
+
+    int media=0;
+    int num=0;
+
+    if (nacion == 0) {
+        for(int i=0;i<sizeof(lista_estudantes);i++) {
+            if (lista_estudantes[i].codigo==1) {
+                media=media+(lista_estudantes[i].n_matriculas);
+                num++;
+            }
+        }
+        return (media/num);
+    }
+    else if (nacion != 0) {
+        for(int i=0;i<sizeof(lista_estudantes);i++) {
+            if ((lista_estudantes[i].codigo==1) && (lista_estudantes[i].nacionalidade==nacion)) {
+                media=media+(lista_estudantes[i].n_matriculas);
+                num++;
+            }
+        }
+        return (media/num);
     }
 }

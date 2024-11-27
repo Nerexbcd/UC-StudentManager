@@ -38,8 +38,13 @@ int main(void)
     }
     */
 
+
     char *path_estudantes;
     char *path_situacao;
+
+    int con_saida=1;
+
+    
 
     if (strcmp(OS, "W") == 0)
     {
@@ -63,20 +68,23 @@ int main(void)
 
 
     ALUNO aaa[10];
-    aaa[0].ocupado=0;
-    aaa[1].ocupado=0;
-    aaa[2].ocupado=0;
-    aaa[3].ocupado=0;
-    aaa[4].ocupado=0;
+
+    for(int what=0;what<10;what++) {
+        aaa[what].ocupado=0;
+    }
 
 
     size_t size_alunos = 0;
 
     seek_data(txt_estudantes, txt_situacao, aaa,&size_alunos);
 
-    
+    inserir_estudante(aaa);
+    inserir_estudante(aaa);
+    inserir_estudante(aaa);
 
-    mostrar_lista(aaa);
+    mostrar_toda_lista(aaa);
+
+    printf("\n%d",aaa[4].codigo);
 
 
     //Menu principal
