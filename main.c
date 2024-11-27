@@ -80,6 +80,10 @@ int main(void)
 
     mostrar_lista(aaa);
 
+    // txt_load_file(&txt_estudantes);
+    // txt_append_data(&txt_estudantes, "9999	Anita Carvalhedo	12-05-2001	Portuguesa");
+    // txt_save_file(txt_estudantes);
+
 
 
 

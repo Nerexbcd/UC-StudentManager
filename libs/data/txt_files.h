@@ -11,9 +11,14 @@ typedef struct txtFile {
 } txtFile;
 
 
+// ------------------------------ TXT File Initialization
+
 /* Initialize txt file data array */
 /* It Prepares the file to be used */
 txtFile txt_files_init(char *path);
+
+
+// ------------------------------ TXT File to memmory and vice versa 
 
 /* Load txt files in to Program */
 /* It reads the file and stores the data in the data array */
@@ -23,12 +28,37 @@ void txt_load_file(txtFile *txt);
 /* It frees the memory allocated for the data array */
 void txt_unload_file(txtFile *txt);
 
-/* Get txt file data */
-/* It returns an array with each line one the file*/
-char** txt_get_data(txtFile txt);
+
+// ------------------------------ TXT File Infos
 
 /* Get txt file size */
 /* It returns the number of lines in the file */
 size_t txt_get_size(txtFile txt);
+
+
+// ------------------------------ TXT Data Manipulation
+
+/* Get txt file data */
+/* It returns an array with each line one the file*/
+char** txt_get_data(txtFile txt);
+
+/* Append data to txt file */
+/* It adds a new line to the file */
+void txt_append_data(txtFile *txt, char *data);
+
+/* Update data in txt file */
+/* It changes the data in the line index */
+void txt_update_data(txtFile *txt, char *data, size_t index);
+
+/* Remove data from txt file */
+/* It removes the line index from the file */
+void txt_remove_data(txtFile *txt, size_t index);
+
+
+// ------------------------------ TXT File Save
+
+/* Save data to txt file */
+/* It saves the data array to the file */
+void txt_save_file(txtFile txt);
 
 #endif
