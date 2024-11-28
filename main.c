@@ -67,9 +67,9 @@ int main(void)
 
 
 
-    ALUNO aaa[10];
+    ALUNO aaa[100];
 
-    for(int what=0;what<10;what++) {
+    for(int what=0;what<100;what++) {
         aaa[what].ocupado=0;
     }
 
@@ -81,10 +81,11 @@ int main(void)
     inserir_estudante(aaa);
     inserir_estudante(aaa);
     inserir_estudante(aaa);
+    inserir_estudante(aaa);
 
     mostrar_toda_lista(aaa);
 
-    printf("\n%d",aaa[4].codigo);
+    printf("\n%d",aaa[5].codigo);
 
 
     //Menu principal

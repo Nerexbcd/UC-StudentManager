@@ -68,17 +68,17 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
 
 void inserir_estudante(ALUNO *lista_estudantes)
 {
-    int j=(-1);
-    do {
+    int j=0;
+    while(((lista_estudantes[j]).ocupado)!=0) {
         j++;
     }
-    while(((lista_estudantes[j]).ocupado==1) && (j<sizeof(lista_estudantes)));
 
     //Temporário, pede ao utilizador
     (lista_estudantes[j]).ocupado=1;
     printf("codigo: \n");
     fflush(stdin);
     scanf(" %d",&((lista_estudantes[j]).codigo));
+    fflush(stdin);
     (lista_estudantes[j]).ects_concluidos=3;
     (lista_estudantes[j]).ano_curso=4;
     (lista_estudantes[j]).n_matriculas=2;
@@ -171,7 +171,7 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes)
 int calcular_tam_lista(ALUNO *lista_estudantes) {
     //pode ser útil
     int tam = 0;
-    for (int i=0; i<sizeof(lista_estudantes) ;i++) {
+    for (int i=0; i<sizeof(lista_estudantes[0]) ;i++) {
         if (lista_estudantes[i].ocupado==1) {
             tam++;
         }
@@ -186,18 +186,18 @@ int calcular_tam_lista(ALUNO *lista_estudantes) {
 
 void mostrar_toda_lista(ALUNO *lista_estudantes) {//corta elementos????
 
-    for (int i=0; i<sizeof(lista_estudantes);i++) {
+    for (int i=0,j=0; j<calcular_tam_lista(lista_estudantes);i++) {
         if ((lista_estudantes[i].ocupado)==1) {
             
             if ((i != 0) && (i%3==0)) {
-            printf("Pagina seguinte ->");
-            fflush(stdin);
-            getchar();
-            fflush(stdin);
-            puts("\n");
-            fflush(stdin);
+                printf("Pagina seguinte ->");
+                fflush(stdin);
+                getchar();
+                puts("");
+                fflush(stdin);
             }
 
+            fflush(stdin);
             printf("Codigo: %d\n",lista_estudantes[i].codigo);
             printf("Nome: %s\n",lista_estudantes[i].nome);
             printf("Nacionalidade: %s\n",lista_estudantes[i].nacionalidade);
@@ -207,6 +207,8 @@ void mostrar_toda_lista(ALUNO *lista_estudantes) {//corta elementos????
             printf("Media atual: %.1f\n",lista_estudantes[i].media_atual);
             printf("ECTS concluidos: %d\n\n",lista_estudantes[i].ects_concluidos);
             fflush(stdin);
+
+            j++;
         }
     }
 }
