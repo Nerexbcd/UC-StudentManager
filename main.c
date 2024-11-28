@@ -24,19 +24,19 @@ int main(void)
 
     setlocale(LC_ALL, "Portuguese");
 
-   // for (int i = 0; i < 10; i++)
-    //{
+   for (int i = 0; i < 10; i++)
+    {
         clearConsole();
-   /*    program_header();
+        //program_header();
         printf(CYAN("Starting..."));
         for (int j = 1; j < i; j++) {
             printf(CYAN("."));
         }
-        if (i == 9) printf(CYAN(" [✓]"));
+        if (i == 9) printf(CYAN(" [DONE!]"));
         printf("\n");
-        sleep(1);
+        //sleep(1);
     }
-    */
+    
 
 
     char *path_estudantes;
@@ -83,24 +83,15 @@ int main(void)
     inserir_estudante(aaa);
     inserir_estudante(aaa);
 
-    mostrar_toda_lista(aaa);
-
-    printf("\n%d",aaa[5].codigo);
 
 
-    //Menu principal
-   /*
-   do
-    {
-        load ficheiro 1
-        atribuir atributos do ficheiro 1 ao struct aluno
-        load ficheiro 2
-        atribuir atributos do ficheiro 2 ao struct aluno
+    //MENU PRINCIPAL
+    /*do {
+        int saida=0;
 
-        escolhas do utilizador (com outros menus)
 
-        saida - break
-    } while (1);
+    }
+    while(saida != 1)
     */
     
   
