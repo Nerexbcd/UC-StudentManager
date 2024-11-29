@@ -69,24 +69,77 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
 
 void inserir_estudante(ALUNO *lista_estudantes)
 {
+    /*ALUNO * new_lista_estudantes;
+    ALUNO * ptr = lista_estudantes;
+    new_lista_estudantes = (ALUNO *) realloc(ptr , sizeof(ALUNO));
+    if(!new_lista_estudantes)
+    {
+    printf("erro\n");
+    }*/
+
     int j=0;
-    while(((lista_estudantes[j]).ocupado)!=0) {
+    while((lista_estudantes[j]).ocupado==1) {
         j++;
     }
 
-    //Temporário, pede ao utilizador
+    
     (lista_estudantes[j]).ocupado=1;
-    printf("codigo: \n");
-    fflush(stdin);
+
+    printf("codigo: ");
     scanf(" %d",&((lista_estudantes[j]).codigo));
+
+    char * stringgg=NULL;
+    size_t bufsize=200;
+    printf("nome: ");
     fflush(stdin);
-    (lista_estudantes[j]).ects_concluidos=3;
-    (lista_estudantes[j]).ano_curso=4;
-    (lista_estudantes[j]).n_matriculas=2;
-    (lista_estudantes[j]).media_atual=12.3;
-    (lista_estudantes[j]).nome="EU";
-    (lista_estudantes[j]).nacionalidade="ANGOLA";
-    (lista_estudantes[j]).data_n="23-06-2938";
+    getline(&stringgg,&bufsize,stdin);
+    stringgg = * str_split(stringgg, '\n', NULL);
+    lista_estudantes[j].nome=(char*) malloc(sizeof(stringgg));
+    lista_estudantes[j].nome=stringgg;
+    fflush(stdin);
+    
+    stringgg=NULL;
+    bufsize=11;
+    printf("data de nascimento (dd-mm-aaaa): ");
+    fflush(stdin);
+    getline(&stringgg,&bufsize,stdin);
+    stringgg = * str_split(stringgg, '\n', NULL);
+    lista_estudantes[j].data_n=(char*) malloc(sizeof(stringgg));
+    lista_estudantes[j].data_n=stringgg;
+    fflush(stdin);
+
+    stringgg=NULL;
+    bufsize=200;
+    printf("nacionalidade: ");
+    fflush(stdin);
+    getline(&stringgg,&bufsize,stdin);
+    stringgg = * str_split(stringgg, '\n', NULL);
+    lista_estudantes[j].nacionalidade=(char*) malloc(sizeof(stringgg));
+    lista_estudantes[j].nacionalidade=stringgg;
+    fflush(stdin);
+
+    printf("ano de curso: ");
+    fflush(stdin);
+    scanf(" %d",&((lista_estudantes[j]).ano_curso));
+
+    printf("media atual: ");
+    fflush(stdin);
+    scanf(" %f",&((lista_estudantes[j]).media_atual));
+
+    printf("ECTS concluidos: ");
+    fflush(stdin);
+    scanf(" %d",&((lista_estudantes[j]).ects_concluidos));
+
+    printf("numero de matriculas: ");
+    fflush(stdin);
+    scanf(" %d",&((lista_estudantes[j]).n_matriculas));
+
+    puts("\n");
+    fflush(stdin);
+
+    /*if j=sizeof(lista_estudantes) {
+    free(lista_estudantes);
+    }*/
 }
 
 
@@ -123,14 +176,10 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes)
         }
     }
 
-    /*printf("O que pretende alterar? Escreva um numero.\n0 - codigo\n1 - ECTS concluidos\n2 - Ano do curso\n3 - Media atual\n4 - Nome\n5 - Nacionalidade\n6 - Data de nascimento\n7 - Numero de matriculas");
-    fflush(stdin);
-    scanf(" %d",&i);*/
-
     i = menu_opcoes_field();
 
     switch (i) {
-        //i indica qual elemento da estrutura a mudar, fornecido pelo utilizador
+        //i indica qual elemento da estrutura a mudar, fornecido pelo utilizador no menu anterior
         case 0:
             printf("Qual o novo codigo do estudante numero %d?\n",(lista_estudantes[j]).codigo);
             scanf("%d",&(lista_estudantes[j]).codigo);
@@ -150,7 +199,7 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes)
         case 4:
             //Esvazia-se o string primeiro para evitar erros:
             (*(lista_estudantes+j)).nome=NULL;
-            //(lista_estudantes[j]).nome;
+            //(lista_estudantes[j]).nome; //fuck me i ca't be bothered
             break;
         case 5:
             (*(lista_estudantes+j)).nacionalidade=NULL;
@@ -187,7 +236,7 @@ int calcular_tam_lista(ALUNO *lista_estudantes) {
 
 
 
-void mostrar_toda_lista(ALUNO *lista_estudantes) {//corta elementos????
+void mostrar_toda_lista(ALUNO *lista_estudantes) {
 
     for (int i=0,j=0; j<calcular_tam_lista(lista_estudantes);i++) {
         if ((lista_estudantes[i].ocupado)==1) {
