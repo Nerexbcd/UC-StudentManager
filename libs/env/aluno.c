@@ -112,11 +112,11 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes)
     int j; //posição do aluno com código k na lista
 
 
-    printf("Qual o codigo do estudante?");
+    printf("Qual o codigo do estudante? ");
     fflush(stdin);
     scanf(" %d",&k);
 
-    for(int t=0;t<sizeof(lista_estudantes);t++) {
+    for(int t=0;t<sizeof(*lista_estudantes);t++) {
         if(lista_estudantes[t].codigo==k) {
             j=t;
             break;

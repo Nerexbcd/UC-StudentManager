@@ -85,6 +85,10 @@ int main(void)
 
     mostrar_toda_lista(aaa);
 
+    atualizar_uma_caracteristica_estudante(aaa);
+
+    mostrar_toda_lista(aaa);
+
    //menu_principal();
 
     
