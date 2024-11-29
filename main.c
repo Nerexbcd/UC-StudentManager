@@ -23,7 +23,7 @@ int main(void)
     
 
     setlocale(LC_ALL, "Portuguese");
-/*
+
    for (int i = 0; i < 10; i++)
     {
         clearConsole();
@@ -36,9 +36,9 @@ int main(void)
         printf("\n");
         //sleep(1);
     }
-*/
 
-    /*
+
+
     char *path_estudantes;
     char *path_situacao;
 
@@ -66,7 +66,7 @@ int main(void)
     // printf("Size: %u\n", txt_get_size(txt_estudantes));
 
 
-*/
+
     ALUNO aaa[100];
 
     for(int what=0;what<100;what++) {
@@ -76,20 +76,18 @@ int main(void)
 
     size_t size_alunos = 0;
 
-    //seek_data(txt_estudantes, txt_situacao, aaa,&size_alunos);
+    seek_data(txt_estudantes, txt_situacao, aaa,&size_alunos);
 
-    aaa[0].nome="EU";
 
-    //inserir_estudante(aaa);
-    //inserir_estudante(aaa);
+    inserir_estudante(aaa);
+    inserir_estudante(aaa);
     //inserir_estudante(aaa);
     //inserir_estudante(aaa);
 
     mostrar_toda_lista(aaa);
 
-    //atualizar_uma_caracteristica_estudante(aaa);
+    atualizar_uma_caracteristica_estudante(aaa);
 
-    inserir_estudante(aaa);
 
     mostrar_toda_lista(aaa);
 

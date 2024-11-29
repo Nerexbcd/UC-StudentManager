@@ -85,13 +85,14 @@ void inserir_estudante(ALUNO *lista_estudantes)
     
     (lista_estudantes[j]).ocupado=1;
 
-    printf("codigo: ");
+    printf("Codigo: ");
     scanf(" %d",&((lista_estudantes[j]).codigo));
 
     char * stringgg=NULL;
     size_t bufsize=200;
-    printf("nome: ");
+    printf("Nome: ");
     fflush(stdin);
+    //não consegui usar o scanf ou gets (?????????????porquê?????)
     getline(&stringgg,&bufsize,stdin);
     stringgg = * str_split(stringgg, '\n', NULL);
     lista_estudantes[j].nome=(char*) malloc(sizeof(stringgg));
@@ -100,7 +101,7 @@ void inserir_estudante(ALUNO *lista_estudantes)
     
     stringgg=NULL;
     bufsize=11;
-    printf("data de nascimento (dd-mm-aaaa): ");
+    printf("Data de nascimento (dd-mm-aaaa): ");
     fflush(stdin);
     getline(&stringgg,&bufsize,stdin);
     stringgg = * str_split(stringgg, '\n', NULL);
@@ -110,7 +111,7 @@ void inserir_estudante(ALUNO *lista_estudantes)
 
     stringgg=NULL;
     bufsize=200;
-    printf("nacionalidade: ");
+    printf("Nacionalidade: ");
     fflush(stdin);
     getline(&stringgg,&bufsize,stdin);
     stringgg = * str_split(stringgg, '\n', NULL);
@@ -118,11 +119,11 @@ void inserir_estudante(ALUNO *lista_estudantes)
     lista_estudantes[j].nacionalidade=stringgg;
     fflush(stdin);
 
-    printf("ano de curso: ");
+    printf("Ano de curso: ");
     fflush(stdin);
     scanf(" %d",&((lista_estudantes[j]).ano_curso));
 
-    printf("media atual: ");
+    printf("Media atual: ");
     fflush(stdin);
     scanf(" %f",&((lista_estudantes[j]).media_atual));
 
@@ -130,7 +131,7 @@ void inserir_estudante(ALUNO *lista_estudantes)
     fflush(stdin);
     scanf(" %d",&((lista_estudantes[j]).ects_concluidos));
 
-    printf("numero de matriculas: ");
+    printf("Numero de matriculas: ");
     fflush(stdin);
     scanf(" %d",&((lista_estudantes[j]).n_matriculas));
 
@@ -199,15 +200,42 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes)
         case 4:
             //Esvazia-se o string primeiro para evitar erros:
             (*(lista_estudantes+j)).nome=NULL;
-            //(lista_estudantes[j]).nome; //fuck me i ca't be bothered
+            //Por algum motivo o scanf e gets não funcionam para mim, por isso tenho de fazer esta abominação
+            char * stringgg=NULL;
+            size_t bufsize=200;
+            printf("Qual o novo nome do estudante numero %d?\n",(lista_estudantes[j]).codigo);
+            fflush(stdin);
+            getline(&stringgg,&bufsize,stdin);
+            stringgg = * str_split(stringgg, '\n', NULL);
+            lista_estudantes[j].nome=(char*) malloc(sizeof(stringgg));
+            lista_estudantes[j].nome=stringgg;
+            fflush(stdin);
             break;
         case 5:
             (*(lista_estudantes+j)).nacionalidade=NULL;
-            //(lista_estudantes[j]).nacionalidade;
+            stringgg=NULL;
+            bufsize=200;
+            printf("Qual a nova nacionalidade do estudante numero %d?\n",(lista_estudantes[j]).codigo);
+            fflush(stdin);
+            getline(&stringgg,&bufsize,stdin);
+            stringgg = * str_split(stringgg, '\n', NULL);
+            lista_estudantes[j].nacionalidade=(char*) malloc(sizeof(stringgg));
+            lista_estudantes[j].nacionalidade=stringgg;
+            fflush(stdin);
+            break;
             break;
         case 6:
             (*(lista_estudantes+j)).data_n=NULL;
-            //(lista_estudantes[j]).data_n;
+            stringgg=NULL;
+            bufsize=11;
+            printf("Qual a nova data de nascimento do estudante numero %d?\n",(lista_estudantes[j]).codigo);
+            fflush(stdin);
+            getline(&stringgg,&bufsize,stdin);
+            stringgg = * str_split(stringgg, '\n', NULL);
+            lista_estudantes[j].data_n=(char*) malloc(sizeof(stringgg));
+            lista_estudantes[j].data_n=stringgg;
+            fflush(stdin);
+            break;
             break;
         case 7:
             printf("Qual o novo numero de matriculas do estudante numero %d?\n",(lista_estudantes[j]).codigo);
