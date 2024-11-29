@@ -6,6 +6,7 @@
 #include "../data/txt_files.h"
 #include "../utils/string_util.h"
 #include "../style/colors.h"
+#include "../style/menu.h"
 
 
 
@@ -122,9 +123,11 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes)
         }
     }
 
-    printf("O que pretende alterar? Escreva um numero.\n0 - codigo\n1 - ECTS concluidos\n2 - Ano do curso\n3 - Media atual\n4 - Nome\n5 - Nacionalidade\n6 - Data de nascimento\n7 - Numero de matriculas");
+    /*printf("O que pretende alterar? Escreva um numero.\n0 - codigo\n1 - ECTS concluidos\n2 - Ano do curso\n3 - Media atual\n4 - Nome\n5 - Nacionalidade\n6 - Data de nascimento\n7 - Numero de matriculas");
     fflush(stdin);
-    scanf(" %d",&i);
+    scanf(" %d",&i);*/
+
+    i = menu_opcoes_field();
 
     switch (i) {
         //i indica qual elemento da estrutura a mudar, fornecido pelo utilizador

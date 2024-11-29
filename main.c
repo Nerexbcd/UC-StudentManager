@@ -83,16 +83,10 @@ int main(void)
     inserir_estudante(aaa);
     inserir_estudante(aaa);
 
+    mostrar_toda_lista(aaa);
 
+   //menu_principal();
 
-    //MENU PRINCIPAL
-    /*do {
-        int saida=0;
-
-
-    }
-    while(saida != 1)
-    */
     
   
     return 0;
