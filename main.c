@@ -67,20 +67,23 @@ int main(void)
 
 
 
-    ALUNO aaa[100];
+    ALUNO *aaa = NULL;
+    aaa = criar_lista(txt_estudantes);
 
-    for(int what=0;what<100;what++) {
-        aaa[what].ocupado=0;
-    }
+    //aaa = malloc(sizeof(ALUNO)*(txt_estudantes.size)+1);
+
+    printf("%d\n",sizeof(aaa));
+
 
 
     size_t size_alunos = 0;
 
-    seek_data(txt_estudantes, txt_situacao, aaa,&size_alunos);
+    seek_data(txt_estudantes, txt_situacao,aaa,&size_alunos);
 
+    mostrar_toda_lista(aaa);
 
-    inserir_estudante(aaa);
-    inserir_estudante(aaa);
+    inserir_estudante(aaa,&size_alunos);
+    inserir_estudante(aaa,&size_alunos);
     //inserir_estudante(aaa);
     //inserir_estudante(aaa);
 

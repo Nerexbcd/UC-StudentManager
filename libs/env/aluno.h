@@ -21,10 +21,10 @@ typedef struct aluno
 void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, size_t *size_alunos);
 
 //Cria e inicializa a lista de estudantes
-ALUNO * criar_lista(int i);
+ALUNO * criar_lista(txtFile txt_estudantes);
 
 //Permite adicionar um aluno à lista
-void inserir_estudante(ALUNO *lista_estudantes);
+void inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos);
 
 //Permite remover um aluno da lista
 void remover_estudante(ALUNO *lista_estudantes,int i);

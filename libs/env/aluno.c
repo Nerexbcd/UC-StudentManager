@@ -1,13 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <locale.h>
 #include "aluno.h"
 #include "../data/txt_files.h"
-#include "../utils/string_util.h"
 #include "../style/colors.h"
 #include "../style/menu.h"
+#include "../utils/string_util.h"
 
+
+ALUNO * criar_lista(txtFile txt_estudantes) {
+    ALUNO *lista_estudantes;
+    lista_estudantes = malloc(sizeof(ALUNO)*(txt_estudantes.size)+1);
+    for (int i=0;i<=txt_estudantes.size+1;i++) {
+        lista_estudantes[i].ocupado=0;
+    }
+    return lista_estudantes;
+
+    printf("%d\n",lista_estudantes[1].ocupado);
+}
 
 
 void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, size_t *size_alunos)
@@ -42,7 +52,6 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
     txt_load_file(&file_situacao);
 
     for (int i=0; i < txt_get_size(file_situacao) ; i++) {
-        
         char *linha = file_situacao.data[i];
         char **dados = str_split(linha, '\t', NULL);
         
@@ -67,17 +76,18 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
 
 
 
-void inserir_estudante(ALUNO *lista_estudantes)
+void inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos)
 {
-    /*ALUNO * new_lista_estudantes;
     ALUNO * ptr = lista_estudantes;
-    new_lista_estudantes = (ALUNO *) realloc(ptr , sizeof(ALUNO));
+    ptr = (ALUNO *) malloc(sizeof(ALUNO));
+    ALUNO * new_lista_estudantes = (ALUNO *) realloc(ptr , sizeof(ALUNO));
     if(!new_lista_estudantes)
     {
-    printf("erro\n");
-    }*/
+        printf("erro\n");
+        free(ptr);
+    }
 
-    int j=0;
+    int j = 0;
     while((lista_estudantes[j]).ocupado==1) {
         j++;
     }
@@ -268,7 +278,6 @@ void mostrar_toda_lista(ALUNO *lista_estudantes) {
 
     for (int i=0,j=0; j<calcular_tam_lista(lista_estudantes);i++) {
         if ((lista_estudantes[i].ocupado)==1) {
-            
             if ((i != 0) && (i%3==0)) {
                 printf("Pagina seguinte ->");
                 fflush(stdin);
