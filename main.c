@@ -37,7 +37,6 @@ int main(void)
         printf("\n");
         //sleep(1);
     }
-        */
     char *path_estudantes;
     char *path_situacao;
 
@@ -76,7 +75,8 @@ int main(void)
     //MENU PRINCIPAL
     do
     {
-            for (int i = 0; i < 10; i++)
+
+        for (int i = 0; i < 10; i++)
         {
             clearConsole();
             //program_header();
@@ -92,25 +92,34 @@ int main(void)
 
         printf("BEM VINDO!\n\n");
 
-        printf("A carregar %s...",path_estudantes);
-        txtFile txt_estudantes = txt_files_init(path_estudantes);
-        if (txt_estudantes.size!=0) {
-            printf(" carregado!\n");
+        char *path_estudantes;
+        char *path_situacao;
+
+
+        if (strcmp(OS, "W") == 0)
+        {
+
+            path_estudantes = "data\\estudantes.txt";
+            path_situacao   = "data\\situacao_Escolar_Estudantes.txt";
         }
-        else {
-            printf(" ERRO! A sair...\n");
-            return 1;
+        else if (strcmp(OS, "L") == 0)
+        {
+            path_estudantes = "./data/estudantes.txt";
+            path_situacao   = "./data/situacao_Escolar_Estudantes.txt";
         }
 
-        printf("A carregar %s...",path_situacao);
+        txtFile txt_estudantes = txt_files_init(path_estudantes);
         txtFile txt_situacao   = txt_files_init(path_situacao);
-        if (txt_situacao.size!=0) {
-            printf(" carregado!\n");
-        }
-        else {
-            printf(" ERRO! A sair...\n");
-            return 1;
-        }
+
+        ALUNO *aaa = NULL;
+        aaa = criar_lista(&txt_estudantes);
+
+
+        size_t size_alunos = 0;
+
+        seek_data(txt_estudantes, txt_situacao,aaa,&size_alunos);
+
+        mostrar_toda_lista(aaa);
 
         gets("");
 
