@@ -157,9 +157,9 @@ void inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos)
     puts("\n");
     fflush(stdin);
 
-    /*if j=sizeof(lista_estudantes) {
-    free(lista_estudantes);
-    }*/
+    if (j==sizeof(lista_estudantes)) {
+    free(new_lista_estudantes);
+    }
 }
 
 
