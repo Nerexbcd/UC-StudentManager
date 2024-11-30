@@ -213,18 +213,22 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes)
             printf("Qual o novo codigo do estudante numero %d?\n",(lista_estudantes[j]).codigo);
             scanf("%d",&(lista_estudantes[j]).codigo);
             break;
+
         case 1:
             printf("Qual o novo numero de ECTS concluidos do estudante numero %d?\n",(lista_estudantes[j]).codigo);
             scanf("%d",&(lista_estudantes[j]).ects_concluidos);
             break;
+
         case 2:
             printf("Qual o novo ano de curso do estudante número %d?\n",(lista_estudantes[j]).codigo);
             scanf("%d",&(lista_estudantes[j]).ano_curso);
             break;
+
         case 3:
             printf("Qual a nova media do estudante numero %d?\n",(lista_estudantes[j]).codigo);
             scanf("%f",&(lista_estudantes[j]).media_atual);
             break;
+
         case 4:
             //Esvazia-se o string primeiro para evitar erros:
             (*(lista_estudantes+j)).nome=NULL;
@@ -239,6 +243,7 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes)
             lista_estudantes[j].nome=stringgg;
             fflush(stdin);
             break;
+
         case 5:
             (*(lista_estudantes+j)).nacionalidade=NULL;
             stringgg=NULL;
@@ -251,7 +256,7 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes)
             lista_estudantes[j].nacionalidade=stringgg;
             fflush(stdin);
             break;
-            break;
+
         case 6:
             (*(lista_estudantes+j)).data_n=NULL;
             stringgg=NULL;
@@ -264,7 +269,7 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes)
             lista_estudantes[j].data_n=stringgg;
             fflush(stdin);
             break;
-            break;
+
         case 7:
             printf("Qual o novo numero de matriculas do estudante numero %d?\n",(lista_estudantes[j]).codigo);
             scanf("%d",&(lista_estudantes[j]).n_matriculas);
@@ -346,4 +351,31 @@ float media_mat(ALUNO *lista_estudantes,char *nacion) {
         }
         return (media/num);
     }
+}
+
+
+
+
+
+void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
+{
+    char * parte_nome = (char * ) malloc((calcular_tam_lista(lista_estudantes))*sizeof(char)*200);
+    for (int i=0; i<sizeof(lista_estudantes);i++) {
+        if (lista_estudantes[i].ocupado==1) {
+            for (int j=0 ; parte_nome[i][j] != "\0" ;j++) {
+                parte_nome[i][j]=str_split(lista_estudantes[i].nome," ",sizeof(lista_estudantes[i].nome));
+            }
+        }
+    }
+
+    for (int i=0,j=0; i<sizeof(lista_estudantes);i++) {
+        if (parte_nome[i][j]==pesquisa)
+        {
+            printf("%s (Y/N)? ",lista_estudantes[i].nome);
+            int answer;
+            answer = getchar();
+        }
+        
+    }
+
 }

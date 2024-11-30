@@ -24,58 +24,18 @@ int main(void)
     
 
     setlocale(LC_ALL, "Portuguese");
-    /*
-    for (int i = 0; i < 10; i++)
-    {
-        clearConsole();
-        //program_header();
-        printf(CYAN("Starting..."));
-        for (int j = 1; j < i; j++) {
-            printf(CYAN("."));
-        }
-        if (i == 9) printf(CYAN(" [DONE!]"));
-        printf("\n");
-        //sleep(1);
-    }
-    char *path_estudantes;
-    char *path_situacao;
-
-
-    if (strcmp(OS, "W") == 0)
-    {
-
-        path_estudantes = "data\\estudantes.txt";
-        path_situacao   = "data\\situacao_Escolar_Estudantes.txt";
-    }
-    else if (strcmp(OS, "L") == 0)
-    {
-        path_estudantes = "./data/estudantes.txt";
-        path_situacao   = "./data/situacao_Escolar_Estudantes.txt";
-    }
 
     /*
-    txtFile txt_estudantes = txt_files_init(path_estudantes);
-    txtFile txt_situacao   = txt_files_init(path_situacao);
-
-  
     // // Podes usar a função sizeof para saber quantas linhas tem
     //printf("Size: %u\n", txt_get_size(txt_estudantes));
-
-
-    ALUNO *aaa = NULL;
-    aaa = criar_lista(&txt_estudantes);
-
-
-    size_t size_alunos = 0;
-
-    seek_data(txt_estudantes, txt_situacao,aaa,&size_alunos);*/
+    */
 
     
     int condicao_saida=0;
     //MENU PRINCIPAL
     do
     {
-
+        
         for (int i = 0; i < 10; i++)
         {
             clearConsole();
@@ -88,6 +48,7 @@ int main(void)
             printf("\n");
             //sleep(1);
         }
+        
 
 
         printf("BEM VINDO!\n\n");
