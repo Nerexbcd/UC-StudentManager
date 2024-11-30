@@ -82,6 +82,11 @@ int main(void)
 
         mostrar_toda_lista(aaa);
 
+        char pesquisa [6] = "Rosado";
+        char * ptr_pesquisa = pesquisa;
+
+        pesquisar(aaa,ptr_pesquisa);
+
         gets("");
 
 
