@@ -18,7 +18,7 @@ ALUNO * criar_lista(txtFile *txt_estudantes) {
         lista_estudantes[i].data_n=NULL;
         lista_estudantes[i].nacionalidade=NULL;
     }
-    
+
     return lista_estudantes;
 }
 
@@ -60,7 +60,7 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
 
         for (int j=0 ; j<wrt_size_alunos ; j++) {
             if (atoi(dados[0]) == base_dados[j].codigo) {
-                puts("ali");
+                
                 base_dados[i].n_matriculas= atoi(strdup(dados[1]));
 
                 base_dados[i].ects_concluidos= atoi(strdup(dados[2]));
