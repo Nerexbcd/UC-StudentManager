@@ -8,15 +8,18 @@
 #include "../utils/string_util.h"
 
 
-ALUNO * criar_lista(txtFile txt_estudantes) {
+ALUNO * criar_lista(txtFile *txt_estudantes) {
     ALUNO *lista_estudantes;
-    lista_estudantes = malloc(sizeof(ALUNO)*(txt_estudantes.size)+1);
-    for (int i=0;i<=txt_estudantes.size+1;i++) {
-        lista_estudantes[i].ocupado=0;
-    }
-    return lista_estudantes;
+    lista_estudantes = malloc(sizeof(ALUNO)*((txt_estudantes->size)+1));
 
-    printf("%d\n",lista_estudantes[1].ocupado);
+    for (int i=0 ; i<=(txt_estudantes->size) ; i++) {
+        lista_estudantes[i].ocupado=0;
+        lista_estudantes[i].nome=NULL;
+        lista_estudantes[i].data_n=NULL;
+        lista_estudantes[i].nacionalidade=NULL;
+    }
+    
+    return lista_estudantes;
 }
 
 
@@ -54,10 +57,10 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
     for (int i=0; i < txt_get_size(file_situacao) ; i++) {
         char *linha = file_situacao.data[i];
         char **dados = str_split(linha, '\t', NULL);
-        
+
         for (int j=0 ; j<wrt_size_alunos ; j++) {
             if (atoi(dados[0]) == base_dados[j].codigo) {
-
+                puts("ali");
                 base_dados[i].n_matriculas= atoi(strdup(dados[1]));
 
                 base_dados[i].ects_concluidos= atoi(strdup(dados[2]));

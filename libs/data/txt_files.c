@@ -45,11 +45,14 @@ txtFile txt_files_init(char *path) {
     char** pathParts = str_split(strdup(path), PATH_SEPARATOR_CHAR, NULL);
     txt.fileDir = strdup("");
 
+    txt.size++;
     for (int i = 0; *(pathParts + i); i++) {
         if (*(pathParts + i + 1) == NULL) {
             txt.fileName = *(pathParts + i);
+            txt.size++;
         } else {
             strcat(strcat(txt.fileDir, *(pathParts + i)) , PATH_SEPARATOR_STR);
+            txt.size++;
         }  
     }
     return txt;
@@ -96,7 +99,7 @@ void txt_unload_file(txtFile *txt){
 // ------------------------------ TXT File Infos
 
 size_t txt_get_size(txtFile txt){
-    if (txt.loaded == 0) txt_error_not_loaded(txt.path);
+    //if (txt.loaded == 0) txt_error_not_loaded(txt.path);
 
     return txt.size;
 }

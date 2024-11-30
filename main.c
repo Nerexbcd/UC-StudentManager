@@ -63,21 +63,16 @@ int main(void)
 
   
     // // Podes usar a função sizeof para saber quantas linhas tem
-    // printf("Size: %u\n", txt_get_size(txt_estudantes));
+    //printf("Size: %u\n", txt_get_size(txt_estudantes));
 
 
 
     ALUNO *aaa = NULL;
-    aaa = criar_lista(txt_estudantes);
-
-    //aaa = malloc(sizeof(ALUNO)*(txt_estudantes.size)+1);
-
-    printf("%d\n",sizeof(aaa));
-
+    aaa = criar_lista(&txt_estudantes);
 
 
     size_t size_alunos = 0;
-
+    
     seek_data(txt_estudantes, txt_situacao,aaa,&size_alunos);
 
     mostrar_toda_lista(aaa);
