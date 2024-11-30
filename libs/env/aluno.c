@@ -87,6 +87,7 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
 
 void inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos)
 {
+    //alocar memória para o aluno novo
     ALUNO * ptr = lista_estudantes;
     ptr = (ALUNO *) malloc(sizeof(ALUNO));
     ALUNO * new_lista_estudantes = (ALUNO *) realloc(ptr , sizeof(ALUNO));
@@ -96,12 +97,13 @@ void inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos)
         free(ptr);
     }
 
+    //procurar posição livre
     int j = 0;
     while((lista_estudantes[j]).ocupado==1) {
         j++;
     }
 
-    
+    //ocupar posição
     (lista_estudantes[j]).ocupado=1;
 
     printf("Codigo: ");
@@ -157,6 +159,7 @@ void inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos)
     puts("\n");
     fflush(stdin);
 
+    //para esvaziar a memória alocada no caso de não ser necessária
     if (j==sizeof(lista_estudantes)) {
     free(new_lista_estudantes);
     }
