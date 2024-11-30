@@ -18,13 +18,14 @@
     #include<unistd.h>
 #endif
 
+
 int main(void)
 {
     
 
     setlocale(LC_ALL, "Portuguese");
 
-   for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 10; i++)
     {
         clearConsole();
         //program_header();
@@ -37,12 +38,8 @@ int main(void)
         //sleep(1);
     }
 
-
-
     char *path_estudantes;
     char *path_situacao;
-
-    int con_saida=1;
 
     
 
@@ -66,14 +63,23 @@ int main(void)
     //printf("Size: %u\n", txt_get_size(txt_estudantes));
 
 
-
     ALUNO *aaa = NULL;
     aaa = criar_lista(&txt_estudantes);
 
 
     size_t size_alunos = 0;
-    
+
     seek_data(txt_estudantes, txt_situacao,aaa,&size_alunos);
+
+    /*
+    int condicao_saida=0;
+    //MENU PRINCIPAL
+    do
+    {
+        
+    } while (condicao_saida==0);
+ */   
+
 
     mostrar_toda_lista(aaa);
 
@@ -89,7 +95,6 @@ int main(void)
 
     mostrar_toda_lista(aaa);
 
-   //menu_principal();
 
     
   

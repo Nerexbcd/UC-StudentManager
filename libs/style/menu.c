@@ -14,15 +14,6 @@ void menu_header() {
  *                                                                                                                                                 
  */
 
-/*void menu_principal()
-{
-    do
-    {
-        int continuar=1;
-
-    } while (continuar==1);
-    
-}*/
 
 int menu_opcoes_field()
 {

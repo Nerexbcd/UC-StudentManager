@@ -11,6 +11,10 @@
 ALUNO * criar_lista(txtFile *txt_estudantes) {
     ALUNO *lista_estudantes;
     lista_estudantes = malloc(sizeof(ALUNO)*((txt_estudantes->size)+1));
+    if (sizeof(lista_estudantes)==0) {
+        printf("ERRO!");
+        return 0;
+    }
 
     for (int i=0 ; i<=(txt_estudantes->size) ; i++) {
         lista_estudantes[i].ocupado=0;
@@ -21,6 +25,8 @@ ALUNO * criar_lista(txtFile *txt_estudantes) {
 
     return lista_estudantes;
 }
+
+
 
 
 void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, size_t *size_alunos)
