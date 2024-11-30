@@ -17,6 +17,14 @@ typedef struct aluno
     char * data_n;
 }ALUNO;
 
+//Parâmetro define data de nascimento a partir de data_n
+typedef struct data_nascimento
+{
+    int dia;
+    int mes;
+    int ano;
+}DATA_NAS;
+
 //Transfere os dados dos ficheiros para a struct base de dados do tipo ALUNO
 void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, size_t *size_alunos);
 

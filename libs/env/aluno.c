@@ -7,6 +7,9 @@
 #include "../style/menu.h"
 #include "../utils/string_util.h"
 
+//#define ZERO 0 talvez??
+
+
 
 ALUNO * criar_lista(txtFile *txt_estudantes) {
 
