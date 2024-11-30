@@ -359,17 +359,19 @@ float media_mat(ALUNO *lista_estudantes,char *nacion) {
 
 void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
 {
-    char * parte_nome = (char * ) malloc((calcular_tam_lista(lista_estudantes))*sizeof(char)*200);
+    char * parte_nome = NULL; //Acho que vou fazer struct
+    char ** ptr = & parte_nome;
     for (int i=0; i<sizeof(lista_estudantes);i++) {
-        if (lista_estudantes[i].ocupado==1) {
-            for (int j=0 ; parte_nome[i][j] != "\0" ;j++) {
-                parte_nome[i][j]=str_split(lista_estudantes[i].nome," ",sizeof(lista_estudantes[i].nome));
+        if (lista_estudantes[i].ocupado == 1) {
+            for (int j=0 ; parte_nome[j] != 0 ;j++) {
+                char * new_lista_estudantes = (char *) realloc(ptr , sizeof(char)*sizeof(lista_estudantes[i].nome));
+                parte_nome[j] = * str_split(lista_estudantes[i].nome , ' ' , sizeof(lista_estudantes[i].nome));
             }
         }
     }
 
     for (int i=0,j=0; i<sizeof(lista_estudantes);i++) {
-        if (parte_nome[i][j]==pesquisa)
+        if (parte_nome[j] == *pesquisa)
         {
             printf("%s (Y/N)? ",lista_estudantes[i].nome);
             int answer;
