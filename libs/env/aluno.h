@@ -39,7 +39,7 @@ void mostrar_toda_lista(ALUNO *lista_estudantes);
 int calcular_tam_lista(ALUNO *lista_estudantes);
 
 //Determina média do número de matrículas dos estudantes, em geral e por nacionalidade
-int media_mat(ALUNO *lista_estudantes,char *nacion);
+float media_mat(ALUNO *lista_estudantes,char *nacion);
 
 
 #endif

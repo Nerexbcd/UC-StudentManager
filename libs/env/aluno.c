@@ -9,8 +9,11 @@
 
 
 ALUNO * criar_lista(txtFile *txt_estudantes) {
+
+    //alocar memória necessária para todos os elementos da lista
     ALUNO *lista_estudantes;
     lista_estudantes = malloc(sizeof(ALUNO)*((txt_estudantes->size)+1));
+
     if (sizeof(lista_estudantes)==0) {
         printf("ERRO!");
         return 0;
@@ -183,9 +186,9 @@ void remover_estudante(ALUNO *lista_estudantes,int i)
 void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes)
 {
     //setlocale(LC_ALL, "Portuguese"); //não funciona?
-    int i;
-    int k; //código do estudante
-    int j; //posição do aluno com código k na lista
+    int i=0;
+    int k=0; //código do estudante
+    int j=0; //posição do aluno com código k na lista
 
 
     printf("Qual o codigo do estudante? ");
@@ -317,7 +320,7 @@ void mostrar_toda_lista(ALUNO *lista_estudantes) {
 
 
 
-int media_mat(ALUNO *lista_estudantes,char *nacion) {
+float media_mat(ALUNO *lista_estudantes,char *nacion) {
 
     int media=0;
     int num=0;
