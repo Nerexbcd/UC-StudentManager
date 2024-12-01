@@ -72,20 +72,18 @@ int main(void)
         txtFile txt_estudantes = txt_files_init(path_estudantes);
         txtFile txt_situacao   = txt_files_init(path_situacao);
 
-        ALUNO *aaa = NULL;
-        aaa = criar_lista(&txt_estudantes);
-
+        ALUNO *dados_alunos = criar_lista(&txt_estudantes);
 
         size_t size_alunos = 0;
 
-        seek_data(txt_estudantes, txt_situacao,aaa,&size_alunos);
+        seek_data(txt_estudantes, txt_situacao,dados_alunos, &size_alunos);
 
-        mostrar_toda_lista(aaa);
+        mostrar_toda_lista(dados_alunos);
 
-        char pesquisa [11] = "Carvalheira";
+        char * pesquisa = "calvo";
         char * ptr_pesquisa = pesquisa;
 
-        pesquisar(aaa,ptr_pesquisa);
+        pesquisar(dados_alunos,ptr_pesquisa);
 
         gets("");
 
