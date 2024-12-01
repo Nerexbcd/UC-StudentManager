@@ -356,11 +356,16 @@ float media_mat(ALUNO *lista_estudantes,char *nacion) {
 
 
 
-/*
+
 void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
 {
-    int * lista_matches = NULL; //vai guardar as posicoes dos alunos que respondem à pesquisa
+    char * lista_matches = NULL; //vai guardar as posicoes dos alunos que respondem à pesquisa
     int a=0;
+    lista_matches=malloc(sizeof(char)*(sizeof(lista_estudantes)+1));
+
+    for (int i=0;i<sizeof(lista_matches);i++) {
+        lista_matches[i]='a';
+    }
 
     //procura ao longo da lista toda
     for (int i=0;i<sizeof(lista_estudantes);i++) {
@@ -379,44 +384,51 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
 
                 while (vetor[pos+rep]!=pesquisa[0]) { //procura onde no vetor nome está o primeiro elemento do vetor pesquisa
                     pos++;
-                    puts("dddd");
                 }
-
-                puts("aaaa");
 
                 if (pos==sizeof(vetor)) {   //se não tiver, vai para a próxima iteraçao
-                    puts("vvvv");
                     break;
                 }
-
                 else {  //verifica se os elementos seguintes são iguais aos do vetor pesquisa
-                    puts("ccccc");
+                    
                     int mat=0; //quantidade de elementos dos vetores que são exatamente iguais
-                    puts("bbbb");
-                    for (j=0 ; j<=sizeof(vetor) ; j++) { //enquanto a sequência estiver dentro do tamanho do vetor pesquisa
-                        puts("ddddd");
-                        if (vetor[pos+j]=vetor[j]) { //se for igual, mat aumenta
+                    
+                    for (j=0 ; j<=sizeof(vetor) && pesquisa[j]!='\0' ; j++) { //enquanto a sequência estiver dentro do tamanho do vetor pesquisa
+                        if (vetor[pos+j]==pesquisa[j]) { //se for igual, mat aumenta
                             mat++;
+                            printf("%d\n",j);
                         }
                         else { //se não for, vai para a próxima iteração
-                            puts("fffff");
                             break;
                         }
-                        puts("ggggg");
                     }
-
-                    if (mat==sizeof(vetor)) { //se os 2 vetores forem iguais
-                        puts("hhhh");
-                        printf("%d",pos);
-                        *(lista_matches+a)= i;  //iguala o elemento a da lista de posicoes dos alunos à posicao do aluno
-                        printf("%d",lista_matches[a]);
+                    
+                    if (mat==(sizeof(vetor))) { //se os 2 vetores forem iguais
+                        printf("%d\n",pos);
+                        lista_matches[a]= i;  //iguala o elemento a da lista de posicoes dos alunos à posicao do aluno
+                        printf("lista matches: %s\n",lista_matches[a]);
                         a++;
                     }
                 }
+
+                lista_matches[a]='b';
+                a++;
             }
+
             while (j<sizeof(vetor));
-            printf("%s",lista_matches);
+            printf("rep: %i\n",i);
         }
     }
+
+    for (int i=0;i<sizeof(lista_matches);i++) {
+        puts("gg");
+        if ((lista_matches[i]!='a') && (lista_matches[i]!='b')) {
+            printf("%d\n",lista_matches[i]);
+            int a = (int) *(lista_matches+i);
+            puts("FF");
+            printf("%s\n",lista_estudantes[a].nome);
+        }
+    }
+    
+    puts("fin");
 }
-*/
