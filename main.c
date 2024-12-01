@@ -82,7 +82,7 @@ int main(void)
 
         mostrar_toda_lista(aaa);
 
-        char pesquisa [5] = "Calvo";
+        char pesquisa [11] = "Carvalheira";
         char * ptr_pesquisa = pesquisa;
 
         pesquisar(aaa,ptr_pesquisa);
