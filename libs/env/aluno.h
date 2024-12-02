@@ -17,6 +17,14 @@ typedef struct aluno
     char * data_n;
 }ALUNO;
 
+
+typedef struct data_nasc
+{
+    int dia;
+    int mes;
+    int ano;
+}DATA;
+
 //Parâmetro define data de nascimento a partir de data_n
 typedef struct data_nascimento
 {
