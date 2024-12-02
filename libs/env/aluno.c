@@ -382,24 +382,24 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
                 int posicao=0;
                 int matches=0;
                 
-                while((vetor[posicao+repeticao]!=pesquisa[0]) && ((posicao+repeticao)<(sizeof(vetor)))) {  //determina qual é o elemento inicial
+                while((vetor[posicao+repeticao]!=pesquisa[0]) && ((posicao+repeticao)<(strlen(vetor)))) {  //determina qual é o elemento inicial
                     int f=posicao+repeticao;
                         posicao++;
                 }
 
-                if (posicao<sizeof(vetor)) {
+                if (posicao<strlen(vetor)) {
 
                     matches=1;
                 
                     printf("posicao: %d\n", posicao);
 
-                    for (int j=1; (j<sizeof(pesquisa)) && (posicao+repeticao+j)<sizeof(vetor); j++) {
+                    for (int j=1; (j<strlen(pesquisa)) && (posicao+repeticao+j)<strlen(vetor); j++) {
                         if (pesquisa[j]==vetor[posicao+repeticao+j]) {
                             matches++;
                         }
                     }
 
-                    if ((matches)==(sizeof(pesquisa))) {
+                    if ((matches)==(strlen(pesquisa))) {
                         lista_matches[i]=1;
                     }
                     else {
@@ -410,12 +410,12 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
                 }
 
             }
-            while ((sizeof(vetor))-repeticao>sizeof(pesquisa) && repeticao!=0);
+            while ((strlen(vetor))-repeticao>strlen(pesquisa) && repeticao!=0);
 
         }
     }
 
-    for (int k=0; k<sizeof(lista_matches); k++) {
+    for (int k=0; k< sizeof(lista_matches); k++) {
         if (lista_matches[k]==1) {
             printf("%s\n",lista_estudantes[k].nome);
         }

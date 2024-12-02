@@ -80,7 +80,7 @@ int main(void)
 
         mostrar_toda_lista(dados_alunos);
 
-        char * pesquisa = "calvo";
+        char * pesquisa = "Rosado";
         char * ptr_pesquisa = pesquisa;
 
         pesquisar(dados_alunos,ptr_pesquisa);
