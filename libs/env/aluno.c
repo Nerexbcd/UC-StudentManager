@@ -294,6 +294,19 @@ int calcular_tam_lista(ALUNO *lista_estudantes) {
 
 
 
+void mostrar_um_aluno(ALUNO *lista_estudantes,int posicao)
+{
+        fflush(stdin);
+        printf("Codigo: %d\n",lista_estudantes[posicao].codigo);
+        printf("Nome: %s\n",lista_estudantes[posicao].nome);
+        printf("Nacionalidade: %s\n",lista_estudantes[posicao].nacionalidade);
+        printf("Data de nascimento: %s\n",lista_estudantes[posicao].data_n);
+        printf("Numero de matriculas: %d\n",lista_estudantes[posicao].n_matriculas);
+        printf("Ano do curso: %d\n",lista_estudantes[posicao].ano_curso);
+        printf("Media atual: %.1f\n",lista_estudantes[posicao].media_atual);
+        printf("ECTS concluidos: %d\n\n",lista_estudantes[posicao].ects_concluidos);
+        fflush(stdin);
+}
 
 
 
@@ -309,16 +322,7 @@ void mostrar_toda_lista(ALUNO *lista_estudantes) {
                 fflush(stdin);
             }
 
-            fflush(stdin);
-            printf("Codigo: %d\n",lista_estudantes[i].codigo);
-            printf("Nome: %s\n",lista_estudantes[i].nome);
-            printf("Nacionalidade: %s\n",lista_estudantes[i].nacionalidade);
-            printf("Data de nascimento: %s\n",lista_estudantes[i].data_n);
-            printf("Numero de matriculas: %d\n",lista_estudantes[i].n_matriculas);
-            printf("Ano do curso: %d\n",lista_estudantes[i].ano_curso);
-            printf("Media atual: %.1f\n",lista_estudantes[i].media_atual);
-            printf("ECTS concluidos: %d\n\n",lista_estudantes[i].ects_concluidos);
-            fflush(stdin);
+            mostrar_um_aluno(lista_estudantes,i);
 
             j++;
         }

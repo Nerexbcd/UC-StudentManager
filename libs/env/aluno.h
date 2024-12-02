@@ -40,6 +40,9 @@ void remover_estudante(ALUNO *lista_estudantes,int i);
 //Permite alterar um dos dados do aluno
 void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes);
 
+//Mostra os dados de um aluno
+void mostrar_um_aluno(ALUNO *lista_estudantes,int posicao);
+
 //Faz display da struct (apenas os membros com ocupado=1)
 void mostrar_toda_lista(ALUNO *lista_estudantes);
 
