@@ -275,6 +275,10 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes)
             scanf("%d",&(lista_estudantes[j]).n_matriculas);
             break;
     }
+
+    printf("Novos dados do estudante:\n");
+    mostrar_um_aluno(lista_estudantes,j);
+    
 }
 
 
@@ -417,12 +421,21 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
     }
 
     int rep=0;
+    int g=0;
     for (int k=0; k< sizeof(lista_matches); k++) {
         if (rep==0) {//no case de ser a primeira iteração
             printf("Resultado(s) da pesquisa <%s>:\n",pesquisa);
         }
         if (lista_matches[k]==1) {
+            if ((g != 0) && (g%3==0)) {
+                printf("Pagina seguinte ->");
+                fflush(stdin);
+                getchar();
+                puts("");
+                fflush(stdin);
+            }
             mostrar_um_aluno(lista_estudantes,k);
+            g++;
         }
         rep++;
     }
@@ -446,10 +459,20 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y)
     }
 
     //Mostrar os alunos com médias entre estes 2 valores
+    int i=0;
+
     for (int k=0;k<sizeof(lista_estudantes);k++) {
         if ((lista_estudantes[k].ocupado==1) && (lista_estudantes[k].media_atual>=min) && (lista_estudantes[k].media_atual<=max)) {
+            if ((i != 0) && (i%3==0)) {
+                printf("Pagina seguinte ->");
+                fflush(stdin);
+                getchar();
+                puts("");
+                fflush(stdin);
+            }
             mostrar_um_aluno(lista_estudantes,k);
             n_est_com_media++;
+            i++;
         }
     }
 
