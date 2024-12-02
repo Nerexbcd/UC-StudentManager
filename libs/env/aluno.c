@@ -382,12 +382,15 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
             do {
                 int posicao=0;
                 int matches=0;
-                
+
+                //procura o primeiro elemento que seja igual ao primeiro elemento do vetor pesquisa
                 while((vetor[posicao+repeticao]!=pesquisa[0]) && ((posicao+repeticao)<(strlen(vetor)))) {  //determina qual é o elemento inicial
                     int f=posicao+repeticao;
                         posicao++;
                 }
 
+                //se não houver um elemento igual ao primeiro elemento da pesquisa, posicao==strlen(vetor)
+                //caso contrário, vai verificar se os outros elementos são iguais
                 if (posicao<strlen(vetor)) {
 
                     matches=1;
@@ -398,11 +401,13 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
                         }
                     }
 
+                    //verifica se o número de elementos iguais consecutivos é igual ao número de elementos da pesquisa
                     if ((matches)==(strlen(pesquisa))) {
-                        lista_matches[i]=1;
+                        lista_matches[i]=1;//o vetor matches vai ser 1 nas posicoes correspondentes às posições dos nomes que contêm a pesquisa
                     }
                     else {
-                        repeticao++;
+                        repeticao++;//caso não seja igual, verifica se algum outro segmento do nome coincide com o vetor pesquisa
+                        //isto acontece através de começar a pesquisa do primeiro elemento em comum 1 espaço à frente do anterior
                     }
                 }
             }
@@ -413,7 +418,7 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
 
     int rep=0;
     for (int k=0; k< sizeof(lista_matches); k++) {
-        if (rep==0) {
+        if (rep==0) {//no case de ser a primeira iteração
             printf("Resultado(s) da pesquisa <%s>:\n",pesquisa);
         }
         if (lista_matches[k]==1) {
@@ -421,6 +426,4 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
         }
         rep++;
     }
-    
-    puts("fin");
 }
