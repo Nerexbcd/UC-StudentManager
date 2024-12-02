@@ -460,7 +460,7 @@ int det_n_est_finalistas(ALUNO * lista_estudantes) {
     
     int n_est_fin=0;
 
-    for(k=0;k<sizeof(lista_estudantes);k++) {
+    for(int k=0;k<sizeof(lista_estudantes);k++) {
         if ((lista_estudantes[k].ocupado==1) && (lista_estudantes[k].ects_concluidos>=154)) {
             n_est_fin++;
         }
