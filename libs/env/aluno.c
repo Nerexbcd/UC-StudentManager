@@ -296,16 +296,16 @@ int calcular_tam_lista(ALUNO *lista_estudantes) {
 
 void mostrar_um_aluno(ALUNO *lista_estudantes,int posicao)
 {
-        fflush(stdin);
-        printf("Codigo: %d\n",lista_estudantes[posicao].codigo);
-        printf("Nome: %s\n",lista_estudantes[posicao].nome);
-        printf("Nacionalidade: %s\n",lista_estudantes[posicao].nacionalidade);
-        printf("Data de nascimento: %s\n",lista_estudantes[posicao].data_n);
-        printf("Numero de matriculas: %d\n",lista_estudantes[posicao].n_matriculas);
-        printf("Ano do curso: %d\n",lista_estudantes[posicao].ano_curso);
-        printf("Media atual: %.1f\n",lista_estudantes[posicao].media_atual);
-        printf("ECTS concluidos: %d\n\n",lista_estudantes[posicao].ects_concluidos);
-        fflush(stdin);
+    fflush(stdin);
+    printf("Codigo: %d\n",lista_estudantes[posicao].codigo);
+    printf("Nome: %s\n",lista_estudantes[posicao].nome);
+    printf("Nacionalidade: %s\n",lista_estudantes[posicao].nacionalidade);
+    printf("Data de nascimento: %s\n",lista_estudantes[posicao].data_n);
+    printf("Numero de matriculas: %d\n",lista_estudantes[posicao].n_matriculas);
+    printf("Ano do curso: %d\n",lista_estudantes[posicao].ano_curso);
+    printf("Media atual: %.1f\n",lista_estudantes[posicao].media_atual);
+    printf("ECTS concluidos: %d\n\n",lista_estudantes[posicao].ects_concluidos);
+    fflush(stdin);
 }
 
 
@@ -421,7 +421,7 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
 
     for (int k=0; k< sizeof(lista_matches); k++) {
         if (lista_matches[k]==1) {
-            printf("%s\n",lista_estudantes[k].nome);
+            mostrar_um_aluno(lista_estudantes,k);
         }
     }
     
