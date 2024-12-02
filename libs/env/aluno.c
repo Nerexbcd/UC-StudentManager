@@ -373,14 +373,11 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
 
     for (int i=0; i<sizeof(lista_estudantes->nome); i++) {
 
-        printf("size: %d\n",sizeof(lista_estudantes->nome));
         char * vetor = lista_estudantes[i].nome;  //define o vetor a comparar.
 
         for (int k=0; k<sizeof(*(lista_estudantes->nome)); k++) { //vai comparar elemento a elemento
+            
             int repeticao=k;
-
-            printf("k: %d\n",k);
-            printf("i: %d\n",i);
 
             do {
                 int posicao=0;
@@ -394,8 +391,6 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
                 if (posicao<strlen(vetor)) {
 
                     matches=1;
-                
-                    printf("posicao: %d\n", posicao);
 
                     for (int j=1; (j<strlen(pesquisa)) && (posicao+repeticao+j)<strlen(vetor); j++) {
                         if (pesquisa[j]==vetor[posicao+repeticao+j]) {
@@ -409,20 +404,22 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
                     else {
                         repeticao++;
                     }
-                    printf("mathc: %d\n",lista_matches[i]);
-
                 }
-
             }
             while ((strlen(vetor))-repeticao>strlen(pesquisa) && repeticao!=0);
 
         }
     }
 
+    int rep=0;
     for (int k=0; k< sizeof(lista_matches); k++) {
+        if (rep==0) {
+            printf("Resultado(s) da pesquisa <%s>:\n",pesquisa);
+        }
         if (lista_matches[k]==1) {
             mostrar_um_aluno(lista_estudantes,k);
         }
+        rep++;
     }
     
     puts("fin");
