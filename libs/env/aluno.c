@@ -427,3 +427,44 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
         rep++;
     }
 }
+
+
+
+int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y) 
+{
+    int n_est_com_media=0;
+
+    //determinar o maior e menor valor
+    float max=x;
+    float min=0;
+    if (max>y) {
+        min=y;
+    }
+    else {
+        max=y;
+        min=x;
+    }
+
+    //Mostrar os alunos com médias entre estes 2 valores
+    for (int k=0;k<sizeof(lista_estudantes);k++) {
+        if ((lista_estudantes[k].ocupado==1) && (lista_estudantes[k].media_atual>=min) && (lista_estudantes[k].media_atual<=max)) {
+            mostrar_um_aluno(lista_estudantes,k);
+            n_est_com_media++;
+        }
+    }
+
+    return n_est_com_media;
+}
+
+int det_n_est_finalistas(ALUNO * lista_estudantes) {
+    
+    int n_est_fin=0;
+
+    for(k=0;k<sizeof(lista_estudantes);k++) {
+        if ((lista_estudantes[k].ocupado==1) && (lista_estudantes[k].ects_concluidos>=154)) {
+            n_est_fin++;
+        }
+    }
+
+    return n_est_fin;
+}

@@ -55,5 +55,10 @@ float media_mat(ALUNO *lista_estudantes,char *nacion);
 //Pesquisa um aluno através de parte do seu nome
 void pesquisar(ALUNO *lista_estudantes,char *pesquisa);
 
+//Calcular e mostrar quantos estudantes existem com cada um de 3 escalões de média atual especificados pelo utilizador
+int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y);
+
+//Determinar o número de estudantes finalistas (pelo menos 154 ECTS realizados)
+int det_n_est_finalistas(ALUNO * lista_estudantes);
 
 #endif
