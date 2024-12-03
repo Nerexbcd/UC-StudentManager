@@ -11,7 +11,8 @@ typedef struct data_nascimento
 }DATA_NAS;
 
 //Define a estrutura aluno, de modo a organizar a informação de cada aluno.
-//Parâmetro ocupado indica se há um aluno ou não nessa posição da estrutura; permite a eliminação de alunos.
+//Parâmetro ocupado indica se há um aluno ou não nessa posição da estrutura; permite a eliminação de 
+//alunos.
 //data_n está armazenada numa outra estrutura
 typedef struct aluno
 {
@@ -52,14 +53,20 @@ int calcular_tam_lista(ALUNO *lista_estudantes);
 
 //Determina média do número de matrículas dos estudantes, em geral e por nacionalidade
 float media_mat(ALUNO *lista_estudantes,char *nacion);
+//falta determinar por nacionalidades, vou ver mais tarde
 
 //Pesquisa um aluno através de parte do seu nome
 void pesquisar(ALUNO *lista_estudantes,char *pesquisa);
 
-//Calcular e mostrar quantos estudantes existem com cada um de 3 escalões de média atual especificados pelo utilizador
+//Calcular e mostrar quantos estudantes existem com cada um de 3 escalões de média atual especificados 
+//pelo utilizador
 int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y);
 
 //Determinar o número de estudantes finalistas (pelo menos 154 ECTS realizados)
 int det_n_est_finalistas(ALUNO * lista_estudantes);
+
+//Listar os estudantes, cujas datas de nascimento estejam dentro de um intervalo e pertencentes a um
+//conjunto máximo de 5 nacionalidades
+void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * data_2, char * nac_1, char * nac_2, char * nac_3, char * nac_4, char * nac_5);
 
 #endif
