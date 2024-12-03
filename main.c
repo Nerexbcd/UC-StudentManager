@@ -33,8 +33,8 @@ int main(void)
     
     int condicao_saida=0;
     //MENU PRINCIPAL
-    do
-    {
+    //do
+    //{
         
         for (int i = 0; i < 10; i++)
         {
@@ -80,7 +80,9 @@ int main(void)
 
         mostrar_toda_lista(dados_alunos);
 
-        char * pesquisa = "i";
+        mostrar_lista_por_ordem_apelido(dados_alunos);
+
+        /*char * pesquisa = "i";
         char * ptr_pesquisa = pesquisa;
 
         pesquisar(dados_alunos,ptr_pesquisa);
@@ -108,11 +110,11 @@ int main(void)
             }
             */
             //etc
-        }
-        while (opcao==0);
+        //}
+        //while (opcao==0);*/
 
 
-    } while (condicao_saida==0);
+    //} while (condicao_saida==0);
  
 
  /*

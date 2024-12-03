@@ -348,6 +348,74 @@ void mostrar_toda_lista(ALUNO *lista_estudantes) {
 
 
 
+void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes)
+{
+    int * vet_organizado;
+    vet_organizado = malloc(sizeof(int)*sizeof(lista_estudantes));
+
+    //cria o vetor que vai determinar a ordem alfabética dos apelidos
+    for (int k=0;k<sizeof(lista_estudantes);k++) {
+        vet_organizado[k]=k;
+    }
+    
+    //struct vai acumular todos os apelidos, pela mesma ordem dos estudantes na lista normal
+    APELIDO *lista_apelidos;
+    lista_apelidos = malloc(sizeof(APELIDO *) * sizeof(lista_estudantes));
+
+    for (int g=0; g<sizeof(lista_estudantes);g++) {
+        char * linha = strdup(lista_estudantes[g].nome);
+        char ** nome_comp = NULL;
+        nome_comp = str_split(linha,' ', NULL);
+        int componentes = 0;
+        int i=0;
+
+        while(nome_comp[i+1]!=0) {
+            componentes++;
+            i++;
+        }
+        lista_apelidos[g].apel = malloc(sizeof(char) * strlen(nome_comp[componentes]));
+        lista_apelidos[g].apel = nome_comp[componentes];
+        printf("%s\n",lista_apelidos[g].apel);
+    }
+
+
+
+
+    //algoritmo organização
+    int temp;
+    int pos;
+    char letra_a;
+    char letra_b;
+
+    //compara os apelidos, mas guarda a sua ordem correta no vet_organizado
+    //ainda nao está certo, mas parte anterior está
+    for (int i=0; i<sizeof(lista_estudantes)-1; i++) {
+        for (int j=0;j<sizeof(lista_estudantes)-i-1;j++) {
+            pos = vet_organizado[j];
+            letra_a = lista_apelidos[pos].apel[j];
+            letra_b = lista_apelidos[pos+1].apel[j];
+            printf("%c\n",letra_a);
+            printf("%c\n",letra_b);
+            puts("ggg");
+        // compara elementos adjacentes para ver se estão fora de ordem
+            if ((letra_a > letra_b) && (letra_a!=0) && (letra_b!=0)) {
+            temp=vet_organizado[j];
+            vet_organizado[j]=vet_organizado[j+1];
+            vet_organizado[j+1]=temp;
+            }
+        }
+    }
+
+    for (int i=0;i<sizeof(vet_organizado);i++) {
+        int posicao = vet_organizado[i];
+        if (lista_estudantes[posicao].ocupado==1) {
+            printf("%s\n",lista_estudantes[posicao].nome);
+        }
+    }
+}
+
+
+
 
 float media_mat(ALUNO *lista_estudantes,char *nacion) {
 

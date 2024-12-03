@@ -27,6 +27,11 @@ typedef struct aluno
     DATA_NAS data_n;
 }ALUNO;
 
+typedef struct apelido
+{
+    char * apel;
+}APELIDO;
+
 //Transfere os dados dos ficheiros para a struct base de dados do tipo ALUNO
 void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, size_t *size_alunos);
 
@@ -47,6 +52,10 @@ void mostrar_um_aluno(ALUNO *lista_estudantes,int posicao);
 
 //Faz display da struct (apenas os membros com ocupado=1)
 void mostrar_toda_lista(ALUNO *lista_estudantes);
+
+//Listar estudantes por ordem alfabética do apelido (considera-se apelido a última palavra
+//do nome completo)
+void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes);
 
 //Permite calcular o número de posições ocupadas, ou seja, com lista_estudantes[i].ocupado==1
 int calcular_tam_lista(ALUNO *lista_estudantes);
