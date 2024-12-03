@@ -563,9 +563,8 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
     }
 
     //Efetua a comparação
-    //Acrescentar caso das nacionalidades mais tarde
     for (int k=0;k<sizeof(lista_estudantes);k++) {
-        if (lista_estudantes[k].ocupado==1) {
+        if (lista_estudantes[k].ocupado==1 && (lista_estudantes[k].nacionalidade==nac_1 || lista_estudantes[k].nacionalidade==nac_2 || lista_estudantes[k].nacionalidade==nac_3 || lista_estudantes[k].nacionalidade==nac_4 || lista_estudantes[k].nacionalidade==nac_5)) {
             //Compara os anos inicialmente
             if ((lista_estudantes[k].data_n.ano>data_inf.ano) && (lista_estudantes[k].data_n.ano<data_sup.ano)) {
                 mostrar_um_aluno(lista_estudantes,k);
