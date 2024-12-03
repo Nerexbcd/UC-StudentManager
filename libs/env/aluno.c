@@ -23,9 +23,9 @@ ALUNO * criar_lista(txtFile *txt_estudantes) {
     }
 
     for (int i=0 ; i<=(txt_estudantes->size) ; i++) {
+        int z=0;
         lista_estudantes[i].ocupado=0;
         lista_estudantes[i].nome=NULL;
-        lista_estudantes[i].data_n=NULL;
         lista_estudantes[i].nacionalidade=NULL;
     }
 
@@ -53,7 +53,13 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
 
             base_dados[i].nome = strdup(dados[1]);
 
-            base_dados[i].data_n= strdup(dados[2]);
+            printf("%s\n",dados[2]);
+
+            char *dn = dados[2];
+            char **ptr_dn = str_split(dn, '-', NULL);
+            base_dados[i].data_n.dia= atoi(strdup(ptr_dn[0]));
+            base_dados[i].data_n.mes= atoi(strdup(ptr_dn[1]));
+            base_dados[i].data_n.ano= atoi(strdup(ptr_dn[2]));
 
             base_dados[i].nacionalidade = strdup(dados[3]);
 
@@ -132,8 +138,12 @@ void inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos)
     fflush(stdin);
     getline(&stringgg,&bufsize,stdin);
     stringgg = * str_split(stringgg, '\n', NULL);
-    lista_estudantes[j].data_n=(char*) malloc(sizeof(stringgg));
-    lista_estudantes[j].data_n=stringgg;
+    char *dn = stringgg;
+    char **ptr_dn = str_split(dn, '-', NULL);
+    lista_estudantes[j].data_n.dia= atoi(strdup(ptr_dn[0]));
+    lista_estudantes[j].data_n.mes= atoi(strdup(ptr_dn[1]));
+    lista_estudantes[j].data_n.ano= atoi(strdup(ptr_dn[2]));
+
     fflush(stdin);
 
     stringgg=NULL;
@@ -180,7 +190,6 @@ void remover_estudante(ALUNO *lista_estudantes,int i)
     //Para esvaziar os string:
     (*(lista_estudantes+i)).nome=NULL;
     (*(lista_estudantes+i)).nacionalidade=NULL;
-    (*(lista_estudantes+i)).data_n=NULL;
 }
 
 
@@ -258,15 +267,19 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes)
             break;
 
         case 6:
-            (*(lista_estudantes+j)).data_n=NULL;
+
             stringgg=NULL;
             bufsize=11;
             printf("Qual a nova data de nascimento do estudante numero %d?\n",(lista_estudantes[j]).codigo);
             fflush(stdin);
             getline(&stringgg,&bufsize,stdin);
             stringgg = * str_split(stringgg, '\n', NULL);
-            lista_estudantes[j].data_n=(char*) malloc(sizeof(stringgg));
-            lista_estudantes[j].data_n=stringgg;
+            char *dn = stringgg;
+            char **ptr_dn = str_split(dn, '-', NULL);
+            lista_estudantes[j].data_n.dia= atoi(strdup(ptr_dn[0]));
+            lista_estudantes[j].data_n.mes= atoi(strdup(ptr_dn[1]));
+            lista_estudantes[j].data_n.ano= atoi(strdup(ptr_dn[2]));
+
             fflush(stdin);
             break;
 
@@ -304,7 +317,7 @@ void mostrar_um_aluno(ALUNO *lista_estudantes,int posicao)
     printf("Codigo: %d\n",lista_estudantes[posicao].codigo);
     printf("Nome: %s\n",lista_estudantes[posicao].nome);
     printf("Nacionalidade: %s\n",lista_estudantes[posicao].nacionalidade);
-    printf("Data de nascimento: %s\n",lista_estudantes[posicao].data_n);
+    printf("Data de nascimento: %d-%d-%d\n", lista_estudantes[posicao].data_n.dia, lista_estudantes[posicao].data_n.mes, lista_estudantes[posicao].data_n.ano);
     printf("Numero de matriculas: %d\n",lista_estudantes[posicao].n_matriculas);
     printf("Ano do curso: %d\n",lista_estudantes[posicao].ano_curso);
     printf("Media atual: %.1f\n",lista_estudantes[posicao].media_atual);

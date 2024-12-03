@@ -2,6 +2,14 @@
 #define ALUNO_H_INCLUDED
 #include "../data/txt_files.h"
 
+//Parâmetro define data de nascimento
+typedef struct data_nascimento
+{
+    int dia;
+    int mes;
+    int ano;
+}DATA_NAS;
+
 //Define a estrutura aluno, de modo a organizar a informação de cada aluno.
 //Parâmetro ocupado indica se há um aluno ou não nessa posição da estrutura; permite a eliminação de alunos.
 typedef struct aluno
@@ -14,24 +22,8 @@ typedef struct aluno
     float media_atual;
     char * nome;
     char * nacionalidade;
-    char * data_n;
+    DATA_NAS data_n;
 }ALUNO;
-
-
-typedef struct data_nasc
-{
-    int dia;
-    int mes;
-    int ano;
-}DATA;
-
-//Parâmetro define data de nascimento a partir de data_n
-typedef struct data_nascimento
-{
-    int dia;
-    int mes;
-    int ano;
-}DATA_NAS;
 
 //Transfere os dados dos ficheiros para a struct base de dados do tipo ALUNO
 void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, size_t *size_alunos);
