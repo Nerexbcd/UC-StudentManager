@@ -492,6 +492,8 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y)
     return n_est_com_media;
 }
 
+
+
 int det_n_est_finalistas(ALUNO * lista_estudantes) {
     
     int n_est_fin=0;
@@ -503,4 +505,108 @@ int det_n_est_finalistas(ALUNO * lista_estudantes) {
     }
 
     return n_est_fin;
+}
+
+
+
+void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * data_2, char * nac_1, char * nac_2, char * nac_3, char * nac_4, char * nac_5)
+{
+    DATA_NAS data_sup;
+    DATA_NAS data_inf;
+
+    DATA_NAS data_prim;
+    DATA_NAS data_seg;
+
+    //Coloca as datas fornecidas pelo utilizador na struct do tipo DATA_NAS para fácil comparação
+    //com as datas dos alunos
+    char *dnp = data_1;
+    char **ptr_dnp = str_split(dnp, '-', NULL);
+    data_prim.dia= atoi(strdup(ptr_dnp[0]));
+    data_prim.mes= atoi(strdup(ptr_dnp[1]));
+    data_prim.ano= atoi(strdup(ptr_dnp[2]));
+
+    char *dns = data_2;
+    char **ptr_dns = str_split(dns, '-', NULL);
+    data_seg.dia= atoi(strdup(ptr_dns[0]));
+    data_seg.mes= atoi(strdup(ptr_dns[1]));
+    data_seg.ano= atoi(strdup(ptr_dns[2]));
+
+
+    //Determina qual a data superior e a data inferior
+    if ((data_prim.ano)>(data_seg.ano)) {
+        data_sup = data_prim;
+        data_inf = data_seg;
+    }
+    else if ((data_seg.ano)>(data_prim.ano)) {
+        data_sup = data_seg;
+        data_inf = data_prim;
+    }
+    else if ((data_seg.ano)==(data_prim.ano)) {
+        if ((data_prim.mes)>(data_seg.mes)) {
+            data_sup = data_prim;
+            data_inf = data_seg;
+        }
+        else if ((data_seg.mes)>(data_prim.mes)) {
+            data_sup = data_seg;
+            data_inf = data_prim;
+        }
+        else if ((data_prim.mes)==(data_seg.mes)) {
+            if ((data_prim.dia)>(data_seg.dia)) {
+            data_sup = data_prim;
+            data_inf = data_seg;
+            }
+            else if ((data_seg.dia)>(data_prim.dia)) {
+                data_sup = data_seg;
+                data_inf = data_prim;
+            }
+        }
+    }
+
+    //Efetua a comparação
+    //Acrescentar caso das nacionalidades mais tarde
+    for (int k=0;k<sizeof(lista_estudantes);k++) {
+        if (lista_estudantes[k].ocupado==1) {
+            //Compara os anos inicialmente
+            if ((lista_estudantes[k].data_n.ano>data_inf.ano) && (lista_estudantes[k].data_n.ano<data_sup.ano)) {
+                mostrar_um_aluno(lista_estudantes,k);
+            }
+            else if (lista_estudantes[k].data_n.ano==data_inf.ano) {
+                //No caso dos anos serem os extremos, compara os meses.
+                if ((lista_estudantes[k].data_n.mes>data_inf.mes) && (lista_estudantes[k].data_n.mes<data_sup.mes)) {
+                mostrar_um_aluno(lista_estudantes,k);
+                }
+                //No casos dos meses serem os extremos, compara os dias.
+                else if (lista_estudantes[k].data_n.mes==data_inf.mes) { 
+                    if ((lista_estudantes[k].data_n.dia>=data_inf.dia) && (lista_estudantes[k].data_n.dia<=data_sup.dia)) {
+                        mostrar_um_aluno(lista_estudantes,k);
+                    }
+                }
+                else if (lista_estudantes[k].data_n.mes==data_sup.mes) {
+                    if ((lista_estudantes[k].data_n.dia>=data_inf.dia) && (lista_estudantes[k].data_n.dia<=data_sup.dia)) {
+                        mostrar_um_aluno(lista_estudantes,k);
+                    }
+                }
+            }
+            //Mesma situação que o anterior, mas caso extremo oposto
+            else if (lista_estudantes[k].data_n.ano==data_sup.ano) {
+                if ((lista_estudantes[k].data_n.mes>data_inf.mes) && (lista_estudantes[k].data_n.mes<data_sup.mes)) {
+                mostrar_um_aluno(lista_estudantes,k);
+                }
+                else if (lista_estudantes[k].data_n.mes==data_inf.mes) { 
+                    if ((lista_estudantes[k].data_n.dia>=data_inf.dia) && (lista_estudantes[k].data_n.dia<=data_sup.dia)) {
+                        mostrar_um_aluno(lista_estudantes,k);
+                    }
+                }
+                else if (lista_estudantes[k].data_n.mes==data_sup.mes) {
+                    if ((lista_estudantes[k].data_n.dia>=data_inf.dia) && (lista_estudantes[k].data_n.dia<=data_sup.dia)) {
+                        mostrar_um_aluno(lista_estudantes,k);
+                    }
+                }
+
+            }
+        }
+    }
+
+
+    
 }
