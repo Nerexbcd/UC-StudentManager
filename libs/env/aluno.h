@@ -83,4 +83,8 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
 //proceder à sua listagem
 int estudantes_risco_prescrever(ALUNO * lista_estudantes);
 
+//Determinar a média de idades dos estudantes de uma nacionalidade, atendendo ao ano
+//que estão a frequentar
+float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float ano_atual);
+
 #endif

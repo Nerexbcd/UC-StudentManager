@@ -688,6 +688,8 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
 
 
 int estudantes_risco_prescrever(ALUNO * lista_estudantes) {
+
+    setlocale(LC_ALL,"Portuguese");//??????
     
     //vetor cujas posicoes com 1 correspondem às posicoes dos alunos em risco de prescricao na struct lista_estudantes
     int * lista_prescricao = malloc(sizeof(int) * sizeof(lista_estudantes));
@@ -736,4 +738,35 @@ int estudantes_risco_prescrever(ALUNO * lista_estudantes) {
     }
 
     return num;
+}
+
+
+
+float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float ano_atual)
+{
+    //vetor vai organizar as médias das idades da nacionalidade fornecida pelo ano de curso
+    float * media_por_nac_por_ano = malloc(sizeof(float)*3); 
+
+    for (int j=1; j<sizeof(media_por_nac_por_ano); j++) { //determina qual o ano de curso (e posicao no vetor) estamos a avaliar
+        int n_ele=0;
+        int soma=0;
+        for (int i=0; i<sizeof(lista_estudantes);i++) {
+            //procura os alunos que obedecem a todas as condicoes:
+            //nacionalidade, ano de curso correto, existência na base de dados
+            if ((lista_estudantes[i].ocupado == 1) && (strcmp(lista_estudantes[i].nacionalidade, nacio) == 0) && (lista_estudantes[i].ano_curso == j)) {
+                n_ele++;
+                int idade = ano_atual - (lista_estudantes[i].data_n.ano); //idade é obtida de forma muito simplificada através do ano de nascimento.
+                //ignoram-se as outras componentes desta data por agora
+                soma = soma + idade;
+            }
+        }
+        if (n_ele!=0) {
+            media_por_nac_por_ano[j-1] = ((float) soma)/ ((float) n_ele);
+        }
+        else { //para evitar possíveis divisões por zero
+            media_por_nac_por_ano[j-1] = 0;
+        }
+    }
+
+    return media_por_nac_por_ano; //retorna todo o vetor
 }

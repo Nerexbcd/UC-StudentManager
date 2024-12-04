@@ -87,6 +87,13 @@ int main(void)
 
         int a = estudantes_risco_prescrever(dados_alunos);
 
+        char * c = "Portuguesa";
+        float ano_a= 2024;
+        float * b = media_idades_nacionalidade(dados_alunos, c, ano_a);
+        printf("%.0f\n",b[0]);
+        printf("%.0f\n",b[1]);
+        printf("%.0f\n",b[2]);
+
         /*char * pesquisa = "i";
         char * ptr_pesquisa = pesquisa;
 
