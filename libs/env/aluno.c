@@ -706,7 +706,7 @@ int estudantes_risco_prescrever(ALUNO * lista_estudantes) {
                 lista_prescricao[i]=1;
                 num++;
             }
-            else if ((lista_estudantes[i].n_matriculas>5) && (lista_estudantes[i].ano_curso<5)) {
+            else if ((lista_estudantes[i].n_matriculas>5) && (lista_estudantes[i].ects_concluidos<154)) {
                 lista_prescricao[i]=1;
                 num++;
             }
