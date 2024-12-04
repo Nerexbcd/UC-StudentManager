@@ -329,18 +329,18 @@ void mostrar_um_aluno(ALUNO *lista_estudantes,int posicao)
 
 void mostrar_toda_lista(ALUNO *lista_estudantes) {
 
-    for (int i=0,j=0; j<calcular_tam_lista(lista_estudantes);i++) {
+    for (int i=0,j=0,rep=0; j<calcular_tam_lista(lista_estudantes);i++) {
         if ((lista_estudantes[i].ocupado)==1) {
-            if ((i != 0) && (i%3==0)) {
+            if ((rep != 0) && (rep%3==0)) {
                 printf("Pagina seguinte ->");
                 fflush(stdin);
                 getchar();
                 puts("");
                 fflush(stdin);
             }
-
+            
             mostrar_um_aluno(lista_estudantes,i);
-
+            rep++;
             j++;
         }
     }
@@ -398,10 +398,18 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes)
 
     //mostra os nomes por ordem crescente (alfabética) do apelido
     //como a lista está na ordem decrescente, também está o contador (para ser crescente)
-    for (int i=sizeof(vet_organizado)-1; i>=0; i--) {
+    for (int i=sizeof(vet_organizado)-1, rep=0; i>=0; i--) {
         int posicao = vet_organizado[i];
         if (lista_estudantes[posicao].ocupado==1) {
+            if(rep!=0 && rep%10==0) {
+                printf("Pagina seguinte ->");
+                fflush(stdin);
+                getchar();
+                puts("");
+                fflush(stdin);
+            }
             printf("%s\n",lista_estudantes[posicao].nome);
+            rep++;
         }
     }
 
@@ -624,7 +632,16 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
     }
 
     //Efetua a comparação
+    int rep=0;
     for (int k=0;k<sizeof(lista_estudantes);k++) {
+        if (rep!=0 && rep%3==0) {
+                printf("Pagina seguinte ->");
+                fflush(stdin);
+                getchar();
+                puts("");
+                fflush(stdin);
+        }
+
         if (lista_estudantes[k].ocupado==1 && (lista_estudantes[k].nacionalidade==nac_1 || lista_estudantes[k].nacionalidade==nac_2 || lista_estudantes[k].nacionalidade==nac_3 || lista_estudantes[k].nacionalidade==nac_4 || lista_estudantes[k].nacionalidade==nac_5)) {
             //Compara os anos inicialmente
             if ((lista_estudantes[k].data_n.ano>data_inf.ano) && (lista_estudantes[k].data_n.ano<data_sup.ano)) {
@@ -665,8 +682,58 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
 
             }
         }
+        rep++;
+    }
+}
+
+
+int estudantes_risco_prescrever(ALUNO * lista_estudantes) {
+    
+    //vetor cujas posicoes com 1 correspondem às posicoes dos alunos em risco de prescricao na struct lista_estudantes
+    int * lista_prescricao = malloc(sizeof(int) * sizeof(lista_estudantes));
+    for (int i=0; i<sizeof(lista_prescricao); i++) {
+        lista_prescricao[i]=0;
     }
 
+    int num=0; //número de estudantes em risco de prescrição
+    for (int i=0;i<sizeof(lista_estudantes);i++) {
+        if (lista_estudantes[i].ocupado==1) {
+            if ((lista_estudantes[i].n_matriculas==3) && (lista_estudantes[i].ects_concluidos<60)) {
+                lista_prescricao[i]=1;
+                num++;
+            }
+            else if ((lista_estudantes[i].n_matriculas==4) && (lista_estudantes[i].ects_concluidos<120)) {
+                lista_prescricao[i]=1;
+                num++;
+            }
+            else if ((lista_estudantes[i].n_matriculas>5) && (lista_estudantes[i].ano_curso<5)) {
+                lista_prescricao[i]=1;
+                num++;
+            }
+        }
+    }
 
-    
+    int rep=0;
+    if (num!=0) {
+        for (int i=0;i<sizeof(lista_prescricao);i++) {
+            if (lista_prescricao[i]==1) {
+                if (rep==0) {
+                    printf("Lista de alunos em risco de prescrição:\n");
+                }
+                else if(rep!=0 && rep%10==0) {
+                    printf("Pagina seguinte ->");
+                    fflush(stdin);
+                    getchar();
+                    puts("");
+                    fflush(stdin);
+                }
+                printf("%s\n",lista_estudantes[i].nome);
+            }
+        }
+    }
+    else {
+        printf("Não há alunos em risco de prescrição!\n");
+    }
+
+    return num;
 }

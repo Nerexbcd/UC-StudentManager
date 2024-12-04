@@ -78,4 +78,9 @@ int det_n_est_finalistas(ALUNO * lista_estudantes);
 //conjunto máximo de 5 nacionalidades
 void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * data_2, char * nac_1, char * nac_2, char * nac_3, char * nac_4, char * nac_5);
 
+//Determinar o número de estudantes em risco de prescrever (3 matrículas e menos de
+//60 ECTS, 4 matrículas e menos de 120 ECTS ou mais de 5 matrículas e não finalista) e
+//proceder à sua listagem
+int estudantes_risco_prescrever(ALUNO * lista_estudantes);
+
 #endif

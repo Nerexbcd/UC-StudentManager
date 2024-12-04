@@ -82,6 +82,8 @@ int main(void)
 
         mostrar_lista_por_ordem_apelido(dados_alunos);
 
+        int a = estudantes_risco_prescrever(dados_alunos);
+
         /*char * pesquisa = "i";
         char * ptr_pesquisa = pesquisa;
 
