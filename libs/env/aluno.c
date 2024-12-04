@@ -770,3 +770,16 @@ float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float
 
     return media_por_nac_por_ano; //retorna todo o vetor
 }
+
+
+int n_est_finalistas(ALUNO * lista_estudantes) {
+    int n_fin=0;
+    
+    for (int i=0;i<sizeof(lista_estudantes);i++) {
+        if ((lista_estudantes[i].ocupado==1) && (lista_estudantes[i].ects_concluidos>=154)) {
+            n_fin++;
+        }
+    }
+
+    return n_fin;
+}
