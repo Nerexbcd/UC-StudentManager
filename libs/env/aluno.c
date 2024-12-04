@@ -383,7 +383,6 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes)
     //compara os apelidos, mas guarda a sua ordem correta no vet_organizado
     //organiza por ordem decrescente
     //crescente nao funciona por algum motivo????
-
     for(int i = 0; i<sizeof(vet_organizado)-1; ++i)
     {
         int pos1 = vet_organizado[i];
@@ -397,6 +396,8 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes)
         }
     }
 
+    //mostra os nomes por ordem crescente (alfabética) do apelido
+    //como a lista está na ordem decrescente, também está o contador (para ser crescente)
     for (int i=sizeof(vet_organizado)-1; i>=0; i--) {
         int posicao = vet_organizado[i];
         if (lista_estudantes[posicao].ocupado==1) {
