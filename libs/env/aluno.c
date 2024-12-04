@@ -375,43 +375,35 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes)
         }
         lista_apelidos[g].apel = malloc(sizeof(char) * strlen(nome_comp[componentes]));
         lista_apelidos[g].apel = nome_comp[componentes];
-        printf("%s\n",lista_apelidos[g].apel);
     }
 
 
-
-
-    //algoritmo organização
     int temp;
-    int pos;
-    char letra_a;
-    char letra_b;
 
     //compara os apelidos, mas guarda a sua ordem correta no vet_organizado
-    //ainda nao está certo, mas parte anterior está
-    for (int i=0; i<sizeof(lista_estudantes)-1; i++) {
-        for (int j=0;j<sizeof(lista_estudantes)-i-1;j++) {
-            pos = vet_organizado[j];
-            letra_a = lista_apelidos[pos].apel[j];
-            letra_b = lista_apelidos[pos+1].apel[j];
-            printf("%c\n",letra_a);
-            printf("%c\n",letra_b);
-            puts("ggg");
-        // compara elementos adjacentes para ver se estão fora de ordem
-            if ((letra_a > letra_b) && (letra_a!=0) && (letra_b!=0)) {
-            temp=vet_organizado[j];
-            vet_organizado[j]=vet_organizado[j+1];
-            vet_organizado[j+1]=temp;
-            }
+    //organiza por ordem decrescente
+    //crescente nao funciona por algum motivo????
+
+    for(int i = 0; i<sizeof(vet_organizado)-1; ++i)
+    {
+        int pos1 = vet_organizado[i];
+        int pos2 = vet_organizado[i+1];
+
+        if(strcmp(lista_apelidos[pos1].apel, lista_apelidos[pos2].apel) < 0 )
+        {
+            temp = vet_organizado[i];
+            vet_organizado[i] = vet_organizado[i+1];
+            vet_organizado[i+1] = temp;
         }
     }
 
-    for (int i=0;i<sizeof(vet_organizado);i++) {
+    for (int i=sizeof(vet_organizado)-1; i>=0; i--) {
         int posicao = vet_organizado[i];
         if (lista_estudantes[posicao].ocupado==1) {
             printf("%s\n",lista_estudantes[posicao].nome);
         }
     }
+
 }
 
 
