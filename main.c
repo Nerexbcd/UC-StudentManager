@@ -36,17 +36,18 @@ int main(void)
     //do
     //{
         
+            //program_header();
+            
         for (int i = 0; i < 10; i++)
         {
             clearConsole();
-            //program_header();
             printf(CYAN("Starting..."));
             for (int j = 1; j < i; j++) {
                 printf(CYAN("."));
             }
             if (i == 9) printf(CYAN(" [DONE!]"));
             printf("\n");
-            //sleep(1);
+            sleep(1);
         }
         
 

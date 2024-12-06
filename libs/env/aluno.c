@@ -523,7 +523,7 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
 
 int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y) 
 {
-    int n_est_com_media=0;
+    int n_est_com_media=0;//número de estudantes com média entre estes valores
 
     //determinar o maior e menor valor
     float max=x;
@@ -537,11 +537,11 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y)
     }
 
     //Mostrar os alunos com médias entre estes 2 valores
-    int i=0;
+    int i=0;//elemento de paginação, determina quantas iterações foram mostradas ao utilizador
 
     for (int k=0;k<sizeof(lista_estudantes);k++) {
         if ((lista_estudantes[k].ocupado==1) && (lista_estudantes[k].media_atual>=min) && (lista_estudantes[k].media_atual<=max)) {
-            if ((i != 0) && (i%3==0)) {
+            if ((i != 0) && (i%3==0)) {//elemento de paginação, mostra em blocos de 3
                 printf("Pagina seguinte ->");
                 fflush(stdin);
                 getchar();
@@ -559,37 +559,38 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y)
 
 
 
-int det_n_est_finalistas(ALUNO * lista_estudantes) {
-    
-    int n_est_fin=0;
+int n_est_finalistas(ALUNO * lista_estudantes) {
+    int n_fin=0;//vai guardar o número de alunos que é finalista
 
-    for(int k=0;k<sizeof(lista_estudantes);k++) {
-        if ((lista_estudantes[k].ocupado==1) && (lista_estudantes[k].ects_concluidos>=154)) {
-            n_est_fin++;
+    //para ser considerado finalista, o aluno tem de ter pelo menos 154 ects
+    for (int i=0;i<sizeof(lista_estudantes);i++) {
+        if ((lista_estudantes[i].ocupado==1) && (lista_estudantes[i].ects_concluidos>=154)) {
+            n_fin++;
         }
     }
 
-    return n_est_fin;
+    return n_fin;//retorna o número de estudantes finalistas
 }
 
 
 
 void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * data_2, char * nac_1, char * nac_2, char * nac_3, char * nac_4, char * nac_5)
 {
-    DATA_NAS data_sup;
-    DATA_NAS data_inf;
+    DATA_NAS data_sup;//data maior
+    DATA_NAS data_inf;//data menor
 
-    DATA_NAS data_prim;
-    DATA_NAS data_seg;
+    DATA_NAS data_prim;//primeira data fornecida, data_1, organizada em struct
+    DATA_NAS data_seg;//segunda data fornecida, data_2, organizada em struct
 
     //Coloca as datas fornecidas pelo utilizador na struct do tipo DATA_NAS para fácil comparação
     //com as datas dos alunos
-    char *dnp = data_1;
-    char **ptr_dnp = str_split(dnp, '-', NULL);
-    data_prim.dia= atoi(strdup(ptr_dnp[0]));
+    char *dnp = data_1;//ponteiro de data_1
+    char **ptr_dnp = str_split(dnp, '-', NULL);//vai separar as datas da carater '-'
+    data_prim.dia= atoi(strdup(ptr_dnp[0]));//alocação de cada elemento no campo adequado
     data_prim.mes= atoi(strdup(ptr_dnp[1]));
     data_prim.ano= atoi(strdup(ptr_dnp[2]));
 
+    //de forma semelhante:
     char *dns = data_2;
     char **ptr_dns = str_split(dns, '-', NULL);
     data_seg.dia= atoi(strdup(ptr_dns[0]));
@@ -597,7 +598,8 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
     data_seg.ano= atoi(strdup(ptr_dns[2]));
 
 
-    //Determina qual a data superior e a data inferior
+    //Determina qual a data superior e a data inferior por comparação
+    //comparação por anos
     if ((data_prim.ano)>(data_seg.ano)) {
         data_sup = data_prim;
         data_inf = data_seg;
@@ -607,6 +609,7 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
         data_inf = data_prim;
     }
     else if ((data_seg.ano)==(data_prim.ano)) {
+        //comparação por meses
         if ((data_prim.mes)>(data_seg.mes)) {
             data_sup = data_prim;
             data_inf = data_seg;
@@ -616,6 +619,7 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
             data_inf = data_prim;
         }
         else if ((data_prim.mes)==(data_seg.mes)) {
+            //comparação por dias
             if ((data_prim.dia)>(data_seg.dia)) {
             data_sup = data_prim;
             data_inf = data_seg;
@@ -628,7 +632,16 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
     }
 
     //Efetua a comparação
+    int rep=0;
     for (int k=0;k<sizeof(lista_estudantes);k++) {
+        if (rep!=0 && rep%3==0) {
+                printf("Pagina seguinte ->");
+                fflush(stdin);
+                getchar();
+                puts("");
+                fflush(stdin);
+        }
+
         if (lista_estudantes[k].ocupado==1 && (lista_estudantes[k].nacionalidade==nac_1 || lista_estudantes[k].nacionalidade==nac_2 || lista_estudantes[k].nacionalidade==nac_3 || lista_estudantes[k].nacionalidade==nac_4 || lista_estudantes[k].nacionalidade==nac_5)) {
             //Compara os anos inicialmente
             if ((lista_estudantes[k].data_n.ano>data_inf.ano) && (lista_estudantes[k].data_n.ano<data_sup.ano)) {
@@ -669,8 +682,104 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
 
             }
         }
+        rep++;
+    }
+}
+
+
+int estudantes_risco_prescrever(ALUNO * lista_estudantes) {
+
+    setlocale(LC_ALL,"Portuguese");//??????
+    
+    //vetor cujas posicoes com 1 correspondem às posicoes dos alunos em risco de prescricao na struct lista_estudantes
+    int * lista_prescricao = malloc(sizeof(int) * sizeof(lista_estudantes));
+    for (int i=0; i<sizeof(lista_prescricao); i++) {
+        lista_prescricao[i]=0;
     }
 
+    int num=0; //número de estudantes em risco de prescrição
+    for (int i=0;i<sizeof(lista_estudantes);i++) {
+        if (lista_estudantes[i].ocupado==1) {
+            if ((lista_estudantes[i].n_matriculas==3) && (lista_estudantes[i].ects_concluidos<60)) {
+                lista_prescricao[i]=1;
+                num++;
+            }
+            else if ((lista_estudantes[i].n_matriculas==4) && (lista_estudantes[i].ects_concluidos<120)) {
+                lista_prescricao[i]=1;
+                num++;
+            }
+            else if ((lista_estudantes[i].n_matriculas>5) && (lista_estudantes[i].ects_concluidos<154)) {
+                lista_prescricao[i]=1;
+                num++;
+            }
+        }
+    }
 
+    int rep=0;
+    if (num!=0) {
+        for (int i=0;i<sizeof(lista_prescricao);i++) {
+            if (lista_prescricao[i]==1) {
+                if (rep==0) {
+                    printf("Lista de alunos em risco de prescrição:\n");
+                }
+                else if(rep!=0 && rep%10==0) {
+                    printf("Pagina seguinte ->");
+                    fflush(stdin);
+                    getchar();
+                    puts("");
+                    fflush(stdin);
+                }
+                printf("%s\n",lista_estudantes[i].nome);
+            }
+        }
+    }
+    else {
+        printf("Não há alunos em risco de prescrição!\n");
+    }
+
+    return num;
+}
+
+
+
+float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float ano_atual)
+{
+    //vetor vai organizar as médias das idades da nacionalidade fornecida pelo ano de curso
+    float * media_por_nac_por_ano = malloc(sizeof(float)*3); 
+
+    for (int j=1; j<sizeof(media_por_nac_por_ano); j++) { //determina qual o ano de curso (e posicao no vetor) estamos a avaliar
+        int n_ele=0;
+        int soma=0;
+        for (int i=0; i<sizeof(lista_estudantes);i++) {
+            //procura os alunos que obedecem a todas as condicoes:
+            //nacionalidade, ano de curso correto, existência na base de dados
+            if ((lista_estudantes[i].ocupado == 1) && (strcmp(lista_estudantes[i].nacionalidade, nacio) == 0) && (lista_estudantes[i].ano_curso == j)) {
+                n_ele++;
+                int idade = ano_atual - (lista_estudantes[i].data_n.ano); //idade é obtida de forma muito simplificada através do ano de nascimento.
+                //ignoram-se as outras componentes desta data por agora
+                soma = soma + idade;
+            }
+        }
+        if (n_ele!=0) {
+            media_por_nac_por_ano[j-1] = ((float) soma)/ ((float) n_ele);
+        }
+        else { //para evitar possíveis divisões por zero
+            media_por_nac_por_ano[j-1] = 0;
+        }
+    }
+
+    return media_por_nac_por_ano; //retorna todo o vetor
+}
+
+
+int n_est_finalistas(ALUNO * lista_estudantes) {
+    int n_fin=0;
     
+    for (int i=0;i<sizeof(lista_estudantes);i++) {
+        if ((lista_estudantes[i].ocupado==1) && (lista_estudantes[i].ects_concluidos>=154)) {
+            n_fin++;
+        }
+    }
+
+    return n_fin;
 }
