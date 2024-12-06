@@ -11,184 +11,6 @@
 
 
 
-DB *db_init(size_t size_alunos) {
-
-    //alocar memória necessária para todos os elementos da lista
-    ALUNO *lista_estudantes;
-    lista_estudantes = malloc(sizeof(ALUNO)*((size_alunos)+1));
-
-    if (sizeof(lista_estudantes)==0) {
-        printf("ERRO!");
-        return 0;
-    }
-
-    for (int i=0 ; i<=(size_alunos) ; i++) {
-        int z=0;
-        lista_estudantes[i].ocupado=0;
-        lista_estudantes[i].nome=NULL;
-        lista_estudantes[i].nacionalidade=NULL;
-    }
-
-    DB *base_dados = malloc(sizeof(DB));
-    base_dados->alunos = lista_estudantes;
-    base_dados->size = size_alunos;
-    
-    return base_dados;
-}
-
-
-
-
-void db_load_data(txtFile file_estudante, txtFile file_situacao, DB *base_dados)
-{
-    for (int i=0; i < base_dados->size ; i++) {
-        if (base_dados->alunos[i].ocupado==0) {
-
-            base_dados->alunos[i].ocupado=1;
-
-            char *linha = txt_get_line(file_estudante, i);
-            char **dados = str_split(linha, '\t', NULL);
-
-            base_dados->alunos[i].codigo = atoi(strdup(dados[0]));
-            base_dados->alunos[i].nome = strdup(dados[1]);
-            base_dados->alunos[i].nacionalidade = strdup(dados[3]);
-
-            char *dn = dados[2];
-            char **ptr_dn = str_split(dn, '-', NULL);
-            base_dados->alunos[i].data_n.dia= atoi(strdup(ptr_dn[0]));
-            base_dados->alunos[i].data_n.mes= atoi(strdup(ptr_dn[1]));
-            base_dados->alunos[i].data_n.ano= atoi(strdup(ptr_dn[2]));
-        }
-    }
-
-    //Atribuição dos dados do ficheiro situaçao_Escolar_Estudantes.txt à struct
-    //É efetuada a sua correta colocação por comparação dos números de código
-
-
-    for (int i=0; i < txt_get_size(file_situacao) ; i++) {
-        char *linha = file_situacao.data[i];
-        char **dados = str_split(linha, '\t', NULL);
-
-        for (int j=0 ; j<base_dados->size ; j++) {
-            if (atoi(dados[0]) == base_dados->alunos[j].codigo) {
-                
-                base_dados->alunos[j].n_matriculas= atoi(strdup(dados[1]));
-                base_dados->alunos[j].ects_concluidos= atoi(strdup(dados[2]));
-                base_dados->alunos[j].ano_curso= atoi(strdup(dados[3]));
-                base_dados->alunos[j].media_atual= atof(strdup(dados[4]));
-            }
-        }
-    }
-}
-
-
-
-
-void db_insert(DB *base_dados, ALUNO aluno)
-{
-    // Add plus one to the db size
-    size_t wrt_size = base_dados->size+1;
-
-    // Allocate memory for the new student
-    ALUNO * wrt_alunos = base_dados->alunos;
-    wrt_alunos = realloc(wrt_alunos , sizeof(ALUNO)*((wrt_size)+1));
-
-
-    //ocupar posição
-    wrt_alunos[wrt_size-1].ocupado=1;
-
-    //atribuir valores
-    wrt_alunos[wrt_size-1].codigo=aluno.codigo;
-    wrt_alunos[wrt_size-1].nome=aluno.nome;
-    wrt_alunos[wrt_size-1].nacionalidade=aluno.nacionalidade;
-    wrt_alunos[wrt_size-1].data_n=aluno.data_n;
-
-    wrt_alunos[wrt_size-1].ano_curso=aluno.ano_curso;
-    wrt_alunos[wrt_size-1].media_atual=aluno.media_atual;
-    wrt_alunos[wrt_size-1].ects_concluidos=aluno.ects_concluidos;
-    wrt_alunos[wrt_size-1].n_matriculas=aluno.n_matriculas;
-    
-    base_dados->alunos = wrt_alunos;
-    base_dados->size = wrt_size;
-
-    
-
-    
-
-    
-
-    // printf("Codigo: ");
-    // scanf(" %d",&((lista_estudantes[j]).codigo));
-
-    // char * stringgg=NULL;
-    // size_t bufsize=200;
-    // printf("Nome: ");
-    // fflush(stdin);
-    // //não consegui usar o scanf ou gets (?????????????porquê?????)
-    // getline(&stringgg,&bufsize,stdin);
-    // stringgg = * str_split(stringgg, '\n', NULL);
-    // lista_estudantes[j].nome=(char*) malloc(sizeof(stringgg));
-    // lista_estudantes[j].nome=stringgg;
-    // fflush(stdin);
-    
-    // stringgg=NULL;
-    // bufsize=11;
-    // printf("Data de nascimento (dd-mm-aaaa): ");
-    // fflush(stdin);
-    // getline(&stringgg,&bufsize,stdin);
-    // stringgg = * str_split(stringgg, '\n', NULL);
-    // char *dn = stringgg;
-    // char **ptr_dn = str_split(dn, '-', NULL);
-    // lista_estudantes[j].data_n.dia= atoi(strdup(ptr_dn[0]));
-    // lista_estudantes[j].data_n.mes= atoi(strdup(ptr_dn[1]));
-    // lista_estudantes[j].data_n.ano= atoi(strdup(ptr_dn[2]));
-
-    // fflush(stdin);
-
-    // stringgg=NULL;
-    // bufsize=200;
-    // printf("Nacionalidade: ");
-    // fflush(stdin);
-    // getline(&stringgg,&bufsize,stdin);
-    // stringgg = * str_split(stringgg, '\n', NULL);
-    // lista_estudantes[j].nacionalidade=(char*) malloc(sizeof(stringgg));
-    // lista_estudantes[j].nacionalidade=stringgg;
-    // fflush(stdin);
-
-    // printf("Ano de curso: ");
-    // fflush(stdin);
-    // scanf(" %d",&((lista_estudantes[j]).ano_curso));
-
-    // printf("Media atual: ");
-    // fflush(stdin);
-    // scanf(" %f",&((lista_estudantes[j]).media_atual));
-
-    // printf("ECTS concluidos: ");
-    // fflush(stdin);
-    // scanf(" %d",&((lista_estudantes[j]).ects_concluidos));
-
-    // printf("Numero de matriculas: ");
-    // fflush(stdin);
-    // scanf(" %d",&((lista_estudantes[j]).n_matriculas));
-
-    // puts("\n");
-    // fflush(stdin);
-
-    //para esvaziar a memória alocada no caso de não ser necessária
-
-}
-
-
-
-
-void remover_estudante(ALUNO *lista_estudantes,int i)
-{
-    (lista_estudantes[i]).ocupado=0;
-    //Para esvaziar os string:
-    (*(lista_estudantes+i)).nome=NULL;
-    (*(lista_estudantes+i)).nacionalidade=NULL;
-}
-
 
 
 
@@ -299,9 +121,7 @@ int calcular_tam_lista(ALUNO *lista_estudantes) {
     //pode ser útil
     int tam = 0;
     for (int i=0; i<sizeof(lista_estudantes[0]) ;i++) {
-        if (lista_estudantes[i].ocupado==1) {
-            tam++;
-        }
+        tam++;
     }
     return tam;
 }
@@ -327,19 +147,17 @@ void mostrar_um_aluno(ALUNO *lista_estudantes,int posicao)
 void mostrar_toda_lista(ALUNO *lista_estudantes) {
 
     for (int i=0,j=0; j<calcular_tam_lista(lista_estudantes);i++) {
-        if ((lista_estudantes[i].ocupado)==1) {
-            if ((i != 0) && (i%3==0)) {
-                printf("Pagina seguinte ->");
-                fflush(stdin);
-                getchar();
-                puts("");
-                fflush(stdin);
-            }
-
-            mostrar_um_aluno(lista_estudantes,i);
-
-            j++;
+        if ((i != 0) && (i%3==0)) {
+            printf("Pagina seguinte ->");
+            fflush(stdin);
+            getchar();
+            puts("");
+            fflush(stdin);
         }
+
+        mostrar_um_aluno(lista_estudantes,i);
+
+        j++;
     }
 }
 
@@ -405,9 +223,7 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes)
 
     for (int i=0;i<sizeof(vet_organizado);i++) {
         int posicao = vet_organizado[i];
-        if (lista_estudantes[posicao].ocupado==1) {
-            printf("%s\n",lista_estudantes[posicao].nome);
-        }
+        printf("%s\n",lista_estudantes[posicao].nome);
     }
 }
 
@@ -540,7 +356,7 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y)
     int i=0;//elemento de paginação, determina quantas iterações foram mostradas ao utilizador
 
     for (int k=0;k<sizeof(lista_estudantes);k++) {
-        if ((lista_estudantes[k].ocupado==1) && (lista_estudantes[k].media_atual>=min) && (lista_estudantes[k].media_atual<=max)) {
+        if ((lista_estudantes[k].media_atual>=min) && (lista_estudantes[k].media_atual<=max)) {
             if ((i != 0) && (i%3==0)) {//elemento de paginação, mostra em blocos de 3
                 printf("Pagina seguinte ->");
                 fflush(stdin);
@@ -564,7 +380,7 @@ int n_est_finalistas(ALUNO * lista_estudantes) {
 
     //para ser considerado finalista, o aluno tem de ter pelo menos 154 ects
     for (int i=0;i<sizeof(lista_estudantes);i++) {
-        if ((lista_estudantes[i].ocupado==1) && (lista_estudantes[i].ects_concluidos>=154)) {
+        if (lista_estudantes[i].ects_concluidos>=154) {
             n_fin++;
         }
     }
@@ -642,7 +458,7 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
                 fflush(stdin);
         }
 
-        if (lista_estudantes[k].ocupado==1 && (lista_estudantes[k].nacionalidade==nac_1 || lista_estudantes[k].nacionalidade==nac_2 || lista_estudantes[k].nacionalidade==nac_3 || lista_estudantes[k].nacionalidade==nac_4 || lista_estudantes[k].nacionalidade==nac_5)) {
+        if ((lista_estudantes[k].nacionalidade==nac_1 || lista_estudantes[k].nacionalidade==nac_2 || lista_estudantes[k].nacionalidade==nac_3 || lista_estudantes[k].nacionalidade==nac_4 || lista_estudantes[k].nacionalidade==nac_5)) {
             //Compara os anos inicialmente
             if ((lista_estudantes[k].data_n.ano>data_inf.ano) && (lista_estudantes[k].data_n.ano<data_sup.ano)) {
                 mostrar_um_aluno(lista_estudantes,k);
@@ -699,20 +515,20 @@ int estudantes_risco_prescrever(ALUNO * lista_estudantes) {
 
     int num=0; //número de estudantes em risco de prescrição
     for (int i=0;i<sizeof(lista_estudantes);i++) {
-        if (lista_estudantes[i].ocupado==1) {
-            if ((lista_estudantes[i].n_matriculas==3) && (lista_estudantes[i].ects_concluidos<60)) {
-                lista_prescricao[i]=1;
-                num++;
-            }
-            else if ((lista_estudantes[i].n_matriculas==4) && (lista_estudantes[i].ects_concluidos<120)) {
-                lista_prescricao[i]=1;
-                num++;
-            }
-            else if ((lista_estudantes[i].n_matriculas>5) && (lista_estudantes[i].ects_concluidos<154)) {
-                lista_prescricao[i]=1;
-                num++;
-            }
+
+        if ((lista_estudantes[i].n_matriculas==3) && (lista_estudantes[i].ects_concluidos<60)) {
+            lista_prescricao[i]=1;
+            num++;
         }
+        else if ((lista_estudantes[i].n_matriculas==4) && (lista_estudantes[i].ects_concluidos<120)) {
+            lista_prescricao[i]=1;
+            num++;
+        }
+        else if ((lista_estudantes[i].n_matriculas>5) && (lista_estudantes[i].ects_concluidos<154)) {
+            lista_prescricao[i]=1;
+            num++;
+        }
+
     }
 
     int rep=0;
@@ -753,7 +569,7 @@ float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float
         for (int i=0; i<sizeof(lista_estudantes);i++) {
             //procura os alunos que obedecem a todas as condicoes:
             //nacionalidade, ano de curso correto, existência na base de dados
-            if ((lista_estudantes[i].ocupado == 1) && (strcmp(lista_estudantes[i].nacionalidade, nacio) == 0) && (lista_estudantes[i].ano_curso == j)) {
+            if ((strcmp(lista_estudantes[i].nacionalidade, nacio) == 0) && (lista_estudantes[i].ano_curso == j)) {
                 n_ele++;
                 int idade = ano_atual - (lista_estudantes[i].data_n.ano); //idade é obtida de forma muito simplificada através do ano de nascimento.
                 //ignoram-se as outras componentes desta data por agora

@@ -9,7 +9,9 @@
         "tools.h": "c",
         "stdlib.h": "c",
         "assert.h": "c",
-        "menu.h": "c"
+        "menu.h": "c",
+        "aluno.h": "c",
+        "db.h": "c"
     },
     "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe",
     "lonberg.editorButtonRunTask": {

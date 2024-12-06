@@ -9,6 +9,7 @@
 #include "libs/style/tools.h"
 #include "libs/style/program.h"
 #include "libs/style/menu.h"
+#include "libs/data/db.h"
 
 #ifdef _WIN32
     #define OS "W"
@@ -102,6 +103,14 @@ int main(void)
         aluno.n_matriculas = 0;
 
         db_insert(base_dados, aluno);
+
+        printf("%u\n",base_dados->size);
+
+        mostrar_toda_lista(base_dados->alunos);
+
+        printf("\n\nbanananananan\n\n");
+
+        db_remove(base_dados, 2);
 
         printf("%u\n",base_dados->size);
 
