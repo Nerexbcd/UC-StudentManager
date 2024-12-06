@@ -772,7 +772,7 @@ float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float
 }
 
 
-int n_est_finalistas(ALUNO * lista_estudantes) {
+/* int n_est_finalistas(ALUNO * lista_estudantes) {
     int n_fin=0;
     
     for (int i=0;i<sizeof(lista_estudantes);i++) {
@@ -782,4 +782,4 @@ int n_est_finalistas(ALUNO * lista_estudantes) {
     }
 
     return n_fin;
-}
+} */
