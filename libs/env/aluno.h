@@ -32,14 +32,20 @@ typedef struct apelido
     char * apel;
 }APELIDO;
 
+typedef struct db
+{
+    ALUNO *alunos;
+    size_t size;
+}DB;
+
 //Transfere os dados dos ficheiros para a struct base de dados do tipo ALUNO
-void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, size_t *size_alunos);
+void db_load_data(txtFile file_estudante, txtFile file_situacao, DB *base_dados);
 
 //Cria e inicializa a lista de estudantes
-ALUNO * criar_lista(txtFile *txt_estudantes);
+DB *db_init(size_t size_alunos);
 
 //Permite adicionar um aluno à lista
-void inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos);
+void db_insert(DB *base_dados, ALUNO aluno);
 
 //Permite remover um aluno da lista
 void remover_estudante(ALUNO *lista_estudantes,int i);

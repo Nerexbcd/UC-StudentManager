@@ -112,6 +112,13 @@ char** txt_get_data(txtFile txt){
     return txt.data;
 }
 
+char* txt_get_line(txtFile txt, size_t index){
+    if (txt.loaded == 0) txt_error_not_loaded(txt.path);
+    if (index >= txt.size) txt_error_index_out_of_bounds();
+
+    return *(txt.data + index);
+}
+
 void txt_append_data(txtFile *txt, char *data){
     txtFile w_txt = *txt;
 

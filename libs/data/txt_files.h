@@ -54,6 +54,10 @@ size_t txt_get_size(txtFile txt);
 /* It returns an array with each line one the file*/
 char** txt_get_data(txtFile txt);
 
+/* Get txt file line */
+/* It returns the line index from the file */
+char* txt_get_line(txtFile txt, size_t index);
+
 /* Append data to txt file */
 /* It adds a new line to the file */
 void txt_append_data(txtFile *txt, char *data);
