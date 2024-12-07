@@ -29,3 +29,19 @@ int menu_opcoes_field()
     while (i<0 || i>7);
     return i;
 }
+
+char * menu_obter_pesquisa() 
+{
+    char * pesquisa = NULL;
+
+    do
+    {
+        printf("Pesquisar: ");
+        fflush(stdin);
+        scanf(" %s",pesquisa);
+        puts("");
+    }
+    while (pesquisa==NULL);
+
+    return pesquisa;
+}

@@ -31,11 +31,6 @@ int main(void)
     //printf("Size: %u\n", txt_get_size(txt_estudantes));
     */
 
-    
-    int condicao_saida=0;
-    //MENU PRINCIPAL
-    //do
-    //{
         
             //program_header();
             
@@ -140,31 +135,8 @@ int main(void)
         gets("");
 
 
-        int opcao = 0;
-        do
-        {
-            /*
-            switch (opcao)
-            {
-            case 1:constant-expression:
-                code
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            default: 
-                printf("Erro de seleção! Por favor faça uma escolha válida.\n")
-                opcao=0;
-                break;
-            }
-            */
-            //etc
-        //}
-        //while (opcao==0);*/
+      
 
-
-    //} while (condicao_saida==0);
  
 
  /*
@@ -184,6 +156,45 @@ int main(void)
 
 
   */  
-  
+
+    //tem que ter inicializado dos ficheiros antes
+    int cond_saida=0; //condicao de saída do loop
+/*
+    do
+    {
+        int opcao=0;
+        scanf(" %d",&opcao);
+        switch (opcao)
+        {
+        case 1: //mostrar a lista
+            mostrar_toda_lista(base_dados);
+            break;
+        case 2: //inserir um aluno
+            break;
+        case 3: //remover um aluno
+            break;
+        case 4: //alterar dados de um aluno
+            atualizar_uma_caracteristica_estudante(base_dados);
+            break;
+        case 5: //pesquisar estudante por nome
+            char *pesquisa = NULL;
+            pesquisa = menu_obter_pesquisa;
+            pesquisar(base_dados,pesquisa);
+            break;
+        case 6: //mostra lista por ordem alfabética do último nome
+            mostrar_lista_por_ordem_apelido(base_dados);
+            break;
+        //etc
+        case ():
+            cond_saida=1;
+            printf("A sair...");
+            break;
+        default:
+            printf("Erro! Escolha uma opção válida")
+            break;
+        }
+    } while (cond_saida==0);
+    
+  */
     return 0;
 }
