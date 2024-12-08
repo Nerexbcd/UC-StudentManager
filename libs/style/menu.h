@@ -19,5 +19,7 @@ char * menu_obter_nacionalidade();
 //determina se o utilizador pretende guardar o resultado obtido, e se sim em .txt ou .cvs
 char * tipo_de_guardar();
 
+//obtem um valor float positivo do utilizador
+float menu_obter_float();
 #endif
 

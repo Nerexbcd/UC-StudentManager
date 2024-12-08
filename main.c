@@ -184,7 +184,13 @@ int main(void)
         case 6: //mostra lista por ordem alfabética do último nome
             mostrar_lista_por_ordem_apelido(base_dados);
             break;
-        case 7: 
+        case 7: //mostrar alunos entre duas médias
+            float x = 0;
+            float y = 0;
+            x = menu_obter_float();
+            y = menu_obter_float();
+            mostrar_alunos_entre_medias(base_dados,x,y);
+            break;
         //etc
         case ():
             cond_saida=1;

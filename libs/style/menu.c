@@ -33,13 +33,18 @@ int menu_opcoes_field()
 char * menu_obter_pesquisa() 
 {
     char * pesquisa = NULL;
+    int rep = 0;
 
     do
     {
+        if (rep!=0) {
+            printf("Erro! Tente novamente.\n");
+        }
         printf("Pesquisar: ");
         fflush(stdin);
         scanf(" %s",pesquisa);
         puts("");
+        rep++;
     }
     while (pesquisa==NULL);
 
@@ -50,13 +55,18 @@ char * menu_obter_pesquisa()
 char * menu_obter_nacionalidade()
 {
     char * nacio = NULL;
+    int rep = 0;
 
     do
     {
+        if (rep!=0) {
+            printf("Erro! Tente novamente.\n");
+        }
         printf("Nacionalidade: ");
         fflush(stdin);
         scanf(" %s",nacio);
         puts("");
+        rep++;
     }
     while (nacio==NULL);
 
@@ -74,8 +84,12 @@ char * tipo_de_guardar()
     scanf(" %c",resposta);
 
     if (resposta=='S' || resposta=='s') {
+        int rep = 0;
         do
         {
+            if (rep!=0) {
+                printf("Erro! Tente novamente.\n");
+            }
             printf("Guardar em:\n1 - .txt\n2 - .cvs\nEscolha: ");
             fflush(stdin);
             scanf(" %d",ans);
@@ -85,9 +99,31 @@ char * tipo_de_guardar()
             else if (ans==2) {
                 tipo = ".cvs";
             }
+            rep++;
+            puts("");
         }
         while ((ans!=1) && (ans!=2));
     }
 
     else return tipo;
+}
+
+
+float menu_obter_float()
+{
+    float valor = 0;
+    int rep = 0;
+    do {
+        if (rep!=0) {
+            printf("Erro! Tente novamente.\n")
+        }
+        printf("Valor: ");
+        fflush(stdin);
+        scanf(" %f",valor);
+        puts("");
+        rep++;
+    }
+    while (valor<0);
+
+    return valor;
 }
