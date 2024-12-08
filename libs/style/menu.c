@@ -45,3 +45,49 @@ char * menu_obter_pesquisa()
 
     return pesquisa;
 }
+
+
+char * menu_obter_nacionalidade()
+{
+    char * nacio = NULL;
+
+    do
+    {
+        printf("Nacionalidade: ");
+        fflush(stdin);
+        scanf(" %s",nacio);
+        puts("");
+    }
+    while (nacio==NULL);
+
+    return nacio;
+}
+
+char * tipo_de_guardar()
+{
+    char resposta = NULL;
+    char * tipo = NULL;
+    int ans = 0;
+
+    printf("Pretende guardar? (S/N)");
+    fflush(stdin);
+    scanf(" %c",resposta);
+
+    if (resposta=='S' || resposta=='s') {
+        do
+        {
+            printf("Guardar em:\n1 - .txt\n2 - .cvs\nEscolha: ");
+            fflush(stdin);
+            scanf(" %d",ans);
+            if (ans==1) {
+                tipo = ".txt";
+            }
+            else if (ans==2) {
+                tipo = ".cvs";
+            }
+        }
+        while ((ans!=1) && (ans!=2));
+    }
+
+    else return tipo;
+}

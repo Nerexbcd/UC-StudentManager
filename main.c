@@ -184,6 +184,7 @@ int main(void)
         case 6: //mostra lista por ordem alfabética do último nome
             mostrar_lista_por_ordem_apelido(base_dados);
             break;
+        case 7: 
         //etc
         case ():
             cond_saida=1;
