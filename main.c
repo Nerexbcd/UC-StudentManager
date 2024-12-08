@@ -191,6 +191,26 @@ int main(void)
             y = menu_obter_float();
             mostrar_alunos_entre_medias(base_dados,x,y);
             break;
+        case 8: //mostrar estudantes em risco de prescrever
+            int n_est_risco = 0;
+            n_est_risco = estudantes_risco_prescrever(base_dados);
+            break;
+        case 9: //determinar o número de estudantes finalistas
+            int n_fin = 0;
+            n_fin = n_est_finalistas(base_dados);
+            printf("Número de estudantes finalistas: %d.\n",n_fin);
+            fflush(stdin);
+            break;
+        case 10: //mostra a média dos alunos de uma certa nacionalidade por ano
+            float media = 0;
+            float ano_atual = 2024;
+            char * nacion = NULL;
+            nacion = menu_obter_nacionalidade();
+            float * media_idades_nacionalidade(base_dados, nacion, ano_atual);
+            //printf
+            break;
+        case 11:
+            break;
         //etc
         case ():
             cond_saida=1;

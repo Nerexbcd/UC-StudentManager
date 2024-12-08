@@ -115,7 +115,7 @@ float menu_obter_float()
     int rep = 0;
     do {
         if (rep!=0) {
-            printf("Erro! Tente novamente.\n")
+            printf("Erro! Tente novamente.\n");
         }
         printf("Valor: ");
         fflush(stdin);
