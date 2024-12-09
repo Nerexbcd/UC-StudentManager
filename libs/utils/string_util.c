@@ -48,3 +48,13 @@ char** str_split(char str[], char separator, size_t *size) {
 
     return result;
 }
+
+int str_get_bigger(char **strs, int size) {
+    int bigger = 0;
+    for (int i = 0; i<size; i++) {
+        if (strlen(strs[i]) > bigger) {
+            bigger = strlen(strs[i]);
+        }
+    }
+    return bigger;
+}

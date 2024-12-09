@@ -48,8 +48,19 @@ int main(void)
             }
             if (i == 9) printf(CYAN(" [DONE!]"));
             printf("\n");
-            sleep(1);
+            // sleep(1);
         }
+
+
+
+        MENU_PAGE menu_principal;
+        menu_principal.title = "Menu Principal";
+        menu_principal.option_1 = "Gestão de Estudantes";
+        menu_principal.option_2 = "Gestão de Disciplinas";
+        menu_principal.option_3 = "Gestão de Situações Escolares";
+        menu_principal.option_4 = "kakakaka";
+
+        menu_show_page(&menu_principal);
         
 
 
