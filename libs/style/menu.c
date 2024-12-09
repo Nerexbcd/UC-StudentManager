@@ -85,16 +85,6 @@ int menu_show_page(MENU_PAGE * page) {
     }
     printf("┛\n");
 
-    
-
-
-
-/*     printf("%s\n", page->title);
-    printf("1 - %s\n", page->option_1);
-    printf("2 - %s\n", page->option_2);
-    printf("3 - %s\n", page->option_3);
-    printf("4 - %s\n", page->option_4);
-    printf("\n"); */
     int i = 0;
     do {
         if (i<0 || i>4) {

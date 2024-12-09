@@ -14,6 +14,9 @@ typedef struct menu_page
     char * option_4;
 }MENU_PAGE;
 
+
+int menu_show_page(MENU_PAGE * page);
+
 //MENUS SECUNDÁRIOS
 
 //permite ao utilizador escolher qual o campo a alterar

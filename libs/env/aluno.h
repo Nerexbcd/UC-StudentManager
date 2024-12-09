@@ -1,6 +1,8 @@
 #ifndef ALUNO_H_INCLUDED
 #define ALUNO_H_INCLUDED
+#include "../data/db.h"
 #include "../data/txt_files.h"
+
 
 //Parâmetro define data de nascimento
 typedef struct data_nascimento
@@ -9,6 +11,7 @@ typedef struct data_nascimento
     int mes;
     int ano;
 }DATA_NAS;
+
 
 //Define a estrutura aluno, de modo a organizar a informação de cada aluno.
 //Parâmetro ocupado indica se há um aluno ou não nessa posição da estrutura; permite a eliminação de 
@@ -35,10 +38,9 @@ typedef struct apelido
 void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes);
 
 //Mostra os dados de um aluno
-void mostrar_um_aluno(ALUNO *lista_estudantes,int posicao);
+void mostrar_um_aluno(ALUNO aluno);
 
-//Faz display da struct (apenas os membros com ocupado=1)
-void mostrar_toda_lista(ALUNO *lista_estudantes);
+
 
 //Listar estudantes por ordem alfabética do apelido (considera-se apelido a última palavra
 //do nome completo)
@@ -73,5 +75,10 @@ float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float
 
 //Determinar o número de estudantes finalistas (pelo menos 154 ECTS realizados)
 int n_est_finalistas(ALUNO * lista_estudantes);
+
+
+
+//Faz display da struct (apenas os membros com ocupado=1)
+void mostrar_toda_lista(DB * base_dados);
 
 #endif

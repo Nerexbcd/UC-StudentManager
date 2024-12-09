@@ -24,4 +24,6 @@ void db_remove(DB *base_dados, int index);
 //Permite atualizar um aluno da lista
 void db_update(DB *base_dados, int index, ALUNO aluno);
 
+ALUNO db_get(DB *base_dados, int index);
+
 #endif

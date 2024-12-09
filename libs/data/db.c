@@ -184,3 +184,9 @@ void db_update(DB *base_dados, int index, ALUNO aluno)
     // Save Changes
     base_dados->alunos = wrt_alunos;
 }
+
+ALUNO db_get(DB *base_dados, int index)
+{
+    ALUNO aluno = (ALUNO) base_dados->alunos[index];
+    return aluno;
+}
