@@ -1,6 +1,7 @@
 #ifndef ALUNO_H_INCLUDED
 #define ALUNO_H_INCLUDED
 #include "../data/txt_files.h"
+#include "../data/db.h"
 
 //Parâmetro define data de nascimento
 typedef struct data_nascimento

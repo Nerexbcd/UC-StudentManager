@@ -3,6 +3,7 @@
 #include "../data/txt_files.h"
 #include "../env/aluno.h"
 
+
 typedef struct db
 {
     ALUNO *alunos;

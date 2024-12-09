@@ -6,6 +6,7 @@
 #include "../style/colors.h"
 #include "../style/menu.h"
 #include "../utils/string_util.h"
+#include "../data/db.h"
 
 //#define ZERO 0 talvez??
 

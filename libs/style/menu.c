@@ -2,9 +2,7 @@
 #include "../utils/string_util.h"
 #include "../style/colors.h"
 
-void menu_header() {
-
-}
+void menu_header();
 
 /***
  *    ██╗   ██╗ ██████╗      ███████╗████████╗██╗   ██╗██████╗ ███████╗███╗   ██╗████████╗███╗   ███╗ █████╗ ███╗   ██╗ █████╗  ██████╗ ███████╗██████╗ 
@@ -108,6 +106,7 @@ int menu_show_page(MENU_PAGE * page) {
     return i;
 
 }
+
 char * menu_obter_pesquisa() 
 {
     char * pesquisa = NULL;
@@ -153,7 +152,7 @@ char * menu_obter_nacionalidade()
 
 char * tipo_de_guardar()
 {
-    char resposta = NULL;
+    char * resposta = NULL;
     char * tipo = NULL;
     int ans = 0;
 
