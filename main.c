@@ -97,7 +97,23 @@ int main(void)
 
         db_load_data(txt_estudantes, txt_situacao, base_dados);
 
-        mostrar_toda_lista(base_dados->alunos);
+
+        ALUNO aluno2 = db_get(base_dados, 0);
+
+        printf("%d\n", aluno2.codigo);
+        printf("%s\n", aluno2.nome);
+        printf("%s\n", aluno2.nacionalidade);
+        printf("%d-%d-%d\n", aluno2.data_n.dia, aluno2.data_n.mes, aluno2.data_n.ano);
+        printf("%d\n", aluno2.ano_curso);
+        printf("%.1f\n", aluno2.media_atual);
+        printf("%d\n", aluno2.ects_concluidos);
+        printf("%d\n", aluno2.n_matriculas);
+
+
+
+
+
+        // mostrar_toda_lista(base_dados->alunos);
 
         printf("\n\nbanananananan\n\n");
 
@@ -118,7 +134,7 @@ int main(void)
 
         printf("%u\n",base_dados->size);
 
-        mostrar_toda_lista(base_dados->alunos);
+        // mostrar_toda_lista(base_dados->alunos);
 
         printf("\n\nbanananananan\n\n");
 
@@ -126,7 +142,7 @@ int main(void)
 
         printf("%u\n",base_dados->size);
 
-        mostrar_toda_lista(base_dados->alunos);
+        // mostrar_toda_lista(base_dados->alunos);
 
         // mostrar_lista_por_ordem_apelido(dados_alunos);
 
