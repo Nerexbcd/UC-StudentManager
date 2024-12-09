@@ -31,11 +31,6 @@ int main(void)
     //printf("Size: %u\n", txt_get_size(txt_estudantes));
     */
 
-    
-    int condicao_saida=0;
-    //MENU PRINCIPAL
-    //do
-    //{
         
             //program_header();
             
@@ -151,31 +146,8 @@ int main(void)
         gets("");
 
 
-        int opcao = 0;
-        do
-        {
-            /*
-            switch (opcao)
-            {
-            case 1:constant-expression:
-                code
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            default: 
-                printf("Erro de seleção! Por favor faça uma escolha válida.\n")
-                opcao=0;
-                break;
-            }
-            */
-            //etc
-        //}
-        //while (opcao==0);*/
+      
 
-
-    //} while (condicao_saida==0);
  
 
  /*
@@ -195,6 +167,72 @@ int main(void)
 
 
   */  
-  
+
+    //tem que ter inicializado dos ficheiros antes
+    int cond_saida=0; //condicao de saída do loop
+/*
+    do
+    {
+        int opcao=0;
+        scanf(" %d",&opcao);
+        switch (opcao)
+        {
+        case 1: //mostrar a lista
+            mostrar_toda_lista(base_dados);
+            break;
+        case 2: //inserir um aluno
+            break;
+        case 3: //remover um aluno
+            break;
+        case 4: //alterar dados de um aluno
+            atualizar_uma_caracteristica_estudante(base_dados);
+            break;
+        case 5: //pesquisar estudante por nome
+            char *pesquisa = NULL;
+            pesquisa = menu_obter_pesquisa;
+            pesquisar(base_dados,pesquisa);
+            break;
+        case 6: //mostra lista por ordem alfabética do último nome
+            mostrar_lista_por_ordem_apelido(base_dados);
+            break;
+        case 7: //mostrar alunos entre duas médias
+            float x = 0;
+            float y = 0;
+            x = menu_obter_float();
+            y = menu_obter_float();
+            mostrar_alunos_entre_medias(base_dados,x,y);
+            break;
+        case 8: //mostrar estudantes em risco de prescrever
+            int n_est_risco = 0;
+            n_est_risco = estudantes_risco_prescrever(base_dados);
+            break;
+        case 9: //determinar o número de estudantes finalistas
+            int n_fin = 0;
+            n_fin = n_est_finalistas(base_dados);
+            printf("Número de estudantes finalistas: %d.\n",n_fin);
+            fflush(stdin);
+            break;
+        case 10: //mostra a média dos alunos de uma certa nacionalidade por ano
+            float media = 0;
+            float ano_atual = 2024;
+            char * nacion = NULL;
+            nacion = menu_obter_nacionalidade();
+            float * media_idades_nacionalidade(base_dados, nacion, ano_atual);
+            //printf
+            break;
+        case 11:
+            break;
+        //etc
+        case ():
+            cond_saida=1;
+            printf("A sair...");
+            break;
+        default:
+            printf("Erro! Escolha uma opção válida")
+            break;
+        }
+    } while (cond_saida==0);
+    
+  */
     return 0;
 }

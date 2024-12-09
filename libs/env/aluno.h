@@ -58,9 +58,6 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa);
 //pelo utilizador
 int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y);
 
-//Determinar o número de estudantes finalistas (pelo menos 154 ECTS realizados)
-int det_n_est_finalistas(ALUNO * lista_estudantes);
-
 //Listar os estudantes, cujas datas de nascimento estejam dentro de um intervalo e pertencentes a um
 //conjunto máximo de 5 nacionalidades
 void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * data_2, char * nac_1, char * nac_2, char * nac_3, char * nac_4, char * nac_5);
