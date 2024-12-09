@@ -30,7 +30,6 @@ int menu_opcoes_field()
     return i;
 }
 
-<<<<<<< HEAD
 
 int menu_show_page(MENU_PAGE * page) {
 
@@ -102,7 +101,6 @@ int menu_show_page(MENU_PAGE * page) {
     }
     while (i<0 || i>4);
     return i;
-=======
 char * menu_obter_pesquisa() 
 {
     char * pesquisa = NULL;
@@ -199,5 +197,4 @@ float menu_obter_float()
     while (valor<0);
 
     return valor;
->>>>>>> origin/dev
 }
