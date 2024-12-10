@@ -21,9 +21,11 @@
 
 int main(void)
 {
-    
+    fflush(stdin);
+    getchar();
 
     setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL,"pt_PT.UTF-8");
 
     /*
     // // Podes usar a função sizeof para saber quantas linhas tem
@@ -31,14 +33,14 @@ int main(void)
     */
 
     
-    int condicao_saida=0;
+    //int condicao_saida=0;
     //MENU PRINCIPAL
     //do
     //{
         
             //program_header();
             
-        for (int i = 0; i < 10; i++)
+       /* for (int i = 0; i < 10; i++)
         {
             clearConsole();
             printf(CYAN("Starting..."));
@@ -47,16 +49,18 @@ int main(void)
             }
             if (i == 9) printf(CYAN(" [DONE!]"));
             printf("\n");
-            sleep(1);
+            //sleep(1);
+            fflush(stdin);
         }
+        */
         
 
-
+       getchar();
         printf("BEM VINDO!\n\n");
-
+        getchar();
         char *path_estudantes;
         char *path_situacao;
-
+    getchar();
 
         if (strcmp(OS, "W") == 0)
         {
@@ -69,20 +73,25 @@ int main(void)
             path_estudantes = "./data/estudantes.txt";
             path_situacao   = "./data/situacao_Escolar_Estudantes.txt";
         }
-
+        puts("1");
+    getchar();
         txtFile txt_estudantes = txt_files_init(path_estudantes);
         txtFile txt_situacao   = txt_files_init(path_situacao);
-
+    puts("1");~
+    getchar();
         ALUNO *dados_alunos = criar_lista(&txt_estudantes);
 
         size_t size_alunos = 0;
 
         seek_data(txt_estudantes, txt_situacao,dados_alunos, &size_alunos);
-
+    puts("1");
+    getchar();
         mostrar_toda_lista(dados_alunos);
-
+        puts("2");
+    getchar();
         mostrar_lista_por_ordem_apelido(dados_alunos);
-
+    puts("1");
+    getchar();
         char * string = "do";
         pesquisar(dados_alunos,string);
 
@@ -147,6 +156,6 @@ int main(void)
 
 
   */  
-  
+    getchar();
     return 0;
 }

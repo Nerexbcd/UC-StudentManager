@@ -693,7 +693,10 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
 
 int estudantes_risco_prescrever(ALUNO * lista_estudantes) {
 
-    setlocale(LC_ALL,"Portuguese");//??????
+    setlocale(LC_ALL,"Portuguese");
+    setlocale(LC_ALL,"pt_PT.UTF-8");
+    //SetConsoleOutputCP();
+    //SetConsoleCP();
     
     //vetor cujas posicoes com 1 correspondem às posicoes dos alunos em risco de prescricao na struct lista_estudantes
     int * lista_prescricao = malloc(sizeof(int) * sizeof(lista_estudantes));
