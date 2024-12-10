@@ -31,72 +31,6 @@ int menu_opcoes_field()
 }
 
 
-int menu_show_page(MENU_PAGE * page) {
-
-    char **strs = malloc(sizeof(char*) * 5);
-    strs[0] = page->title;
-    strs[1] = str_concat(" 1 -> ",page->option_1);
-    strs[2] = str_concat(" 2 -> ",page->option_2);
-    strs[3] = str_concat(" 3 -> ",page->option_3);
-    strs[4] = str_concat(" 4 -> ",page->option_4);
-
-    int bigger = str_get_bigger(strs,5);
-
-
-    printf("\n┏");
-    for (int i = 0; i < bigger+2; i++) { 
-        printf("━");
-    }
-    printf("┓\n");
-
-
-    printf("┃ %s ",page->title);
-    for (int j = 0; j < bigger-strlen(page->title); j++) {
-        printf(" ");
-    }
-    printf("┃\n");
-
-    printf("┣");
-    for (int i = 0; i < bigger+2; i++) {
-        printf("━");
-    }
-    printf("┫\n");
-
-    for (int i = 1; i < 5; i++) {
-        printf("┃%s ",strs[i]);
-        for (int j = 0; j < bigger-strlen(strs[i])+2; j++) {
-            printf(" ");
-        }
-        printf("┃\n");
-    }
-
-    printf("┃ 0 -> Voltar ");
-    for (int j = 0; j < bigger-11; j++) {
-        printf(" ");
-    }
-    printf("┃\n");
-
-
-    printf("┗");
-    for (int i = 0; i < bigger+2; i++) {
-        printf("━");
-    }
-    printf("┛\n");
-
-    int i = 0;
-    do {
-        if (i<0 || i>4) {
-            printf(RED("Erro! Insira uma Opção válida!")"\n");
-        }
-        printf("Escolha uma opção: ");
-        fflush(stdin);
-        scanf(" %d",&i);
-    }
-    while (i<0 || i>4);
-    return i;
-
-}
-
 char * menu_obter_pesquisa() 
 {
     char * pesquisa = NULL;
@@ -150,7 +84,7 @@ char * tipo_de_guardar()
     fflush(stdin);
     scanf(" %c",resposta);
 
-    if (resposta=='S' || resposta=='s') {
+    if (strcmp(strdup(resposta),"S") || strcmp(strdup(resposta),"s")) {
         int rep = 0;
         do
         {

@@ -15,7 +15,6 @@ typedef struct menu_page
 }MENU_PAGE;
 
 
-int menu_show_page(MENU_PAGE * page);
 
 //MENUS SECUNDÁRIOS
 
