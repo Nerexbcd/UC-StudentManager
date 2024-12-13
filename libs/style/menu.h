@@ -33,6 +33,9 @@ char * tipo_de_guardar();
 //obtem um valor float positivo do utilizador
 float menu_obter_float();
 
+//obtem o codigo do aluno a remover
+int escolher_codigo();
+
 #endif
 
 

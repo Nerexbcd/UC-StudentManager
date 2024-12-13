@@ -122,14 +122,17 @@ int main(void)
         switch (opcao)
         {
         case 1: //mostrar a lista
+            printf("Lista de estudantes: \n");
             mostrar_toda_lista(dados_alunos);
             break;
 
         case 2: //inserir um aluno
+            printf("Insira os dados do aluno:\n");
             inserir_estudante(dados_alunos,&size_alunos);
             break;
 
         case 3: //remover um aluno
+            remover_estudante(dados_alunos,int i);
             break;
 
         case 4: //alterar dados de um aluno

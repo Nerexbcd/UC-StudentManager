@@ -128,3 +128,10 @@ float menu_obter_float()
 
     return valor;
 }
+
+
+int escolher_codigo()
+{
+    AAAAAAAA
+    printf("Código do aluno")
+}
