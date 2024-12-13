@@ -22,16 +22,17 @@ typedef struct menu_page
 int menu_opcoes_field();
 
 //efetua a obtencao de uma pesquisa válida fornecida pelo utilizdor
-char * menu_obter_pesquisa();
+char * menu_obter_pesquisa(char * pesquisa);
 
 //efetua a obtencao de uma nacionalidade válida fornecida pelo utilizdor
-char * menu_obter_nacionalidade();
+char * menu_obter_nacionalidade(char * nacio);
 
 //determina se o utilizador pretende guardar o resultado obtido, e se sim em .txt ou .cvs
 char * tipo_de_guardar();
 
 //obtem um valor float positivo do utilizador
 float menu_obter_float();
+
 #endif
 
 

@@ -31,9 +31,8 @@ int menu_opcoes_field()
 }
 
 
-char * menu_obter_pesquisa() 
+char * menu_obter_pesquisa(char * pesquisa) 
 {
-    char * pesquisa = NULL;
     int rep = 0;
 
     do
@@ -43,7 +42,7 @@ char * menu_obter_pesquisa()
         }
         printf("Pesquisar: ");
         fflush(stdin);
-        scanf(" %s",pesquisa);
+        scanf(" %s", pesquisa);
         puts("");
         rep++;
     }
@@ -53,11 +52,10 @@ char * menu_obter_pesquisa()
 }
 
 
-char * menu_obter_nacionalidade()
+char * menu_obter_nacionalidade(char * nacio)
 {
-    char * nacio = NULL;
     int rep = 0;
-
+    
     do
     {
         if (rep!=0) {

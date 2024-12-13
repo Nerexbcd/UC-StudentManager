@@ -82,7 +82,7 @@ int main(void)
 
         seek_data(txt_estudantes, txt_situacao,dados_alunos, &size_alunos);
 
-        mostrar_toda_lista(dados_alunos);
+       /* mostrar_toda_lista(dados_alunos);
         
     
         mostrar_lista_por_ordem_apelido(dados_alunos);
@@ -97,7 +97,7 @@ int main(void)
         float * b = media_idades_nacionalidade(dados_alunos, c, ano_a);
         printf("%.0f\n",b[0]);
         printf("%.0f\n",b[1]);
-        printf("%.0f\n",b[2]);
+        printf("%.0f\n",b[2]);*/
 
    //tem que ter inicializado dos ficheiros antes
     int cond_saida=0; //condicao de saída do loop
@@ -109,12 +109,14 @@ int main(void)
         int opcao=0;
 
         float ano_atual = 0;
-        char * pesquisa = NULL;
         float x = 0;
         float y = 0;
         int n_est_risco = 0;
         int n_fin = 0;
         float * media = NULL;
+        char * nacion = NULL;
+        char * pesquisa = NULL;
+        
 
         scanf(" %d",&opcao);
         switch (opcao)
@@ -122,49 +124,59 @@ int main(void)
         case 1: //mostrar a lista
             mostrar_toda_lista(dados_alunos);
             break;
+
         case 2: //inserir um aluno
+            inserir_estudante(dados_alunos,&size_alunos);
             break;
+
         case 3: //remover um aluno
             break;
+
         case 4: //alterar dados de um aluno
             atualizar_uma_caracteristica_estudante(dados_alunos);
             break;
+
         case 5: //pesquisar estudante por nome
-            pesquisa = menu_obter_pesquisa;
+            pesquisa = menu_obter_pesquisa(pesquisa);
             pesquisar(dados_alunos,pesquisa);
             break;
+
         case 6: //mostra lista por ordem alfabética do último nome
             mostrar_lista_por_ordem_apelido(dados_alunos);
             break;
-        case 7: //mostrar alunos entre duas médias
-            
+
+        case 7: //mostrar alunos entre duas médias 
             x = menu_obter_float();
             y = menu_obter_float();
             mostrar_alunos_entre_medias(dados_alunos,x,y);
             break;
+
         case 8: //mostrar estudantes em risco de prescrever
-            
             n_est_risco = estudantes_risco_prescrever(dados_alunos);
             break;
+
         case 9: //determinar o número de estudantes finalistas
             n_fin = n_est_finalistas(dados_alunos);
             printf("Número de estudantes finalistas: %d.\n",n_fin);
             fflush(stdin);
             break;
+
         case 10: //mostra a média dos alunos de uma certa nacionalidade por ano
             ano_atual = 2024;
-            char * nacion = NULL;
-            nacion = menu_obter_nacionalidade();
+            nacion = menu_obter_nacionalidade(nacion);
             media = media_idades_nacionalidade(dados_alunos, nacion, ano_atual);
             //printf
             break;
+
         case 11:
             break;
+
         //etc
         case 12:
             cond_saida=1;
             printf("A sair...");
             break;
+
         default:
             printf("Erro! Escolha uma opção válida");
             break;
