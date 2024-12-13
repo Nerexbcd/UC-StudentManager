@@ -120,7 +120,9 @@ float menu_obter_float()
         }
         printf("Valor: ");
         fflush(stdin);
-        scanf(" %f",valor);
+        puts("b");
+        scanf(" %f",&valor);
+        puts("a");
         puts("");
         rep++;
     }
