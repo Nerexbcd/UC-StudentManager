@@ -2,13 +2,10 @@
 #include <stdlib.h>
 #include <locale.h>
 #include "aluno.h"
-#include "../data/db.h"
 #include "../data/txt_files.h"
 #include "../style/colors.h"
 #include "../style/menu.h"
 #include "../utils/string_util.h"
-#include "../data/db.h"
-
 
 //#define ZERO 0 talvez??
 
@@ -140,22 +137,7 @@ void mostrar_um_aluno(ALUNO aluno)
 
 
 
-void mostrar_toda_lista(DB * base_dados) {
 
-    for (int i=0,j=0; j<base_dados->size;i++) {
-        if ((i != 0) && (i%3==0)) {
-            printf("Pagina seguinte ->");
-            fflush(stdin);
-            getchar();
-            puts("");
-            fflush(stdin);
-        }
-
-        // mostrar_um_aluno(db_get(base_dados,j));
-
-        j++;
-    }
-}
 
 
 

@@ -190,3 +190,22 @@ ALUNO db_get(DB *base_dados, int index)
     ALUNO aluno = (ALUNO) base_dados->alunos[index];
     return aluno;
 }
+
+
+
+void mostrar_toda_lista(DB * base_dados) {
+
+    for (int i=0,j=0; j<base_dados->size;i++) {
+        if ((i != 0) && (i%3==0)) {
+            printf("Pagina seguinte ->");
+            fflush(stdin);
+            getchar();
+            puts("");
+            fflush(stdin);
+        }
+
+        // mostrar_um_aluno(db_get(base_dados,j));
+
+        j++;
+    }
+}

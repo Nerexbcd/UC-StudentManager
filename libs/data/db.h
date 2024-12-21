@@ -27,4 +27,7 @@ void db_update(DB *base_dados, int index, ALUNO aluno);
 
 ALUNO db_get(DB *base_dados, int index);
 
+//Faz display da struct (apenas os membros com ocupado=1)
+void mostrar_toda_lista(DB * base_dados);
+
 #endif

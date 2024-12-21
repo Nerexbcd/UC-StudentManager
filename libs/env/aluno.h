@@ -1,8 +1,6 @@
 #ifndef ALUNO_H_INCLUDED
 #define ALUNO_H_INCLUDED
-#include "../data/db.h"
 #include "../data/txt_files.h"
-#include "../data/db.h"
 
 
 //Parâmetro define data de nascimento
@@ -79,7 +77,6 @@ int n_est_finalistas(ALUNO * lista_estudantes);
 
 
 
-//Faz display da struct (apenas os membros com ocupado=1)
-void mostrar_toda_lista(DB * base_dados);
+
 
 #endif
