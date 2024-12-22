@@ -1,0 +1,59 @@
+{
+	"files": [
+		{
+			"path": "main.c",
+			"bookmarks": [
+				{
+					"line": 23,
+					"column": 0,
+					"label": "STYLING DEFINITIONS"
+				},
+				{
+					"line": 47,
+					"column": 0,
+					"label": "STYLING"
+				},
+				{
+					"line": 58,
+					"column": 0,
+					"label": "STRING UTILS DEFINITIONS"
+				},
+				{
+					"line": 73,
+					"column": 0,
+					"label": "STRING UTILS"
+				},
+				{
+					"line": 212,
+					"column": 0,
+					"label": "TXT FILES"
+				},
+				{
+					"line": 374,
+					"column": 0,
+					"label": "STUDENT DEFINITIONS"
+				},
+				{
+					"line": 407,
+					"column": 0,
+					"label": "STUDENT"
+				},
+				{
+					"line": 1018,
+					"column": 0,
+					"label": "DATABASE DEFINITIONS"
+				},
+				{
+					"line": 1049,
+					"column": 0,
+					"label": "DATABASE"
+				},
+				{
+					"line": 1251,
+					"column": 0,
+					"label": "MAIN"
+				}
+			]
+		}
+	]
+}
