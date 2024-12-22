@@ -1,6 +1,6 @@
 #include "menu.h"
 #include "../utils/string_util.h"
-#include "../style/colors.h"
+
 
 void menu_header();
 
@@ -86,7 +86,7 @@ int menu_show_page(MENU_PAGE * page) {
     int i = 0;
     do {
         if (i<0 || i>4) {
-            printf(RED("Erro! Insira uma Opção válida!")"\n");
+            printf("Erro! Insira uma Opção válida!\n");
         }
         printf("Escolha uma opção: ");
         fflush(stdin);
