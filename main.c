@@ -2,14 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <locale.h>
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <locale.h>
-
-
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include "libs/utils/string_util.h"
 
@@ -52,6 +44,7 @@ void clearConsole();
 #define MAGENTA(string) ANSI_COLOR_MAGENTA string ANSI_COLOR_RESET
 #define CYAN(string)    ANSI_COLOR_CYAN string ANSI_COLOR_RESET
 
+
 // ============================== STYLING
 
 void clearConsole()
@@ -62,6 +55,7 @@ void clearConsole()
         system("clear");
     #endif
 }
+
 
 // ============================== TXT FILES DEFINITIONS
 
