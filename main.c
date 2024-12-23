@@ -116,6 +116,7 @@ int main(void)
         float * media = NULL;
         char * nacion = NULL;
         char * pesquisa = NULL;
+        int i = 0;
         
 
         scanf(" %d",&opcao);
@@ -132,7 +133,8 @@ int main(void)
             break;
 
         case 3: //remover um aluno
-            remover_estudante(dados_alunos,int i);
+            i = escolher_codigo(dados_alunos);
+            remover_estudante(dados_alunos, i);
             break;
 
         case 4: //alterar dados de um aluno

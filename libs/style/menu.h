@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../env/aluno.h"
 #ifndef MENU_H_INCLUDED
 #define MENU_H_INCLUDED
 
@@ -34,7 +35,7 @@ char * tipo_de_guardar();
 float menu_obter_float();
 
 //obtem o codigo do aluno a remover
-int escolher_codigo();
+int escolher_codigo(ALUNO * base_dados);
 
 #endif
 

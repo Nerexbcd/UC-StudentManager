@@ -118,9 +118,7 @@ float menu_obter_float()
         }
         printf("Valor: ");
         fflush(stdin);
-        puts("b");
         scanf(" %f",&valor);
-        puts("a");
         puts("");
         rep++;
     }
@@ -130,8 +128,17 @@ float menu_obter_float()
 }
 
 
-int escolher_codigo()
+int escolher_codigo(ALUNO * base_dados)
 {
-    AAAAAAAA
+    int n = 0;
+    //ver como fazer pesquisa???
+    for (int i = 0; i<sizeof(base_dados); i++) {
+        if (base_dados->ocupado==1 && ) {
+            
+        }
+    }
+
+    AAAAAA
     printf("Código do aluno")
+    return n;
 }
