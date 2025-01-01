@@ -118,8 +118,10 @@ int main(void)
         char * pesquisa = NULL;
         int i = 0;
         
-
+        printf("\nlOpção: ");
+        fflush(stdin);
         scanf(" %d",&opcao);
+        
         switch (opcao)
         {
         case 1: //mostrar a lista

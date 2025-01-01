@@ -130,15 +130,29 @@ float menu_obter_float()
 
 int escolher_codigo(ALUNO * base_dados)
 {
-    int n = 0;
-    //ver como fazer pesquisa???
-    for (int i = 0; i<sizeof(base_dados); i++) {
-        if (base_dados->ocupado==1 && ) {
-            
-        }
-    }
+    int n;
+    int cod;
+    int ans;
 
-    AAAAAA
-    printf("Código do aluno")
-    return n;
+    do {
+        printf("\nQual é o código do aluno? ");
+        scanf(" %i", &cod);
+        
+
+        for (int pos = 0; pos<sizeof(base_dados); pos++) {
+            if (base_dados[pos].ocupado==1 && base_dados[pos].codigo==cod) {
+                printf("\nAluno:\n");
+                mostrar_um_aluno(base_dados,pos);
+                printf("\nCorreto (S/N)? ");
+                scanf(" %i", &ans);
+                
+                if (ans=='s' || ans=='S') {
+                    return pos;
+                }
+            }
+        }
+
+    }
+    while(1);
+
 }
