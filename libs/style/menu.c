@@ -132,10 +132,11 @@ int escolher_codigo(ALUNO * base_dados)
 {
     int n;
     int cod;
-    int ans;
+    char ans;
 
     do {
         printf("\nQual é o código do aluno? ");
+        fflush(stdin);
         scanf(" %i", &cod);
         
 
@@ -144,7 +145,7 @@ int escolher_codigo(ALUNO * base_dados)
                 printf("\nAluno:\n");
                 mostrar_um_aluno(base_dados,pos);
                 printf("\nCorreto (S/N)? ");
-                scanf(" %i", &ans);
+                scanf(" %c", &ans);
                 
                 if (ans=='s' || ans=='S') {
                     return pos;
