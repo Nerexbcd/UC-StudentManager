@@ -31,8 +31,77 @@ int menu_opcoes_field()
 }
 
 
-char * menu_obter_pesquisa(char * pesquisa) 
+int menu_show_page(MENU_PAGE * page) {
+
+    char **strs = malloc(sizeof(char*) * 5);
+    strs[0] = page->title;
+    strs[1] = str_concat(" 1 -> ",page->option_1);
+    strs[2] = str_concat(" 2 -> ",page->option_2);
+    strs[3] = str_concat(" 3 -> ",page->option_3);
+    strs[4] = str_concat(" 4 -> ",page->option_4);
+
+    int bigger = str_get_bigger(strs,5);
+
+    //SetConsoleOutputCP(CP_UTF8);
+
+
+    printf("\n%s","┏");
+    for (int i = 0; i < bigger+2; i++) { 
+        printf("%s","━");
+    }
+    printf("┓\n");
+
+
+    printf("┃ %s ",page->title);
+    for (int j = 0; j < bigger-strlen(page->title); j++) {
+        printf(" ");
+    }
+    printf("┃\n");
+
+    printf("┣");
+    for (int i = 0; i < bigger+2; i++) {
+        printf("━");
+    }
+    printf("┫\n");
+
+    for (int i = 1; i < 5; i++) {
+        printf("┃%s ",strs[i]);
+        for (int j = 0; j < bigger-strlen(strs[i])+2; j++) {
+            printf(" ");
+        }
+        printf("┃\n");
+    }
+
+    printf("┃ 0 -> Voltar ");
+    for (int j = 0; j < bigger-11; j++) {
+        printf(" ");
+    }
+    printf("┃\n");
+
+
+    printf("┗");
+    for (int i = 0; i < bigger+2; i++) {
+        printf("━");
+    }
+    printf("┛\n");
+
+    int i = 0;
+    do {
+        if (i<0 || i>4) {
+            printf(RED("Erro! Insira uma Opção válida!")"\n");
+        }
+        printf("Escolha uma opção: ");
+        fflush(stdin);
+        scanf(" %d",&i);
+    }
+    while (i<0 || i>4);
+    return i;
+
+}
+
+char * menu_obter_pesquisa() 
 {
+    char * pesquisa = NULL;
     int rep = 0;
 
     do
@@ -42,7 +111,7 @@ char * menu_obter_pesquisa(char * pesquisa)
         }
         printf("Pesquisar: ");
         fflush(stdin);
-        scanf(" %s", pesquisa);
+        scanf(" %s",pesquisa);
         puts("");
         rep++;
     }
@@ -52,10 +121,11 @@ char * menu_obter_pesquisa(char * pesquisa)
 }
 
 
-char * menu_obter_nacionalidade(char * nacio)
+char * menu_obter_nacionalidade()
 {
+    char * nacio = NULL;
     int rep = 0;
-    
+
     do
     {
         if (rep!=0) {
@@ -63,7 +133,7 @@ char * menu_obter_nacionalidade(char * nacio)
         }
         printf("Nacionalidade: ");
         fflush(stdin);
-        scanf(" %s",nacio);
+        scanf(" %s",&nacio);
         puts("");
         rep++;
     }
@@ -82,7 +152,7 @@ char * tipo_de_guardar()
     fflush(stdin);
     scanf(" %c",resposta);
 
-    if (strcmp(strdup(resposta),"S") || strcmp(strdup(resposta),"s")) {
+    if (resposta=='S' || resposta=='s') {
         int rep = 0;
         do
         {
@@ -118,27 +188,11 @@ float menu_obter_float()
         }
         printf("Valor: ");
         fflush(stdin);
-        scanf(" %f",&valor);
+        scanf(" %f",valor);
         puts("");
         rep++;
     }
     while (valor<0);
 
     return valor;
-}
-
-
-int escolher_codigo(ALUNO * base_dados)
-{
-    int n = 0;
-    //ver como fazer pesquisa???
-    for (int i = 0; i<sizeof(base_dados); i++) {
-        if (base_dados->ocupado==1 && ) {
-            
-        }
-    }
-
-    AAAAAA
-    printf("Código do aluno")
-    return n;
 }
