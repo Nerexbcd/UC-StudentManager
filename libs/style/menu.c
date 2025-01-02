@@ -65,7 +65,7 @@ char * menu_obter_nacionalidade()
         printf("Nacionalidade: ");
         fflush(stdin);
         scanf("%s",nacio);
-        printf("%s",nacio);
+        printf("%s",nacio); //parte aqui
         puts("");
         puts("vvvv");
         rep++;
