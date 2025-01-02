@@ -167,11 +167,15 @@ int main(void)
             fflush(stdin);
             break;
 
-        case 10: //mostra a média dos alunos de uma certa nacionalidade por ano
+        case 10: //mostra a média das idades dos alunos de uma certa nacionalidade por ano
             ano_atual = 2024;
             nacion = menu_obter_nacionalidade();
             media = media_idades_nacionalidade(dados_alunos, nacion, ano_atual);
-            //printf
+            for (i=0;i<6;i++) {
+                if (media[i]!=0) {
+                    printf("\nMedia das idades dos alunos da nacionalidade \"%s\" do ano %i: %f",nacion,i+1,media[i]);
+                }
+            }
             break;
 
         case 11:

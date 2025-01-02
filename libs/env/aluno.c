@@ -757,37 +757,27 @@ float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float
     //vetor vai organizar as médias das idades da nacionalidade fornecida pelo ano de curso
     float * media_por_nac_por_ano = malloc(sizeof(float)*5);
 
-    for (int j=1; j<=3; j++) { //determina qual o ano de curso (e posicao no vetor) estamos a avaliar
-        float n_ele=0;
-        float soma=0;
-        
+    for (int j=1; j<6; j++) { //determina qual o ano de curso (e posicao no vetor) estamos a avaliar
+        float n_ele = 0;
+        float soma = 0;
+
         for (int i=0; i<sizeof(lista_estudantes);i++) {
             //procura os alunos que obedecem a todas as condicoes:
             //nacionalidade, ano de curso correto, existência na base de dados
-            printf("\n%f %s %i - ",lista_estudantes[i].media_atual,lista_estudantes[i].nacionalidade,lista_estudantes[i].ano_curso);
             if ((lista_estudantes[i].ocupado == 1) && (strcmp(lista_estudantes[i].nacionalidade,nacio)==0) && (lista_estudantes[i].ano_curso == j)) {
-                puts("d");
                 n_ele++;
-                int idade = ano_atual - (lista_estudantes[i].data_n.ano); //idade é obtida de forma muito simplificada através do ano de nascimento.
+                float idade = ano_atual - (lista_estudantes[i].data_n.ano); //idade é obtida de forma muito simplificada através do ano de nascimento.
                 //ignoram-se as outras componentes desta data por agora
                 soma = soma + idade;
-                printf("\n%f",soma);
             }
         }
         if (n_ele!=0) {
-            puts("g");
             media_por_nac_por_ano[j-1] = (soma/n_ele);
-            puts("j");
         }
         else { //para evitar possíveis divisões por zero
-            puts("h");
             media_por_nac_por_ano[j-1] = 0;
         }
-        puts("i");
     }
 
-    for (int i=0;i<4;i++) {
-        printf("\n%f",media_por_nac_por_ano[i]);
-    }
     return media_por_nac_por_ano; //retorna todo o vetor
 }
