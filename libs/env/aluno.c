@@ -754,6 +754,7 @@ int estudantes_risco_prescrever(ALUNO * lista_estudantes) {
 
 float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float ano_atual)
 {
+    puts("bbbb");
     //vetor vai organizar as médias das idades da nacionalidade fornecida pelo ano de curso
     float * media_por_nac_por_ano = 0; 
     puts("a");

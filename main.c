@@ -24,7 +24,6 @@ int main(void)
     fflush(stdin);
 
     setlocale(LC_ALL, "Portuguese");
-    setlocale(LC_ALL,"pt_PT.UTF-8");
 
     /*
     // // Podes usar a função sizeof para saber quantas linhas tem
@@ -118,7 +117,7 @@ int main(void)
         char * pesquisa = NULL;
         int i = 0;
         
-        printf("\nlOpção: ");
+        printf("\nOpcao: ");
         fflush(stdin);
         scanf(" %d",&opcao);
         
@@ -170,7 +169,7 @@ int main(void)
 
         case 10: //mostra a média dos alunos de uma certa nacionalidade por ano
             ano_atual = 2024;
-            nacion = menu_obter_nacionalidade(nacion);
+            nacion = menu_obter_nacionalidade();
             media = media_idades_nacionalidade(dados_alunos, nacion, ano_atual);
             //printf
             break;

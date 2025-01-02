@@ -52,9 +52,10 @@ char * menu_obter_pesquisa(char * pesquisa)
 }
 
 
-char * menu_obter_nacionalidade(char * nacio)
+char * menu_obter_nacionalidade()
 {
     int rep = 0;
+    char * nacio = malloc(sizeof(char)*100);
     
     do
     {
@@ -63,12 +64,15 @@ char * menu_obter_nacionalidade(char * nacio)
         }
         printf("Nacionalidade: ");
         fflush(stdin);
-        scanf(" %s",nacio);
+        scanf("%s",nacio);
+        printf("%s",nacio);
         puts("");
+        puts("vvvv");
         rep++;
     }
     while (nacio==NULL);
 
+    puts ("aaa");
     return nacio;
 }
 

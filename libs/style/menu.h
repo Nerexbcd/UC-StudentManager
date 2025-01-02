@@ -26,7 +26,7 @@ int menu_opcoes_field();
 char * menu_obter_pesquisa(char * pesquisa);
 
 //efetua a obtencao de uma nacionalidade válida fornecida pelo utilizdor
-char * menu_obter_nacionalidade(char * nacio);
+char * menu_obter_nacionalidade();
 
 //determina se o utilizador pretende guardar o resultado obtido, e se sim em .txt ou .cvs
 char * tipo_de_guardar();
