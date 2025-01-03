@@ -17,7 +17,7 @@ ALUNO * criar_lista(txtFile *txt_estudantes) {
     ALUNO *lista_estudantes;
     lista_estudantes = malloc(sizeof(ALUNO)*((txt_estudantes->size)+1));
 
-    if (sizeof(lista_estudantes)==0) {
+    if (calcular_tam_lista(lista_estudantes)==0) {
         printf("ERRO!");
         return 0;
     }
@@ -97,12 +97,12 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
 
 
 
-void inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos)
+int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base)
 {
     //alocar memória para o aluno novo
     ALUNO * ptr = lista_estudantes;
     ptr = (ALUNO *) malloc(sizeof(ALUNO));
-    ALUNO * new_lista_estudantes = (ALUNO *) realloc(ptr , sizeof(ALUNO));
+    ALUNO * new_lista_estudantes = (ALUNO *) realloc(ptr , sizeof(ALUNO)* (size_base+1));
     if(!new_lista_estudantes)
     {
         printf("erro\n");
@@ -176,9 +176,14 @@ void inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos)
     fflush(stdin);
 
     //para esvaziar a memória alocada no caso de não ser necessária
-    if (j==sizeof(lista_estudantes)) {
+    if (j==size_base) {
     free(new_lista_estudantes);
     }
+    else {
+        size_base++;
+    }
+
+    return size_base;
 }
 
 
@@ -195,7 +200,7 @@ void remover_estudante(ALUNO *lista_estudantes,int i)
 
 
 
-void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes)
+void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_base)
 {
     //setlocale(LC_ALL, "Portuguese"); //não funciona?
     int i=0;
@@ -207,7 +212,7 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes)
     fflush(stdin);
     scanf(" %d",&k);
 
-    for(int t=0;t<sizeof(*lista_estudantes);t++) {
+    for(int t=0;t<size_base;t++) {
         if(lista_estudantes[t].codigo==k) {
             j=t;
             break;
@@ -301,7 +306,7 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes)
 int calcular_tam_lista(ALUNO *lista_estudantes) {
     //pode ser útil
     int tam = 0;
-    for (int i=0; i<sizeof(lista_estudantes[0]) ;i++) {
+    for (int i=0; i<sizeof(lista_estudantes) ;i++) {
         if (lista_estudantes[i].ocupado==1) {
             tam++;
         }
@@ -327,9 +332,9 @@ void mostrar_um_aluno(ALUNO *lista_estudantes,int posicao)
 
 
 
-void mostrar_toda_lista(ALUNO *lista_estudantes) {
+void mostrar_toda_lista(ALUNO *lista_estudantes, int size_base) {
 
-    for (int i=0,j=0,rep=0; j<calcular_tam_lista(lista_estudantes);i++) {
+    for (int i=0,j=0,rep=0; j<size_base;i++) {
         if ((lista_estudantes[i].ocupado)==1) {
             if ((rep != 0) && (rep%3==0)) {
                 printf("Pagina seguinte ->");
@@ -348,21 +353,21 @@ void mostrar_toda_lista(ALUNO *lista_estudantes) {
 
 
 
-void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes)
+void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes, int size_base)
 {
     int * vet_organizado;
     vet_organizado = malloc(sizeof(int)*sizeof(lista_estudantes));
 
     //cria o vetor que vai determinar a ordem alfabética dos apelidos
-    for (int k=0;k<sizeof(lista_estudantes);k++) {
+    for (int k=0;k<size_base;k++) {
         vet_organizado[k]=k;
     }
     
     //struct vai acumular todos os apelidos, pela mesma ordem dos estudantes na lista normal
     APELIDO *lista_apelidos;
-    lista_apelidos = malloc(sizeof(APELIDO *) * sizeof(lista_estudantes));
+    lista_apelidos = malloc(sizeof(APELIDO *) * size_base);
 
-    for (int g=0; g<sizeof(lista_estudantes);g++) {
+    for (int g=0; g<size_base;g++) {
         char * linha = strdup(lista_estudantes[g].nome);
         char ** nome_comp = NULL;
         nome_comp = str_split(linha,' ', NULL);
@@ -418,13 +423,13 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes)
 
 
 
-float media_mat(ALUNO *lista_estudantes,char *nacion) {
+float media_mat(ALUNO *lista_estudantes,char *nacion, int size_base) {
 
     int media=0;
     int num=0;
 
     if (nacion == 0) {
-        for(int i=0;i<sizeof(lista_estudantes);i++) {
+        for(int i=0;i<size_base;i++) {
             if (lista_estudantes[i].codigo==1) {
                 media=media+(lista_estudantes[i].n_matriculas);
                 num++;
@@ -433,7 +438,7 @@ float media_mat(ALUNO *lista_estudantes,char *nacion) {
         return (media/num);
     }
     else if (nacion != 0) {
-        for(int i=0;i<sizeof(lista_estudantes);i++) {
+        for(int i=0;i<size_base;i++) {
             if ((lista_estudantes[i].codigo==1) && (lista_estudantes[i].nacionalidade==nacion)) {
                 media=media+(lista_estudantes[i].n_matriculas);
                 num++;
@@ -447,21 +452,21 @@ float media_mat(ALUNO *lista_estudantes,char *nacion) {
 
 
 
-void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
+void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
 {
     int * lista_matches;
-    lista_matches = (int *) malloc(sizeof(int)*sizeof(lista_estudantes->nome));
+    lista_matches = (int *) malloc(sizeof(int)*size_base);
 
     for (int s=0; s<sizeof(lista_matches); s++) {
         lista_matches[s]=0;
     }
 
 
-    for (int i=0; i<sizeof(lista_estudantes->nome); i++) {
+    for (int i=0; i<size_base; i++) {
 
         char * vetor = lista_estudantes[i].nome;  //define o vetor a comparar.
 
-        for (int k=0; k<sizeof(*(lista_estudantes->nome)); k++) { //vai comparar elemento a elemento
+        for (int k=0; k<strlen(lista_estudantes[i].nome); k++) { //vai comparar elemento a elemento
             
             int repeticao=k;
 
@@ -525,7 +530,7 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa)
 
 
 
-int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y) 
+int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y, int size_base) 
 {
     int n_est_com_media=0;//número de estudantes com média entre estes valores
 
@@ -543,7 +548,7 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y)
     //Mostrar os alunos com médias entre estes 2 valores
     int i=0;//elemento de paginação, determina quantas iterações foram mostradas ao utilizador
 
-    for (int k=0;k<sizeof(lista_estudantes);k++) {
+    for (int k=0;k<size_base;k++) {
         if ((lista_estudantes[k].ocupado==1) && (lista_estudantes[k].media_atual>=min) && (lista_estudantes[k].media_atual<=max)) {
             if ((i != 0) && (i%3==0)) {//elemento de paginação, mostra em blocos de 3
                 printf("Pagina seguinte ->");
@@ -563,11 +568,11 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y)
 
 
 
-int n_est_finalistas(ALUNO * lista_estudantes) {
+int n_est_finalistas(ALUNO * lista_estudantes, int size_base) {
     int n_fin=0;//vai guardar o número de alunos que é finalista
 
     //para ser considerado finalista, o aluno tem de ter pelo menos 154 ects
-    for (int i=0;i<sizeof(lista_estudantes);i++) {
+    for (int i=0;i<size_base;i++) {
         if ((lista_estudantes[i].ocupado==1) && (lista_estudantes[i].ects_concluidos>=154)) {
             n_fin++;
         }
@@ -578,7 +583,7 @@ int n_est_finalistas(ALUNO * lista_estudantes) {
 
 
 
-void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * data_2, char * nac_1, char * nac_2, char * nac_3, char * nac_4, char * nac_5)
+void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * data_2, char * nac_1, char * nac_2, char * nac_3, char * nac_4, char * nac_5, int size_base)
 {
     DATA_NAS data_sup;//data maior
     DATA_NAS data_inf;//data menor
@@ -637,7 +642,7 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
 
     //Efetua a comparação da data dos estudantes com o intervalo definido
     int rep=0;//serve para determinar se é necessário o elemento de paginação
-    for (int k=0;k<sizeof(lista_estudantes);k++) {
+    for (int k=0;k<size_base;k++) {
         if (rep!=0 && rep%3==0) {//elemento de paginação, organizado em blocos de 3 outputs
                 printf("Pagina seguinte ->");
                 fflush(stdin);
@@ -691,7 +696,7 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
 }
 
 
-int estudantes_risco_prescrever(ALUNO * lista_estudantes) {
+int estudantes_risco_prescrever(ALUNO * lista_estudantes, int size_base) {
 
     setlocale(LC_ALL,"Portuguese");
     setlocale(LC_ALL,"pt_PT.UTF-8");
@@ -699,13 +704,13 @@ int estudantes_risco_prescrever(ALUNO * lista_estudantes) {
     //SetConsoleCP();
     
     //vetor cujas posicoes com 1 correspondem às posicoes dos alunos em risco de prescricao na struct lista_estudantes
-    int * lista_prescricao = malloc(sizeof(int) * sizeof(lista_estudantes));
+    int * lista_prescricao = malloc(sizeof(int) * size_base);
     for (int i=0; i<sizeof(lista_prescricao); i++) {
         lista_prescricao[i]=0;//inicializa a 0: significa que o aluno na posicao i não está em risco de prescrição
     }
 
     int num=0; //número de estudantes em risco de prescrição
-    for (int i=0;i<sizeof(lista_estudantes);i++) {
+    for (int i=0;i<size_base;i++) {
         if (lista_estudantes[i].ocupado==1) {
             //3 matrículas e menos de 60 ects
             if ((lista_estudantes[i].n_matriculas==3) && (lista_estudantes[i].ects_concluidos<60)) {
@@ -752,7 +757,7 @@ int estudantes_risco_prescrever(ALUNO * lista_estudantes) {
 
 
 
-float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float ano_atual)
+float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float ano_atual, int size_base)
 {
     //vetor vai organizar as médias das idades da nacionalidade fornecida pelo ano de curso
     float * media_por_nac_por_ano = malloc(sizeof(float)*5);
@@ -761,7 +766,7 @@ float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float
         float n_ele = 0;
         float soma = 0;
 
-        for (int i=0; i<sizeof(lista_estudantes);i++) {
+        for (int i=0; i<size_base;i++) {
             //procura os alunos que obedecem a todas as condicoes:
             //nacionalidade, ano de curso correto, existência na base de dados
             if ((lista_estudantes[i].ocupado == 1) && (strcmp(lista_estudantes[i].nacionalidade,nacio)==0) && (lista_estudantes[i].ano_curso == j)) {

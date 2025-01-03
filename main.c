@@ -99,6 +99,8 @@ int main(void)
         printf("%.0f\n",b[2]);*/
 
    //tem que ter inicializado dos ficheiros antes
+
+    int size_base = sizeof(dados_alunos);
     int cond_saida=0; //condicao de saída do loop
 
 
@@ -125,13 +127,13 @@ int main(void)
         {
         case 1: //mostrar a lista
             printf("Lista de estudantes: \n");
-            mostrar_toda_lista(dados_alunos);
+            mostrar_toda_lista(dados_alunos, size_base);
             break;
 
         case 2: //inserir um aluno
             printf("antes: %i\n",sizeof(dados_alunos));
             printf("Insira os dados do aluno:\n");
-            inserir_estudante(dados_alunos,&size_alunos);
+            size_base = (dados_alunos,&size_alunos, size_base);
             printf("\ndepois: %i\n",sizeof(dados_alunos));
             break;
 
@@ -141,30 +143,30 @@ int main(void)
             break;
 
         case 4: //alterar dados de um aluno
-            atualizar_uma_caracteristica_estudante(dados_alunos);
+            atualizar_uma_caracteristica_estudante(dados_alunos, size_base);
             break;
 
         case 5: //pesquisar estudante por nome
             pesquisa = menu_obter_pesquisa();
-            pesquisar(dados_alunos,pesquisa);
+            pesquisar(dados_alunos,pesquisa, size_base);
             break;
 
         case 6: //mostra lista por ordem alfabética do último nome
-            mostrar_lista_por_ordem_apelido(dados_alunos);
+            mostrar_lista_por_ordem_apelido(dados_alunos, size_base);
             break;
 
         case 7: //mostrar alunos entre duas médias 
             x = menu_obter_float();
             y = menu_obter_float();
-            mostrar_alunos_entre_medias(dados_alunos,x,y);
+            mostrar_alunos_entre_medias(dados_alunos,x,y, size_base);
             break;
 
         case 8: //mostrar estudantes em risco de prescrever
-            n_est_risco = estudantes_risco_prescrever(dados_alunos);
+            n_est_risco = estudantes_risco_prescrever(dados_alunos, size_base);
             break;
 
         case 9: //determinar o número de estudantes finalistas
-            n_fin = n_est_finalistas(dados_alunos);
+            n_fin = n_est_finalistas(dados_alunos, size_base);
             printf("Número de estudantes finalistas: %d.\n",n_fin);
             fflush(stdin);
             break;
@@ -172,7 +174,7 @@ int main(void)
         case 10: //mostra a média das idades dos alunos de uma certa nacionalidade por ano
             ano_atual = 2024;
             nacion = menu_obter_nacionalidade();
-            media = media_idades_nacionalidade(dados_alunos, nacion, ano_atual);
+            media = media_idades_nacionalidade(dados_alunos, nacion, ano_atual, size_base);
             for (i=0;i<6;i++) {
                 if (media[i]!=0) {
                     printf("\nMedia das idades dos alunos da nacionalidade \"%s\" do ano %i: %f",nacion,i+1,media[i]);
