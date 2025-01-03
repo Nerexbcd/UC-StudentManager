@@ -129,8 +129,10 @@ int main(void)
             break;
 
         case 2: //inserir um aluno
+            printf("antes: %i\n",sizeof(dados_alunos));
             printf("Insira os dados do aluno:\n");
             inserir_estudante(dados_alunos,&size_alunos);
+            printf("\ndepois: %i\n",sizeof(dados_alunos));
             break;
 
         case 3: //remover um aluno
@@ -143,7 +145,7 @@ int main(void)
             break;
 
         case 5: //pesquisar estudante por nome
-            pesquisa = menu_obter_pesquisa(pesquisa);
+            pesquisa = menu_obter_pesquisa();
             pesquisar(dados_alunos,pesquisa);
             break;
 
@@ -188,7 +190,7 @@ int main(void)
             break;
 
         default:
-            printf("Erro! Escolha uma opção válida");
+            printf("Erro! Escolha uma opcao valida");
             break;
         }
     } while (cond_saida==0);

@@ -23,7 +23,7 @@ typedef struct menu_page
 int menu_opcoes_field();
 
 //efetua a obtencao de uma pesquisa válida fornecida pelo utilizdor
-char * menu_obter_pesquisa(char * pesquisa);
+char * menu_obter_pesquisa();
 
 //efetua a obtencao de uma nacionalidade válida fornecida pelo utilizdor
 char * menu_obter_nacionalidade();

@@ -31,8 +31,9 @@ int menu_opcoes_field()
 }
 
 
-char * menu_obter_pesquisa(char * pesquisa) 
+char * menu_obter_pesquisa() 
 {
+    char * pesquisa = malloc(sizeof(char)*50);
     int rep = 0;
 
     do
@@ -42,12 +43,12 @@ char * menu_obter_pesquisa(char * pesquisa)
         }
         printf("Pesquisar: ");
         fflush(stdin);
-        scanf(" %s", pesquisa);
+        scanf(" %s",pesquisa);
         puts("");
         rep++;
     }
     while (pesquisa==NULL);
-
+    
     return pesquisa;
 }
 
