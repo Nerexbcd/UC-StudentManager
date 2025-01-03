@@ -1202,6 +1202,8 @@ void db_remove(DB *base_dados, int index)
 
     wrt_alunos[index] = wrt_alunos[wrt_size-1];
 
+    free(&wrt_alunos[wrt_size-1]);
+
     wrt_size--;
 
     wrt_alunos = realloc(wrt_alunos , sizeof(STUDENT)*((wrt_size)+1));
