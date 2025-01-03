@@ -131,10 +131,11 @@ int main(void)
             break;
 
         case 2: //inserir um aluno
-            printf("antes: %i\n",sizeof(dados_alunos));
+            printf("\n%i\n",size_base);
             printf("Insira os dados do aluno:\n");
-            size_base = (dados_alunos,&size_alunos, size_base);
-            printf("\ndepois: %i\n",sizeof(dados_alunos));
+            fflush(stdin);
+            size_base = inserir_estudante(dados_alunos,&size_alunos, size_base);
+            printf("\n%i\n",size_base);
             break;
 
         case 3: //remover um aluno

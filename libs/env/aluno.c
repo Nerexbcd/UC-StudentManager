@@ -17,7 +17,7 @@ ALUNO * criar_lista(txtFile *txt_estudantes) {
     ALUNO *lista_estudantes;
     lista_estudantes = malloc(sizeof(ALUNO)*((txt_estudantes->size)+1));
 
-    if (calcular_tam_lista(lista_estudantes)==0) {
+    if (sizeof(lista_estudantes)==0) {
         printf("ERRO!");
         return 0;
     }
@@ -53,7 +53,6 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
 
             base_dados[i].nome = strdup(dados[1]);
 
-            printf("%s\n",dados[2]);
 
             char *dn = dados[2];
             char **ptr_dn = str_split(dn, '-', NULL);
@@ -179,9 +178,8 @@ int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base
     if (j==size_base) {
     free(new_lista_estudantes);
     }
-    else {
-        size_base++;
-    }
+        
+    size_base++;
 
     return size_base;
 }
@@ -465,9 +463,8 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
     for (int i=0; i<size_base; i++) {
 
         char * vetor = lista_estudantes[i].nome;  //define o vetor a comparar.
-
-        for (int k=0; k<strlen(lista_estudantes[i].nome); k++) { //vai comparar elemento a elemento
-            
+        printf("\n%i\n",i);
+        for (int k=0; k<(sizeof(* lista_estudantes->nome)); k++) { //vai comparar elemento a elemento
             int repeticao=k;
 
             do {
