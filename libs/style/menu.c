@@ -135,6 +135,7 @@ int escolher_codigo(ALUNO * base_dados)
     int n;
     int cod;
     char ans;
+    int pos;
 
     do {
         printf("\nQual é o código do aluno? ");

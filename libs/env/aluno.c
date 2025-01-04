@@ -204,18 +204,26 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
     int i=0;
     int k=0; //código do estudante
     int j=0; //posição do aluno com código k na lista
+    int t=0;
 
+    do {
+        printf("Qual o codigo do estudante? ");
+        fflush(stdin);
+        scanf(" %d",&k);
 
-    printf("Qual o codigo do estudante? ");
-    fflush(stdin);
-    scanf(" %d",&k);
+        for(t=0;t<size_base;t++) {
+            if(lista_estudantes[t].codigo==k) {
+                j=t;
+                break;
+            }
+        }
 
-    for(int t=0;t<size_base;t++) {
-        if(lista_estudantes[t].codigo==k) {
-            j=t;
-            break;
+        if (t==size_base) {
+            printf("\nErro! Escolha um codigo valido. ");
+            fflush(stdin);
         }
     }
+    while (t==size_base);
 
     i = menu_opcoes_field();
 
@@ -463,7 +471,7 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
     for (int i=0; i<size_base; i++) {
 
         char * vetor = lista_estudantes[i].nome;  //define o vetor a comparar.
-        printf("\n%i\n",i);
+    
         for (int k=0; k<(sizeof(* lista_estudantes->nome)); k++) { //vai comparar elemento a elemento
             int repeticao=k;
 
@@ -506,7 +514,7 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
 
     int rep=0;
     int g=0;
-    for (int k=0; k< sizeof(lista_matches); k++) {
+    for (int k=0; k<size_base; k++) {
         if (rep==0) {//no case de ser a primeira iteração
             printf("Resultado(s) da pesquisa <%s>:\n",pesquisa);
         }
