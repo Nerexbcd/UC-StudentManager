@@ -461,8 +461,10 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
 {
     int * lista_matches;
     lista_matches = (int *) malloc(sizeof(int)*size_base);
+    printf("\n%i\n",strlen(pesquisa));
+    
 
-    for (int s=0; s<sizeof(lista_matches); s++) {
+    for (int s=0; s<size_base; s++) {
         lista_matches[s]=0;
     }
 
@@ -470,20 +472,20 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
     for (int i=0; i<size_base; i++) {
 
         char * vetor = lista_estudantes[i].nome;  //define o vetor a comparar.
-    
-        for (int k=0; k<(sizeof(* lista_estudantes->nome)); k++) { //vai comparar elemento a elemento
+        printf("\n%i\n",strlen(vetor));
+        for (int k=0; k<sizeof(*(lista_estudantes->nome)); k++) { //vai comparar elemento a elemento
+            printf("//%c// ",vetor[k]);
             int repeticao=k;
-
+            puts("c");
             do {
                 int posicao=0;
                 int matches=0;
 
                 //procura o primeiro elemento que seja igual ao primeiro elemento do vetor pesquisa
                 while((vetor[posicao+repeticao]!=pesquisa[0]) && ((posicao+repeticao)<(strlen(vetor)))) {  //determina qual é o elemento inicial
-                    int f=posicao+repeticao;
-                        posicao++;
+                    posicao++;
                 }
-
+                
                 //se não houver um elemento igual ao primeiro elemento da pesquisa, posicao==strlen(vetor)
                 //caso contrário, vai verificar se os outros elementos são iguais
                 if (posicao<strlen(vetor)) {
@@ -495,7 +497,7 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
                             matches++;
                         }
                     }
-
+                    
                     //verifica se o número de elementos iguais consecutivos é igual ao número de elementos da pesquisa
                     if ((matches)==(strlen(pesquisa))) {
                         lista_matches[i]=1;//o vetor matches vai ser 1 nas posicoes correspondentes às posições dos nomes que contêm a pesquisa
@@ -503,10 +505,13 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
                     else {
                         repeticao++;//caso não seja igual, verifica se algum outro segmento do nome coincide com o vetor pesquisa
                         //isto acontece através de começar a pesquisa do primeiro elemento em comum 1 espaço à frente do anterior
+                    
                     }
+
                 }
             }
             while ((strlen(vetor))-repeticao>strlen(pesquisa) && repeticao!=0);
+            puts("fim");
 
         }
     }
@@ -551,6 +556,8 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y, int siz
 
     //Mostrar os alunos com médias entre estes 2 valores
     int i=0;//elemento de paginação, determina quantas iterações foram mostradas ao utilizador
+    int n_result = 0;;
+    int n_alu = 0;
 
     for (int k=0;k<size_base;k++) {
         if ((lista_estudantes[k].ocupado==1) && (lista_estudantes[k].media_atual>=min) && (lista_estudantes[k].media_atual<=max)) {
@@ -565,6 +572,13 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y, int siz
             n_est_com_media++;
             i++;
         }
+        else n_result++;
+        
+        n_alu++;
+    }
+
+    if (n_result==n_alu) {
+        printf("Nao ha resultados no intervalo de medias %.2f - %.2f.\n",min,max);
     }
 
     return n_est_com_media;
@@ -701,28 +715,25 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
 
 
 int estudantes_risco_prescrever(ALUNO * lista_estudantes, int size_base) {
-
-    setlocale(LC_ALL,"Portuguese");
-    setlocale(LC_ALL,"pt_PT.UTF-8");
-    //SetConsoleOutputCP();
-    //SetConsoleCP();
     
     //vetor cujas posicoes com 1 correspondem às posicoes dos alunos em risco de prescricao na struct lista_estudantes
     int * lista_prescricao = malloc(sizeof(int) * size_base);
-    for (int i=0; i<sizeof(lista_prescricao); i++) {
+    for (int i=0; i<size_base; i++) {
         lista_prescricao[i]=0;//inicializa a 0: significa que o aluno na posicao i não está em risco de prescrição
     }
 
+    
     int num=0; //número de estudantes em risco de prescrição
     for (int i=0;i<size_base;i++) {
+        
         if (lista_estudantes[i].ocupado==1) {
             //3 matrículas e menos de 60 ects
-            if ((lista_estudantes[i].n_matriculas==3) && (lista_estudantes[i].ects_concluidos<60)) {
+            if ((lista_estudantes[i].n_matriculas>=3) && (lista_estudantes[i].ects_concluidos<60)) {
                 lista_prescricao[i]=1;//posição com valor 1: indica risco de prescrição
                 num++;//aumenta o nº de estudantes em risco
             }
             //4 matrículas e menos de 120 ects
-            else if ((lista_estudantes[i].n_matriculas==4) && (lista_estudantes[i].ects_concluidos<120)) {
+            else if ((lista_estudantes[i].n_matriculas>=4) && (lista_estudantes[i].ects_concluidos<120)) {
                 lista_prescricao[i]=1;
                 num++;
             }
@@ -736,10 +747,10 @@ int estudantes_risco_prescrever(ALUNO * lista_estudantes, int size_base) {
 
     int rep=0;
     if (num!=0) {//no caso de haver pelo menos 1 estudante em risco
-        for (int i=0;i<sizeof(lista_prescricao);i++) {
+        for (int i=0;i<size_base;i++) {
             if (lista_prescricao[i]==1) {
                 if (rep==0) {//na primeira iteração vai ter este cabeçalho
-                    printf("Lista de alunos em risco de prescrição:\n");
+                    printf("Lista de alunos em risco de prescricao:\n");
                 }
                 else if(rep!=0 && rep%10==0) {//paginação, mostra nomes em blocos de 10
                     printf("Pagina seguinte ->");
@@ -753,7 +764,7 @@ int estudantes_risco_prescrever(ALUNO * lista_estudantes, int size_base) {
         }
     }
     else {//no caso de ser tudo a 0
-        printf("Não há alunos em risco de prescrição!\n");
+        printf("Nao ha alunos em risco de prescricao!\n");
     }
 
     return num;//retorna o número de estudantes em risco

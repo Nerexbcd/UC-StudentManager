@@ -66,7 +66,6 @@ char * menu_obter_nacionalidade()
         printf("Nacionalidade: ");
         fflush(stdin);
         scanf("%s",nacio);
-        puts("");
         rep++;
     }
     while (nacio==NULL);
@@ -118,10 +117,9 @@ float menu_obter_float()
         if (rep!=0) {
             printf("Erro! Tente novamente.\n");
         }
-        printf("Valor: ");
+        printf("Valor de media: ");
         fflush(stdin);
         scanf(" %f",&valor);
-        puts("");
         rep++;
     }
     while (valor<0);

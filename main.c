@@ -126,16 +126,15 @@ int main(void)
         switch (opcao)
         {
         case 1: //mostrar a lista
-            printf("Lista de estudantes: \n");
+            printf("\nLista de estudantes: \n");
             mostrar_toda_lista(dados_alunos, size_base);
             break;
 
         case 2: //inserir um aluno
-            printf("\n%i\n",size_base);
-            printf("Insira os dados do aluno:\n");
+            printf("\nInsira os dados do aluno:\n");
             fflush(stdin);
             size_base = inserir_estudante(dados_alunos,&size_alunos, size_base);
-            printf("\n%i\n",size_base);
+            printf("\nnova size_base %i\n",size_base);
             break;
 
         case 3: //remover um aluno
@@ -153,6 +152,7 @@ int main(void)
             break;
 
         case 6: //mostra lista por ordem alfabética do último nome
+            printf("\nLista dos nomes dos alunos por ordem alfabetica do seu apelido:\n");
             mostrar_lista_por_ordem_apelido(dados_alunos, size_base);
             break;
 
@@ -168,7 +168,7 @@ int main(void)
 
         case 9: //determinar o número de estudantes finalistas
             n_fin = n_est_finalistas(dados_alunos, size_base);
-            printf("Número de estudantes finalistas: %d.\n",n_fin);
+            printf("Numero de estudantes finalistas: %d.\n",n_fin);
             fflush(stdin);
             break;
 
@@ -178,16 +178,21 @@ int main(void)
             media = media_idades_nacionalidade(dados_alunos, nacion, ano_atual, size_base);
             for (i=0;i<6;i++) {
                 if (media[i]!=0) {
-                    printf("\nMedia das idades dos alunos da nacionalidade \"%s\" do ano %i: %f",nacion,i+1,media[i]);
+                    printf("\nMedia das idades dos alunos da nacionalidade \"%s\" do ano %i: %.2f",nacion,i+1,media[i]);
                 }
             }
             break;
 
-        case 11:
+
+        ///////
+        ////////
+        //////// TO DO
+        case 11: //listar estudantes cujas datas de nascimento estejam entre x e y e que pertencam no maximo a 5 nacionalidades
             break;
 
-        //etc
-        case 12:
+        case 12: //determinar o numero medio de matriculas, em geral e por nacionalidade
+            break;
+        case 177:
             cond_saida=1;
             printf("A sair...");
             break;
