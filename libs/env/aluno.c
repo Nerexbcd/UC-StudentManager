@@ -340,7 +340,7 @@ void mostrar_um_aluno(ALUNO *lista_estudantes,int posicao)
 
 void mostrar_toda_lista(ALUNO *lista_estudantes, int size_base) {
 
-    for (int i=0,j=0,rep=0; j<size_base;i++) {
+    for (int i=0,rep=0; i<size_base;i++) {
         if ((lista_estudantes[i].ocupado)==1) {
             if ((rep != 0) && (rep%3==0)) {
                 printf("Pagina seguinte ->");
@@ -352,7 +352,6 @@ void mostrar_toda_lista(ALUNO *lista_estudantes, int size_base) {
             
             mostrar_um_aluno(lista_estudantes,i);
             rep++;
-            j++;
         }
     }
 }
@@ -362,7 +361,7 @@ void mostrar_toda_lista(ALUNO *lista_estudantes, int size_base) {
 void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes, int size_base)
 {
     int * vet_organizado;
-    vet_organizado = malloc(sizeof(int)*sizeof(lista_estudantes));
+    vet_organizado = malloc(sizeof(int)*size_base);
 
     //cria o vetor que vai determinar a ordem alfabética dos apelidos
     for (int k=0;k<size_base;k++) {
@@ -394,7 +393,7 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes, int size_base)
     //compara os apelidos, mas guarda a sua ordem correta no vet_organizado
     //organiza por ordem decrescente
     //crescente nao funciona por algum motivo????
-    for(int i = 0; i<sizeof(vet_organizado)-1; ++i)
+    for(int i = 0; i<size_base-1; ++i)
     {
         int pos1 = vet_organizado[i];
         int pos2 = vet_organizado[i+1];
@@ -409,7 +408,7 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes, int size_base)
 
     //mostra os nomes por ordem crescente (alfabética) do apelido
     //como a lista está na ordem decrescente, também está o contador (para ser crescente)
-    for (int i=sizeof(vet_organizado)-1, rep=0; i>=0; i--) {
+    for (int i=size_base-1, rep=0; i>=0; i--) {
         int posicao = vet_organizado[i];
         if (lista_estudantes[posicao].ocupado==1) {
             if(rep!=0 && rep%10==0) {
