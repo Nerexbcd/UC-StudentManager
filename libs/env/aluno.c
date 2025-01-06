@@ -865,6 +865,8 @@ int estudantes_risco_prescrever(ALUNO * lista_estudantes, int size_base) {
         printf("Nao ha alunos em risco de prescricao!\n");
     }
 
+    puts("");
+
     return num;//retorna o número de estudantes em risco
 }
 

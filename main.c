@@ -187,12 +187,17 @@ int main(void)
             break;
 
         case 11: //listar estudantes cujas datas de nascimento estejam entre x e y e que pertencam no maximo a 5 nacionalidades
+            printf("\nIntroduza a primeira data de nascimento (dd-mm-aaaa): ");
+            fflush(stdin);
             scanf(" %s",data1);
+            printf("\nIntroduza a segunda data de nascimento (dd-mm-aaaa): ");
+            fflush(stdin);
             scanf(" %s",data2);
             listar_est_entre_data_n(dados_alunos, data1 , data2, size_base);
             break;
 
         case 12: //determinar o numero medio de matriculas, em geral e por nacionalidade
+
             break;
         
         case 13: //guardar o ficheiro
