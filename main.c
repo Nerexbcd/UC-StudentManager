@@ -186,10 +186,6 @@ int main(void)
             puts("");
             break;
 
-
-        ///////
-        ////////
-        //////// TO DO
         case 11: //listar estudantes cujas datas de nascimento estejam entre x e y e que pertencam no maximo a 5 nacionalidades
             scanf(" %s",data1);
             scanf(" %s",data2);
@@ -198,6 +194,11 @@ int main(void)
 
         case 12: //determinar o numero medio de matriculas, em geral e por nacionalidade
             break;
+        
+        case 13: //guardar o ficheiro
+        //incluir opcao de sair imediatamente depois de guardar?
+            break;
+
         case 177:
             cond_saida=1;
             printf("A sair...");
