@@ -88,4 +88,7 @@ float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float
 //Determinar o número de estudantes finalistas (pelo menos 154 ECTS realizados)
 int n_est_finalistas(ALUNO * lista_estudantes, int size_base);
 
+//Determinar o numero medio de matriculas, em geral e por nacionalidade
+void n_medio_mat(ALUNO * lista_estudantes, int size_base);
+
 #endif

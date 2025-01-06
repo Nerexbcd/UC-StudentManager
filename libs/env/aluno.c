@@ -881,6 +881,8 @@ float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float
         float n_ele = 0;
         float soma = 0;
 
+
+        /////TO DO
         for (int i=0; i<size_base;i++) {
             //procura os alunos que obedecem a todas as condicoes:
             //nacionalidade, ano de curso correto, existência na base de dados
@@ -900,4 +902,83 @@ float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float
     }
 
     return media_por_nac_por_ano; //retorna todo o vetor
+}
+
+
+void n_medio_mat(ALUNO * lista_estudantes, int size_base)
+{
+    puts("a");
+    //media geral
+    float soma_geral = 0;
+    float n_total = 0;
+    float media_geral = 0;
+
+    for (int i=0; i<size_base; i++) {
+        if (lista_estudantes[i].ocupado==1) {
+            soma_geral += lista_estudantes[i].n_matriculas;
+            n_total++;
+        }
+    }
+
+    media_geral = soma_geral / n_total;
+
+    puts("b");
+    //media por nacionalidades
+    typedef struct nacionalidades
+    {
+        char * nacionalidade;
+    }NACIO;
+
+    NACIO * vetor_nacionalidades = NULL;
+    int size_vetor_nacio = 0;
+    float * medias = calloc(1,sizeof(float));
+    float * somas = calloc(1,sizeof(float));
+    float * n_ele = calloc(1,sizeof(float));
+
+    for (int i=0,k=0; i<size_base; i++) {
+        if (lista_estudantes[i].ocupado==1) {
+            if (!vetor_nacionalidades) {
+                vetor_nacionalidades = (NACIO *) realloc(vetor_nacionalidades,sizeof(NACIO));
+                vetor_nacionalidades[k].nacionalidade = (char *) (strdup (lista_estudantes[i].nacionalidade));
+                medias = (NACIO *) realloc(medias,sizeof(float));
+                somas = (NACIO *) realloc(somas,sizeof(float));
+                n_ele = (NACIO *) realloc(n_ele,sizeof(float));
+                somas[i] = lista_estudantes[i].n_matriculas;
+                n_ele[i] = 1;
+                size_vetor_nacio ++;
+            }
+            else {
+                for (int j=0; j<size_vetor_nacio; j++) {
+                    if (strcmp(lista_estudantes[i].nacionalidade,vetor_nacionalidades[j].nacionalidade)==0) {
+                        somas[i] = somas[i] + lista_estudantes[i].n_matriculas;
+                        n_ele[i] ++;
+                        break;
+                    }
+                    else {
+                        vetor_nacionalidades = (NACIO *) realloc(vetor_nacionalidades,sizeof(NACIO));
+                        vetor_nacionalidades[k].nacionalidade = strdup (lista_estudantes[i].nacionalidade);
+                        size_vetor_nacio++;
+                        medias = (NACIO *) realloc(medias,sizeof(float));
+                        somas = (NACIO *) realloc(somas,sizeof(float));
+                        n_ele = (NACIO *) realloc(n_ele,sizeof(float));
+                        somas[i] = lista_estudantes[i].n_matriculas;
+                        n_ele[i] = 1;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    for (int i=0; i<size_vetor_nacio; i++) {
+        medias[i]=somas[i]/n_ele[i];
+    }
+
+    printf("\nA media geral do numero de matriculas e %.2f",media_geral);
+
+    for (int i=0;i<size_vetor_nacio;i++) {
+        printf("\nA media do numero de matriculas da nacionalidade \"%s\" e %.2f.",vetor_nacionalidades[i].nacionalidade,medias[i]);
+    }
+
+    puts("");
 }

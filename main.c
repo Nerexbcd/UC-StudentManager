@@ -197,11 +197,11 @@ int main(void)
             break;
 
         case 12: //determinar o numero medio de matriculas, em geral e por nacionalidade
-
+            n_medio_mat(dados_alunos, size_base);
             break;
         
         case 13: //guardar o ficheiro
-        //incluir opcao de sair imediatamente depois de guardar?
+            printf("\nPretende guardar o ficheiro? ");
             break;
 
         case 177:
