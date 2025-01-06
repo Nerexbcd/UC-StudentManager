@@ -74,7 +74,7 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y, int siz
 
 //Listar os estudantes, cujas datas de nascimento estejam dentro de um intervalo e pertencentes a um
 //conjunto máximo de 5 nacionalidades
-void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * data_2, char * nac_1, char * nac_2, char * nac_3, char * nac_4, char * nac_5, int size_base);
+void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * data_2, int size_base);
 
 //Determinar o número de estudantes em risco de prescrever (3 matrículas e menos de
 //60 ECTS, 4 matrículas e menos de 120 ECTS ou mais de 5 matrículas e não finalista) e

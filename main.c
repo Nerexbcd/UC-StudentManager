@@ -118,6 +118,8 @@ int main(void)
         char * nacion = NULL;
         char * pesquisa = NULL;
         int i = 0;
+        char * data1 = malloc(sizeof(char)*10);;
+        char * data2 = malloc(sizeof(char)*10);;
         
         printf("\nOpcao: ");
         fflush(stdin);
@@ -181,6 +183,7 @@ int main(void)
                     printf("\nMedia das idades dos alunos da nacionalidade \"%s\" do ano %i: %.2f",nacion,i+1,media[i]);
                 }
             }
+            puts("");
             break;
 
 
@@ -188,6 +191,9 @@ int main(void)
         ////////
         //////// TO DO
         case 11: //listar estudantes cujas datas de nascimento estejam entre x e y e que pertencam no maximo a 5 nacionalidades
+            scanf(" %s",data1);
+            scanf(" %s",data2);
+            listar_est_entre_data_n(dados_alunos, data1 , data2, size_base);
             break;
 
         case 12: //determinar o numero medio de matriculas, em geral e por nacionalidade

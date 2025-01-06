@@ -601,8 +601,11 @@ int n_est_finalistas(ALUNO * lista_estudantes, int size_base) {
 
 
 
-void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * data_2, char * nac_1, char * nac_2, char * nac_3, char * nac_4, char * nac_5, int size_base)
+void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * data_2, int size_base)
 {
+    char * data_3 = strdup(data_1);
+    char * data_4 = strdup(data_2);
+    
     DATA_NAS data_sup;//data maior
     DATA_NAS data_inf;//data menor
 
@@ -658,59 +661,154 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
         }
     }
 
+    int * lista_matches = (int *) calloc(size_base, sizeof(int));
+    int * lista_preliminary_matches = (int *) calloc(size_base, sizeof(int));
+
     //Efetua a comparação da data dos estudantes com o intervalo definido
-    int rep=0;//serve para determinar se é necessário o elemento de paginação
+    //Nacionalidades são tidas em conta noutro ciclo
+
     for (int k=0;k<size_base;k++) {
-        if (rep!=0 && rep%3==0) {//elemento de paginação, organizado em blocos de 3 outputs
-                printf("Pagina seguinte ->");
-                fflush(stdin);
-                getchar();
-                puts("");
-                fflush(stdin);
-        }
-        //se pertencem a uma das 5 nacionalidades fornecidas:
-        if (lista_estudantes[k].ocupado==1 && (lista_estudantes[k].nacionalidade==nac_1 || lista_estudantes[k].nacionalidade==nac_2 || lista_estudantes[k].nacionalidade==nac_3 || lista_estudantes[k].nacionalidade==nac_4 || lista_estudantes[k].nacionalidade==nac_5)) {
+        if (lista_estudantes[k].ocupado==1) {
             //Compara os anos inicialmente
             if ((lista_estudantes[k].data_n.ano>data_inf.ano) && (lista_estudantes[k].data_n.ano<data_sup.ano)) {
-                mostrar_um_aluno(lista_estudantes,k);
+                lista_preliminary_matches[k]=1;
             }
             else if (lista_estudantes[k].data_n.ano==data_inf.ano) {
                 //No caso dos anos serem os extremos, compara os meses.
                 if ((lista_estudantes[k].data_n.mes>data_inf.mes) && (lista_estudantes[k].data_n.mes<data_sup.mes)) {
-                mostrar_um_aluno(lista_estudantes,k);
+                    lista_preliminary_matches[k]=1;
                 }
                 //No casos dos meses serem os extremos, compara os dias.
                 else if (lista_estudantes[k].data_n.mes==data_inf.mes) { 
                     if ((lista_estudantes[k].data_n.dia>=data_inf.dia) && (lista_estudantes[k].data_n.dia<=data_sup.dia)) {
-                        mostrar_um_aluno(lista_estudantes,k);
+                        lista_preliminary_matches[k]=1;
                     }
                 }
                 else if (lista_estudantes[k].data_n.mes==data_sup.mes) {
                     if ((lista_estudantes[k].data_n.dia>=data_inf.dia) && (lista_estudantes[k].data_n.dia<=data_sup.dia)) {
-                        mostrar_um_aluno(lista_estudantes,k);
+                        lista_preliminary_matches[k]=1;
                     }
                 }
             }
             //Mesma situação que o anterior, mas caso extremo oposto
             else if (lista_estudantes[k].data_n.ano==data_sup.ano) {
                 if ((lista_estudantes[k].data_n.mes>data_inf.mes) && (lista_estudantes[k].data_n.mes<data_sup.mes)) {
-                mostrar_um_aluno(lista_estudantes,k);
+                    lista_preliminary_matches[k]=1;
                 }
                 else if (lista_estudantes[k].data_n.mes==data_inf.mes) { 
                     if ((lista_estudantes[k].data_n.dia>=data_inf.dia) && (lista_estudantes[k].data_n.dia<=data_sup.dia)) {
-                        mostrar_um_aluno(lista_estudantes,k);
+                        lista_preliminary_matches[k]=1;
                     }
                 }
                 else if (lista_estudantes[k].data_n.mes==data_sup.mes) {
                     if ((lista_estudantes[k].data_n.dia>=data_inf.dia) && (lista_estudantes[k].data_n.dia<=data_sup.dia)) {
-                        mostrar_um_aluno(lista_estudantes,k);
+                        lista_preliminary_matches[k]=1;
                     }
                 }
 
             }
         }
-        rep++;//aumenta o número da iteração para a paginação adequada
     }
+
+    char * nacio1;
+    char * nacio2;
+    char * nacio3;
+    char * nacio4;
+    char * nacio5;
+    int n_resultados = 0;
+
+
+    //Determina as nacionalidades: as cinco primeiras encontradas.
+    for (int k=0,repeat=0;k<size_base;k++) {
+        if (lista_preliminary_matches[k]==1) {
+            if (repeat==0) {
+                nacio1 = strdup(lista_estudantes[k].nacionalidade);
+                lista_matches[k]=1;
+                repeat++;
+                n_resultados++;
+            }
+            else if (repeat==1) {
+                if (strcmp(lista_estudantes[k].nacionalidade,nacio1)==0) {
+                    lista_matches[k]=1;
+                    n_resultados++;
+                }
+                else {
+                    nacio2=strdup(lista_estudantes[k].nacionalidade);
+                    lista_matches[k]=1;
+                    repeat++;
+                    n_resultados++;
+                }
+            }
+            else if (repeat==2) {
+                if ((strcmp(lista_estudantes[k].nacionalidade,nacio1)==0) || ((strcmp(lista_estudantes[k].nacionalidade,nacio2)==0))) {
+                    lista_matches[k]=1;
+                    n_resultados++;
+                }
+                else {
+                    nacio3=strdup(lista_estudantes[k].nacionalidade);
+                    lista_matches[k]=1;
+                    repeat++;
+                    n_resultados++;
+                }
+            }
+            else if (repeat==3) {
+                if ((strcmp(lista_estudantes[k].nacionalidade,nacio1)==0) || ((strcmp(lista_estudantes[k].nacionalidade,nacio2)==0)) || ((strcmp(lista_estudantes[k].nacionalidade,nacio3)==0))) {
+                    lista_matches[k]=1;
+                    n_resultados++;
+                }
+                else {
+                    nacio4=strdup(lista_estudantes[k].nacionalidade);
+                    lista_matches[k]=1;
+                    repeat++;
+                    n_resultados++;
+                }
+            }
+            else if (repeat==4) {
+                if ((strcmp(lista_estudantes[k].nacionalidade,nacio1)==0) || ((strcmp(lista_estudantes[k].nacionalidade,nacio2)==0)) || ((strcmp(lista_estudantes[k].nacionalidade,nacio3)==0)) || ((strcmp(lista_estudantes[k].nacionalidade,nacio4)==0))) {
+                    lista_matches[k]=1;
+                    n_resultados++;
+                }
+                else {
+                    nacio5=strdup(lista_estudantes[k].nacionalidade);
+                    lista_matches[k]=1;
+                    repeat++;
+                    n_resultados++;
+                }
+            }
+            else if (repeat>4) {
+                if ((strcmp(lista_estudantes[k].nacionalidade,nacio1)==0) || ((strcmp(lista_estudantes[k].nacionalidade,nacio2)==0)) || ((strcmp(lista_estudantes[k].nacionalidade,nacio3)==0)) || ((strcmp(lista_estudantes[k].nacionalidade,nacio4)==0)) || ((strcmp(lista_estudantes[k].nacionalidade,nacio5)==0))) {
+                    lista_matches[k]=1;
+                    n_resultados++;
+                }
+            }
+
+        }
+    }
+
+    //Faz o display dos resultados
+    printf("\nLista dos alunos com datas de nascimento entre %s e %s:",data_3,data_4);
+    for (int k=0;k<size_base;k++) {
+
+        if (n_resultados==0) {
+            printf("\nNao ha alunos com datas de nascimento entre %s e %s.\n",data_3,data_4);
+            break;
+        }
+        else {
+            if (lista_matches[k]==1) {
+                printf("\n%s",lista_estudantes[k].nome);
+            }
+
+            if (n_resultados!=0 && n_resultados%11==0) {//elemento de paginação, organizado em blocos de 3 outputs
+                printf("\nPagina seguinte ->");
+                fflush(stdin);
+                getchar();
+                puts("");
+                fflush(stdin);
+            }
+        }
+    }
+
+    
 }
 
 
