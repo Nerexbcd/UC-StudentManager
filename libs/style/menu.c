@@ -99,9 +99,8 @@ int menu_show_page(MENU_PAGE * page) {
 
 }
 
-char * menu_obter_pesquisa() 
-{
-    char * pesquisa = NULL;
+char * menu_obter_pesquisa(char * pesquisa) {
+    * pesquisa = NULL;
     int rep = 0;
 
     do
@@ -122,11 +121,10 @@ char * menu_obter_pesquisa()
 
 
 char * menu_obter_nacionalidade()
-char * menu_obter_nacionalidade()
 {
     char * nacio = NULL;
     int rep = 0;
-    char * nacio = malloc(sizeof(char)*100);
+    *nacio = malloc(sizeof(char)*100);
     
     do
     {
