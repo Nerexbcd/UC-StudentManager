@@ -91,4 +91,7 @@ int n_est_finalistas(ALUNO * lista_estudantes, int size_base);
 //Determinar o numero medio de matriculas, em geral e por nacionalidade
 void n_medio_mat(ALUNO * lista_estudantes, int size_base);
 
+//Prepara o texto e outras informações relevantes para guardar o ficheiro
+void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * filepath1, char * filepath2);
+
 #endif

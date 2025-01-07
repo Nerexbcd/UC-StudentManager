@@ -7,6 +7,14 @@
 #include "../style/menu.h"
 #include "../utils/string_util.h"
 
+#ifdef _WIN32
+    #define PATH_SEPARATOR_CHAR '\\'
+    #define PATH_SEPARATOR_STR  "\\"
+#elif __linux__
+    #define PATH_SEPARATOR_CHAR '/'
+    #define PATH_SEPARATOR_STR  "/"
+#endif
+
 //#define ZERO 0 talvez??
 
 
@@ -981,4 +989,127 @@ void n_medio_mat(ALUNO * lista_estudantes, int size_base)
     }
 
     puts("");
+}
+
+
+void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * filepath1, char * filepath2)
+{
+    txtFile output_txt_estudantes;
+    output_txt_estudantes.data = NULL;
+    char * vetor_estudantes = NULL;
+    txtFile output_txt_situacao;
+    output_txt_situacao.data = NULL;
+    char * vetor_situacao = NULL;
+
+    puts("a");
+
+    for (int i=0; i<size_base; i++) {
+        if (dados_alunos[i].ocupado==1){
+            //vetor_estudantes
+            if (!vetor_estudantes) {
+                puts("b");
+                vetor_estudantes = malloc(sizeof(char) * strlen((dados_alunos[i].codigo)));
+                puts("e");
+                vetor_estudantes = strdup(dados_alunos[i].codigo);
+                puts("e");
+                vetor_estudantes = strcat(vetor_estudantes,'\t');
+                vetor_estudantes = strcat(vetor_estudantes,strdup(dados_alunos[i].nome));
+                puts("e");
+                vetor_estudantes = strcat(vetor_estudantes,'\t');
+                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].data_n.dia));
+                vetor_estudantes = strcat(vetor_estudantes,'-');
+                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].data_n.mes));
+                vetor_estudantes = strcat(vetor_estudantes,'-');
+                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].data_n.ano));
+                vetor_estudantes = strcat(vetor_estudantes,'\t');
+                vetor_estudantes = strcat(vetor_estudantes,strdup(dados_alunos[i].nacionalidade));
+                puts("c");
+            }
+            else {
+                vetor_estudantes = strcat(vetor_estudantes,'\n');
+                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].codigo));
+                vetor_estudantes = strcat(vetor_estudantes,'\t');
+                vetor_estudantes = strcat(vetor_estudantes,strdup(dados_alunos[i].nome));
+                vetor_estudantes = strcat(vetor_estudantes,'\t');
+                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].data_n.dia));
+                vetor_estudantes = strcat(vetor_estudantes,'-');
+                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].data_n.mes));
+                vetor_estudantes = strcat(vetor_estudantes,'-');
+                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].data_n.ano));
+                vetor_estudantes = strcat(vetor_estudantes,'\t');
+                vetor_estudantes = strcat(vetor_estudantes,strdup(dados_alunos[i].nacionalidade));
+            }
+
+            //vetor_situacao
+            if (!vetor_situacao) {
+                vetor_estudantes = malloc(sizeof(char) * sizeof(dados_alunos[i].codigo));
+                vetor_estudantes = strdup((char) dados_alunos[i].codigo);
+                vetor_estudantes = strcat(vetor_estudantes,'\t');
+                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].ano_curso));
+                vetor_estudantes = strcat(vetor_estudantes,'\t');
+                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].ects_concluidos));
+                vetor_estudantes = strcat(vetor_estudantes,'\t');
+                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].n_matriculas));
+                vetor_estudantes = strcat(vetor_estudantes,'\t');
+                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].media_atual));
+            }
+            else {
+                vetor_estudantes = strcat(vetor_estudantes,'\n');
+                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].codigo));
+                vetor_estudantes = strcat(vetor_estudantes,'\t');
+                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].ano_curso));
+                vetor_estudantes = strcat(vetor_estudantes,'\t');
+                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].ects_concluidos));
+                vetor_estudantes = strcat(vetor_estudantes,'\t');
+                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].n_matriculas));
+                vetor_estudantes = strcat(vetor_estudantes,'\t');
+                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].media_atual));
+            }
+        }
+    }
+
+    int size_txt_est = strlen(vetor_estudantes);
+    output_txt_estudantes.size = size_txt_est;
+    int size_txt_sit = strlen(vetor_situacao);
+    output_txt_situacao.size = size_txt_sit;
+
+    output_txt_estudantes.data = & vetor_estudantes;
+    output_txt_situacao.data = & vetor_situacao;
+
+    output_txt_estudantes.fileDir = strdup(filepath1);
+    output_txt_situacao.fileDir = strdup(filepath2);
+
+    char** pathParts1 = str_split(strdup(filepath1), PATH_SEPARATOR_CHAR, NULL);
+
+    for (int i = 0; *(pathParts1 + i); i++) {
+        if (*(pathParts1 + i + 1) == NULL) {
+            output_txt_estudantes.fileName = *(pathParts1 + i);
+        } else {
+            strcat(strcat(output_txt_estudantes.fileDir, *(pathParts1 + i)) , PATH_SEPARATOR_STR);
+        }  
+    }
+
+    char** pathParts2 = str_split(strdup(filepath1), PATH_SEPARATOR_CHAR, NULL);
+
+    for (int i = 0; *(pathParts2 + i); i++) {
+        if (*(pathParts2 + i + 1) == NULL) {
+            output_txt_situacao.fileName = *(pathParts2 + i);
+        } else {
+            strcat(strcat(output_txt_situacao.fileDir, *(pathParts2 + i)) , PATH_SEPARATOR_STR);
+        }  
+    }
+
+    if (output_txt_estudantes.size!=0) {
+        output_txt_estudantes.loaded = 1;
+    }
+    else {
+        output_txt_estudantes.loaded = 0;
+    }
+
+    if (output_txt_situacao.size!=0) {
+        output_txt_situacao.loaded = 1;
+    }
+    else {
+        output_txt_situacao.loaded = 0;
+    }
 }
