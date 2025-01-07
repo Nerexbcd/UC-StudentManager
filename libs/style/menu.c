@@ -44,6 +44,7 @@ char * menu_obter_pesquisa()
         printf("Pesquisar: ");
         fflush(stdin);
         scanf(" %s",pesquisa);
+        scanf(" %s",pesquisa);
         puts("");
         rep++;
     }
@@ -55,8 +56,9 @@ char * menu_obter_pesquisa()
 
 char * menu_obter_nacionalidade()
 {
+    char * nacio = NULL;
     int rep = 0;
-    char * nacio = malloc(sizeof(char)*100);
+    *nacio = malloc(sizeof(char)*100);
     
     do
     {
@@ -83,7 +85,7 @@ char * tipo_de_guardar()
     fflush(stdin);
     scanf(" %c",resposta);
 
-    if (strcmp(strdup(resposta),"S") || strcmp(strdup(resposta),"s")) {
+    if (resposta=='S' || resposta=='s') {
         int rep = 0;
         do
         {
