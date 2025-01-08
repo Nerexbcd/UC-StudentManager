@@ -1001,24 +1001,30 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
 
     puts("a");
 
+    //era um teste
     int temp = 9999;
     char * temp2 = malloc(sizeof(char)*(int)log10(temp));
-    sprintf(temp2, "%d", temp);
+    sprintf(temp2, "%d", temp); 
+
     printf("\n%s\n",temp2);
+    //
+
     puts("d");
-    char * vetor_estudantes;
+    char * vetor_estudantes; //vetor que vai receber informaçao (nao tinha a certeza como fazer diretamente para txt.data)
+    //é só para o ficheiro estudantes, o outro tem outro vetor
     puts("v");
     for (int i=0,rep=0; i<size_base; i++) {
         if (dados_alunos[i].ocupado==1){
             //vetor_estudantes
             if (rep!=0) {
+                //no caso de não ser a primeira iteração do aluno, acrescenta um parágrafo
                 vetor_estudantes = strcat(vetor_estudantes,"\n");
             }
             else {
                 puts("g");
                 int temp = dados_alunos[i].codigo;
-                char * temp2 = temp2 = malloc(sizeof(char)*((int)log10(temp))+1);
-                sprintf(temp2, "%d", temp);
+                char * temp2 = temp2 = malloc(sizeof(char)*((int)log10(temp))+1); //o cálculo do espaço estava na mesma página do stack overflow do da funcao de baixo
+                sprintf(temp2, "%d", temp); //vê no google,é suposto transformar int para (char *)
                 printf("\n%s\n",temp2);
                 vetor_estudantes = strcat(vetor_estudantes,strdup(temp2));
                 puts("i");
@@ -1028,10 +1034,11 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
                 vetor_estudantes = strcat(vetor_estudantes,"\t");
 
                 temp = dados_alunos[i].data_n.dia;
-                temp = 30;
+                temp = 30; //teste para ver se o problema estava com a struct dados_alunos por algum motivo
+                //(mas deu o mesmo resultado)
                 printf("\n%d",temp);
-                sprintf(temp2, "%d", temp);
                 temp2 = malloc(sizeof(char)*(int)(log10(temp)));
+                sprintf(temp2, "%d", temp);
                 
                 vetor_estudantes = strcat(vetor_estudantes,strdup(temp2));
                 printf("\n%s",vetor_estudantes);
@@ -1042,7 +1049,7 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
                 temp2 = malloc(sizeof(char)*((int)log10(temp))+1);
                 sprintf(temp2, "%d", temp);
                 vetor_estudantes = strcat(vetor_estudantes,strdup(temp2));
-                vetor_estudantes = strcat(vetor_estudantes,"-");
+                vetor_estudantes = strcat(vetor_estudantes,"-"); 
                 printf("\n%s",vetor_estudantes);
                 temp = dados_alunos[i].data_n.ano;
                 temp2 = malloc(sizeof(char)*((int)log10(temp))+1);
