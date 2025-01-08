@@ -447,8 +447,16 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes, int size_base)
                 fflush(stdin);
             }
             printf("%s\n",lista_estudantes[posicao].nome);
+            fflush(stdin);
             rep++;
         }
+    }
+    
+    char * t_guardar = malloc(sizeof(char)*4);
+    t_guardar = tipo_de_guardar();
+    printf("\n%s",t_guardar);
+    if (strcmp(t_guardar,".txt")==0 || strcmp(t_guardar,".cvs")==0) {
+        
     }
 
 }

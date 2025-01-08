@@ -22,7 +22,7 @@ typedef struct menu_page
 //permite ao utilizador escolher qual o campo a alterar
 int menu_opcoes_field();
 
-//efetua a obtencao de uma pesquisa válida fornecida pelo utilizdor
+//efetua a obtencao de uma pesquisa válida fornecida pelo utilizador
 char * menu_obter_pesquisa();
 
 //efetua a obtencao de uma nacionalidade válida fornecida pelo utilizdor

@@ -105,11 +105,12 @@ int main(void)
         int i = 0;
         char * data1 = malloc(sizeof(char)*10);
         char * data2 = malloc(sizeof(char)*10);
+        
 
         printf("\nEscolha entre as seguintes opcoes:");
         printf("\n1- Ver todos os dados dos estudantes.\n2- Adicionar um estudante.\n3- Remover um estudante.");
         printf("\n4- Atualizar um dado de um estudante.\n5- Pesquisar um estudante pelo seu nome.");
-        printf("\n6- Mostrar a lista dos nomes dos alunos por ordem algabetica dos seus apelidos.");
+        printf("\n6- Mostrar a lista dos nomes dos alunos por ordem alfabetica dos seus apelidos.");
         printf("\n7- Mostrar alunos com medias entre dois valores.");
         printf("\n8- Mostrar alunos em risco de prescrever\n9- Determinar o numero de estudantes finalistas.");
         printf("\n10- Mostrar as medias das idades dos alunos de uma certa nacionalidade por ano.");
@@ -167,6 +168,7 @@ int main(void)
         case 9: //determinar o número de estudantes finalistas
             n_fin = n_est_finalistas(dados_alunos, size_base);
             printf("Numero de estudantes finalistas: %d.\n",n_fin);
+
             fflush(stdin);
             break;
 
