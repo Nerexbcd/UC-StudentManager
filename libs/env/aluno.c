@@ -93,10 +93,9 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
                 base_dados[i].ano_curso= atoi(strdup(dados[3]));
 
                 char * carater = strdup(dados[4]);
-                for (int k=0;k<strlen(dados[4]);k++) {
-                    if (carater[i]== '.') {
-                        puts("a");
-                        carater[i] = ',';
+                for (int k=0; k<strlen(carater); k++) {
+                    if (carater[k]== '.') {
+                        carater[k] = ',';
                     }
                 }
                 base_dados[i].media_atual= atof(strdup(carater));
@@ -1101,7 +1100,7 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
             
             float temp_f = dados_alunos[i].media_atual;
             temp2 = malloc(sizeof(char)*((float)log10(temp_f)));
-            sprintf(temp2, "%.2f", temp_f);
+            sprintf(temp2, "%.1f", temp_f);
             vetor_situacao = strcat(vetor_situacao,strdup(temp2));
 
 
