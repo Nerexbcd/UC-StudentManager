@@ -103,11 +103,22 @@ int main(void)
         char * nacion = NULL;
         char * pesquisa = NULL;
         int i = 0;
-        char * data1 = malloc(sizeof(char)*10);;
-        char * data2 = malloc(sizeof(char)*10);;
-        char resposta = '0';
+        char * data1 = malloc(sizeof(char)*10);
+        char * data2 = malloc(sizeof(char)*10);
+
+        printf("\nEscolha entre as seguintes opcoes:");
+        printf("\n1- Ver todos os dados dos estudantes.\n2- Adicionar um estudante.\n3- Remover um estudante.");
+        printf("\n4- Atualizar um dado de um estudante.\n5- Pesquisar um estudante pelo seu nome.");
+        printf("\n6- Mostrar a lista dos nomes dos alunos por ordem algabetica dos seus apelidos.");
+        printf("\n7- Mostrar alunos com medias entre dois valores.");
+        printf("\n8- Mostrar alunos em risco de prescrever\n9- Determinar o numero de estudantes finalistas.");
+        printf("\n10- Mostrar as medias das idades dos alunos de uma certa nacionalidade por ano.");
+        printf("\n11- Listar os alunos com datas de nascimento entre dois valores e que pertecam a um grupo de 5 nacionalidades.");
+        printf("\n12- Determinar o numero medio de matriculas, em geral e por nacionalidade.");
+        printf("\n13- Guardar os ficheiros.");
+        printf("\n14- Sair.");
         
-        printf("\nOpcao: ");
+        printf("\n\nOpcao: ");
         fflush(stdin);
         scanf(" %d",&opcao);
         

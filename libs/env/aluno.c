@@ -489,7 +489,6 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
 {
     int * lista_matches;
     lista_matches = (int *) malloc(sizeof(int)*size_base);
-    printf("\n%i\n",strlen(pesquisa));
     
 
     for (int s=0; s<size_base; s++) {
@@ -500,11 +499,11 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
     for (int i=0; i<size_base; i++) {
 
         char * vetor = lista_estudantes[i].nome;  //define o vetor a comparar.
-        printf("\n%i\n",strlen(vetor));
+      
         for (int k=0; k<sizeof(*(lista_estudantes->nome)); k++) { //vai comparar elemento a elemento
-            printf("//%c// ",vetor[k]);
+           
             int repeticao=k;
-            puts("c");
+           
             do {
                 int posicao=0;
                 int matches=0;
@@ -539,7 +538,7 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
                 }
             }
             while ((strlen(vetor))-repeticao>strlen(pesquisa) && repeticao!=0);
-            puts("fim");
+         
 
         }
     }

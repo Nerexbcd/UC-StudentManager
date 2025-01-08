@@ -44,7 +44,6 @@ char * menu_obter_pesquisa()
         printf("Pesquisar: ");
         fflush(stdin);
         scanf(" %s",pesquisa);
-        scanf(" %s",pesquisa);
         puts("");
         rep++;
     }
