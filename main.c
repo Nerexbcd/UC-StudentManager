@@ -74,6 +74,9 @@ int main(void)
         
         txtFile txt_estudantes = txt_files_init(path_estudantes);
         txtFile txt_situacao   = txt_files_init(path_situacao);
+        printf("\n%s",txt_situacao.path);
+        printf("\n%s\n",txt_situacao.fileDir);
+        printf("\n%s\n",txt_situacao.fileName);
    
         ALUNO *dados_alunos = criar_lista(&txt_estudantes);
 
@@ -81,22 +84,7 @@ int main(void)
 
         seek_data(txt_estudantes, txt_situacao,dados_alunos, &size_alunos);
 
-       /* mostrar_toda_lista(dados_alunos);
-        
-    
-        mostrar_lista_por_ordem_apelido(dados_alunos);
-   
-        char * string = "do";
-        pesquisar(dados_alunos,string);
-
-        int a = estudantes_risco_prescrever(dados_alunos);
-
-        char * c = "Portuguesa";
-        float ano_a= 2024;
-        float * b = media_idades_nacionalidade(dados_alunos, c, ano_a);
-        printf("%.0f\n",b[0]);
-        printf("%.0f\n",b[1]);
-        printf("%.0f\n",b[2]);*/
+       
 
    //tem que ter inicializado dos ficheiros antes
 

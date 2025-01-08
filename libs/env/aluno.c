@@ -74,7 +74,7 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
         }
     }
     txt_unload_file(&file_estudante);
-
+    
     //Atribuição dos dados do ficheiro situaçao_Escolar_Estudantes.txt à struct
     //É efetuada a sua correta colocação por comparação dos números de código
     txt_load_file(&file_situacao);
@@ -1096,8 +1096,6 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
             rep2++;
         }
     }
-    printf("\n%s",vetor_estudantes);
-    printf("\n%s",vetor_situacao);
 
     int size_txt_est = strlen(vetor_estudantes);
     output_txt_estudantes.size = size_txt_est;
@@ -1112,23 +1110,19 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
 
     char** pathParts1 = str_split(strdup(filepath1), PATH_SEPARATOR_CHAR, NULL);
 
-    // for (int i = 0; *(pathParts1 + i); i++) {
-    //     if (*(pathParts1 + i + 1) == NULL) {
-    //         output_txt_estudantes.fileName = *(pathParts1 + i);
-    //     } else {
-    //         strcat(strcat(output_txt_estudantes.fileDir, *(pathParts1 + i)) , PATH_SEPARATOR_STR);
-    //     }  
-    // }
+    for (int i = 0; *(pathParts1 + i); i++) {
+        if (*(pathParts1 + i + 1) == NULL) {
+            output_txt_estudantes.fileName = *(pathParts1 + i);
+        }
+    }
 
     char** pathParts2 = str_split(strdup(filepath1), PATH_SEPARATOR_CHAR, NULL);
 
-    // for (int i = 0; *(pathParts2 + i); i++) {
-    //     if (*(pathParts2 + i + 1) == NULL) {
-    //         output_txt_situacao.fileName = *(pathParts2 + i);
-    //     } else {
-    //         strcat(strcat(output_txt_situacao.fileDir, *(pathParts2 + i)) , PATH_SEPARATOR_STR);
-    //     }  
-    // }
+    for (int i = 0; *(pathParts2 + i); i++) {
+        if (*(pathParts2 + i + 1) == NULL) {
+            output_txt_situacao.fileName = *(pathParts2 + i);
+        } 
+    }
 
     if (output_txt_estudantes.size!=0) {
         output_txt_estudantes.loaded = 1;
@@ -1147,7 +1141,6 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
     printf("\n%s",* output_txt_situacao.data);
 
     txt_save_file(output_txt_estudantes);
-    puts("a");
     txt_save_file(output_txt_situacao);
 
 }

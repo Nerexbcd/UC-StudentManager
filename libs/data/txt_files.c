@@ -165,9 +165,12 @@ void txt_save_file(txtFile txt){
         txt_error_open_file(txt.path);
     }
     puts("d");
+    fprintf(file, "%s\n", *(txt.data));
+    /*
     for (int i = 0; i < txt.size; i++) {
         fprintf(file, "%s\n", *(txt.data + i));
     }
+    */
     puts("e");
     fclose(file);
     printf(CYAN("File %s saved\n"), txt.path);
