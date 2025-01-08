@@ -949,7 +949,6 @@ void n_medio_mat(ALUNO * lista_estudantes, int size_base)
 
     media_geral = soma_geral / n_total;
 
-    p
     //media por nacionalidades
     
 
