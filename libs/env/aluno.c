@@ -949,12 +949,9 @@ void n_medio_mat(ALUNO * lista_estudantes, int size_base)
 
     media_geral = soma_geral / n_total;
 
-    puts("b");
+    p
     //media por nacionalidades
-    typedef struct nacionalidades
-    {
-        char * nacionalidade;
-    }NACIO;
+    
 
     NACIO * vetor_nacionalidades = NULL;
     int size_vetor_nacio = 0;
