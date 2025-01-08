@@ -121,7 +121,6 @@ int main(void)
             printf("\nInsira os dados do aluno:\n");
             fflush(stdin);
             size_base = inserir_estudante(dados_alunos,&size_alunos, size_base);
-            printf("\nnova size_base %i\n",size_base);
             break;
 
         case 3: //remover um aluno

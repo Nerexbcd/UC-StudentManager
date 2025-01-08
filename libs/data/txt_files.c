@@ -163,7 +163,7 @@ void txt_save_file(txtFile txt){
     if (file == NULL) {
         txt_error_open_file(txt.path);
     }
-
+    
     fprintf(file, "%s\n", *(txt.data));
     
     fclose(file);

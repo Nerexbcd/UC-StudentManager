@@ -175,7 +175,14 @@ int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base
 
     printf("Media atual: ");
     fflush(stdin);
-    scanf(" %f",&((lista_estudantes[j]).media_atual));
+    char m_temp[5];
+    scanf("%s", m_temp);
+    for (int i=0; i<strlen(m_temp); i++) {
+        if (m_temp[i] == '.') {
+            m_temp[i] = ',';
+        }
+    }
+    lista_estudantes[j].media_atual = atof(m_temp);
 
     printf("ECTS concluidos: ");
     fflush(stdin);
@@ -310,7 +317,14 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
 
         case 7:
             printf("Qual o novo numero de matriculas do estudante numero %d?\n",(lista_estudantes[j]).codigo);
-            scanf("%d",&(lista_estudantes[j]).n_matriculas);
+            char m_temp[5];
+            scanf("%s", m_temp);
+            for (int i=0; i<strlen(m_temp); i++) {
+                if (m_temp[i] == '.') {
+                    m_temp[i] = ',';
+                }
+            }
+            lista_estudantes[j].n_matriculas = atof(m_temp);
             break;
     }
 
@@ -1101,6 +1115,13 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
             float temp_f = dados_alunos[i].media_atual;
             temp2 = malloc(sizeof(char)*((float)log10(temp_f)));
             sprintf(temp2, "%.1f", temp_f);
+            printf("\n%i\n",strlen(temp2));
+            for (int k=0; k<strlen(temp2)+1; k++) {
+                
+                if (temp2[k] == ',') {
+                    temp2[k] = '.';
+                }
+            }
             vetor_situacao = strcat(vetor_situacao,strdup(temp2));
 
 
