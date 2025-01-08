@@ -169,3 +169,18 @@ void txt_save_file(txtFile txt){
     fclose(file);
     printf(CYAN("File %s saved\n"), txt.path);
 }
+
+// ------------------------------ CVS File Save
+
+void cvs_save_file(int size_result, char ** result, char * header, char * nome){
+
+    FILE * ptr_cvs;
+    ptr_cvs = fopen(nome,"w+");
+
+    fprintf(ptr_cvs, header);
+    for (int i=0; i<size_result; i++) {
+        fprintf(ptr_cvs, result[i]);
+    }
+
+    fclose(ptr_cvs);
+}
