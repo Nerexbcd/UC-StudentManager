@@ -92,6 +92,12 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
 
                 base_dados[i].ano_curso= atoi(strdup(dados[3]));
 
+                char * carater = * (dados[4]);
+                for (int k=0;k<strlen(dados[4]);k++) {
+                    if (carater[i]== '.') {
+                        carater[i] = ',';
+                    }
+                }
                 base_dados[i].media_atual= atof(strdup(dados[4]));
             }
         }
