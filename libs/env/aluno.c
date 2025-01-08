@@ -995,49 +995,65 @@ void n_medio_mat(ALUNO * lista_estudantes, int size_base)
 void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * filepath1, char * filepath2)
 {
     txtFile output_txt_estudantes;
-    output_txt_estudantes.data = NULL;
-    char * vetor_estudantes = NULL;
     txtFile output_txt_situacao;
     output_txt_situacao.data = NULL;
     char * vetor_situacao = NULL;
 
     puts("a");
 
-    for (int i=0; i<size_base; i++) {
+    int temp = 9999;
+    char * temp2 = malloc(sizeof(char)*(int)log10(temp));
+    sprintf(temp2, "%d", temp);
+    printf("\n%s\n",temp2);
+    puts("d");
+    char * vetor_estudantes;
+    puts("v");
+    for (int i=0,rep=0; i<size_base; i++) {
         if (dados_alunos[i].ocupado==1){
             //vetor_estudantes
-            if (!vetor_estudantes) {
-                puts("b");
-                vetor_estudantes = malloc(sizeof(char) * strlen((dados_alunos[i].codigo)));
-                puts("e");
-                vetor_estudantes = strdup(dados_alunos[i].codigo);
-                puts("e");
-                vetor_estudantes = strcat(vetor_estudantes,'\t');
-                vetor_estudantes = strcat(vetor_estudantes,strdup(dados_alunos[i].nome));
-                puts("e");
-                vetor_estudantes = strcat(vetor_estudantes,'\t');
-                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].data_n.dia));
-                vetor_estudantes = strcat(vetor_estudantes,'-');
-                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].data_n.mes));
-                vetor_estudantes = strcat(vetor_estudantes,'-');
-                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].data_n.ano));
-                vetor_estudantes = strcat(vetor_estudantes,'\t');
-                vetor_estudantes = strcat(vetor_estudantes,strdup(dados_alunos[i].nacionalidade));
-                puts("c");
+            if (rep!=0) {
+                vetor_estudantes = strcat(vetor_estudantes,"\n");
             }
             else {
-                vetor_estudantes = strcat(vetor_estudantes,'\n');
-                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].codigo));
-                vetor_estudantes = strcat(vetor_estudantes,'\t');
+                puts("g");
+                int temp = dados_alunos[i].codigo;
+                char * temp2 = temp2 = malloc(sizeof(char)*((int)log10(temp))+1);
+                sprintf(temp2, "%d", temp);
+                printf("\n%s\n",temp2);
+                vetor_estudantes = strcat(vetor_estudantes,strdup(temp2));
+                puts("i");
+                vetor_estudantes = strcat(vetor_estudantes,"\t");
+                puts("g");
                 vetor_estudantes = strcat(vetor_estudantes,strdup(dados_alunos[i].nome));
-                vetor_estudantes = strcat(vetor_estudantes,'\t');
-                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].data_n.dia));
-                vetor_estudantes = strcat(vetor_estudantes,'-');
-                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].data_n.mes));
-                vetor_estudantes = strcat(vetor_estudantes,'-');
-                vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].data_n.ano));
-                vetor_estudantes = strcat(vetor_estudantes,'\t');
+                vetor_estudantes = strcat(vetor_estudantes,"\t");
+
+                temp = dados_alunos[i].data_n.dia;
+                temp = 30;
+                printf("\n%d",temp);
+                sprintf(temp2, "%d", temp);
+                temp2 = malloc(sizeof(char)*(int)(log10(temp)));
+                
+                vetor_estudantes = strcat(vetor_estudantes,strdup(temp2));
+                printf("\n%s",vetor_estudantes);
+                
+                vetor_estudantes = strcat(vetor_estudantes,"-");
+                printf("\n%s",vetor_estudantes);
+                temp = dados_alunos[i].data_n.mes;
+                temp2 = malloc(sizeof(char)*((int)log10(temp))+1);
+                sprintf(temp2, "%d", temp);
+                vetor_estudantes = strcat(vetor_estudantes,strdup(temp2));
+                vetor_estudantes = strcat(vetor_estudantes,"-");
+                printf("\n%s",vetor_estudantes);
+                temp = dados_alunos[i].data_n.ano;
+                temp2 = malloc(sizeof(char)*((int)log10(temp))+1);
+                sprintf(temp2, "%d", temp);
+                vetor_estudantes = strcat(vetor_estudantes,strdup(temp));
+                printf("\n%s",vetor_estudantes);
+                
+                vetor_estudantes = strcat(vetor_estudantes,"\t");
+                puts("h");
                 vetor_estudantes = strcat(vetor_estudantes,strdup(dados_alunos[i].nacionalidade));
+                puts("end");
             }
 
             //vetor_situacao
@@ -1065,6 +1081,7 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
                 vetor_estudantes = strcat(vetor_estudantes,'\t');
                 vetor_estudantes = strcat(vetor_estudantes,strdup((char) dados_alunos[i].media_atual));
             }
+            rep++;
         }
     }
 

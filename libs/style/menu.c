@@ -56,9 +56,8 @@ char * menu_obter_pesquisa()
 
 char * menu_obter_nacionalidade()
 {
-    char * nacio = NULL;
+    char * nacio = malloc(sizeof(char)*100);;
     int rep = 0;
-    *nacio = malloc(sizeof(char)*100);
     
     do
     {
