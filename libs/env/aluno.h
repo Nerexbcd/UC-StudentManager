@@ -60,9 +60,6 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes, int size_base);
 //Permite calcular o número de posições ocupadas, ou seja, com lista_estudantes[i].ocupado==1
 int calcular_tam_lista(ALUNO *lista_estudantes);
 
-//Determina média do número de matrículas dos estudantes, em geral e por nacionalidade
-float media_mat(ALUNO *lista_estudantes,char *nacion, int size_base);
-//falta determinar por nacionalidades, vou ver mais tarde
 
 //Pesquisa um aluno através de parte do seu nome
 void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base);
@@ -70,7 +67,6 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base);
 //Calcular e mostrar quantos estudantes existem com cada um de 3 escalões de média atual especificados 
 //pelo utilizador
 int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y, int size_base);
-
 
 //Listar os estudantes, cujas datas de nascimento estejam dentro de um intervalo e pertencentes a um
 //conjunto máximo de 5 nacionalidades

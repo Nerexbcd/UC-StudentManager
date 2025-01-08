@@ -105,6 +105,7 @@ int main(void)
         int i = 0;
         char * data1 = malloc(sizeof(char)*10);;
         char * data2 = malloc(sizeof(char)*10);;
+        char resposta = '0';
         
         printf("\nOpcao: ");
         fflush(stdin);
@@ -185,13 +186,7 @@ int main(void)
             break;
         
         case 13: //guardar o ficheiro
-            /*printf("\nPretende guardar o ficheiro (Y/N)? ");
-            fflush(stdin);
-            gets("");
-            fflush(stdin);*/
-
             criar_txt_ficheiro_guardar (dados_alunos, size_base, path_estudantes, path_situacao);
-
             break;
 
         case 177:

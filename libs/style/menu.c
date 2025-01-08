@@ -64,7 +64,7 @@ char * menu_obter_nacionalidade()
         if (rep!=0) {
             printf("Erro! Tente novamente.\n");
         }
-        printf("Nacionalidade: ");
+        printf("Nacionalidade (se nenhuma, escreva 0): ");
         fflush(stdin);
         scanf("%s",nacio);
         rep++;

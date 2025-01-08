@@ -964,7 +964,7 @@ void n_medio_mat(ALUNO * lista_estudantes, int size_base)
     float * n_ele = calloc(1,sizeof(float));
 
     for (int i=0,k=0; i<size_base; i++) {
-        if (lista_estudantes[i].ocupado==1) {
+        if (lista_estudantes[i].ocupado == 1) {
             if (!vetor_nacionalidades) {
                 vetor_nacionalidades = (NACIO *) realloc(vetor_nacionalidades,sizeof(NACIO));
                 vetor_nacionalidades[k].nacionalidade = (char *) (strdup (lista_estudantes[i].nacionalidade));
