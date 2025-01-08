@@ -1028,6 +1028,9 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
 
             temp = dados_alunos[i].data_n.dia;
             temp2 = malloc(sizeof(char)*(int)(log10(temp)));
+            if (temp<10) {
+                vetor_estudantes = strcat(vetor_estudantes,"0"); 
+            }
             sprintf(temp2, "%d", temp);
             
             vetor_estudantes = strcat(vetor_estudantes,strdup(temp2));
@@ -1035,6 +1038,9 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
             
             temp = dados_alunos[i].data_n.mes;
             temp2 = malloc(sizeof(char)*((int)log10(temp)));
+            if (temp<10) {
+                vetor_estudantes = strcat(vetor_estudantes,"0"); 
+            }
             sprintf(temp2, "%d", temp);
             vetor_estudantes = strcat(vetor_estudantes,strdup(temp2));
             vetor_estudantes = strcat(vetor_estudantes,"-"); 
@@ -1086,9 +1092,9 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
             vetor_situacao = strcat(vetor_situacao,strdup(temp2));
             vetor_situacao = strcat(vetor_situacao,"\t");
             
-            temp = dados_alunos[i].media_atual;
-            temp2 = malloc(sizeof(char)*((float)log10(temp)));
-            sprintf(temp2, "%d", temp);
+            float temp_f = dados_alunos[i].media_atual;
+            temp2 = malloc(sizeof(char)*((float)log10(temp_f)));
+            sprintf(temp2, "%.2f", temp_f);
             vetor_situacao = strcat(vetor_situacao,strdup(temp2));
 
 

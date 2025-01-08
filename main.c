@@ -74,9 +74,6 @@ int main(void)
         
         txtFile txt_estudantes = txt_files_init(path_estudantes);
         txtFile txt_situacao   = txt_files_init(path_situacao);
-        printf("\n%s",txt_situacao.path);
-        printf("\n%s\n",txt_situacao.fileDir);
-        printf("\n%s\n",txt_situacao.fileName);
    
         ALUNO *dados_alunos = criar_lista(&txt_estudantes);
 
