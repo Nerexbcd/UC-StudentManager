@@ -1014,7 +1014,7 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
 
             int temp = dados_alunos[i].codigo;
             char * temp2 = temp2 = malloc(sizeof(char)*((int)(log10(temp)))); //o cálculo do espaço estava na mesma página do stack overflow do da funcao de baixo
-            sprintf(temp2, "%d", temp); //vê no google,é suposto transformar int para (char *)
+            sprintf(temp2, "%d", temp); //vê no google, é suposto transformar int para (char *)
             if (rep==0) {
                 vetor_estudantes = strdup(temp2);
             }
@@ -1048,7 +1048,7 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
             vetor_estudantes = strcat(vetor_estudantes,"\t");
             vetor_estudantes = strcat(vetor_estudantes,strdup(dados_alunos[i].nacionalidade));
 
-            puts("c");
+
             //vetor situacao escolar dos alunos
             if (rep2!=0) {
                 //no caso de não ser a primeira iteração do aluno, acrescenta um parágrafo
@@ -1066,7 +1066,7 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
                 vetor_situacao = strcat(vetor_situacao,strdup(temp2));
             }
             vetor_situacao = strcat(vetor_situacao,"\t");
-            puts("a");
+
             temp = dados_alunos[i].ano_curso;
             temp2 = malloc(sizeof(char)*(int)(log10(temp)));
             sprintf(temp2, "%d", temp);
@@ -1094,7 +1094,6 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
 
             rep++;
             rep2++;
-            puts("b");
         }
     }
     printf("\n%s",vetor_estudantes);
@@ -1104,10 +1103,10 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
     output_txt_estudantes.size = size_txt_est;
     int size_txt_sit = strlen(vetor_situacao);
     output_txt_situacao.size = size_txt_sit;
-
+    
     output_txt_estudantes.data = & vetor_estudantes;
     output_txt_situacao.data = & vetor_situacao;
-
+    
     output_txt_estudantes.fileDir = strdup(filepath1);
     output_txt_situacao.fileDir = strdup(filepath2);
 
@@ -1144,4 +1143,11 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
     else {
         output_txt_situacao.loaded = 0;
     }
+    printf("\n%s",* output_txt_estudantes.data);
+    printf("\n%s",* output_txt_situacao.data);
+
+    txt_save_file(output_txt_estudantes);
+    puts("a");
+    txt_save_file(output_txt_situacao);
+
 }

@@ -157,14 +157,18 @@ void txt_remove_data(txtFile *txt, size_t index){
 void txt_save_file(txtFile txt){
 
     if (txt.loaded == 0) txt_error_not_loaded(txt.path);
-    
+    puts("c");
     FILE *file = fopen(txt.path, "w");
-
-    if (file == NULL) txt_error_open_file(txt.path);
-    
+    puts("b");
+    if (file == NULL) {
+        puts("g");
+        txt_error_open_file(txt.path);
+    }
+    puts("d");
     for (int i = 0; i < txt.size; i++) {
         fprintf(file, "%s\n", *(txt.data + i));
     }
+    puts("e");
     fclose(file);
     printf(CYAN("File %s saved\n"), txt.path);
 }
