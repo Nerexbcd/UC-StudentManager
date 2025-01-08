@@ -1107,28 +1107,28 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
     output_txt_estudantes.data = & vetor_estudantes;
     output_txt_situacao.data = & vetor_situacao;
     
-    output_txt_estudantes.fileDir = strdup(filepath1);
-    output_txt_situacao.fileDir = strdup(filepath2);
+    output_txt_estudantes.path = strdup(filepath1);
+    output_txt_situacao.path = strdup(filepath2);
 
     char** pathParts1 = str_split(strdup(filepath1), PATH_SEPARATOR_CHAR, NULL);
 
-    for (int i = 0; *(pathParts1 + i); i++) {
-        if (*(pathParts1 + i + 1) == NULL) {
-            output_txt_estudantes.fileName = *(pathParts1 + i);
-        } else {
-            strcat(strcat(output_txt_estudantes.fileDir, *(pathParts1 + i)) , PATH_SEPARATOR_STR);
-        }  
-    }
+    // for (int i = 0; *(pathParts1 + i); i++) {
+    //     if (*(pathParts1 + i + 1) == NULL) {
+    //         output_txt_estudantes.fileName = *(pathParts1 + i);
+    //     } else {
+    //         strcat(strcat(output_txt_estudantes.fileDir, *(pathParts1 + i)) , PATH_SEPARATOR_STR);
+    //     }  
+    // }
 
     char** pathParts2 = str_split(strdup(filepath1), PATH_SEPARATOR_CHAR, NULL);
 
-    for (int i = 0; *(pathParts2 + i); i++) {
-        if (*(pathParts2 + i + 1) == NULL) {
-            output_txt_situacao.fileName = *(pathParts2 + i);
-        } else {
-            strcat(strcat(output_txt_situacao.fileDir, *(pathParts2 + i)) , PATH_SEPARATOR_STR);
-        }  
-    }
+    // for (int i = 0; *(pathParts2 + i); i++) {
+    //     if (*(pathParts2 + i + 1) == NULL) {
+    //         output_txt_situacao.fileName = *(pathParts2 + i);
+    //     } else {
+    //         strcat(strcat(output_txt_situacao.fileDir, *(pathParts2 + i)) , PATH_SEPARATOR_STR);
+    //     }  
+    // }
 
     if (output_txt_estudantes.size!=0) {
         output_txt_estudantes.loaded = 1;
