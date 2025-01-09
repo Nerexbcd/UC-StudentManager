@@ -8,6 +8,7 @@ typedef struct txtFile {
     char loaded;
     char **data;
     size_t size;
+    int size2;
 } txtFile;
 
 
