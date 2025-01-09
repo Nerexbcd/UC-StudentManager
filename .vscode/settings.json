@@ -54,6 +54,7 @@
         "nacionalidades",
         "nascimento",
         "nomes",
+        "opção",
         "opcoes",
         "ordem",
         "pelo",
@@ -65,6 +66,7 @@
         "seguintes",
         "seus",
         "situacao",
+        "válida",
         "valores"
     ]
 }
