@@ -11,9 +11,9 @@ typedef struct SDTM_File {
 } SDTM_File;
 
 
-// ------------------------------ TXT File Error Handling
+// ------------------------------ File Error Handling
 
-/* Error File Openning */
+/* Error File Opening */
 void error_open_file(char *path);
 
 /* Error File Data Not Loaded */

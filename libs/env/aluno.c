@@ -19,7 +19,7 @@
 
 
 
-ALUNO * criar_lista(txtFile *txt_estudantes) {
+ALUNO * criar_lista(SDTM_File *txt_estudantes) {
 
     //alocar memória necessária para todos os elementos da lista
     ALUNO *lista_estudantes; //estrutura com informacao dos alunos
@@ -43,7 +43,7 @@ ALUNO * criar_lista(txtFile *txt_estudantes) {
 
 
 
-void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, size_t *size_alunos)
+void seek_data(SDTM_File file_estudante, SDTM_File file_situacao, ALUNO *base_dados, size_t *size_alunos)
 {
     size_t wrt_size_alunos = 0;
 
@@ -2245,8 +2245,8 @@ void n_medio_mat(ALUNO * lista_estudantes, int size_base)
 
 void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * filepath1, char * filepath2)
 {
-    txtFile output_txt_estudantes;
-    txtFile output_txt_situacao;
+    SDTM_File output_txt_estudantes;
+    SDTM_File output_txt_situacao;
     output_txt_situacao.data = NULL;
     char * vetor_situacao;
     
