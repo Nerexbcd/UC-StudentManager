@@ -55,6 +55,7 @@ txtFile files_init(char *path) {
             txt.size++;
         }  
     }
+    
     return txt;
 }
 
