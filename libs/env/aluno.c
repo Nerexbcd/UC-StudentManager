@@ -347,6 +347,8 @@ int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base
         info = strcat(info,strdup(temp2));
         info = strcat(info,"\n"); 
     
+        temp = lista_estudantes[j].codigo;
+        sprintf(temp2, "%d", temp);
 
         char * nome = strdup("novo_aluno_");
         nome = strcat(nome,temp2);
@@ -379,14 +381,14 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
     int i=0; //resultado das opcoes a alterar
     int k=0; //código do estudante
     int j=0; //posição do aluno com código k na lista
-    int t=0;
+    int t=0; //determina posicao do estudante, verifica que existe
     do {
         printf("Qual o codigo do estudante? ");
         fflush(stdin);
         scanf(" %d",&k);
 
         for(t=0;t<size_base;t++) {
-            if(lista_estudantes[t].codigo==k) {
+            if(lista_estudantes[t].codigo==k && lista_estudantes[t].ocupado==1) {
                 j=t;
                 break;
             }
@@ -403,11 +405,6 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
 
     switch (i) {
         //i indica qual elemento da estrutura a mudar, fornecido pelo utilizador no menu anterior
-        case 0:
-            printf("Qual o novo codigo do estudante numero %d?\n",(lista_estudantes[j]).codigo);
-            scanf("%d",&(lista_estudantes[j]).codigo);
-            break;
-
         case 1:
             printf("Qual o novo numero de ECTS concluidos do estudante numero %d?\n",(lista_estudantes[j]).codigo);
             scanf("%d",&(lista_estudantes[j]).ects_concluidos);
@@ -444,7 +441,7 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
             bufsize=200;
             printf("Qual a nova nacionalidade do estudante numero %d?\n",(lista_estudantes[j]).codigo);
             fflush(stdin);
-            getline(&stringgg,&bufsize,stdin);
+            getline(&stringgg,&bufsize,stdin); //scanf decidiu reclamar comigo
             stringgg = * str_split(stringgg, '\n', NULL);
             lista_estudantes[j].nacionalidade=(char*) malloc(sizeof(stringgg));
             lista_estudantes[j].nacionalidade=stringgg;
@@ -460,7 +457,7 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
             getline(&stringgg,&bufsize,stdin);
             stringgg = * str_split(stringgg, '\n', NULL);
             char *dn = stringgg;
-            char **ptr_dn = str_split(dn, '-', NULL);
+            char **ptr_dn = str_split(dn, '-', NULL); //Separa o string  da data nas suas componentes para ser mais fácil lidar com ele
             lista_estudantes[j].data_n.dia= atoi(strdup(ptr_dn[0]));
             lista_estudantes[j].data_n.mes= atoi(strdup(ptr_dn[1]));
             lista_estudantes[j].data_n.ano= atoi(strdup(ptr_dn[2]));
@@ -473,7 +470,7 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
             char m_temp[5];
             scanf("%s", m_temp);
             for (int i=0; i<strlen(m_temp); i++) {
-                if (m_temp[i] == '.') {
+                if (m_temp[i] == '.') { //inputs podem estar com pontos, mas compilador só funciona com vírgulas em floats
                     m_temp[i] = ',';
                 }
             }
@@ -548,8 +545,10 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
         info = strcat(info,strdup(temp2));
         info = strcat(info,"\n"); 
         
+        temp = lista_estudantes[i].codigo;
+        sprintf(temp2, "%d", temp);
 
-        char * nome = strdup("aluno_alterado_");
+        char * nome = strdup("aluno_alterado_"); //nome do ficheiro vai depender do codigo do aluno para evitar reescrever outros possíveis ficheiros
         nome = strcat(nome,temp2);
         nome = strcat(nome,".txt");
         txt_result_save_file(info, nome);
@@ -618,8 +617,10 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
         info = strcat(info,strdup(temp2));
         info = strcat(info,"\n"); 
     
+        temp = lista_estudantes[i].codigo;
+        sprintf(temp2, "%d", temp);
 
-        char * nome = strdup("alu");
+        char * nome = strdup("aluno_alterado_");
         nome = strcat(nome,temp2);
         nome = strcat(nome,".cvs");
         cvs_result_save_file(header, info, nome);
@@ -632,22 +633,10 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
 
 
 
-int calcular_tam_lista(ALUNO *lista_estudantes) {
-    //pode ser útil
-    int tam = 0;
-    for (int i=0; i<sizeof(lista_estudantes) ;i++) {
-        if (lista_estudantes[i].ocupado==1) {
-            tam++;
-        }
-    }
-    return tam;
-}
-
-
-
 void mostrar_um_aluno(ALUNO *lista_estudantes,int posicao)
 {
     fflush(stdin);
+    //printf abstante simples, sem nada a comentar
     printf("Codigo: %d\n",lista_estudantes[posicao].codigo);
     printf("Nome: %s\n",lista_estudantes[posicao].nome);
     printf("Nacionalidade: %s\n",lista_estudantes[posicao].nacionalidade);
@@ -666,7 +655,7 @@ void mostrar_toda_lista(ALUNO *lista_estudantes, int size_base) {
 
     for (int i=0,rep=0; i<size_base;i++) {
         if ((lista_estudantes[i].ocupado)==1) {
-            if ((rep != 0) && (rep%3==0)) {
+            if ((rep != 0) && (rep%3==0)) { //paginacao mostra dados de 3 em 3 alunos, de modo a evitar ter demasiada informacao no ecra de uma vez
                 printf("Pagina seguinte ->");
                 fflush(stdin);
                 getchar();
@@ -848,7 +837,7 @@ void mostrar_toda_lista(ALUNO *lista_estudantes, int size_base) {
 
 void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes, int size_base)
 {
-    int * vet_organizado;
+    int * vet_organizado; //tem os índices da estrutura alunos organizados por ordem alfabetica dos apelidos
     vet_organizado = malloc(sizeof(int)*size_base);
 
     //cria o vetor que vai determinar a ordem alfabética dos apelidos
@@ -861,26 +850,27 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes, int size_base)
     lista_apelidos = malloc(sizeof(APELIDO *) * size_base);
 
     for (int g=0; g<size_base;g++) {
-        char * linha = strdup(lista_estudantes[g].nome);
+        char * linha = strdup(lista_estudantes[g].nome); //copia nome
         char ** nome_comp = NULL;
-        nome_comp = str_split(linha,' ', NULL);
-        int componentes = 0;
+        nome_comp = str_split(linha,' ', NULL); //divide o nome
+        int componentes = 0; //determina a quantidade de subdivisoes do nome
         int i=0;
 
-        while(nome_comp[i+1]!=0) {
+        while(nome_comp[i+1]!=0) { //procura a última subdivisão
             componentes++;
             i++;
         }
-        lista_apelidos[g].apel = malloc(sizeof(char) * strlen(nome_comp[componentes]));
-        lista_apelidos[g].apel = nome_comp[componentes];
+        lista_apelidos[g].apel = malloc(sizeof(char) * strlen(nome_comp[componentes])); 
+        lista_apelidos[g].apel = nome_comp[componentes]; //guarda o apelido na estrutura
     }
 
 
-    int temp;
+    int temp; //temporario, serve para trocar índices
 
     //compara os apelidos, mas guarda a sua ordem correta no vet_organizado
     //organiza por ordem decrescente
     //crescente nao funciona por algum motivo????
+    //de notar que não faz conversão de maiúsculas para minúsculas e vice-versa
     for(int i = 0; i<size_base-1; ++i)
     {
         int pos1 = vet_organizado[i];
@@ -898,9 +888,9 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes, int size_base)
     //como a lista está na ordem decrescente, também está o contador (para ser crescente)
 
     for (int i=size_base-1, rep=0; i>=0; i--) {
-        int posicao = vet_organizado[i];
+        int posicao = vet_organizado[i]; //determina qual o índice a considerar
         if (lista_estudantes[posicao].ocupado==1) {
-            if(rep!=0 && rep%10==0) {
+            if(rep!=0 && rep%10==0) { //paginação 10 a 10
                 printf("Pagina seguinte ->");
                 fflush(stdin);
                 getchar();
@@ -966,27 +956,27 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes, int size_base)
 
 float media_mat(ALUNO *lista_estudantes,char *nacion, int size_base) {
 
-    int media=0;
-    int num=0;
+    float media=0; //têm que estar em floats para fazer a divisao corretamente; media das matriculas, inicialmente a sua soma
+    float num=0; //numero de individuos a considerar
 
-    if (nacion == 0) {
+    if (nacion == 0) { //se for geral
         for(int i=0;i<size_base;i++) {
             if (lista_estudantes[i].codigo==1) {
                 media=media+(lista_estudantes[i].n_matriculas);
                 num++;
             }
         }
-        return (media/num);
+        return (media/num); //calcula a média
     }
-    else if (nacion != 0) {
+    else if (nacion != 0) { //se for de uma certa nacionalidade
         for(int i=0;i<size_base;i++) {
             if ((lista_estudantes[i].codigo==1) && (lista_estudantes[i].nacionalidade==nacion)) {
                 media=media+(lista_estudantes[i].n_matriculas);
                 num++;
             }
         }
-        return (media/num);
-    }
+        return (media/num); //calcula a média
+    } 
 }
 
 
@@ -995,7 +985,7 @@ float media_mat(ALUNO *lista_estudantes,char *nacion, int size_base) {
 
 void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
 {
-    int * lista_matches;
+    int * lista_matches; //indica se encontrou a pesquisa num índice (1) ou se não (0)
     lista_matches = (int *) malloc(sizeof(int)*size_base);
     
 
@@ -1045,7 +1035,7 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
 
                 }
             }
-            while ((strlen(vetor))-repeticao>strlen(pesquisa) && repeticao!=0);
+            while ((strlen(vetor))-repeticao>strlen(pesquisa) && repeticao!=0); //enquanto o vetor ainda tiver espaço para conter a pesquisa, senão sai
          
 
         }
@@ -1058,7 +1048,7 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
         if (rep==0) {//no case de ser a primeira iteração
             printf("Resultado(s) da pesquisa <%s>:\n",pesquisa);
         }
-        if (lista_matches[k]==1) {
+        if (lista_matches[k]==1) { //se a pesquisa deu positivo
             if ((g != 0) && (g%3==0)) {
                 printf("Pagina seguinte ->");
                 fflush(stdin);
@@ -1261,8 +1251,8 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y, int siz
 
     //Mostrar os alunos com médias entre estes 2 valores
     int i=0;//elemento de paginação, determina quantas iterações foram mostradas ao utilizador
-    int n_result = 0;;
-    int n_alu = 0;
+    int n_result = 0; //diz se houve resultados ou se não
+    int n_alu = 0; //número de alunos considerados
 
     for (int k=0;k<size_base;k++) {
         if ((lista_estudantes[k].ocupado==1) && (lista_estudantes[k].media_atual>=min) && (lista_estudantes[k].media_atual<=max)) {
@@ -1282,10 +1272,10 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y, int siz
         n_alu++;
     }
 
-    if (n_result==n_alu) {
+    if (n_result==n_alu) { //verifica se não houve resultados
         printf("Nao ha resultados no intervalo de medias %.2f - %.2f.\n",min,max);
     }
-    else {
+    else { //se houve, oferece para guardar
         char * t_guardar = malloc(sizeof(char)*4);
         t_guardar = tipo_de_guardar();
         
@@ -1490,7 +1480,7 @@ int n_est_finalistas(ALUNO * lista_estudantes, int size_base) {
 
 void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * data_2, int size_base)
 {
-    char * data_3 = strdup(data_1);
+    char * data_3 = strdup(data_1); //copia as strings para evitar erros
     char * data_4 = strdup(data_2);
     
     DATA_NAS data_sup;//data maior
@@ -1503,7 +1493,7 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
     //com as datas dos alunos
     char *dnp = data_1;//ponteiro de data_1
     char **ptr_dnp = str_split(dnp, '-', NULL);//vai separar as datas da carater '-'
-    data_prim.dia= atoi(strdup(ptr_dnp[0]));//alocação de cada elemento no campo adequado
+    data_prim.dia= atoi(strdup(ptr_dnp[0]));//alocação de cada elemento no campo adequado: dia, mes e ano
     data_prim.mes= atoi(strdup(ptr_dnp[1]));
     data_prim.ano= atoi(strdup(ptr_dnp[2]));
 
@@ -1548,8 +1538,8 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
         }
     }
 
-    int * lista_matches = (int *) calloc(size_base, sizeof(int));
-    int * lista_preliminary_matches = (int *) calloc(size_base, sizeof(int));
+    int * lista_matches = (int *) calloc(size_base, sizeof(int)); //vai indicar se os alunos nos índices são hits ou se não
+    int * lista_preliminary_matches = (int *) calloc(size_base, sizeof(int)); //inicializa tudo a 0
 
     //Efetua a comparação da data dos estudantes com o intervalo definido
     //Nacionalidades são tidas em conta noutro ciclo
@@ -1597,12 +1587,13 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
         }
     }
 
+    //nacionalidades permitidas
     char * nacio1;
     char * nacio2;
     char * nacio3;
     char * nacio4;
     char * nacio5;
-    int n_resultados = 0;
+    int n_resultados = 0; //numero de resultados para parte final
 
 
     //Determina as nacionalidades: as cinco primeiras encontradas.
@@ -1775,8 +1766,9 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
                 }
             }
 
-            char * nome = strdup("alunos_com_datas_nascimento_entre");
+            char * nome = strdup("alunos_com_datas_nascimento_entre"); //evita reescrever ficheiros
             nome = strcat(nome,data_3);
+            nome = strcat(nome,"_");
             nome = strcat(nome,data_4);
             nome = strcat(nome,".txt");
             txt_result_save_file(info, nome);
@@ -1860,6 +1852,7 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
 
             char * nome = strdup("alunos_com_datas_nascimento_entre");
             nome = strcat(nome,data_3);
+            nome = strcat(nome,"_");
             nome = strcat(nome,data_4);
             nome = strcat(nome,".cvs");
             cvs_result_save_file(header, info, nome);
@@ -1902,7 +1895,7 @@ int estudantes_risco_prescrever(ALUNO * lista_estudantes, int size_base) {
         }
     }
 
-    int rep=0;
+    int rep=0;//para paginacao
     if (num!=0) {//no caso de haver pelo menos 1 estudante em risco
         for (int i=0;i<size_base;i++) {
             if (lista_prescricao[i]==1) {
@@ -2101,8 +2094,8 @@ float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float
     float * media_por_nac_por_ano = malloc(sizeof(float)*5);
 
     for (int j=1; j<6; j++) { //determina qual o ano de curso (e posicao no vetor) estamos a avaliar
-        float n_ele = 0;
-        float soma = 0;
+        float n_ele = 0; //em float para fazer divisão corretamente; numero de elementos
+        float soma = 0; //soma dos valores
 
         if (strcmp(nacio,"0")!=0) {
             for (int i=0; i<size_base;i++) {
@@ -2112,17 +2105,18 @@ float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float
                     n_ele++;
                     float idade = ano_atual - (lista_estudantes[i].data_n.ano); //idade é obtida de forma muito simplificada através do ano de nascimento.
                     //ignoram-se as outras componentes desta data por agora
+                    //poderia incorporar-se o cálculo com meses e dias, mas seria demasido complicado ter que arredondar e obter a data do sistema
                     soma = soma + idade;
                 }
             }
             if (n_ele!=0) {
-                media_por_nac_por_ano[j-1] = (soma/n_ele);
+                media_por_nac_por_ano[j-1] = (soma/n_ele); //cálculo da média, armazena no vetor
             }
             else { //para evitar possíveis divisões por zero
                 media_por_nac_por_ano[j-1] = 0;
             }
         }
-        else {
+        else { //mesmo princípio mas cálculo geral em vez de por nacionalidade
             for (int i=0; i<size_base;i++) {
                 if ((lista_estudantes[i].ocupado == 1) && (lista_estudantes[i].ano_curso == j)) {
                         n_ele++;
@@ -2149,10 +2143,11 @@ float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float
 void n_medio_mat(ALUNO * lista_estudantes, int size_base)
 {
     //media geral
-    float soma_geral = 0;
-    float n_total = 0;
-    float media_geral = 0;
+    float soma_geral = 0; //soma
+    float n_total = 0; //numero de elementos
+    float media_geral = 0; //media
 
+    //calcula a soma e numero de elementos (do número de matrículas)
     for (int i=0; i<size_base; i++) {
         if (lista_estudantes[i].ocupado==1) {
             soma_geral += lista_estudantes[i].n_matriculas;
@@ -2160,39 +2155,39 @@ void n_medio_mat(ALUNO * lista_estudantes, int size_base)
         }
     }
 
-    media_geral = soma_geral / n_total;
+    media_geral = soma_geral / n_total; //calcula a média
 
     //media por nacionalidades
     
 
-    NACIO * vetor_nacionalidades = NULL;
-    int size_vetor_nacio = 0;
-    float * medias = calloc(1,sizeof(float));
+    NACIO * vetor_nacionalidades = NULL; //armazena as nacionalidades a considerar numa estrutura própria
+    int size_vetor_nacio = 0; //tamanho da estrutura a considerar num outro ciclo
+    float * medias = calloc(1,sizeof(float)); //cria os vetores relevantes, inicializa todos os campos a 0
     float * somas = calloc(1,sizeof(float));
     float * n_ele = calloc(1,sizeof(float));
 
     for (int i=0, k=0; i<size_base; i++) {
         if (lista_estudantes[i].ocupado == 1) {
-            if (!vetor_nacionalidades) {
+            if (!vetor_nacionalidades) { //se não existir, primeira iteração
 
-                NACIO * new_vetor_nacionalidades = (NACIO *) realloc(vetor_nacionalidades,sizeof(NACIO));
+                NACIO * new_vetor_nacionalidades = (NACIO *) realloc(vetor_nacionalidades,sizeof(NACIO)); //realocação de memória
                 vetor_nacionalidades = new_vetor_nacionalidades;
                 vetor_nacionalidades[0].nacionalidade = (char *) (strdup (lista_estudantes[i].nacionalidade));
                 
                 medias = (float *) realloc(medias,sizeof(float));
                 somas = (float* ) realloc(somas,sizeof(float));
                 n_ele = (float *) realloc(n_ele,sizeof(float));
-                somas[0] = lista_estudantes[i].n_matriculas;
+                somas[0] = lista_estudantes[i].n_matriculas; //determina soma e número de elementos
                 n_ele[0] = 1;
                 
-                size_vetor_nacio = 1;
+                size_vetor_nacio = 1; //aumenta tamanho da estrutura
             }
             else {
 
-                int num_rep = 0;
+                int num_rep = 0; //determina quantos elementos foram percorridos na estrutura para ver se o aluno tem uma das suas nacionalidades
                 
                 for (int j=0; j<size_vetor_nacio; j++) {
-                    
+                    //se o aluno tiver nacionalidade já pertencente à estrutura
                     if (strcmp(lista_estudantes[i].nacionalidade,vetor_nacionalidades[j].nacionalidade)==0) {
                         
                         printf("\n%s\n",vetor_nacionalidades[j].nacionalidade);
@@ -2203,19 +2198,19 @@ void n_medio_mat(ALUNO * lista_estudantes, int size_base)
                         break;
                     }
                     else {
-                        num_rep++;
+                        num_rep++; //no caso de não encontrar a nacionalidade certa, percorre a estrutura de nacionalidades
                     }
                 }
-
+                //se o aluno tiver uma nacionalidade nova
                 if (num_rep==size_vetor_nacio) {
                     k++;
-                    size_vetor_nacio ++;
+                    size_vetor_nacio ++; //aumenta o tamanho da estrutura
                 
-                    NACIO * new_vetor_nacionalidades = (NACIO *) realloc(vetor_nacionalidades,sizeof(NACIO *)*sizeof(NACIO));
+                    NACIO * new_vetor_nacionalidades = (NACIO *) realloc(vetor_nacionalidades,sizeof(NACIO *)*sizeof(NACIO)); //??? só funcionava assim
                     vetor_nacionalidades = new_vetor_nacionalidades;
-                    
+                    //adiciona nova nacionalidade
                     vetor_nacionalidades[k].nacionalidade = strdup (lista_estudantes[i].nacionalidade);
-                    medias = (float *) realloc(medias,sizeof(float)* sizeof(float*));
+                    medias = (float *) realloc(medias,sizeof(float)* sizeof(float*)); //adiciona mais espaço aos outros vetores
                     somas = (float *) realloc(somas,sizeof(float)* sizeof(float*));
                     n_ele = (float *) realloc(n_ele,sizeof(float)*sizeof(float*));
                     somas[k] = lista_estudantes[i].n_matriculas;
@@ -2230,12 +2225,12 @@ void n_medio_mat(ALUNO * lista_estudantes, int size_base)
 
     
     for (int i=0; i<size_vetor_nacio; i++) {
-        medias[i]=somas[i]/n_ele[i];
+        medias[i]=somas[i]/n_ele[i]; //calcula todas as médias
     }
 
     printf("\nA media geral do numero de matriculas e %.2f",media_geral);
 
-    for (int i=0;i<size_vetor_nacio;i++) {
+    for (int i=0;i<size_vetor_nacio;i++) { //percorre a estrutura e o vetor das médias
         printf("\nA media do numero de matriculas da nacionalidade \"%s\" e %.2f.",vetor_nacionalidades[i].nacionalidade,medias[i]);
     }
 
@@ -2245,16 +2240,16 @@ void n_medio_mat(ALUNO * lista_estudantes, int size_base)
 
 void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * filepath1, char * filepath2)
 {
-    txtFile output_txt_estudantes;
-    txtFile output_txt_situacao;
+    txtFile output_txt_estudantes; //estrutura para estudantes
+    txtFile output_txt_situacao; //estrutura para situação
     output_txt_situacao.data = NULL;
-    char * vetor_situacao;
+    char * vetor_situacao; //vetor que vai receber informação
     
     char * vetor_estudantes; //vetor que vai receber informaçao (nao tinha a certeza como fazer diretamente para txt.data)
     //é só para o ficheiro estudantes, o outro tem outro vetor
     
     for (int i=0,rep=0,rep2=0; i<size_base; i++) {
-        if (dados_alunos[i].ocupado==1){
+        if (dados_alunos[i].ocupado==1){ //apenas se ocupado
             
             //vetor_estudantes
             if (rep!=0) {
@@ -2263,16 +2258,16 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
             }
             
 
-            int temp = dados_alunos[i].codigo;
-            char * temp2 = malloc(sizeof(char)*((int)(log10(temp)))); //o cálculo do espaço estava na mesma página do stack overflow do da funcao de baixo
-            sprintf(temp2, "%d", temp); //vê no google, é suposto transformar int para (char *)
-            if (rep==0) {
+            int temp = dados_alunos[i].codigo; //informação a transformar
+            char * temp2 = malloc(sizeof(char)*((int)(log10(temp)))); //logaritmo necessário para determinar espaço utilizado; vai ter a informação transformada em char*
+            sprintf(temp2, "%d", temp); //função utilizada para transformar int e float em char*
+            if (rep==0) { //no caso de ser a primeira iteração, inicializa o vetor
                 vetor_estudantes = strdup(temp2);
             }
             else {
-                vetor_estudantes = strcat(vetor_estudantes,strdup(temp2));
+                vetor_estudantes = strcat(vetor_estudantes,strdup(temp2)); //Strcat vai adicionar a informação ao vetor
             }
-            vetor_estudantes = strcat(vetor_estudantes,"\t");
+            vetor_estudantes = strcat(vetor_estudantes,"\t"); //elemento de separação de cada secção
             
             vetor_estudantes = strcat(vetor_estudantes,strdup(dados_alunos[i].nome));
             vetor_estudantes = strcat(vetor_estudantes,"\t");
@@ -2355,26 +2350,27 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
             vetor_situacao = strcat(vetor_situacao,strdup(temp2));
 
 
-            rep++;
-            rep2++;
-        }
+            rep++; //verifica se é a primeira iteração do vetor estudantes
+            rep2++; //verifica se é a primeira iteração do vetor alunos
+        } 
     }
 
-    int size_txt_est = strlen(vetor_estudantes);
-    output_txt_estudantes.size = size_txt_est;
+    int size_txt_est = strlen(vetor_estudantes); //calcula tamanho dos dados
+    output_txt_estudantes.size = size_txt_est; //coloca na struct
     int size_txt_sit = strlen(vetor_situacao);
     output_txt_situacao.size = size_txt_sit;
     
-    output_txt_estudantes.data = & vetor_estudantes;
+    output_txt_estudantes.data = & vetor_estudantes; //transfere vetor para campo adequado na struct
     output_txt_situacao.data = & vetor_situacao;
     
-    output_txt_estudantes.path = strdup(filepath1);
+    output_txt_estudantes.path = strdup(filepath1); //utiliza os caminho iniciais dos ficheiros originais
     output_txt_situacao.path = strdup(filepath2);
 
+    //separa os caminhos dos nomes dos ficheiros, de modo a obter este último
     char** pathParts1 = str_split(strdup(filepath1), PATH_SEPARATOR_CHAR, NULL);
 
     for (int i = 0; *(pathParts1 + i); i++) {
-        if (*(pathParts1 + i + 1) == NULL) {
+        if (*(pathParts1 + i + 1) == NULL) { //procura a última parte (a parte antes de \0)
             output_txt_estudantes.fileName = *(pathParts1 + i);
         }
     }
@@ -2388,7 +2384,7 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
     }
 
     if (output_txt_estudantes.size!=0) {
-        output_txt_estudantes.loaded = 1;
+        output_txt_estudantes.loaded = 1; //diz que a informação está carregada se o tamanho da informação da estrutura for diferente de zero
     }
     else {
         output_txt_estudantes.loaded = 0;
@@ -2401,7 +2397,7 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
         output_txt_situacao.loaded = 0;
     }
 
-    txt_save_file(output_txt_estudantes);
+    txt_save_file(output_txt_estudantes); //guarda os ficheiros
     txt_save_file(output_txt_situacao);
 
 }
