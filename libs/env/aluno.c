@@ -131,8 +131,16 @@ int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base
     //ocupar posição
     (lista_estudantes[j]).ocupado=1;
 
-    printf("Codigo: ");
-    scanf(" %d",&((lista_estudantes[j]).codigo));
+
+    int maior_codigo = 0;
+    for (int i=0;i<size_base;i++) {
+        if (lista_estudantes[i].codigo>maior_codigo) {
+            maior_codigo = lista_estudantes[i].codigo;
+        }
+    }
+    lista_estudantes[j].codigo = maior_codigo +1;
+    printf("\nCodigo: ");
+    printf(" %d",((lista_estudantes[j]).codigo));
 
     char * stringgg=NULL;
     size_t bufsize=200;
