@@ -51,6 +51,7 @@ int seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, 
     //Atribuição dos dados do ficheiro estudantes.txt à struct
     txt_load_file(&file_estudante);
     for (int i=0; i < txt_get_size(file_estudante) ; i++) {
+        printf("\n%s\n",file_estudante.data[i]);
         if ((base_dados[i]).ocupado==0) {
 
             base_dados[i].ocupado=1;
