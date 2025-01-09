@@ -43,8 +43,8 @@ int main(void)
        
         printf("BEM VINDO!\n\n");
         
-        char *path_estudantes;
-        char *path_situacao;
+        char *path_estudantes; //caminho do ficheiro dos dados dos estudantes
+        char *path_situacao; //caminho do ficheiro da situacao escolar
   
 
         if (strcmp(OS, "W") == 0)
@@ -59,39 +59,38 @@ int main(void)
             path_situacao   = "./data/situacao_Escolar_Estudantes.txt";
         }
         
-        txtFile txt_estudantes = txt_files_init(path_estudantes);
-        txtFile txt_situacao   = txt_files_init(path_situacao);
+        txtFile txt_estudantes = txt_files_init(path_estudantes); //estrutura que armazena a informacao do ficheiro dos estudantes
+        txtFile txt_situacao   = txt_files_init(path_situacao); //estrutura que armazena a informacao do ficheiro da situacao escolar
    
-        ALUNO *dados_alunos = criar_lista(&txt_estudantes);
+        ALUNO *dados_alunos = criar_lista(&txt_estudantes); //estrutura que armazena a informacao dos alunos
 
-        size_t size_alunos = 0;
+        size_t size_alunos = 0; //tamanho total da informaçao na estrutura dados_alunos
 
         seek_data(txt_estudantes, txt_situacao,dados_alunos, &size_alunos);
 
        
+    //fim da inicializacao  
 
-   //tem que ter inicializado dos ficheiros antes
-
-    int size_base = sizeof(dados_alunos);
+    int size_base = sizeof(dados_alunos); //tamanho inicial da estrutura
     int cond_saida=0; //condicao de saída do loop
 
 
 
     do
     {
-        int opcao=0;
+        int opcao=0; //opcao escolhida pelo utilizador
 
-        float ano_atual = 0;
-        float x = 0;
-        float y = 0;
-        int n_est_risco = 0;
-        int n_fin = 0;
-        float * media = NULL;
-        char * nacion = NULL;
-        char * pesquisa = NULL;
-        int i = 0;
-        char * data1 = malloc(sizeof(char)*10);
-        char * data2 = malloc(sizeof(char)*10);
+        float ano_atual = 0; //para se calcular idades
+        float x = 0; //para medias
+        float y = 0; //para medias
+        int n_est_risco = 0; //numero de estudantes a precrever
+        int n_fin = 0; //numero finalistas
+        float * media = NULL; //media geral de todos os alunos
+        char * nacion = NULL; //para guardar a string nacionalidade
+        char * pesquisa = NULL; //para guardar a string pesquisa
+        int i = 0; //codigo de um aluno
+        char * data1 = malloc(sizeof(char)*10); //uma data de nascimento
+        char * data2 = malloc(sizeof(char)*10); //uma data de nascimento
         
         fflush(stdin);
         printf("\nEscolha entre as seguintes opcoes:");

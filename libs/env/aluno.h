@@ -27,11 +27,13 @@ typedef struct aluno
     DATA_NAS data_n;
 }ALUNO;
 
+//Define a estrutura apelido, de modo a comparar os apelidos de cada aluno
 typedef struct apelido
 {
     char * apel;
 }APELIDO;
 
+//Define a estrutura nacionalidade, para quando for relevante determinar um numero limitado de nacionalidades permitidas
 typedef struct nacionalidades
 {
     char * nacionalidade;
