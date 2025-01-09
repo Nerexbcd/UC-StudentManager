@@ -746,8 +746,6 @@ void mostrar_toda_lista(ALUNO *lista_estudantes, int size_base) {
         char * header = "Codigo\tNome\tData Nascimento\tNacionalidade\tNumero Matriculas\tECTS Concluidos\tAno Curso\tMedia Atual\n";
         char * info;
 
-        puts("v");
-
         for (int j=0, rep=0; j<size_base; j++) {
             if (lista_estudantes[j].ocupado==1) {
         
@@ -756,7 +754,6 @@ void mostrar_toda_lista(ALUNO *lista_estudantes, int size_base) {
                 sprintf(temp2, "%d", temp);
             
                 if (rep == 0) {
-                    puts("e");
                     info = strdup(temp2);
                     rep = 1;
                 }
@@ -1032,6 +1029,7 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
          
 
         }
+
     }
 
     int rep=0;
@@ -1053,6 +1051,171 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
         }
         rep++;
     }
+
+    char * t_guardar = malloc(sizeof(char)*4);
+    t_guardar = tipo_de_guardar();
+    
+    char * info;
+
+    if (strcmp(t_guardar,".txt")==0) {
+        
+        for (int j=0, rep=0; j<size_base; j++) {
+            if (lista_matches[j]==1) {
+                
+                int temp = lista_estudantes[j].codigo;
+                char * temp2 = malloc(sizeof(char)*100); 
+                sprintf(temp2, "%d", temp);
+                if (rep==0) {
+                    info = strdup(temp2);
+                }
+                else {
+                    info = strcat(info, temp2);
+                }
+                info = strcat(info,"\t"); 
+
+                info = strcat(info, strdup(lista_estudantes[j].nome));
+                info = strcat(info,"\t"); 
+            
+                temp = lista_estudantes[j].data_n.dia;
+                if (temp<10) {
+                    info = strcat(info,"0"); 
+                }
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"-"); 
+
+                temp = lista_estudantes[j].data_n.mes;
+                if (temp<10) {
+                    info = strcat(info,"0"); 
+                }
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"-"); 
+            
+                temp = lista_estudantes[j].data_n.ano;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\t"); 
+        
+                info = strcat(info, strdup(lista_estudantes[j].nacionalidade));
+                info = strcat(info,"\t"); 
+        
+                temp = lista_estudantes[j].n_matriculas;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info, strdup(temp2));
+                info = strcat(info,"\t");
+        
+                temp = lista_estudantes[j].ects_concluidos;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\t"); 
+
+                temp = lista_estudantes[j].ano_curso;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\t"); 
+        
+                float temp_f = lista_estudantes[j].media_atual;
+                sprintf(temp2, "%.1f", temp_f);
+                for (int k=0; k<strlen(temp2)+1; k++) {
+                    
+                    if (temp2[k] == ',') {
+                        temp2[k] = '.';
+                    }
+                }
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\n"); 
+
+                rep = 1;
+            }
+        }
+
+        char * nome = "resultado_pesquisa.txt";
+        txt_result_save_file(info, nome);
+
+    }
+    else if (strcmp(t_guardar,".cvs")==0) {
+        char * header = "Codigo\tNome\tData Nascimento\tNacionalidade\tNumero Matriculas\tECTS Concluidos\tAno Curso\tMedia Atual\n";
+        char * info;
+
+        for (int j=0, rep=0; j<size_base; j++) {
+            if (lista_matches[j]==1) {
+        
+                int temp = lista_estudantes[j].codigo;
+                char * temp2 = malloc(sizeof(char)*100); 
+                sprintf(temp2, "%d", temp);
+            
+                if (rep == 0) {
+                    info = strdup(temp2);
+                    rep = 1;
+                }
+                else {
+                    info = strcat(info,strdup(temp2));
+                }
+
+                info = strcat(info,"\t"); 
+
+                info = strcat(info, strdup(lista_estudantes[j].nome));
+                info = strcat(info,"\t"); 
+            
+                temp = lista_estudantes[j].data_n.dia;
+                if (temp<10) {
+                    info = strcat(info,"0"); 
+                }
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"-"); 
+
+                temp = lista_estudantes[j].data_n.mes;
+                if (temp<10) {
+                    info = strcat(info,"0"); 
+                }
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"-"); 
+            
+                temp = lista_estudantes[j].data_n.ano;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\t"); 
+        
+                info = strcat(info, strdup(lista_estudantes[j].nacionalidade));
+                info = strcat(info,"\t"); 
+        
+                temp = lista_estudantes[j].n_matriculas;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info, strdup(temp2));
+                info = strcat(info,"\t");
+        
+                temp = lista_estudantes[j].ects_concluidos;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\t"); 
+
+                temp = lista_estudantes[j].ano_curso;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\t"); 
+        
+                float temp_f = lista_estudantes[j].media_atual;
+                sprintf(temp2, "%.1f", temp_f);
+                for (int k=0; k<strlen(temp2)+1; k++) {
+                    
+                    if (temp2[k] == ',') {
+                        temp2[k] = '.';
+                    }
+                }
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\n"); 
+            }
+        }
+
+        char * nome = "resultado_pesquisa.cvs";
+        cvs_result_save_file(header, info, nome);
+        
+    }
+
+    
 }
 
 
@@ -1097,6 +1260,170 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y, int siz
 
     if (n_result==n_alu) {
         printf("Nao ha resultados no intervalo de medias %.2f - %.2f.\n",min,max);
+    }
+    else {
+        char * t_guardar = malloc(sizeof(char)*4);
+    t_guardar = tipo_de_guardar();
+    
+    char * info;
+
+    if (strcmp(t_guardar,".txt")==0) {
+        
+        for (int j=0, rep=0; j<size_base; j++) {
+            if (lista_estudantes[j].ocupado==1 && (lista_estudantes[j].media_atual>=min) && (lista_estudantes[j].media_atual<=max)) {
+                
+                int temp = lista_estudantes[j].codigo;
+                char * temp2 = malloc(sizeof(char)*100); 
+                sprintf(temp2, "%d", temp);
+                if (rep==0) {
+                    info = strdup(temp2);
+                }
+                else {
+                    info = strcat(info, temp2);
+                }
+                info = strcat(info,"\t"); 
+
+                info = strcat(info, strdup(lista_estudantes[j].nome));
+                info = strcat(info,"\t"); 
+            
+                temp = lista_estudantes[j].data_n.dia;
+                if (temp<10) {
+                    info = strcat(info,"0"); 
+                }
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"-"); 
+
+                temp = lista_estudantes[j].data_n.mes;
+                if (temp<10) {
+                    info = strcat(info,"0"); 
+                }
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"-"); 
+            
+                temp = lista_estudantes[j].data_n.ano;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\t"); 
+        
+                info = strcat(info, strdup(lista_estudantes[j].nacionalidade));
+                info = strcat(info,"\t"); 
+        
+                temp = lista_estudantes[j].n_matriculas;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info, strdup(temp2));
+                info = strcat(info,"\t");
+        
+                temp = lista_estudantes[j].ects_concluidos;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\t"); 
+
+                temp = lista_estudantes[j].ano_curso;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\t"); 
+        
+                float temp_f = lista_estudantes[j].media_atual;
+                sprintf(temp2, "%.1f", temp_f);
+                for (int k=0; k<strlen(temp2)+1; k++) {
+                    
+                    if (temp2[k] == ',') {
+                        temp2[k] = '.';
+                    }
+                }
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\n"); 
+
+                rep = 1;
+            }
+        }
+
+        char * nome = "alunos_entre_medias.txt";
+        txt_result_save_file(info, nome);
+
+    }
+    else if (strcmp(t_guardar,".cvs")==0) {
+        char * header = "Codigo\tNome\tData Nascimento\tNacionalidade\tNumero Matriculas\tECTS Concluidos\tAno Curso\tMedia Atual\n";
+        char * info;
+
+        for (int j=0, rep=0; j<size_base; j++) {
+            if (lista_estudantes[j].ocupado==1 && (lista_estudantes[j].media_atual>=min) && (lista_estudantes[j].media_atual<=max)) {
+        
+                int temp = lista_estudantes[j].codigo;
+                char * temp2 = malloc(sizeof(char)*100); 
+                sprintf(temp2, "%d", temp);
+            
+                if (rep == 0) {
+                    info = strdup(temp2);
+                    rep = 1;
+                }
+                else {
+                    info = strcat(info,strdup(temp2));
+                }
+
+                info = strcat(info,"\t"); 
+
+                info = strcat(info, strdup(lista_estudantes[j].nome));
+                info = strcat(info,"\t"); 
+            
+                temp = lista_estudantes[j].data_n.dia;
+                if (temp<10) {
+                    info = strcat(info,"0"); 
+                }
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"-"); 
+
+                temp = lista_estudantes[j].data_n.mes;
+                if (temp<10) {
+                    info = strcat(info,"0"); 
+                }
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"-"); 
+            
+                temp = lista_estudantes[j].data_n.ano;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\t"); 
+        
+                info = strcat(info, strdup(lista_estudantes[j].nacionalidade));
+                info = strcat(info,"\t"); 
+        
+                temp = lista_estudantes[j].n_matriculas;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info, strdup(temp2));
+                info = strcat(info,"\t");
+        
+                temp = lista_estudantes[j].ects_concluidos;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\t"); 
+
+                temp = lista_estudantes[j].ano_curso;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\t"); 
+        
+                float temp_f = lista_estudantes[j].media_atual;
+                sprintf(temp2, "%.1f", temp_f);
+                for (int k=0; k<strlen(temp2)+1; k++) {
+                    
+                    if (temp2[k] == ',') {
+                        temp2[k] = '.';
+                    }
+                }
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\n"); 
+            }
+        }
+
+        char * nome = "alunos_entre_medias.cvs";
+        cvs_result_save_file(header, info, nome);
+        
+    }
     }
 
     return n_est_com_media;

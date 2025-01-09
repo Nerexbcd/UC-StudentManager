@@ -108,16 +108,27 @@ int main(void)
         
 
         printf("\nEscolha entre as seguintes opcoes:");
+        fflush(stdin);
         printf("\n1- Ver todos os dados dos estudantes.\n2- Adicionar um estudante.\n3- Remover um estudante.");
+        fflush(stdin);
         printf("\n4- Atualizar um dado de um estudante.\n5- Pesquisar um estudante pelo seu nome.");
+        fflush(stdin);
         printf("\n6- Mostrar a lista dos nomes dos alunos por ordem alfabetica dos seus apelidos.");
+        fflush(stdin);
         printf("\n7- Mostrar alunos com medias entre dois valores.");
-        printf("\n8- Mostrar alunos em risco de prescrever\n9- Determinar o numero de estudantes finalistas.");
+        fflush(stdin);
+        printf("\n8- Determinar o numero de alunos em risco de prescrever.\n9- Determinar o numero de estudantes finalistas.");
+        fflush(stdin);
         printf("\n10- Mostrar as medias das idades dos alunos de uma certa nacionalidade por ano.");
+        fflush(stdin);
         printf("\n11- Listar os alunos com datas de nascimento entre dois valores e que pertecam a um grupo de 5 nacionalidades.");
+        fflush(stdin);
         printf("\n12- Determinar o numero medio de matriculas, em geral e por nacionalidade.");
+        fflush(stdin);
         printf("\n13- Guardar os ficheiros.");
+        fflush(stdin);
         printf("\n14- Sair.");
+        fflush(stdin);
         
         printf("\n\nOpcao: ");
         fflush(stdin);
