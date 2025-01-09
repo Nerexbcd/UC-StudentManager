@@ -210,7 +210,7 @@ int main(void)
             break;
 
         default:
-            printf("Erro! Escolha uma opcao valida");
+            printf("Erro! Escolha uma opção válida");
             break;
         }
     } while (cond_saida==0);
