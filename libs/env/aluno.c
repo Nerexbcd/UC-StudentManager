@@ -22,7 +22,7 @@
 ALUNO * criar_lista(txtFile *txt_estudantes) {
 
     //alocar memória necessária para todos os elementos da lista
-    ALUNO *lista_estudantes;
+    ALUNO *lista_estudantes; //estrutura com informacao dos alunos
     lista_estudantes = malloc(sizeof(ALUNO)*((txt_estudantes->size)+1));
 
     if (sizeof(lista_estudantes)==0) {
@@ -32,7 +32,7 @@ ALUNO * criar_lista(txtFile *txt_estudantes) {
 
     for (int i=0 ; i<=(txt_estudantes->size) ; i++) {
         int z=0;
-        lista_estudantes[i].ocupado=0;
+        lista_estudantes[i].ocupado=0; //indica que está livre
         lista_estudantes[i].nome=NULL;
         lista_estudantes[i].nacionalidade=NULL;
     }
@@ -55,7 +55,7 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
             (base_dados[i]).ocupado=1;
 
             char *linha = file_estudante.data[i];
-            char **dados = str_split(linha, '\t', NULL);
+            char **dados = str_split(linha, '\t', NULL); //tendo em conta que cada secção está separada por \t
 
             base_dados[i].codigo = atoi(strdup(dados[0]));
 
@@ -129,9 +129,10 @@ int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base
     }
 
     //ocupar posição
-    (lista_estudantes[j]).ocupado=1;
+    (lista_estudantes[j]).ocupado=1; //passa a estar ocupado, e, portanto, visível para as outras funcoes
 
-
+    //determina o código do novo aluno
+    //procura o maior código já utilizado e soma-lhe uma unidade
     int maior_codigo = 0;
     for (int i=0;i<size_base;i++) {
         if (lista_estudantes[i].codigo>maior_codigo) {
@@ -208,16 +209,17 @@ int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base
     free(new_lista_estudantes);
     }
         
-    size_base++;
+    size_base++; //tamanho da estrutura aumenta; relevante porque sizeof() é calculado durante a compilação e não é atualizado
 
     char * t_guardar = malloc(sizeof(char)*4);
     t_guardar = tipo_de_guardar();
 
+    //guardar os dados do novo aluno num ficheiro .txt ou .cvs (os princípios desta secção aplicam-se a todas as outras secções em que se guardem ficheiros)
     if (strcmp(t_guardar,".txt")==0) {
         
-        int temp = lista_estudantes[j].codigo;
-        char * temp2 = malloc(sizeof(char)*100); 
-        sprintf(temp2, "%d", temp);
+        int temp = lista_estudantes[j].codigo; //para transformacao em *char
+        char * temp2 = malloc(sizeof(char)*100); //exagero de espaço, mas se não o fizesse dava erro; vai ser onde é guardado temporariamente o float ou int transformado em char*
+        sprintf(temp2, "%d", temp); //utilizado no caso de ser necessário transformar int ou float em char*
         char * info = strdup(temp2);
         info = strcat(info,"\t"); 
 
@@ -226,7 +228,7 @@ int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base
     
         temp = lista_estudantes[j].data_n.dia;
         if (temp<10) {
-            info = strcat(info,"0"); 
+            info = strcat(info,"0"); //para que a data de nascimento em char* tenha sempre 2 caracteres no dia (ou mês)
         }
         sprintf(temp2, "%d", temp);
         info = strcat(info,strdup(temp2));
@@ -267,7 +269,7 @@ int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base
         sprintf(temp2, "%.1f", temp_f);
         for (int k=0; k<strlen(temp2)+1; k++) {
             
-            if (temp2[k] == ',') {
+            if (temp2[k] == ',') { //o compilador só trata de floats com vírgulas, mas os inputs e outputs têm pontos
                 temp2[k] = '.';
             }
         }
@@ -277,14 +279,14 @@ int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base
         temp = lista_estudantes[j].codigo;
         sprintf(temp2, "%d", temp);
 
-        char * nome = strdup("novo_aluno_");
+        char * nome = strdup("novo_aluno_"); //determina o nome do ficheiro dependendo da situacao
         nome = strcat(nome,temp2);
-        nome = strcat(nome,".txt");
+        nome = strcat(nome,".txt"); //neste caso, tem .txt
         txt_result_save_file(info, nome);
 
     }
     else if (strcmp(t_guardar,".cvs")==0) {
-        char * header = "Codigo\tNome\tData Nascimento\tNacionalidade\tNumero Matriculas\tECTS Concluidos\tAno Curso\tMedia Atual\n";
+        char * header = "Codigo\tNome\tData Nascimento\tNacionalidade\tNumero Matriculas\tECTS Concluidos\tAno Curso\tMedia Atual\n"; //header do ficheiro .cvs
         
         int temp = lista_estudantes[j].codigo;
         char * temp2 = malloc(sizeof(char)*100); 
@@ -362,7 +364,7 @@ int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base
 
 void remover_estudante(ALUNO *lista_estudantes,int i)
 {
-    (lista_estudantes[i]).ocupado=0;
+    (lista_estudantes[i]).ocupado=0; //passa a ficar desocupado; deixa de aparecer em qualquer outra funcao
     //Para esvaziar os string:
     (*(lista_estudantes+i)).nome=NULL;
     (*(lista_estudantes+i)).nacionalidade=NULL;
@@ -374,11 +376,10 @@ void remover_estudante(ALUNO *lista_estudantes,int i)
 void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_base)
 {
     //setlocale(LC_ALL, "Portuguese"); //não funciona?
-    int i=0;
+    int i=0; //resultado das opcoes a alterar
     int k=0; //código do estudante
     int j=0; //posição do aluno com código k na lista
     int t=0;
-
     do {
         printf("Qual o codigo do estudante? ");
         fflush(stdin);
