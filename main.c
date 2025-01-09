@@ -40,7 +40,7 @@ int main(void)
         
 
        
-        printf("BEM VINDO!\n\n");
+        printf("\nBEM VINDO!\n\n");
         
         char *path_estudantes; //caminho do ficheiro dos dados dos estudantes
         char *path_situacao; //caminho do ficheiro da situacao escolar
