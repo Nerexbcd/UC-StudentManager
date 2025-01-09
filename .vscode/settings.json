@@ -14,5 +14,19 @@
     "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe",
     "lonberg.editorButtonRunTask": {
         "c": "Run Program"
-    }
+    },
+    "cSpell.ignoreWords": [
+        "VINDO",
+        "estudantes"
+    ],
+    "cSpell.words": [
+        "ALUNO",
+        "alunos",
+        "armazena",
+        "caminho",
+        "estrutura",
+        "ficheiro",
+        "informacao",
+        "situacao"
+    ]
 }
