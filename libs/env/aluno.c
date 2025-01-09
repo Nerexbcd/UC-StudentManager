@@ -15,10 +15,6 @@
     #define PATH_SEPARATOR_STR  "/"
 #endif
 
-//#define ZERO 0 talvez??
-
-
-
 ALUNO * criar_lista(SDTM_File *txt_estudantes) {
 
     //alocar memória necessária para todos os elementos da lista
@@ -632,16 +628,16 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
 
 
 
-int calcular_tam_lista(ALUNO *lista_estudantes) {
-    //pode ser útil
-    int tam = 0;
-    for (int i=0; i<sizeof(lista_estudantes) ;i++) {
-        if (lista_estudantes[i].ocupado==1) {
-            tam++;
-        }
-    }
-    return tam;
-}
+// int calcular_tam_lista(ALUNO *lista_estudantes) {
+//     //pode ser útil
+//     int tam = 0;
+//     for (int i=0; i<sizeof(lista_estudantes) ;i++) {
+//         if (lista_estudantes[i].ocupado==1) {
+//             tam++;
+//         }
+//     }
+//     return tam;
+// }
 
 
 

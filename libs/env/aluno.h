@@ -64,8 +64,8 @@ void mostrar_toda_lista(ALUNO *lista_estudantes, int size_base);
 //do nome completo)
 void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes, int size_base);
 
-//Permite calcular o número de posições ocupadas, ou seja, com lista_estudantes[i].ocupado==1
-int calcular_tam_lista(ALUNO *lista_estudantes);
+// //Permite calcular o número de posições ocupadas, ou seja, com lista_estudantes[i].ocupado==1
+// int calcular_tam_lista(ALUNO *lista_estudantes);
 
 
 //Pesquisa um aluno através de parte do seu nome
