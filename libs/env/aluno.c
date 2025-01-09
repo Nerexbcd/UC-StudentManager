@@ -274,8 +274,12 @@ int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base
         info = strcat(info,strdup(temp2));
         info = strcat(info,"\n"); 
         
+        temp = lista_estudantes[j].codigo;
+        sprintf(temp2, "%d", temp);
 
-        char * nome = "novo_aluno.txt";
+        char * nome = strdup("novo_aluno_");
+        nome = strcat(nome,temp2);
+        nome = strcat(nome,".txt");
         txt_result_save_file(info, nome);
 
     }
@@ -342,8 +346,10 @@ int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base
         info = strcat(info,"\n"); 
     
 
-        char * nome = "novo_aluno.cvs";
-        cvs_result_save_file(header, info, nome);
+        char * nome = strdup("novo_aluno_");
+        nome = strcat(nome,temp2);
+        nome = strcat(nome,".cvs");
+        txt_result_save_file(info, nome);
         
     }
 
@@ -542,7 +548,10 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
         info = strcat(info,"\n"); 
         
 
-        char * nome = "aluno_alterado.txt";
+        char * nome = strdup("aluno_alterado_");
+        nome = strcat(nome,temp2);
+        nome = strcat(nome,".txt");
+        txt_result_save_file(info, nome);
         txt_result_save_file(info, nome);
 
     }
@@ -609,7 +618,9 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
         info = strcat(info,"\n"); 
     
 
-        char * nome = "aluno_alterado.cvs";
+        char * nome = strdup("alu");
+        nome = strcat(nome,temp2);
+        nome = strcat(nome,".cvs");
         cvs_result_save_file(header, info, nome);
         
     }
@@ -1138,7 +1149,9 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
             }
         }
 
-        char * nome = "resultado_pesquisa.txt";
+        char * nome = strdup("resultado_pesquisa_");
+        nome = strcat(nome,pesquisa);
+        nome = strcat(nome,".txt");
         txt_result_save_file(info, nome);
 
     }
@@ -1218,7 +1231,9 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
             }
         }
 
-        char * nome = "resultado_pesquisa.cvs";
+        char * nome = strdup("resultado_pesquisa_");
+        nome = strcat(nome,pesquisa);
+        nome = strcat(nome,".cvs");
         cvs_result_save_file(header, info, nome);
         
     }
@@ -1348,7 +1363,16 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y, int siz
                 }
             }
 
-            char * nome = "alunos_entre_medias.txt";
+            char * nome = strdup("alunos_entre_medias_");
+            float temp = min;
+            char * temp2;
+            sprintf(temp2, "%f", temp);
+            nome = strcat(nome,temp2);
+            nome = strcat(nome,"_");
+            temp = max;
+            sprintf(temp2, "%f", temp);
+            nome = strcat(nome,temp2);
+            nome = strcat(nome,".txt");
             txt_result_save_file(info, nome);
 
         }
@@ -1428,7 +1452,16 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y, int siz
                 }
             }
 
-            char * nome = "alunos_entre_medias.cvs";
+            char * nome = strdup("alunos_entre_medias_");
+            float temp = min;
+            char * temp2;
+            sprintf(temp2, "%f", temp);
+            nome = strcat(nome,temp2);
+            nome = strcat(nome,"_");
+            temp = max;
+            sprintf(temp2, "%f", temp);
+            nome = strcat(nome,temp2);
+            nome = strcat(nome,".cvs");
             cvs_result_save_file(header, info, nome);
             
         }
@@ -1741,7 +1774,10 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
                 }
             }
 
-            char * nome = "alunos_entre_datas_nascimento.txt";
+            char * nome = strdup("alunos_com_datas_nascimento_entre");
+            nome = strcat(nome,data_3);
+            nome = strcat(nome,data_4);
+            nome = strcat(nome,".txt");
             txt_result_save_file(info, nome);
 
         }
@@ -1821,7 +1857,10 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
                 }
             }
 
-            char * nome = "alunos_entre_datas_nascimento.cvs";
+            char * nome = strdup("alunos_com_datas_nascimento_entre");
+            nome = strcat(nome,data_3);
+            nome = strcat(nome,data_4);
+            nome = strcat(nome,".cvs");
             cvs_result_save_file(header, info, nome);
             
         }

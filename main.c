@@ -93,7 +93,7 @@ int main(void)
         char * data1 = malloc(sizeof(char)*10);
         char * data2 = malloc(sizeof(char)*10);
         
-
+        fflush(stdin);
         printf("\nEscolha entre as seguintes opcoes:");
         fflush(stdin);
         printf("\n1- Ver todos os dados dos estudantes.\n2- Adicionar um estudante.\n3- Remover um estudante.");
