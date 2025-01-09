@@ -3,6 +3,14 @@
 #include "../data/files.h"
 
 
+//Parâmetro define data de nascimento
+typedef struct data_nascimento
+{
+    int dia;
+    int mes;
+    int ano;
+}DATA_NAS;
+
 //Define a estrutura aluno, de modo a organizar a informação de cada aluno.
 //Parâmetro ocupado indica se há um aluno ou não nessa posição da estrutura; permite a eliminação de 
 //alunos.
@@ -34,13 +42,6 @@ typedef struct nacionalidades
     char * nacionalidade;
 }NACIO;
 
-//Parâmetro define data de nascimento
-typedef struct data_nascimento
-{
-    int dia;
-    int mes;
-    int ano;
-}DATA_NAS;
 
 //Cria e inicializa a lista de estudantes
 ALUNO * criar_lista(txtFile *txt_estudantes);
