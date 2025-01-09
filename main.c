@@ -40,7 +40,7 @@ int main(void)
         
 
        
-        printf("BEM VINDO!\n\n");
+        printf("\nBEM VINDO!\n\n");
         
         char *path_estudantes; //caminho do ficheiro dos dados dos estudantes
         char *path_situacao; //caminho do ficheiro da situacao escolar
@@ -115,7 +115,7 @@ int main(void)
         printf("\n14- Sair.");
         fflush(stdin);
         
-        printf("\n\nOpcao: ");
+        printf("\n\nOpçao: ");
         fflush(stdin);
         scanf(" %d",&opcao);
         
@@ -174,7 +174,12 @@ int main(void)
             media = media_idades_nacionalidade(dados_alunos, nacion, ano_atual, size_base);
             for (i=0;i<6;i++) {
                 if (media[i]!=0) {
-                    printf("\nMedia das idades dos alunos da nacionalidade \"%s\" do ano %i: %.2f",nacion,i+1,media[i]);
+                    if (strcmp(nacion,"0")!=0) {
+                        printf("\nMedia das idades dos alunos da nacionalidade \"%s\" do ano %i: %.2f",nacion,i+1,media[i]);
+                    }
+                    else {
+                        printf("\nMedia geral das idades do ano %i: %.2f",i+1,media[i]);
+                    }
                 }
             }
             puts("");
@@ -205,7 +210,7 @@ int main(void)
             break;
 
         default:
-            printf("Erro! Escolha uma opcao valida");
+            printf("Erro! Escolha uma opção válida");
             break;
         }
     } while (cond_saida==0);
