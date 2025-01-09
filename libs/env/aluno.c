@@ -114,7 +114,7 @@ int seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, 
 
 
 
-int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base)
+int inserir_estudante(ALUNO *lista_estudantes, int size_base)
 {
     //alocar memória para o aluno novo
     ALUNO * ptr = lista_estudantes;

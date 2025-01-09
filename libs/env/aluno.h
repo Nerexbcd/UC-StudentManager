@@ -2,13 +2,6 @@
 #define ALUNO_H_INCLUDED
 #include "../data/files.h"
 
-//Parâmetro define data de nascimento
-typedef struct data_nascimento
-{
-    int dia;
-    int mes;
-    int ano;
-}DATA_NAS;
 
 //Define a estrutura aluno, de modo a organizar a informação de cada aluno.
 //Parâmetro ocupado indica se há um aluno ou não nessa posição da estrutura; permite a eliminação de 
@@ -27,6 +20,8 @@ typedef struct aluno
     DATA_NAS data_n;
 }ALUNO;
 
+
+
 //Define a estrutura apelido, de modo a comparar os apelidos de cada aluno
 typedef struct apelido
 {
@@ -39,6 +34,14 @@ typedef struct nacionalidades
     char * nacionalidade;
 }NACIO;
 
+//Parâmetro define data de nascimento
+typedef struct data_nascimento
+{
+    int dia;
+    int mes;
+    int ano;
+}DATA_NAS;
+
 //Cria e inicializa a lista de estudantes
 ALUNO * criar_lista(txtFile *txt_estudantes);
 
@@ -46,7 +49,7 @@ ALUNO * criar_lista(txtFile *txt_estudantes);
 int seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, size_t *size_alunos);
 
 //Permite adicionar um aluno à lista
-int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base);
+int inserir_estudante(ALUNO *lista_estudantes, int size_base);
 
 //Permite remover um aluno da lista
 void remover_estudante(ALUNO *lista_estudantes,int i);
