@@ -139,12 +139,12 @@ int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base
         }
     }
     lista_estudantes[j].codigo = maior_codigo +1;
-    printf("\nCodigo: ");
+    printf("Codigo: ");
     printf(" %d",((lista_estudantes[j]).codigo));
 
     char * stringgg=NULL;
     size_t bufsize=200;
-    printf("Nome: ");
+    printf("\nNome: ");
     fflush(stdin);
     //não consegui usar o scanf ou gets (?????????????porquê?????)
     getline(&stringgg,&bufsize,stdin);
@@ -2288,7 +2288,6 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
             float temp_f = dados_alunos[i].media_atual;
             temp2 = malloc(sizeof(char)*((float)log10(temp_f)));
             sprintf(temp2, "%.1f", temp_f);
-            printf("\n%i\n",strlen(temp2));
             for (int k=0; k<strlen(temp2)+1; k++) {
                 
                 if (temp2[k] == ',') {
