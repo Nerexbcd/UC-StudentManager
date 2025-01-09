@@ -24,19 +24,6 @@ int main(void)
     fflush(stdin);
 
     setlocale(LC_ALL, "Portuguese");
-
-    /*
-    // // Podes usar a função sizeof para saber quantas linhas tem
-    //printf("Size: %u\n", txt_get_size(txt_estudantes));
-    */
-
-    
-    //int condicao_saida=0;
-    //MENU PRINCIPAL
-    //do
-    //{
-        
-            //program_header();
             
         for (int i = 0; i < 10; i++)
         {
