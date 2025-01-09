@@ -79,7 +79,7 @@ char * tipo_de_guardar()
     char * tipo = malloc(sizeof(char)*4);
     int ans = 0;
 
-    printf("Pretende guardar? (S/N) ");
+    printf("Pretende guardar em ficheiro? (S/N) ");
     fflush(stdin);
     scanf(" %s",resposta);
 

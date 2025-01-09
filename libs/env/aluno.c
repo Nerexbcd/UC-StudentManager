@@ -207,84 +207,67 @@ int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base
 
     if (strcmp(t_guardar,".txt")==0) {
         
-        char * info = "Codigo: ";
-        
+        char * info = strdup("Codigo: ");
         int temp = lista_estudantes[j].codigo;
-        char * temp2 = malloc(sizeof(char)*((int)(log10(temp)))); 
+        char * temp2 = malloc(sizeof(char)*100); 
         sprintf(temp2, "%d", temp);
-        info = strcat(info, strdup(temp2));
-        puts("dddd");
+        info = strcat(info, temp2);
+        
         info = strcat(info,"\n"); 
-        puts("vvv");
-        info = realloc(info, sizeof(char)*6);
         info = strcat(info, "Nome: ");
-        info = realloc(info, sizeof(char)*(strlen(lista_estudantes[j].nome)+1));
-        info = strcat(info, lista_estudantes[j].nome);
+        char * copia = strdup(lista_estudantes[j].nome);
+        info = strcat(info, copia);
         info = strcat(info,"\n"); 
-
-        info = realloc(info, sizeof(char)*20);
+        
         info = strcat(info, "Data de nascimento: ");
 
         temp = lista_estudantes[j].data_n.dia;
-        temp2 = malloc(sizeof(char)*((int)log10(temp)));
+        if (temp<10) {
+            info = strcat(info,"0"); 
+        }
         sprintf(temp2, "%d", temp);
-        info = realloc(info, sizeof(char)*(strlen(temp2)+1));
         info = strcat(info,strdup(temp2));
         info = strcat(info,"-"); 
 
         temp = lista_estudantes[j].data_n.mes;
-        temp2 = malloc(sizeof(char)*((int)log10(temp)));
+        if (temp<10) {
+            info = strcat(info,"0"); 
+        }
         sprintf(temp2, "%d", temp);
-        info = realloc(info, sizeof(char)*(strlen(temp2)+1));
         info = strcat(info,strdup(temp2));
         info = strcat(info,"-"); 
 
         temp = lista_estudantes[j].data_n.ano;
-        temp2 = malloc(sizeof(char)*((int)log10(temp)));
         sprintf(temp2, "%d", temp);
-        info = realloc(info, sizeof(char)*(strlen(temp2)+1));
         info = strcat(info,strdup(temp2));
         info = strcat(info,"\n"); 
 
-        info = realloc(info, sizeof(char)*15);
         info = strcat(info, "Nacionalidade: ");
-        info = realloc(info, sizeof(char)*(strlen(lista_estudantes[j].nacionalidade)+1));
-        info = strcat(info, lista_estudantes[j].nacionalidade);
+        copia = strdup(lista_estudantes[j].nacionalidade);
+        info = strcat(info, copia);
         info = strcat(info,"\n"); 
 
-        info = realloc(info, sizeof(char)*22);
         info = strcat(info, "Numero de matriculas: ");
         temp = lista_estudantes[j].n_matriculas;
-        temp2 = malloc(sizeof(char)*((int)log10(temp)));
         sprintf(temp2, "%d", temp);
-        info = realloc(info, sizeof(char)*(strlen(temp2)+1));
         info = strcat(info, strdup(temp2));
         info = strcat(info,"\n");
         
-        info = realloc(info, sizeof(char)*17);
         info = strcat(info, "ECTS concluidos: ");
         temp = lista_estudantes[j].ects_concluidos;
-        temp2 = malloc(sizeof(char)*((int)log10(temp)));
         sprintf(temp2, "%d", temp);
-        info = realloc(info, sizeof(char)*(strlen(temp2)+1));
         info = strcat(info,strdup(temp2));
         info = strcat(info,"\n"); 
-        
-        info = realloc(info, sizeof(char)*11);
+       
         info = strcat(info, "Ano atual: ");
         temp = lista_estudantes[j].ano_curso;
-        temp2 = malloc(sizeof(char)*((int)log10(temp)));
         sprintf(temp2, "%d", temp);
-        info = realloc(info, sizeof(char)*(strlen(temp2)+1));
         info = strcat(info,strdup(temp2));
         info = strcat(info,"\n"); 
-        
-        info = realloc(info, sizeof(char)*13);
+       
         info = strcat(info, "Media atual: ");
         float temp_f = lista_estudantes[j].media_atual;
-        temp2 = malloc(sizeof(char)*((float)log10(temp_f)));
         sprintf(temp2, "%.1f", temp_f);
-        info = realloc(info, sizeof(char)*(strlen(temp2)+1));
         for (int k=0; k<strlen(temp2)+1; k++) {
             
             if (temp2[k] == ',') {
@@ -296,18 +279,77 @@ int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base
         
 
         char * nome = "novo_aluno.txt";
-        puts("d");
         txt_result_save_file(info, nome);
 
     }
-    /*else if (strcmp(t_guardar,".cvs")==0) {
-        char * header = "Lista de estudantes por ordem alfabetica do apelido\n";
-        char * info = NULL;
+    else if (strcmp(t_guardar,".cvs")==0) {
+        char * header = "Codigo\tNome\tData Nascimento\tNacionalidade\tNumero Matriculas\tECTS Concluidos\tAno Curso\tMedia Atual\n";
+        
+        int temp = lista_estudantes[j].codigo;
+        char * temp2 = malloc(sizeof(char)*100); 
+        sprintf(temp2, "%d", temp);
+        char * info = strdup(temp2);
+        info = strcat(info,"\t"); 
 
-        char * nome = "resultado_alfabetico.cvs";
+        info = strcat(info, strdup(lista_estudantes[j].nome));
+        info = strcat(info,"\t"); 
+    
+        temp = lista_estudantes[j].data_n.dia;
+        if (temp<10) {
+            info = strcat(info,"0"); 
+        }
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"-"); 
+
+        temp = lista_estudantes[j].data_n.mes;
+        if (temp<10) {
+            info = strcat(info,"0"); 
+        }
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"-"); 
+     
+        temp = lista_estudantes[j].data_n.ano;
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"\t"); 
+  
+        info = strcat(info, strdup(lista_estudantes[j].nacionalidade));
+        info = strcat(info,"\t"); 
+  
+        temp = lista_estudantes[j].n_matriculas;
+        sprintf(temp2, "%d", temp);
+        info = strcat(info, strdup(temp2));
+        info = strcat(info,"\t");
+   
+        temp = lista_estudantes[j].ects_concluidos;
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"\t"); 
+
+        temp = lista_estudantes[j].ano_curso;
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"\t"); 
+   
+        float temp_f = lista_estudantes[j].media_atual;
+        sprintf(temp2, "%.1f", temp_f);
+        for (int k=0; k<strlen(temp2)+1; k++) {
+            
+            if (temp2[k] == ',') {
+                temp2[k] = '.';
+            }
+        }
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"\n"); 
+        
+        printf("\n%s\n",info);
+
+        char * nome = "novo_aluno.cvs";
         cvs_result_save_file(header, info, nome);
         
-    }*/
+    }
 
 
     return size_base;
@@ -438,6 +480,155 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
 
     printf("Novos dados do estudante:\n");
     mostrar_um_aluno(lista_estudantes,j);
+
+    char * t_guardar = malloc(sizeof(char)*4);
+    t_guardar = tipo_de_guardar();
+
+    if (strcmp(t_guardar,".txt")==0) {
+        
+        char * info = strdup("Codigo: ");
+        int temp = lista_estudantes[j].codigo;
+        char * temp2 = malloc(sizeof(char)*100); 
+        sprintf(temp2, "%d", temp);
+        info = strcat(info, temp2);
+        
+        info = strcat(info,"\n"); 
+        info = strcat(info, "Nome: ");
+        char * copia = strdup(lista_estudantes[j].nome);
+        info = strcat(info, copia);
+        info = strcat(info,"\n"); 
+        
+        info = strcat(info, "Data de nascimento: ");
+
+        temp = lista_estudantes[j].data_n.dia;
+        if (temp<10) {
+            info = strcat(info,"0"); 
+        }
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"-"); 
+
+        temp = lista_estudantes[j].data_n.mes;
+        if (temp<10) {
+            info = strcat(info,"0"); 
+        }
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"-"); 
+
+        temp = lista_estudantes[j].data_n.ano;
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"\n"); 
+
+        info = strcat(info, "Nacionalidade: ");
+        copia = strdup(lista_estudantes[j].nacionalidade);
+        info = strcat(info, copia);
+        info = strcat(info,"\n"); 
+
+        info = strcat(info, "Numero de matriculas: ");
+        temp = lista_estudantes[j].n_matriculas;
+        sprintf(temp2, "%d", temp);
+        info = strcat(info, strdup(temp2));
+        info = strcat(info,"\n");
+        
+        info = strcat(info, "ECTS concluidos: ");
+        temp = lista_estudantes[j].ects_concluidos;
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"\n"); 
+       
+        info = strcat(info, "Ano atual: ");
+        temp = lista_estudantes[j].ano_curso;
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"\n"); 
+       
+        info = strcat(info, "Media atual: ");
+        float temp_f = lista_estudantes[j].media_atual;
+        sprintf(temp2, "%.1f", temp_f);
+        for (int k=0; k<strlen(temp2)+1; k++) {
+            
+            if (temp2[k] == ',') {
+                temp2[k] = '.';
+            }
+        }
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"\n"); 
+        
+
+        char * nome = "novo_aluno.txt";
+        txt_result_save_file(info, nome);
+
+    }
+    else if (strcmp(t_guardar,".cvs")==0) {
+        char * header = "Codigo\tNome\tData Nascimento\tNacionalidade\tNumero Matriculas\tECTS Concluidos\tAno Curso\tMedia Atual\n";
+        
+        int temp = lista_estudantes[j].codigo;
+        char * temp2 = malloc(sizeof(char)*100); 
+        sprintf(temp2, "%d", temp);
+        char * info = strdup(temp2);
+        info = strcat(info,"\t"); 
+
+        info = strcat(info, strdup(lista_estudantes[j].nome));
+        info = strcat(info,"\t"); 
+    
+        temp = lista_estudantes[j].data_n.dia;
+        if (temp<10) {
+            info = strcat(info,"0"); 
+        }
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"-"); 
+
+        temp = lista_estudantes[j].data_n.mes;
+        if (temp<10) {
+            info = strcat(info,"0"); 
+        }
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"-"); 
+     
+        temp = lista_estudantes[j].data_n.ano;
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"\t"); 
+  
+        info = strcat(info, strdup(lista_estudantes[j].nacionalidade));
+        info = strcat(info,"\t"); 
+  
+        temp = lista_estudantes[j].n_matriculas;
+        sprintf(temp2, "%d", temp);
+        info = strcat(info, strdup(temp2));
+        info = strcat(info,"\t");
+   
+        temp = lista_estudantes[j].ects_concluidos;
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"\t"); 
+
+        temp = lista_estudantes[j].ano_curso;
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"\t"); 
+   
+        float temp_f = lista_estudantes[j].media_atual;
+        sprintf(temp2, "%.1f", temp_f);
+        for (int k=0; k<strlen(temp2)+1; k++) {
+            
+            if (temp2[k] == ',') {
+                temp2[k] = '.';
+            }
+        }
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"\n"); 
+        
+        printf("\n%s\n",info);
+
+        char * nome = "novo_aluno.cvs";
+        cvs_result_save_file(header, info, nome);
+        
+    }
     
 }
 
@@ -490,6 +681,170 @@ void mostrar_toda_lista(ALUNO *lista_estudantes, int size_base) {
             rep++;
         }
     }
+
+    char * t_guardar = malloc(sizeof(char)*4);
+    t_guardar = tipo_de_guardar();
+
+    if (strcmp(t_guardar,".txt")==0) {
+        
+        char * info = NULL;
+        puts("b");
+        //info = strcat(info,"\n");
+        puts("a");
+        char * temp2 = malloc(sizeof(char)*100); 
+
+        
+        for (int j=0;j<size_base;j++) {
+
+            if (lista_estudantes[j].ocupado==1) {
+                info = strcat(info,"Codigo: ");
+                printf("\n%s\n",info);
+                int temp = lista_estudantes[j].codigo;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info, temp2);
+                
+                info = strcat(info,"\n"); 
+                info = strcat(info, "Nome: ");
+                char * copia = strdup(lista_estudantes[j].nome);
+                info = strcat(info, copia);
+                info = strcat(info,"\n"); 
+                
+                info = strcat(info, "Data de nascimento: ");
+
+                temp = lista_estudantes[j].data_n.dia;
+                if (temp<10) {
+                    info = strcat(info,"0"); 
+                }
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"-"); 
+
+                temp = lista_estudantes[j].data_n.mes;
+                if (temp<10) {
+                    info = strcat(info,"0"); 
+                }
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"-"); 
+
+                temp = lista_estudantes[j].data_n.ano;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\n"); 
+
+                info = strcat(info, "Nacionalidade: ");
+                copia = strdup(lista_estudantes[j].nacionalidade);
+                info = strcat(info, copia);
+                info = strcat(info,"\n"); 
+
+                info = strcat(info, "Numero de matriculas: ");
+                temp = lista_estudantes[j].n_matriculas;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info, strdup(temp2));
+                info = strcat(info,"\n");
+                
+                info = strcat(info, "ECTS concluidos: ");
+                temp = lista_estudantes[j].ects_concluidos;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\n"); 
+            
+                info = strcat(info, "Ano atual: ");
+                temp = lista_estudantes[j].ano_curso;
+                sprintf(temp2, "%d", temp);
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\n"); 
+            
+                info = strcat(info, "Media atual: ");
+                float temp_f = lista_estudantes[j].media_atual;
+                sprintf(temp2, "%.1f", temp_f);
+                for (int k=0; k<strlen(temp2)+1; k++) {
+                    
+                    if (temp2[k] == ',') {
+                        temp2[k] = '.';
+                    }
+                }
+                info = strcat(info,strdup(temp2));
+                info = strcat(info,"\n"); 
+
+                printf("\n%s\n",info);
+            }
+
+        }
+        
+
+        char * nome = "lista_estudantes.txt";
+        txt_result_save_file(info, nome);
+
+    }
+    /*else if (strcmp(t_guardar,".cvs")==0) {
+        char * header = "Codigo\tNome\tData Nascimento\tNacionalidade\tNumero Matriculas\tECTS Concluidos\tAno Curso\tMedia Atual\n";
+        
+        int temp = lista_estudantes[j].codigo;
+        char * temp2 = malloc(sizeof(char)*100); 
+        sprintf(temp2, "%d", temp);
+        char * info = strdup(temp2);
+        info = strcat(info,"\t"); 
+
+        info = strcat(info, strdup(lista_estudantes[j].nome));
+        info = strcat(info,"\t"); 
+    
+        temp = lista_estudantes[j].data_n.dia;
+        if (temp<10) {
+            info = strcat(info,"0"); 
+        }
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"-"); 
+
+        temp = lista_estudantes[j].data_n.mes;
+        if (temp<10) {
+            info = strcat(info,"0"); 
+        }
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"-"); 
+     
+        temp = lista_estudantes[j].data_n.ano;
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"\t"); 
+  
+        info = strcat(info, strdup(lista_estudantes[j].nacionalidade));
+        info = strcat(info,"\t"); 
+  
+        temp = lista_estudantes[j].n_matriculas;
+        sprintf(temp2, "%d", temp);
+        info = strcat(info, strdup(temp2));
+        info = strcat(info,"\t");
+   
+        temp = lista_estudantes[j].ects_concluidos;
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"\t"); 
+
+        temp = lista_estudantes[j].ano_curso;
+        sprintf(temp2, "%d", temp);
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"\t"); 
+   
+        float temp_f = lista_estudantes[j].media_atual;
+        sprintf(temp2, "%.1f", temp_f);
+        for (int k=0; k<strlen(temp2)+1; k++) {
+            
+            if (temp2[k] == ',') {
+                temp2[k] = '.';
+            }
+        }
+        info = strcat(info,strdup(temp2));
+        info = strcat(info,"\n"); 
+        
+        printf("\n%s\n",info);
+
+        char * nome = "novo_aluno.cvs";
+        cvs_result_save_file(header, info, nome);
+        
+    }*/
 }
 
 
