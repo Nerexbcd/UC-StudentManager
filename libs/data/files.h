@@ -1,5 +1,5 @@
-#ifndef TXT_FILES_H_INCLUDED
-#define TXT_FILES_H_INCLUDED
+#ifndef files_H_INCLUDED
+#define files_H_INCLUDED
 
 typedef struct txtFile {
     char *path;
@@ -27,7 +27,7 @@ void txt_error_index_out_of_bounds();
 
 /* Initialize txt file data array */
 /* It Prepares the file to be used */
-txtFile txt_files_init(char *path);
+txtFile files_init(char *path);
 
 
 // ------------------------------ TXT File to memmory and vice versa 

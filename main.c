@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include "libs/style/tools.h"
-#include "libs/data/txt_files.h"
+#include "libs/data/files.h"
 #include "libs/env/aluno.h"
 #include "libs/style/colors.h"
 #include "libs/style/tools.h"
@@ -59,8 +59,8 @@ int main(void)
             path_situacao   = "./data/situacao_Escolar_Estudantes.txt";
         }
         
-        txtFile txt_estudantes = txt_files_init(path_estudantes); //estrutura que armazena a informacao do ficheiro dos estudantes
-        txtFile txt_situacao   = txt_files_init(path_situacao); //estrutura que armazena a informacao do ficheiro da situacao escolar
+        txtFile txt_estudantes = files_init(path_estudantes); //estrutura que armazena a informacao do ficheiro dos estudantes
+        txtFile txt_situacao   = files_init(path_situacao); //estrutura que armazena a informacao do ficheiro da situacao escolar
    
         ALUNO *dados_alunos = criar_lista(&txt_estudantes); //estrutura que armazena a informacao dos alunos
 

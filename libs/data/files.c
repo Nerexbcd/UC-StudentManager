@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "txt_files.h"
+#include "files.h"
 #include "../utils/string_util.h"
 #include "../style/colors.h"
 
@@ -37,7 +37,7 @@ void txt_error_index_out_of_bounds() {
 
 // ------------------------------ TXT File Initialization
 
-txtFile txt_files_init(char *path) {
+txtFile files_init(char *path) {
     struct txtFile txt;
     txt.path = strdup(path);
     txt.size = 0;
