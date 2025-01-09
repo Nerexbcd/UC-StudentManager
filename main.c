@@ -8,6 +8,7 @@
 #include "libs/style/colors.h"
 #include "libs/style/tools.h"
 #include "libs/style/menu.h"
+#define ANOATUAL 2025
 
 #ifdef _WIN32
     #define OS "W"
@@ -82,7 +83,7 @@ int main(void)
     {
         int opcao=0; //opcao escolhida pelo utilizador
 
-        float ano_atual = 0; //para se calcular idades
+        float ano_atual = ANOATUAL; //para se calcular idades
         float x = 0; //para medias
         float y = 0; //para medias
         int n_est_risco = 0; //numero de estudantes a precrever
@@ -172,7 +173,6 @@ int main(void)
             break;
 
         case 10: //mostra a média das idades dos alunos de uma certa nacionalidade por ano
-            ano_atual = 2025;
             nacion = menu_obter_nacionalidade();
             media = media_idades_nacionalidade(dados_alunos, nacion, ano_atual, size_alunos);
             for (i=0;i<6;i++) {
