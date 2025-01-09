@@ -2104,25 +2104,43 @@ float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float
         float n_ele = 0;
         float soma = 0;
 
-
-        /////TO DO
-        for (int i=0; i<size_base;i++) {
-            //procura os alunos que obedecem a todas as condicoes:
-            //nacionalidade, ano de curso correto, existência na base de dados
-            if ((lista_estudantes[i].ocupado == 1) && (strcmp(lista_estudantes[i].nacionalidade,nacio)==0) && (lista_estudantes[i].ano_curso == j)) {
-                n_ele++;
-                float idade = ano_atual - (lista_estudantes[i].data_n.ano); //idade é obtida de forma muito simplificada através do ano de nascimento.
-                //ignoram-se as outras componentes desta data por agora
-                soma = soma + idade;
+        if (strcmp(nacio,"0")!=0) {
+            for (int i=0; i<size_base;i++) {
+                //procura os alunos que obedecem a todas as condicoes:
+                //nacionalidade, ano de curso correto, existência na base de dados
+                if ((lista_estudantes[i].ocupado == 1) && (strcmp(lista_estudantes[i].nacionalidade,nacio)==0) && (lista_estudantes[i].ano_curso == j)) {
+                    n_ele++;
+                    float idade = ano_atual - (lista_estudantes[i].data_n.ano); //idade é obtida de forma muito simplificada através do ano de nascimento.
+                    //ignoram-se as outras componentes desta data por agora
+                    soma = soma + idade;
+                }
+            }
+            if (n_ele!=0) {
+                media_por_nac_por_ano[j-1] = (soma/n_ele);
+            }
+            else { //para evitar possíveis divisões por zero
+                media_por_nac_por_ano[j-1] = 0;
             }
         }
-        if (n_ele!=0) {
-            media_por_nac_por_ano[j-1] = (soma/n_ele);
-        }
-        else { //para evitar possíveis divisões por zero
-            media_por_nac_por_ano[j-1] = 0;
+        else {
+            for (int i=0; i<size_base;i++) {
+                if ((lista_estudantes[i].ocupado == 1) && (lista_estudantes[i].ano_curso == j)) {
+                        n_ele++;
+                        float idade = ano_atual - (lista_estudantes[i].data_n.ano); //idade é obtida de forma muito simplificada através do ano de nascimento.
+                        //ignoram-se as outras componentes desta data por agora
+                        soma = soma + idade;
+                }
+            }
+            
+            if (n_ele!=0) {
+                media_por_nac_por_ano[j-1] = (soma/n_ele);
+            }
+            else { //para evitar possíveis divisões por zero
+                media_por_nac_por_ano[j-1] = 0;
+            }
         }
     }
+    
 
     return media_por_nac_por_ano; //retorna todo o vetor
 }

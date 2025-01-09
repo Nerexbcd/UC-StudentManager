@@ -174,7 +174,12 @@ int main(void)
             media = media_idades_nacionalidade(dados_alunos, nacion, ano_atual, size_base);
             for (i=0;i<6;i++) {
                 if (media[i]!=0) {
-                    printf("\nMedia das idades dos alunos da nacionalidade \"%s\" do ano %i: %.2f",nacion,i+1,media[i]);
+                    if (strcmp(nacion,"0")!=0) {
+                        printf("\nMedia das idades dos alunos da nacionalidade \"%s\" do ano %i: %.2f",nacion,i+1,media[i]);
+                    }
+                    else {
+                        printf("\nMedia geral das idades do ano %i: %.2f",i+1,media[i]);
+                    }
                 }
             }
             puts("");
