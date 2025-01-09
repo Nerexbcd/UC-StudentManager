@@ -202,7 +202,7 @@ int main(void)
             criar_txt_ficheiro_guardar (dados_alunos, size_base, path_estudantes, path_situacao);
             break;
 
-        case 177:
+        case 14:
             cond_saida=1;
             printf("A sair...");
             break;

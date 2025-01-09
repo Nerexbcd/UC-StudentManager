@@ -170,17 +170,32 @@ void txt_save_file(txtFile txt){
     printf(CYAN("File %s saved\n"), txt.path);
 }
 
-// ------------------------------ CVS File Save
+// ------------------------------ CVS Result File Save
 
-void cvs_save_file(int size_result, char ** result, char * header, char * nome){
+void cvs_result_save_file(char * header, char * result, char * nome)
+{
 
-    FILE * ptr_cvs;
-    ptr_cvs = fopen(nome,"w+");
-
+    FILE * ptr_cvs = fopen(nome,"w");
+    if (ptr_cvs == NULL) {
+        puts("a");
+    } 
     fprintf(ptr_cvs, header);
-    for (int i=0; i<size_result; i++) {
-        fprintf(ptr_cvs, result[i]);
-    }
+    fprintf(ptr_cvs, result);
 
     fclose(ptr_cvs);
+}
+
+// ------------------------------ TXT Result File Save
+
+void txt_result_save_file(char * result, char * nome)
+{
+
+    FILE * ptr_txt = fopen(nome,"w");
+    if (ptr_txt == NULL) {
+        puts("a");
+    } 
+    
+    fprintf(ptr_txt, result);
+
+    fclose(ptr_txt);
 }

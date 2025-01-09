@@ -73,4 +73,9 @@ void txt_remove_data(txtFile *txt, size_t index);
 /* It saves the data array to the file */
 void txt_save_file(txtFile txt);
 
+
+void cvs_result_save_file(char * header, char * result, char * nome);
+
+void txt_result_save_file(char * result, char * nome);
+
 #endif

@@ -202,6 +202,10 @@ int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base
         
     size_base++;
 
+    char * t_guardar = malloc(sizeof(char)*4);
+    t_guardar = tipo_de_guardar();
+    
+
     return size_base;
 }
 
@@ -436,6 +440,7 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes, int size_base)
 
     //mostra os nomes por ordem crescente (alfabética) do apelido
     //como a lista está na ordem decrescente, também está o contador (para ser crescente)
+
     for (int i=size_base-1, rep=0; i>=0; i--) {
         int posicao = vet_organizado[i];
         if (lista_estudantes[posicao].ocupado==1) {
@@ -454,10 +459,49 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes, int size_base)
     
     char * t_guardar = malloc(sizeof(char)*4);
     t_guardar = tipo_de_guardar();
-    printf("\n%s",t_guardar);
-    if (strcmp(t_guardar,".txt")==0 || strcmp(t_guardar,".cvs")==0) {
+
+    if (strcmp(t_guardar,".txt")==0) {
+        
+        char * info = NULL;
+
+        for (int i=size_base-1, rep=0; i>=0; i--) {
+            int posicao = vet_organizado[i];
+            if (lista_estudantes[posicao].ocupado==1) {
+                if (!info) {
+                    info = strdup(lista_estudantes[posicao].nome);
+                }
+                else {
+                    strcat (info,"\n");
+                    info = strcat(info, lista_estudantes[posicao].nome);
+                }
+            }
+        }
+        char * nome = "resultado_alfabetico.txt";
+        txt_result_save_file(info, nome);
+    }
+    else if (strcmp(t_guardar,".cvs")==0) {
+        char * header = "Lista de estudantes por ordem alfabetica do apelido\n";
+        char * info = NULL;
+
+        for (int i=size_base-1, rep=0; i>=0; i--) {
+            int posicao = vet_organizado[i];
+            if (lista_estudantes[posicao].ocupado==1) {
+                if (!info) {
+                    info = strdup(lista_estudantes[posicao].nome);
+                }
+                else {
+                    strcat (info,"\n");
+                    info = strcat(info, lista_estudantes[posicao].nome);
+                }
+            }
+        }
+
+        char * nome = "resultado_alfabetico.cvs";
+        cvs_result_save_file(header, info, nome);
         
     }
+
+    
 
 }
 

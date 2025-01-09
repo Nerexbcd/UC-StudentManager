@@ -75,7 +75,7 @@ char * menu_obter_nacionalidade()
 
 char * tipo_de_guardar()
 {
-    char * resposta;
+    char * resposta = malloc(sizeof(char));
     char * tipo = malloc(sizeof(char)*4);
     int ans = 0;
 
@@ -93,16 +93,14 @@ char * tipo_de_guardar()
             printf("Guardar em:\n1 - .txt\n2 - .cvs\nEscolha: ");
             fflush(stdin);
             scanf(" %d",&ans);
-            puts("v");
+        
             if (ans==1) {
-                puts("b");
                 tipo = strdup(".txt");
-                puts("a");
-                return * tipo;
+                return tipo;
             }
             else if (ans==2) {
                 tipo = strdup(".cvs");
-                return * tipo;
+                return tipo;
             }
             rep++;
             puts("");
