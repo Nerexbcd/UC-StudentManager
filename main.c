@@ -63,17 +63,14 @@ int main(void)
    
         ALUNO *dados_alunos = criar_lista(&txt_estudantes); //estrutura que armazena a informacao dos alunos
 
-        size_t size_alunos = 0; //tamanho total da informaçao na estrutura dados_alunos
+        size_t size_alunos = 0; //tamanho total da informaçao na estrutura dados_alunos (bytes)
 
-        seek_data(txt_estudantes, txt_situacao,dados_alunos, &size_alunos);
+        int size_base = seek_data(txt_estudantes, txt_situacao,dados_alunos, &size_alunos); //tamanho inicial da estrutura
 
        
     //fim da inicializacao  
-
-    int size_base = sizeof(dados_alunos); //tamanho inicial da estrutura
+    
     int cond_saida=0; //condicao de saída do loop
-
-
 
     do
     {

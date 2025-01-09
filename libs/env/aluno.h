@@ -40,7 +40,7 @@ typedef struct nacionalidades
 }NACIO;
 
 //Transfere os dados dos ficheiros para a struct base de dados do tipo ALUNO
-void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, size_t *size_alunos);
+int seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, size_t *size_alunos);
 
 //Cria e inicializa a lista de estudantes
 ALUNO * criar_lista(txtFile *txt_estudantes);

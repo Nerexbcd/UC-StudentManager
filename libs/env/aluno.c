@@ -43,16 +43,17 @@ ALUNO * criar_lista(txtFile *txt_estudantes) {
 
 
 
-void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, size_t *size_alunos)
+int seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, size_t *size_alunos)
 {
     size_t wrt_size_alunos = 0;
+    int tamanho = 0; //tamanho da estrutura
 
     //Atribuição dos dados do ficheiro estudantes.txt à struct
     txt_load_file(&file_estudante);
     for (int i=0; i < txt_get_size(file_estudante) ; i++) {
         if ((base_dados[i]).ocupado==0) {
 
-            (base_dados[i]).ocupado=1;
+            base_dados[i].ocupado=1;
 
             char *linha = file_estudante.data[i];
             char **dados = str_split(linha, '\t', NULL); //tendo em conta que cada secção está separada por \t
@@ -71,8 +72,10 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
             base_dados[i].nacionalidade = strdup(dados[3]);
 
             wrt_size_alunos++;
+            tamanho++;
         }
     }
+
     txt_unload_file(&file_estudante);
     
     //Atribuição dos dados do ficheiro situaçao_Escolar_Estudantes.txt à struct
@@ -82,7 +85,6 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
     for (int i=0; i < txt_get_size(file_situacao) ; i++) {
         char *linha = file_situacao.data[i];
         char **dados = str_split(linha, '\t', NULL);
-
         for (int j=0 ; j<wrt_size_alunos ; j++) {
             if (atoi(dados[0]) == base_dados[j].codigo) {
                 
@@ -105,6 +107,7 @@ void seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados,
     txt_unload_file(&file_situacao);
 
     if (size_alunos != NULL) *size_alunos = wrt_size_alunos;
+    return tamanho;
 }
 
 

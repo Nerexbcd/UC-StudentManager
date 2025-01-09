@@ -3,3 +3,4 @@
 8052	Anita Carvalhedo	12-05-2001	Portuguesa
 8053	Sofia Castro	13-02-1965	Portuguesa
 8054	Ana Maria Costa	11-11-1999	Brasileira
+8056    Tamara Higgs    07-07-2004
