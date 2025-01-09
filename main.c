@@ -7,7 +7,6 @@
 #include "libs/env/aluno.h"
 #include "libs/style/colors.h"
 #include "libs/style/tools.h"
-#include "libs/style/program.h"
 #include "libs/style/menu.h"
 
 #ifdef _WIN32
