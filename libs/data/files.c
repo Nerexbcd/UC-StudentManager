@@ -34,6 +34,12 @@ void error_index_out_of_bounds() {
     exit(1);
 }
 
+void error_already_created(char *path) {
+    fprintf(stderr,RED("Error: File %s already created\n"), path);
+    printf(CYAN("Exiting...\n"));
+    exit(1);
+}
+
 
 // ------------------------------ TXT File Initialization
 
@@ -154,7 +160,7 @@ void txt_remove_data(SDTM_File *txt, size_t index){
 
 // ------------------------------ TXT File Save
 
-void txt_save_file(SDTM_File txt){
+void save_file(SDTM_File txt){
 
     if (txt.loaded == 0) error_not_loaded(txt.path);
 
@@ -168,6 +174,20 @@ void txt_save_file(SDTM_File txt){
     
     fclose(file);
     printf(CYAN("File %s saved\n"), txt.path);
+}
+
+void create_file(SDTM_File txt){
+
+    if (txt.loaded == 1) error_already_created(txt.path);
+
+    FILE *file = fopen(txt.path, "w");
+    
+    if (file == NULL) {
+        error_open_file(txt.path);
+    }
+    
+    fclose(file);
+    printf(CYAN("File %s created\n"), txt.path);
 }
 
 // ------------------------------ CVS Result File Save

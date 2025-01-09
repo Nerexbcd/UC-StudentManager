@@ -22,6 +22,9 @@ void error_not_loaded(char *path);
 /* Error Index Out Of Bounds */
 void error_index_out_of_bounds();
 
+/* Error File Already Created */
+void error_already_created(char *path);
+
 
 // ------------------------------ TXT File Initialization
 
@@ -30,7 +33,7 @@ void error_index_out_of_bounds();
 SDTM_File files_init(char *path);
 
 
-// ------------------------------ TXT File to memmory and vice versa 
+// ------------------------------ TXT File to memory and vice versa 
 
 /* Load txt files in to Program */
 /* It reads the file and stores the data in the data array */
@@ -71,7 +74,7 @@ void txt_remove_data(SDTM_File *txt, size_t index);
 
 /* Save data to txt file */
 /* It saves the data array to the file */
-void txt_save_file(SDTM_File txt);
+void save_file(SDTM_File txt);
 
 
 void cvs_result_save_file(char * header, char * result, char * nome);

@@ -2401,7 +2401,7 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
         output_txt_situacao.loaded = 0;
     }
 
-    txt_save_file(output_txt_estudantes);
-    txt_save_file(output_txt_situacao);
+    save_file(output_txt_estudantes);
+    save_file(output_txt_situacao);
 
 }
