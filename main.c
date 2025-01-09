@@ -106,7 +106,7 @@ int main(void)
         fflush(stdin);
         printf("\n8- Determinar o numero de alunos em risco de prescrever.\n9- Determinar o numero de estudantes finalistas.");
         fflush(stdin);
-        printf("\n10- Mostrar as medias das idades dos alunos de uma certa nacionalidade por ano.");
+        printf("\n10- Mostrar as medias das idades dos alunos de uma certa nacionalidade por ano (apenas considera o ano atual).");
         fflush(stdin);
         printf("\n11- Listar os alunos com datas de nascimento entre dois valores e que pertecam a um grupo de 5 nacionalidades.");
         fflush(stdin);
@@ -171,7 +171,7 @@ int main(void)
             break;
 
         case 10: //mostra a média das idades dos alunos de uma certa nacionalidade por ano
-            ano_atual = 2024;
+            ano_atual = 2025;
             nacion = menu_obter_nacionalidade();
             media = media_idades_nacionalidade(dados_alunos, nacion, ano_atual, size_base);
             for (i=0;i<6;i++) {
