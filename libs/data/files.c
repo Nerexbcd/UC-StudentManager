@@ -16,19 +16,19 @@
 
 // ------------------------------ TXT File Error Handling
 
-void txt_error_open_file(char *path) {
+void error_open_file(char *path) {
     fprintf(stderr,RED("Error: Could not open file %s\n"), path);
     printf(CYAN("Exiting...\n"));
     exit(1);
 }
 
-void txt_error_not_loaded(char *path) {
+void error_not_loaded(char *path) {
     fprintf(stderr,RED("Error: File %s not loaded\n"), path);
     printf(CYAN("Exiting...\n"));
     exit(1);
 }
 
-void txt_error_index_out_of_bounds() {
+void error_index_out_of_bounds() {
     fprintf(stderr,RED("Error: Index out of bounds\n"));
     printf(CYAN("Exiting...\n"));
     exit(1);
@@ -37,8 +37,8 @@ void txt_error_index_out_of_bounds() {
 
 // ------------------------------ TXT File Initialization
 
-txtFile files_init(char *path) {
-    struct txtFile txt;
+SDTM_File files_init(char *path) {
+    struct SDTM_File txt;
     txt.path = strdup(path);
     txt.size = 0;
     txt.loaded = 0;
@@ -58,13 +58,13 @@ txtFile files_init(char *path) {
     return txt;
 }
 
-// ------------------------------ TXT File to memmory and vice versa
+// ------------------------------ TXT File to memory and vice versa
 
-void txt_load_file(txtFile *txt){
-    txtFile w_txt = *txt; 
+void txt_load_file(SDTM_File *txt){
+    SDTM_File w_txt = *txt; 
     FILE *file = fopen(w_txt.path, "r");
 
-    if (file == NULL) txt_error_open_file(w_txt.path);
+    if (file == NULL) error_open_file(w_txt.path);
 
     fseek(file, 0, SEEK_END);
     long fileSize = ftell(file);
@@ -85,8 +85,8 @@ void txt_load_file(txtFile *txt){
     *txt = w_txt;
 }
 
-void txt_unload_file(txtFile *txt){
-    txtFile w_txt = *txt;
+void txt_unload_file(SDTM_File *txt){
+    SDTM_File w_txt = *txt;
     for (int i = 0; *(w_txt.data + i); i++) {
         free(*(w_txt.data + i));
     }
@@ -98,24 +98,24 @@ void txt_unload_file(txtFile *txt){
 
 // ------------------------------ TXT File Infos
 
-size_t txt_get_size(txtFile txt){
-    if (txt.loaded == 0) txt_error_not_loaded(txt.path);
+size_t txt_get_size(SDTM_File txt){
+    if (txt.loaded == 0) error_not_loaded(txt.path);
 
     return txt.size;
 }
 
 // ------------------------------ TXT Data Manipulation
 
-char** txt_get_data(txtFile txt){
-    if (txt.loaded == 0) txt_error_not_loaded(txt.path);
+char** txt_get_data(SDTM_File txt){
+    if (txt.loaded == 0) error_not_loaded(txt.path);
 
     return txt.data;
 }
 
-void txt_append_data(txtFile *txt, char *data){
-    txtFile w_txt = *txt;
+void txt_append_data(SDTM_File *txt, char *data){
+    SDTM_File w_txt = *txt;
 
-    if (w_txt.loaded == 0) txt_error_not_loaded(w_txt.path);
+    if (w_txt.loaded == 0) error_not_loaded(w_txt.path);
     
     w_txt.data = realloc(w_txt.data, (w_txt.size + 1) * sizeof(char*));
     *(w_txt.data + w_txt.size) = strdup(data);
@@ -123,24 +123,24 @@ void txt_append_data(txtFile *txt, char *data){
     *txt = w_txt;
 }
 
-void txt_update_data(txtFile *txt, char *data, size_t index){
-    txtFile w_txt = *txt;
+void txt_update_data(SDTM_File *txt, char *data, size_t index){
+    SDTM_File w_txt = *txt;
 
-    if (w_txt.loaded == 0) txt_error_not_loaded(w_txt.path);
+    if (w_txt.loaded == 0) error_not_loaded(w_txt.path);
     
-    if (index >= w_txt.size) txt_error_index_out_of_bounds();
+    if (index >= w_txt.size) error_index_out_of_bounds();
 
     free(*(w_txt.data + index));
     *(w_txt.data + index) = strdup(data);
     *txt = w_txt;
 }
 
-void txt_remove_data(txtFile *txt, size_t index){
-    txtFile w_txt = *txt;
+void txt_remove_data(SDTM_File *txt, size_t index){
+    SDTM_File w_txt = *txt;
 
-    if (w_txt.loaded == 0) txt_error_not_loaded(w_txt.path);
+    if (w_txt.loaded == 0) error_not_loaded(w_txt.path);
     
-    if (index >= w_txt.size) txt_error_index_out_of_bounds();
+    if (index >= w_txt.size) error_index_out_of_bounds();
 
     free(*(w_txt.data + index));
     for (int i = index; i < w_txt.size - 1; i++) {
@@ -154,14 +154,14 @@ void txt_remove_data(txtFile *txt, size_t index){
 
 // ------------------------------ TXT File Save
 
-void txt_save_file(txtFile txt){
+void txt_save_file(SDTM_File txt){
 
-    if (txt.loaded == 0) txt_error_not_loaded(txt.path);
+    if (txt.loaded == 0) error_not_loaded(txt.path);
 
     FILE *file = fopen(txt.path, "w");
     
     if (file == NULL) {
-        txt_error_open_file(txt.path);
+        error_open_file(txt.path);
     }
     
     fprintf(file, "%s\n", *(txt.data));

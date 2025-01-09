@@ -14,5 +14,8 @@
     "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe",
     "lonberg.editorButtonRunTask": {
         "c": "Run Program"
-    }
+    },
+    "cSpell.ignoreWords": [
+        "SDTM"
+    ]
 }
