@@ -61,6 +61,7 @@ SDTM_File files_init(char *path) {
             txt.size++;
         }  
     }
+    
     return txt;
 }
 
