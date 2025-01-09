@@ -40,7 +40,7 @@ int main(void)
         
 
        
-        printf("BEM VINDO!\n\n");
+        printf("\nBEM VINDO!\n\n");
         
         char *path_estudantes; //caminho do ficheiro dos dados dos estudantes
         char *path_situacao; //caminho do ficheiro da situacao escolar
@@ -115,7 +115,7 @@ int main(void)
         printf("\n14- Sair.");
         fflush(stdin);
         
-        printf("\n\nOpcao: ");
+        printf("\n\nOpçao: ");
         fflush(stdin);
         scanf(" %d",&opcao);
         
