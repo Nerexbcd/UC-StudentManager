@@ -177,7 +177,9 @@ void cvs_result_save_file(char * header, char * result, char * nome)
 
     FILE * ptr_cvs = fopen(nome,"w");
     if (ptr_cvs == NULL) {
-        puts("a");
+        puts("\nerro\n");
+        fclose(ptr_cvs);
+        exit;
     } 
     fprintf(ptr_cvs, header);
     fprintf(ptr_cvs, result);
@@ -192,7 +194,9 @@ void txt_result_save_file(char * result, char * nome)
 
     FILE * ptr_txt = fopen(nome,"w");
     if (ptr_txt == NULL) {
-        puts("a");
+        puts("\nerro\n");
+        fclose(ptr_txt);
+        exit;
     } 
     
     fprintf(ptr_txt, result);

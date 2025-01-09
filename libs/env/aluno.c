@@ -682,7 +682,7 @@ void mostrar_toda_lista(ALUNO *lista_estudantes, int size_base) {
         }
     }
 
-    char * t_guardar = malloc(sizeof(char)*4);
+    /*char * t_guardar = malloc(sizeof(char)*4);
     t_guardar = tipo_de_guardar();
 
     if (strcmp(t_guardar,".txt")==0) {
@@ -1445,7 +1445,6 @@ float * media_idades_nacionalidade(ALUNO * lista_estudantes, char * nacio, float
 
 void n_medio_mat(ALUNO * lista_estudantes, int size_base)
 {
-    puts("a");
     //media geral
     float soma_geral = 0;
     float n_total = 0;
@@ -1469,41 +1468,64 @@ void n_medio_mat(ALUNO * lista_estudantes, int size_base)
     float * somas = calloc(1,sizeof(float));
     float * n_ele = calloc(1,sizeof(float));
 
-    for (int i=0,k=0; i<size_base; i++) {
+    for (int i=0, k=0; i<size_base; i++) {
         if (lista_estudantes[i].ocupado == 1) {
             if (!vetor_nacionalidades) {
-                vetor_nacionalidades = (NACIO *) realloc(vetor_nacionalidades,sizeof(NACIO));
-                vetor_nacionalidades[k].nacionalidade = (char *) (strdup (lista_estudantes[i].nacionalidade));
-                medias = (NACIO *) realloc(medias,sizeof(float));
-                somas = (NACIO *) realloc(somas,sizeof(float));
-                n_ele = (NACIO *) realloc(n_ele,sizeof(float));
-                somas[i] = lista_estudantes[i].n_matriculas;
-                n_ele[i] = 1;
-                size_vetor_nacio ++;
+
+                NACIO * new_vetor_nacionalidades = (NACIO *) realloc(vetor_nacionalidades,sizeof(NACIO));
+                vetor_nacionalidades = new_vetor_nacionalidades;
+                vetor_nacionalidades[0].nacionalidade = (char *) (strdup (lista_estudantes[i].nacionalidade));
+                
+                medias = (float *) realloc(medias,sizeof(float));
+                somas = (float* ) realloc(somas,sizeof(float));
+                n_ele = (float *) realloc(n_ele,sizeof(float));
+                somas[0] = lista_estudantes[i].n_matriculas;
+                n_ele[0] = 1;
+                
+                size_vetor_nacio = 1;
             }
             else {
+
+                int num_rep = 0;
+                
                 for (int j=0; j<size_vetor_nacio; j++) {
+                    
                     if (strcmp(lista_estudantes[i].nacionalidade,vetor_nacionalidades[j].nacionalidade)==0) {
-                        somas[i] = somas[i] + lista_estudantes[i].n_matriculas;
-                        n_ele[i] ++;
+                        
+                        printf("\n%s\n",vetor_nacionalidades[j].nacionalidade);
+                        somas[j] = somas[j] + lista_estudantes[i].n_matriculas;
+                        n_ele[j] ++;
+
+                        
                         break;
                     }
                     else {
-                        vetor_nacionalidades = (NACIO *) realloc(vetor_nacionalidades,sizeof(NACIO));
-                        vetor_nacionalidades[k].nacionalidade = strdup (lista_estudantes[i].nacionalidade);
-                        size_vetor_nacio++;
-                        medias = (NACIO *) realloc(medias,sizeof(float));
-                        somas = (NACIO *) realloc(somas,sizeof(float));
-                        n_ele = (NACIO *) realloc(n_ele,sizeof(float));
-                        somas[i] = lista_estudantes[i].n_matriculas;
-                        n_ele[i] = 1;
-                        break;
+                        num_rep++;
                     }
+                }
+
+                if (num_rep==size_vetor_nacio) {
+                    k++;
+                    size_vetor_nacio ++;
+                
+                    NACIO * new_vetor_nacionalidades = (NACIO *) realloc(vetor_nacionalidades,sizeof(NACIO *)*sizeof(NACIO));
+                    vetor_nacionalidades = new_vetor_nacionalidades;
+                    
+                    vetor_nacionalidades[k].nacionalidade = strdup (lista_estudantes[i].nacionalidade);
+                    medias = (float *) realloc(medias,sizeof(float)* sizeof(float*));
+                    somas = (float *) realloc(somas,sizeof(float)* sizeof(float*));
+                    n_ele = (float *) realloc(n_ele,sizeof(float)*sizeof(float*));
+                    somas[k] = lista_estudantes[i].n_matriculas;
+                    n_ele[k] = 1;
+
                 }
             }
         }
+        
+    
     }
 
+    
     for (int i=0; i<size_vetor_nacio; i++) {
         medias[i]=somas[i]/n_ele[i];
     }
