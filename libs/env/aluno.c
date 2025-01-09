@@ -212,8 +212,6 @@ int inserir_estudante(ALUNO *lista_estudantes,size_t *size_alunos, int size_base
         int temp = lista_estudantes[j].codigo;
         char * temp2 = malloc(sizeof(char)*((int)(log10(temp)))); 
         sprintf(temp2, "%d", temp);
-        info = realloc(info, sizeof(char)*(strlen(temp2)+1));
-        puts("dddd");
         info = strcat(info, strdup(temp2));
         puts("dddd");
         info = strcat(info,"\n"); 
