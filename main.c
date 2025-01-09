@@ -4,7 +4,7 @@
 #include <locale.h>
 #include "libs/style/tools.h"
 #include "libs/data/files.h"
-#include "libs/env/aluno.h"
+#include "libs/env/student.h"
 #include "libs/style/colors.h"
 #include "libs/style/tools.h"
 #include "libs/style/menu.h"
@@ -61,16 +61,15 @@ int main(void)
         SDTM_File txt_estudantes = files_init(path_estudantes); //estrutura que armazena a informacao do ficheiro dos estudantes
         SDTM_File txt_situacao   = files_init(path_situacao); //estrutura que armazena a informacao do ficheiro da situacao escolar
    
-        ALUNO *dados_alunos = criar_lista(&txt_estudantes); //estrutura que armazena a informacao dos alunos
+        STUDENT *dados_alunos = criar_lista(&txt_estudantes); //estrutura que armazena a informacao dos alunos
 
-        size_t size_alunos = 0; //tamanho total da informaçao na estrutura dados_alunos
+        int size_alunos = 0; //tamanho total da informaçao na estrutura dados_alunos
 
-        seek_data(txt_estudantes, txt_situacao,dados_alunos, &size_alunos);
+        student_seek_data(txt_estudantes, txt_situacao, dados_alunos, &size_alunos);
 
        
     //fim da inicializacao  
 
-    int size_base = sizeof(dados_alunos); //tamanho inicial da estrutura
     int cond_saida=0; //condicao de saída do loop
 
 
@@ -87,7 +86,7 @@ int main(void)
         float * media = NULL; //media geral de todos os alunos
         char * nacion = NULL; //para guardar a string nacionalidade
         char * pesquisa = NULL; //para guardar a string pesquisa
-        int i = 0; //codigo de um aluno
+        int i = 0; //codigo de um student
         char * data1 = malloc(sizeof(char)*10); //uma data de nascimento
         char * data2 = malloc(sizeof(char)*10); //uma data de nascimento
         
@@ -123,46 +122,46 @@ int main(void)
         {
         case 1: //mostrar a lista
             printf("\nLista de estudantes: \n");
-            mostrar_toda_lista(dados_alunos, size_base);
+            mostrar_toda_lista(dados_alunos, size_alunos);
             break;
 
-        case 2: //inserir um aluno
-            printf("\nInsira os dados do aluno:\n");
+        case 2: //inserir um student
+            printf("\nInsira os dados do student:\n");
             fflush(stdin);
-            size_base = inserir_estudante(dados_alunos,&size_alunos, size_base);
+            inserir_estudante(dados_alunos,size_alunos);
             break;
 
-        case 3: //remover um aluno
+        case 3: //remover um student
             i = escolher_codigo(dados_alunos);
             remover_estudante(dados_alunos, i);
             break;
 
-        case 4: //alterar dados de um aluno
-            atualizar_uma_caracteristica_estudante(dados_alunos, size_base);
+        case 4: //alterar dados de um student
+            atualizar_uma_caracteristica_estudante(dados_alunos, size_alunos);
             break;
 
         case 5: //pesquisar estudante por nome
             pesquisa = menu_obter_pesquisa();
-            pesquisar(dados_alunos,pesquisa, size_base);
+            pesquisar(dados_alunos,pesquisa, size_alunos);
             break;
 
         case 6: //mostra lista por ordem alfabética do último nome
             printf("\nLista dos nomes dos alunos por ordem alfabetica do seu apelido:\n");
-            mostrar_lista_por_ordem_apelido(dados_alunos, size_base);
+            mostrar_lista_por_ordem_apelido(dados_alunos, size_alunos);
             break;
 
         case 7: //mostrar alunos entre duas médias 
             x = menu_obter_float();
             y = menu_obter_float();
-            mostrar_alunos_entre_medias(dados_alunos,x,y, size_base);
+            mostrar_alunos_entre_medias(dados_alunos,x,y, size_alunos);
             break;
 
         case 8: //mostrar estudantes em risco de prescrever
-            n_est_risco = estudantes_risco_prescrever(dados_alunos, size_base);
+            n_est_risco = estudantes_risco_prescrever(dados_alunos, size_alunos);
             break;
 
         case 9: //determinar o número de estudantes finalistas
-            n_fin = n_est_finalistas(dados_alunos, size_base);
+            n_fin = n_est_finalistas(dados_alunos, size_alunos);
             printf("Numero de estudantes finalistas: %d.\n",n_fin);
 
             fflush(stdin);
@@ -171,7 +170,7 @@ int main(void)
         case 10: //mostra a média das idades dos alunos de uma certa nacionalidade por ano
             ano_atual = 2025;
             nacion = menu_obter_nacionalidade();
-            media = media_idades_nacionalidade(dados_alunos, nacion, ano_atual, size_base);
+            media = media_idades_nacionalidade(dados_alunos, nacion, ano_atual, size_alunos);
             for (i=0;i<6;i++) {
                 if (media[i]!=0) {
                     if (strcmp(nacion,"0")!=0) {
@@ -192,19 +191,19 @@ int main(void)
             printf("\nIntroduza a segunda data de nascimento (dd-mm-aaaa): ");
             fflush(stdin);
             scanf(" %s",data2);
-            listar_est_entre_data_n(dados_alunos, data1 , data2, size_base);
+            listar_est_entre_data_n(dados_alunos, data1 , data2, size_alunos);
             break;
 
         case 12: //determinar o numero medio de matriculas, em geral e por nacionalidade
-            n_medio_mat(dados_alunos, size_base);
+            n_medio_mat(dados_alunos, size_alunos);
             break;
         
         case 13: //guardar o ficheiro
-            criar_txt_ficheiro_guardar (dados_alunos, size_base, path_estudantes, path_situacao);
+            student_save_data(txt_estudantes, txt_situacao, dados_alunos, size_alunos);
             break;
 
         case 14:
-            criar_txt_ficheiro_guardar(dados_alunos,size_base,path_estudantes,path_situacao);
+            //criar_txt_ficheiro_guardar(dados_alunos,size_alunos,path_estudantes,path_situacao);
             cond_saida=1;
             printf("A sair...");
             break;

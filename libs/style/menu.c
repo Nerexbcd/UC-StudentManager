@@ -120,7 +120,7 @@ float menu_obter_float()
 }
 
 
-int escolher_codigo(ALUNO * base_dados)
+int escolher_codigo(STUDENT * base_dados)
 {
     int n;
     int cod;
@@ -128,7 +128,7 @@ int escolher_codigo(ALUNO * base_dados)
     int pos;
 
     do {
-        printf("\nQual é o código do aluno? ");
+        printf("\nQual é o código do student? ");
         fflush(stdin);
         scanf(" %i", &cod);
         

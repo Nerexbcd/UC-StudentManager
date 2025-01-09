@@ -104,7 +104,7 @@ void txt_unload_file(SDTM_File *txt){
 
 // ------------------------------ TXT File Infos
 
-size_t txt_get_size(SDTM_File txt){
+int txt_get_size(SDTM_File txt){
     if (txt.loaded == 0) error_not_loaded(txt.path);
 
     return txt.size;
@@ -129,7 +129,7 @@ void txt_append_data(SDTM_File *txt, char *data){
     *txt = w_txt;
 }
 
-void txt_update_data(SDTM_File *txt, char *data, size_t index){
+void txt_update_data(SDTM_File *txt, char *data, int index){
     SDTM_File w_txt = *txt;
 
     if (w_txt.loaded == 0) error_not_loaded(w_txt.path);
@@ -141,7 +141,7 @@ void txt_update_data(SDTM_File *txt, char *data, size_t index){
     *txt = w_txt;
 }
 
-void txt_remove_data(SDTM_File *txt, size_t index){
+void txt_remove_data(SDTM_File *txt, int index){
     SDTM_File w_txt = *txt;
 
     if (w_txt.loaded == 0) error_not_loaded(w_txt.path);
@@ -162,7 +162,6 @@ void txt_remove_data(SDTM_File *txt, size_t index){
 
 void save_file(SDTM_File txt){
 
-    if (txt.loaded == 0) error_not_loaded(txt.path);
 
     FILE *file = fopen(txt.path, "w");
     
@@ -170,7 +169,10 @@ void save_file(SDTM_File txt){
         error_open_file(txt.path);
     }
     
-    fprintf(file, "%s\n", *(txt.data));
+    for (int i = 0; i < txt.size - 1; i++) {
+        fprintf(file, "%s\n", *(txt.data + i));
+    }
+    fprintf(file, "%s", *(txt.data + txt.size - 1));
     
     fclose(file);
     printf(CYAN("File %s saved\n"), txt.path);

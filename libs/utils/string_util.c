@@ -4,7 +4,7 @@
 #include <assert.h>
 #include "string_util.h"
 
-char** str_split(char str[], char separator, size_t *size) {
+char** str_split(char str[], char separator, size_t * size) {
     char **result = 0;
     size_t count = 0;
     char *tmp = str;
@@ -32,7 +32,7 @@ char** str_split(char str[], char separator, size_t *size) {
     result = malloc(sizeof(char*) * count);
 
     if (result) {
-        size_t idx  = 0;
+        int idx  = 0;
         char* token = strtok(str, delim);
 
         while (token) {
@@ -49,7 +49,7 @@ char** str_split(char str[], char separator, size_t *size) {
     return result;
 }
 
-int str_get_bigger(char **strs, int size) {
+int str_get_bigger(char **strs, int *size) {
     int bigger = 0;
     for (int i = 0; i<size; i++) {
         if (strlen(strs[i]) > bigger) {
@@ -65,4 +65,10 @@ char* str_concat(const char *s1, const char *s2)
     strcpy(result, s1);
     strcat(result, s2);
     return result;
+}
+
+char* str_convert_int(int num) {
+    char *temp = malloc(sizeof(char)*((float)log10(num)+1));
+    sprintf(temp, "%d", num);
+    return temp;
 }

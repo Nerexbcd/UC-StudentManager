@@ -7,7 +7,7 @@ typedef struct SDTM_File {
     char *fileDir;
     char loaded;
     char **data;
-    size_t size;
+    int size;
 } SDTM_File;
 
 
@@ -48,7 +48,7 @@ void txt_unload_file(SDTM_File *txt);
 
 /* Get txt file size */
 /* It returns the number of lines in the file */
-size_t txt_get_size(SDTM_File txt);
+int txt_get_size(SDTM_File txt);
 
 
 // ------------------------------ TXT Data Manipulation
@@ -63,11 +63,11 @@ void txt_append_data(SDTM_File *txt, char *data);
 
 /* Update data in txt file */
 /* It changes the data in the line index */
-void txt_update_data(SDTM_File *txt, char *data, size_t index);
+void txt_update_data(SDTM_File *txt, char *data, int index);
 
 /* Remove data from txt file */
 /* It removes the line index from the file */
-void txt_remove_data(SDTM_File *txt, size_t index);
+void txt_remove_data(SDTM_File *txt, int index);
 
 
 // ------------------------------ TXT File Save
