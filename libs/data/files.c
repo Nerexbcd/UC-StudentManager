@@ -99,7 +99,7 @@ void txt_unload_file(txtFile *txt){
 
 // ------------------------------ TXT File Infos
 
-size_t txt_get_size(txtFile txt){
+int file_get_size(txtFile txt){
     if (txt.loaded == 0) txt_error_not_loaded(txt.path);
 
     return txt.size;
