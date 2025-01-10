@@ -61,9 +61,13 @@ int main(void)
         SDTM_File txt_estudantes = files_init(path_estudantes); //estrutura que armazena a informacao do ficheiro dos estudantes
         SDTM_File txt_situacao   = files_init(path_situacao); //estrutura que armazena a informacao do ficheiro da situacao escolar
    
-        STUDENT *dados_alunos = criar_lista(&txt_estudantes); //estrutura que armazena a informacao dos alunos
+        file_load(&txt_estudantes);
 
-        int size_alunos = 0; //tamanho total da informaçao na estrutura dados_alunos
+        int size_alunos = file_get_size(txt_estudantes); //tamanho da lista de alunos
+
+        file_unload(&txt_estudantes);
+
+        STUDENT *dados_alunos = criar_lista(size_alunos); //estrutura que armazena a informacao dos alunos
 
         student_seek_data(txt_estudantes, txt_situacao, dados_alunos, &size_alunos);
 
@@ -128,7 +132,7 @@ int main(void)
         case 2: //inserir um student
             printf("\nInsira os dados do student:\n");
             fflush(stdin);
-            inserir_estudante(dados_alunos,size_alunos);
+            inserir_estudante(dados_alunos,&size_alunos);
             break;
 
         case 3: //remover um student

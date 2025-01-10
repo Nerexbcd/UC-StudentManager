@@ -66,7 +66,7 @@ SDTM_File files_init(char *path) {
 
 // ------------------------------ TXT File to memory and vice versa
 
-void txt_load_file(SDTM_File *txt){
+void file_load(SDTM_File *txt){
     SDTM_File w_txt = *txt; 
     FILE *file = fopen(w_txt.path, "r");
 
@@ -91,7 +91,7 @@ void txt_load_file(SDTM_File *txt){
     *txt = w_txt;
 }
 
-void txt_unload_file(SDTM_File *txt){
+void file_unload(SDTM_File *txt){
     SDTM_File w_txt = *txt;
     for (int i = 0; *(w_txt.data + i); i++) {
         free(*(w_txt.data + i));
@@ -104,7 +104,7 @@ void txt_unload_file(SDTM_File *txt){
 
 // ------------------------------ TXT File Infos
 
-int txt_get_size(SDTM_File txt){
+int file_get_size(SDTM_File txt){
     if (txt.loaded == 0) error_not_loaded(txt.path);
 
     return txt.size;

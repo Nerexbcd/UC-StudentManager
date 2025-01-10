@@ -37,18 +37,18 @@ SDTM_File files_init(char *path);
 
 /* Load txt files in to Program */
 /* It reads the file and stores the data in the data array */
-void txt_load_file(SDTM_File *txt);
+void file_load(SDTM_File *txt);
 
 /* Unload txt files from Program */
 /* It frees the memory allocated for the data array */
-void txt_unload_file(SDTM_File *txt);
+void file_unload(SDTM_File *txt);
 
 
 // ------------------------------ TXT File Infos
 
 /* Get txt file size */
 /* It returns the number of lines in the file */
-int txt_get_size(SDTM_File txt);
+int file_get_size(SDTM_File txt);
 
 
 // ------------------------------ TXT Data Manipulation

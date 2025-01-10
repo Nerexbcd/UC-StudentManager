@@ -43,56 +43,59 @@ typedef struct nacionalidades
 void student_seek_data(SDTM_File file_estudante, SDTM_File file_situacao, STUDENT *base_dados, int * size_alunos);
 
 //Cria e inicializa a lista de estudantes
-STUDENT * criar_lista(SDTM_File *txt_estudantes);
+STUDENT * criar_lista(int size_alunos);
+
+//Realoca memória para a lista de estudantes
+STUDENT * resize_lista(STUDENT * lista_estudantes, int size_alunos);
 
 //Permite adicionar um student à lista
-void inserir_estudante(STUDENT *lista_estudantes,int size_base);
+void inserir_estudante(STUDENT *lista_estudantes,int * size_alunos);
 
 //Permite remover um student da lista
-void remover_estudante(STUDENT *lista_estudantes,int i);
+void remover_estudante(STUDENT *lista_estudantes, int i);
 
 //Permite alterar um dos dados do student
-void atualizar_uma_caracteristica_estudante(STUDENT *lista_estudantes, int size_base);
+void atualizar_uma_caracteristica_estudante(STUDENT *lista_estudantes, int size_alunos);
 
 //Mostra os dados de um student
 void mostrar_um_aluno(STUDENT *lista_estudantes,int posicao);
 
 //Faz display da struct (apenas os membros com ocupado=1)
-void mostrar_toda_lista(STUDENT *lista_estudantes, int size_base);
+void mostrar_toda_lista(STUDENT *lista_estudantes, int size_alunos);
 
 //Listar estudantes por ordem alfabética do apelido (considera-se apelido a última palavra
 //do nome completo)
-void mostrar_lista_por_ordem_apelido(STUDENT *lista_estudantes, int size_base);
+void mostrar_lista_por_ordem_apelido(STUDENT *lista_estudantes, int size_alunos);
 
 
 //Pesquisa um student através de parte do seu nome
-void pesquisar(STUDENT *lista_estudantes,char *pesquisa, int size_base);
+void pesquisar(STUDENT *lista_estudantes,char *pesquisa, int size_alunos);
 
 //Calcular e mostrar quantos estudantes existem com cada um de 3 escalões de média atual especificados 
 //pelo utilizador
-int mostrar_alunos_entre_medias(STUDENT *lista_estudantes,float x,float y, int size_base);
+int mostrar_alunos_entre_medias(STUDENT *lista_estudantes,float x,float y, int size_alunos);
 
 //Listar os estudantes, cujas datas de nascimento estejam dentro de um intervalo e pertencentes a um
 //conjunto máximo de 5 nacionalidades
-void listar_est_entre_data_n(STUDENT * lista_estudantes, char *data_1 , char * data_2, int size_base);
+void listar_est_entre_data_n(STUDENT * lista_estudantes, char *data_1 , char * data_2, int size_alunos);
 
 //Determinar o número de estudantes em risco de prescrever (3 matrículas e menos de
 //60 ECTS, 4 matrículas e menos de 120 ECTS ou mais de 5 matrículas e não finalista) e
 //proceder à sua listagem
-int estudantes_risco_prescrever(STUDENT * lista_estudantes, int size_base);
+int estudantes_risco_prescrever(STUDENT * lista_estudantes, int size_alunos);
 
 //Determinar a média de idades dos estudantes de uma nacionalidade, atendendo ao ano
 //que estão a frequentar
-float * media_idades_nacionalidade(STUDENT * lista_estudantes, char * nacio, float ano_atual, int size_base);
+float * media_idades_nacionalidade(STUDENT * lista_estudantes, char * nacio, float ano_atual, int size_alunos);
 
 //Determinar o número de estudantes finalistas (pelo menos 154 ECTS realizados)
-int n_est_finalistas(STUDENT * lista_estudantes, int size_base);
+int n_est_finalistas(STUDENT * lista_estudantes, int size_alunos);
 
 //Determinar o numero medio de matriculas, em geral e por nacionalidade
-void n_medio_mat(STUDENT * lista_estudantes, int size_base);
+void n_medio_mat(STUDENT * lista_estudantes, int size_alunos);
 
 //Prepara o texto e outras informações relevantes para guardar o ficheiro, e depois guarda o ficheiro
-// void criar_txt_ficheiro_guardar (STUDENT * dados_alunos, int size_base, char * filepath1, char * filepath2);
+// void criar_txt_ficheiro_guardar (STUDENT * dados_alunos, int size_alunos, char * filepath1, char * filepath2);
 
 void student_save_data(SDTM_File file_estudante, SDTM_File file_situacao, STUDENT *base_dados, int size_alunos);
 
