@@ -26,6 +26,10 @@ STUDENT * criar_lista(int size_alunos) {
         return 0;
     }
 
+    for (int i = 0; i<size_alunos; i++) {
+        lista_estudantes[i].ocupado = 0;
+    }
+
     return lista_estudantes;
 }
 
@@ -40,6 +44,13 @@ STUDENT * resize_lista(STUDENT * lista_estudantes, int size_alunos) {
         printf("erro\n");
         free(ptr);
     }
+
+    for (int i = 0; i<size_alunos; i++) {
+        if (lista_estudantes[i].ocupado!=0 && lista_estudantes[i].ocupado!=1) {
+            lista_estudantes[i].ocupado = 0;
+        }
+    }
+
     return new_lista_estudantes;
 }
 
@@ -72,6 +83,7 @@ void student_seek_data(SDTM_File file_estudante, SDTM_File file_situacao, STUDEN
             base_dados[i].data_n.ano= atoi(strdup(ptr_dn[2]));
 
             base_dados[i].nacionalidade = strdup(dados[3]);
+            
 
             wrt_size_alunos++;
         }
