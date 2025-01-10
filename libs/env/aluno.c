@@ -22,7 +22,7 @@
 ALUNO * criar_lista(int size_alunos) {
 
     ALUNO * lista_estudantes; //estrutura com informacao dos alunos
-    lista_estudantes = malloc(sizeof(STUDENT)*((size_alunos)+1));
+    lista_estudantes = malloc(sizeof(ALUNO)*((size_alunos)+1));
 
     if (sizeof(lista_estudantes)==0) {
         printf("ERRO!");
