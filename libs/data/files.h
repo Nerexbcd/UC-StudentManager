@@ -73,9 +73,12 @@ void txt_remove_data(txtFile *txt, int index);
 /* It saves the data array to the file */
 void txt_save_file(txtFile txt);
 
-
+/* Save data to cvs file*/
+/* Used in case of not using txtFile data, such as in function results*/
 void cvs_result_save_file(char * header, char * result, char * nome);
 
+/* Save data to txt file*/
+/* Used in case of not using txtFile data, such as in function results*/
 void txt_result_save_file(char * result, char * nome);
 
 #endif
