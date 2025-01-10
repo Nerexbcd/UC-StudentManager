@@ -131,7 +131,6 @@ int inserir_estudante(ALUNO *lista_estudantes, int size_base)
     //procura o maior código já utilizado e soma-lhe uma unidade
     int maior_codigo = 0;
     for (int i=0;i<size_base;i++) {
-        printf("\n%i\n",lista_estudantes[i].codigo);
         if (lista_estudantes[i].codigo>maior_codigo) {
             maior_codigo = lista_estudantes[i].codigo;
         }

@@ -117,7 +117,7 @@ int main(void)
         printf("\n14- Sair.");
         fflush(stdin);
         
-        printf("\n\nOpçao: ");
+        printf("\n\nOpcao: ");
         fflush(stdin);
         scanf(" %d",&opcao);
         
