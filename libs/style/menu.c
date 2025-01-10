@@ -1,6 +1,8 @@
 #include "menu.h"
 #include "../utils/string_util.h"
 #include "../style/colors.h"
+#define SIZE_BUFFER 100
+#define SIZE_PESQUISA 50
 
 
 int menu_opcoes_field()
@@ -21,7 +23,7 @@ int menu_opcoes_field()
 
 char * menu_obter_pesquisa() 
 {
-    char * pesquisa = malloc(sizeof(char)*50);
+    char * pesquisa = malloc(sizeof(char)*SIZE_PESQUISA);
     int rep = 0;
 
     do
@@ -43,7 +45,7 @@ char * menu_obter_pesquisa()
 
 char * menu_obter_nacionalidade()
 {
-    char * nacio = malloc(sizeof(char)*100);;
+    char * nacio = malloc(sizeof(char)*SIZE_BUFFER);;
     int rep = 0;
     
     do

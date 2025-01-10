@@ -9,6 +9,7 @@
 #include "libs/style/tools.h"
 #include "libs/style/menu.h"
 #define ANOATUAL 2025
+#define DEZENA 10
 
 #ifdef _WIN32
     #define OS "W"
@@ -25,7 +26,7 @@ int main(void)
 
     setlocale(LC_ALL, "Portuguese");
             
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < DEZENA; i++)
         {
             clearConsole();
             printf(CYAN("Starting..."));
@@ -90,8 +91,8 @@ int main(void)
         char * nacion = NULL; //para guardar a string nacionalidade
         char * pesquisa = NULL; //para guardar a string pesquisa
         int i = 0; //codigo de um aluno
-        char * data1 = malloc(sizeof(char)*10); //uma data de nascimento
-        char * data2 = malloc(sizeof(char)*10); //uma data de nascimento
+        char * data1 = malloc(sizeof(char)*DEZENA); //uma data de nascimento
+        char * data2 = malloc(sizeof(char)*DEZENA); //uma data de nascimento
         
         fflush(stdin);
         printf("\nEscolha entre as seguintes opcoes:");

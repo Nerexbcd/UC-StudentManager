@@ -6,6 +6,8 @@
 #include "../style/colors.h"
 #include "../style/menu.h"
 #include "../utils/string_util.h"
+#define SIZE_BUFFER 100
+#define DEZENA 10
 
 #ifdef _WIN32
     #define PATH_SEPARATOR_CHAR '\\'
@@ -214,7 +216,7 @@ int inserir_estudante(ALUNO *lista_estudantes, int size_base)
     if (strcmp(t_guardar,".txt")==0) {
         
         int temp = lista_estudantes[j].codigo; //para transformacao em *char
-        char * temp2 = malloc(sizeof(char)*100); //exagero de espaço, mas se não o fizesse dava erro; vai ser onde é guardado temporariamente o float ou int transformado em char*
+        char * temp2 = malloc(sizeof(char)*SIZE_BUFFER); //exagero de espaço, mas se não o fizesse dava erro; vai ser onde é guardado temporariamente o float ou int transformado em char*
         sprintf(temp2, "%d", temp); //utilizado no caso de ser necessário transformar int ou float em char*
         char * info = strdup(temp2);
         info = strcat(info,"\t"); 
@@ -223,7 +225,7 @@ int inserir_estudante(ALUNO *lista_estudantes, int size_base)
         info = strcat(info,"\t"); 
     
         temp = lista_estudantes[j].data_n.dia;
-        if (temp<10) {
+        if (temp<DEZENA) {
             info = strcat(info,"0"); //para que a data de nascimento em char* tenha sempre 2 caracteres no dia (ou mês)
         }
         sprintf(temp2, "%d", temp);
@@ -231,7 +233,7 @@ int inserir_estudante(ALUNO *lista_estudantes, int size_base)
         info = strcat(info,"-"); 
 
         temp = lista_estudantes[j].data_n.mes;
-        if (temp<10) {
+        if (temp<DEZENA) {
             info = strcat(info,"0"); 
         }
         sprintf(temp2, "%d", temp);
@@ -285,7 +287,7 @@ int inserir_estudante(ALUNO *lista_estudantes, int size_base)
         char * header = "Codigo\tNome\tData Nascimento\tNacionalidade\tNumero Matriculas\tECTS Concluidos\tAno Curso\tMedia Atual\n"; //header do ficheiro .cvs
         
         int temp = lista_estudantes[j].codigo;
-        char * temp2 = malloc(sizeof(char)*100); 
+        char * temp2 = malloc(sizeof(char)*SIZE_BUFFER); 
         sprintf(temp2, "%d", temp);
         char * info = strdup(temp2);
         info = strcat(info,"\t"); 
@@ -294,7 +296,7 @@ int inserir_estudante(ALUNO *lista_estudantes, int size_base)
         info = strcat(info,"\t"); 
     
         temp = lista_estudantes[j].data_n.dia;
-        if (temp<10) {
+        if (temp<DEZENA) {
             info = strcat(info,"0"); 
         }
         sprintf(temp2, "%d", temp);
@@ -302,7 +304,7 @@ int inserir_estudante(ALUNO *lista_estudantes, int size_base)
         info = strcat(info,"-"); 
 
         temp = lista_estudantes[j].data_n.mes;
-        if (temp<10) {
+        if (temp<DEZENA) {
             info = strcat(info,"0"); 
         }
         sprintf(temp2, "%d", temp);
@@ -483,7 +485,7 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
     if (strcmp(t_guardar,".txt")==0) {
         
         int temp = lista_estudantes[j].codigo;
-        char * temp2 = malloc(sizeof(char)*100); 
+        char * temp2 = malloc(sizeof(char)*SIZE_BUFFER); 
         sprintf(temp2, "%d", temp);
         char * info = strdup(temp2);
         info = strcat(info,"\t"); 
@@ -492,7 +494,7 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
         info = strcat(info,"\t"); 
     
         temp = lista_estudantes[j].data_n.dia;
-        if (temp<10) {
+        if (temp<DEZENA) {
             info = strcat(info,"0"); 
         }
         sprintf(temp2, "%d", temp);
@@ -500,7 +502,7 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
         info = strcat(info,"-"); 
 
         temp = lista_estudantes[j].data_n.mes;
-        if (temp<10) {
+        if (temp<DEZENA) {
             info = strcat(info,"0"); 
         }
         sprintf(temp2, "%d", temp);
@@ -555,7 +557,7 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
         char * header = "Codigo\tNome\tData Nascimento\tNacionalidade\tNumero Matriculas\tECTS Concluidos\tAno Curso\tMedia Atual\n";
         
         int temp = lista_estudantes[j].codigo;
-        char * temp2 = malloc(sizeof(char)*100); 
+        char * temp2 = malloc(sizeof(char)*SIZE_BUFFER); 
         sprintf(temp2, "%d", temp);
         char * info = strdup(temp2);
         info = strcat(info,"\t"); 
@@ -564,7 +566,7 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
         info = strcat(info,"\t"); 
     
         temp = lista_estudantes[j].data_n.dia;
-        if (temp<10) {
+        if (temp<DEZENA) {
             info = strcat(info,"0"); 
         }
         sprintf(temp2, "%d", temp);
@@ -572,7 +574,7 @@ void atualizar_uma_caracteristica_estudante(ALUNO *lista_estudantes, int size_ba
         info = strcat(info,"-"); 
 
         temp = lista_estudantes[j].data_n.mes;
-        if (temp<10) {
+        if (temp<DEZENA) {
             info = strcat(info,"0"); 
         }
         sprintf(temp2, "%d", temp);
@@ -676,7 +678,7 @@ void mostrar_toda_lista(ALUNO *lista_estudantes, int size_base) {
             if (lista_estudantes[j].ocupado==1) {
                 
                 int temp = lista_estudantes[j].codigo;
-                char * temp2 = malloc(sizeof(char)*100); 
+                char * temp2 = malloc(sizeof(char)*SIZE_BUFFER); 
                 sprintf(temp2, "%d", temp);
                 if (rep==0) {
                     info = strdup(temp2);
@@ -690,7 +692,7 @@ void mostrar_toda_lista(ALUNO *lista_estudantes, int size_base) {
                 info = strcat(info,"\t"); 
             
                 temp = lista_estudantes[j].data_n.dia;
-                if (temp<10) {
+                if (temp<DEZENA) {
                     info = strcat(info,"0"); 
                 }
                 sprintf(temp2, "%d", temp);
@@ -698,7 +700,7 @@ void mostrar_toda_lista(ALUNO *lista_estudantes, int size_base) {
                 info = strcat(info,"-"); 
 
                 temp = lista_estudantes[j].data_n.mes;
-                if (temp<10) {
+                if (temp<DEZENA) {
                     info = strcat(info,"0"); 
                 }
                 sprintf(temp2, "%d", temp);
@@ -755,7 +757,7 @@ void mostrar_toda_lista(ALUNO *lista_estudantes, int size_base) {
             if (lista_estudantes[j].ocupado==1) {
         
                 int temp = lista_estudantes[j].codigo;
-                char * temp2 = malloc(sizeof(char)*100); 
+                char * temp2 = malloc(sizeof(char)*SIZE_BUFFER); 
                 sprintf(temp2, "%d", temp);
             
                 if (rep == 0) {
@@ -772,7 +774,7 @@ void mostrar_toda_lista(ALUNO *lista_estudantes, int size_base) {
                 info = strcat(info,"\t"); 
             
                 temp = lista_estudantes[j].data_n.dia;
-                if (temp<10) {
+                if (temp<DEZENA) {
                     info = strcat(info,"0"); 
                 }
                 sprintf(temp2, "%d", temp);
@@ -780,7 +782,7 @@ void mostrar_toda_lista(ALUNO *lista_estudantes, int size_base) {
                 info = strcat(info,"-"); 
 
                 temp = lista_estudantes[j].data_n.mes;
-                if (temp<10) {
+                if (temp<DEZENA) {
                     info = strcat(info,"0"); 
                 }
                 sprintf(temp2, "%d", temp);
@@ -890,7 +892,7 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes, int size_base)
     for (int i=size_base-1, rep=0; i>=0; i--) {
         int posicao = vet_organizado[i]; //determina qual o índice a considerar
         if (lista_estudantes[posicao].ocupado==1) {
-            if(rep!=0 && rep%10==0) { //paginação 10 a 10
+            if(rep!=0 && rep%DEZENA==0) { //paginação 10 a 10
                 printf("Pagina seguinte ->");
                 fflush(stdin);
                 getchar();
@@ -1073,7 +1075,7 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
             if (lista_matches[j]==1) {
                 
                 int temp = lista_estudantes[j].codigo;
-                char * temp2 = malloc(sizeof(char)*100); 
+                char * temp2 = malloc(sizeof(char)*SIZE_BUFFER); 
                 sprintf(temp2, "%d", temp);
                 if (rep==0) {
                     info = strdup(temp2);
@@ -1087,7 +1089,7 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
                 info = strcat(info,"\t"); 
             
                 temp = lista_estudantes[j].data_n.dia;
-                if (temp<10) {
+                if (temp<DEZENA) {
                     info = strcat(info,"0"); 
                 }
                 sprintf(temp2, "%d", temp);
@@ -1095,7 +1097,7 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
                 info = strcat(info,"-"); 
 
                 temp = lista_estudantes[j].data_n.mes;
-                if (temp<10) {
+                if (temp<DEZENA) {
                     info = strcat(info,"0"); 
                 }
                 sprintf(temp2, "%d", temp);
@@ -1154,7 +1156,7 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
             if (lista_matches[j]==1) {
         
                 int temp = lista_estudantes[j].codigo;
-                char * temp2 = malloc(sizeof(char)*100); 
+                char * temp2 = malloc(sizeof(char)*SIZE_BUFFER); 
                 sprintf(temp2, "%d", temp);
             
                 if (rep == 0) {
@@ -1171,7 +1173,7 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
                 info = strcat(info,"\t"); 
             
                 temp = lista_estudantes[j].data_n.dia;
-                if (temp<10) {
+                if (temp<DEZENA) {
                     info = strcat(info,"0"); 
                 }
                 sprintf(temp2, "%d", temp);
@@ -1179,7 +1181,7 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
                 info = strcat(info,"-"); 
 
                 temp = lista_estudantes[j].data_n.mes;
-                if (temp<10) {
+                if (temp<DEZENA) {
                     info = strcat(info,"0"); 
                 }
                 sprintf(temp2, "%d", temp);
@@ -1287,7 +1289,7 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y, int siz
                 if (lista_estudantes[j].ocupado==1 && (lista_estudantes[j].media_atual>=min) && (lista_estudantes[j].media_atual<=max)) {
                     
                     int temp = lista_estudantes[j].codigo;
-                    char * temp2 = malloc(sizeof(char)*100); 
+                    char * temp2 = malloc(sizeof(char)*SIZE_BUFFER); 
                     sprintf(temp2, "%d", temp);
                     if (rep==0) {
                         info = strdup(temp2);
@@ -1301,7 +1303,7 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y, int siz
                     info = strcat(info,"\t"); 
                 
                     temp = lista_estudantes[j].data_n.dia;
-                    if (temp<10) {
+                    if (temp<DEZENA) {
                         info = strcat(info,"0"); 
                     }
                     sprintf(temp2, "%d", temp);
@@ -1309,7 +1311,7 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y, int siz
                     info = strcat(info,"-"); 
 
                     temp = lista_estudantes[j].data_n.mes;
-                    if (temp<10) {
+                    if (temp<DEZENA) {
                         info = strcat(info,"0"); 
                     }
                     sprintf(temp2, "%d", temp);
@@ -1375,7 +1377,7 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y, int siz
                 if (lista_estudantes[j].ocupado==1 && (lista_estudantes[j].media_atual>=min) && (lista_estudantes[j].media_atual<=max)) {
             
                     int temp = lista_estudantes[j].codigo;
-                    char * temp2 = malloc(sizeof(char)*100); 
+                    char * temp2 = malloc(sizeof(char)*SIZE_BUFFER); 
                     sprintf(temp2, "%d", temp);
                 
                     if (rep == 0) {
@@ -1392,7 +1394,7 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y, int siz
                     info = strcat(info,"\t"); 
                 
                     temp = lista_estudantes[j].data_n.dia;
-                    if (temp<10) {
+                    if (temp<DEZENA) {
                         info = strcat(info,"0"); 
                     }
                     sprintf(temp2, "%d", temp);
@@ -1400,7 +1402,7 @@ int mostrar_alunos_entre_medias(ALUNO *lista_estudantes,float x,float y, int siz
                     info = strcat(info,"-"); 
 
                     temp = lista_estudantes[j].data_n.mes;
-                    if (temp<10) {
+                    if (temp<DEZENA) {
                         info = strcat(info,"0"); 
                     }
                     sprintf(temp2, "%d", temp);
@@ -1699,7 +1701,7 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
                 if (lista_matches[j]==1) {
                     
                     int temp = lista_estudantes[j].codigo;
-                    char * temp2 = malloc(sizeof(char)*100); 
+                    char * temp2 = malloc(sizeof(char)*SIZE_BUFFER); 
                     sprintf(temp2, "%d", temp);
                     if (rep==0) {
                         info = strdup(temp2);
@@ -1713,7 +1715,7 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
                     info = strcat(info,"\t"); 
                 
                     temp = lista_estudantes[j].data_n.dia;
-                    if (temp<10) {
+                    if (temp<DEZENA) {
                         info = strcat(info,"0"); 
                     }
                     sprintf(temp2, "%d", temp);
@@ -1721,7 +1723,7 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
                     info = strcat(info,"-"); 
 
                     temp = lista_estudantes[j].data_n.mes;
-                    if (temp<10) {
+                    if (temp<DEZENA) {
                         info = strcat(info,"0"); 
                     }
                     sprintf(temp2, "%d", temp);
@@ -1782,7 +1784,7 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
                 if (lista_matches[j]==1) {
             
                     int temp = lista_estudantes[j].codigo;
-                    char * temp2 = malloc(sizeof(char)*100); 
+                    char * temp2 = malloc(sizeof(char)*SIZE_BUFFER); 
                     sprintf(temp2, "%d", temp);
                 
                     if (rep == 0) {
@@ -1799,7 +1801,7 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
                     info = strcat(info,"\t"); 
                 
                     temp = lista_estudantes[j].data_n.dia;
-                    if (temp<10) {
+                    if (temp<DEZENA) {
                         info = strcat(info,"0"); 
                     }
                     sprintf(temp2, "%d", temp);
@@ -1807,7 +1809,7 @@ void listar_est_entre_data_n(ALUNO * lista_estudantes, char *data_1 , char * dat
                     info = strcat(info,"-"); 
 
                     temp = lista_estudantes[j].data_n.mes;
-                    if (temp<10) {
+                    if (temp<DEZENA) {
                         info = strcat(info,"0"); 
                     }
                     sprintf(temp2, "%d", temp);
@@ -1902,7 +1904,7 @@ int estudantes_risco_prescrever(ALUNO * lista_estudantes, int size_base) {
                 if (rep==0) {//na primeira iteração vai ter este cabeçalho
                     printf("Lista de alunos em risco de prescricao:\n");
                 }
-                else if(rep!=0 && rep%10==0) {//paginação, mostra nomes em blocos de 10
+                else if(rep!=0 && rep%DEZENA==0) {//paginação, mostra nomes em blocos de 10
                     printf("Pagina seguinte ->");
                     fflush(stdin);
                     getchar();
@@ -1924,7 +1926,7 @@ int estudantes_risco_prescrever(ALUNO * lista_estudantes, int size_base) {
                 if (lista_prescricao[j]==1) {
                     
                     int temp = lista_estudantes[j].codigo;
-                    char * temp2 = malloc(sizeof(char)*100); 
+                    char * temp2 = malloc(sizeof(char)*SIZE_BUFFER); 
                     sprintf(temp2, "%d", temp);
                     if (rep==0) {
                         info = strdup(temp2);
@@ -1938,7 +1940,7 @@ int estudantes_risco_prescrever(ALUNO * lista_estudantes, int size_base) {
                     info = strcat(info,"\t"); 
                 
                     temp = lista_estudantes[j].data_n.dia;
-                    if (temp<10) {
+                    if (temp<DEZENA) {
                         info = strcat(info,"0"); 
                     }
                     sprintf(temp2, "%d", temp);
@@ -1946,7 +1948,7 @@ int estudantes_risco_prescrever(ALUNO * lista_estudantes, int size_base) {
                     info = strcat(info,"-"); 
 
                     temp = lista_estudantes[j].data_n.mes;
-                    if (temp<10) {
+                    if (temp<DEZENA) {
                         info = strcat(info,"0"); 
                     }
                     sprintf(temp2, "%d", temp);
@@ -2003,7 +2005,7 @@ int estudantes_risco_prescrever(ALUNO * lista_estudantes, int size_base) {
                 if (lista_prescricao[j]==1) {
             
                     int temp = lista_estudantes[j].codigo;
-                    char * temp2 = malloc(sizeof(char)*100); 
+                    char * temp2 = malloc(sizeof(char)*SIZE_BUFFER); 
                     sprintf(temp2, "%d", temp);
                 
                     if (rep == 0) {
@@ -2020,7 +2022,7 @@ int estudantes_risco_prescrever(ALUNO * lista_estudantes, int size_base) {
                     info = strcat(info,"\t"); 
                 
                     temp = lista_estudantes[j].data_n.dia;
-                    if (temp<10) {
+                    if (temp<DEZENA) {
                         info = strcat(info,"0"); 
                     }
                     sprintf(temp2, "%d", temp);
@@ -2028,7 +2030,7 @@ int estudantes_risco_prescrever(ALUNO * lista_estudantes, int size_base) {
                     info = strcat(info,"-"); 
 
                     temp = lista_estudantes[j].data_n.mes;
-                    if (temp<10) {
+                    if (temp<DEZENA) {
                         info = strcat(info,"0"); 
                     }
                     sprintf(temp2, "%d", temp);
@@ -2274,7 +2276,7 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
 
             temp = dados_alunos[i].data_n.dia;
             temp2 = malloc(sizeof(char)*(int)(log10(temp)));
-            if (temp<10) {
+            if (temp<DEZENA) {
                 vetor_estudantes = strcat(vetor_estudantes,"0"); 
             }
             sprintf(temp2, "%d", temp);
@@ -2284,7 +2286,7 @@ void criar_txt_ficheiro_guardar (ALUNO * dados_alunos, int size_base, char * fil
             
             temp = dados_alunos[i].data_n.mes;
             temp2 = malloc(sizeof(char)*((int)log10(temp)));
-            if (temp<10) {
+            if (temp<DEZENA) {
                 vetor_estudantes = strcat(vetor_estudantes,"0"); 
             }
             sprintf(temp2, "%d", temp);
