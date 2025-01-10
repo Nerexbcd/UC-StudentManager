@@ -46,8 +46,7 @@ int seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, 
     //Atribuição dos dados do ficheiro estudantes.txt à struct
     txt_load_file(&file_estudante);
     int tamanho = file_get_size(file_estudante)-1;
-    for (int i=0; i < file_get_size(file_estudante)-1 ; i++) {
-        
+    for (int i=0; i < tamanho ; i++) {
         if ((base_dados[i]).ocupado==0) {
 
             base_dados[i].ocupado=1;
@@ -67,18 +66,16 @@ int seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, 
             base_dados[i].data_n.ano= atoi(strdup(ptr_dn[2]));
             
             base_dados[i].nacionalidade = strdup(dados[3]);
-            
             wrt_size_alunos++;
         }
     }
-    printf("\nsize %i\n",tamanho);
     txt_unload_file(&file_estudante);
     
     //Atribuição dos dados do ficheiro situaçao_Escolar_Estudantes.txt à struct
     //É efetuada a sua correta colocação por comparação dos números de código
     txt_load_file(&file_situacao);
-
-    for (int i=0; i < tamanho && i < file_get_size(file_situacao); i++) {
+    
+    for (int i=0; (i < tamanho) && (i < file_get_size(file_situacao)); i++) {
         char *linha = file_situacao.data[i];
         char **dados = str_split(linha, '\t', NULL);
         for (int j=0 ; j<tamanho ; j++) {
@@ -861,6 +858,7 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes, int size_base)
         }
         lista_apelidos[g].apel = malloc(sizeof(char) * strlen(nome_comp[componentes])); 
         lista_apelidos[g].apel = nome_comp[componentes]; //guarda o apelido na estrutura
+        printf("\n%s\n",lista_apelidos[g].apel);
     }
 
 
@@ -870,22 +868,25 @@ void mostrar_lista_por_ordem_apelido(ALUNO *lista_estudantes, int size_base)
     //organiza por ordem decrescente
     //crescente nao funciona por algum motivo????
     //de notar que não faz conversão de maiúsculas para minúsculas e vice-versa
-    for(int i = 0; i<size_base-1; ++i)
-    {
-        int pos1 = vet_organizado[i];
-        int pos2 = vet_organizado[i+1];
-
-        if(strcmp(lista_apelidos[pos1].apel, lista_apelidos[pos2].apel) < 0 )
+    for (int j=0; j<size_base-1;j++) {
+        for(int i = 0; i<size_base-1; i++)
         {
-            temp = vet_organizado[i];
-            vet_organizado[i] = vet_organizado[i+1];
-            vet_organizado[i+1] = temp;
+            int pos1 = vet_organizado[i];
+            int pos2 = vet_organizado[i+1];
+
+            if(strcmp(lista_apelidos[pos1].apel, lista_apelidos[pos2].apel) < 0)
+            {
+                temp = vet_organizado[i];
+                vet_organizado[i] = vet_organizado[i+1];
+                vet_organizado[i+1] = temp;
+            }
         }
     }
 
     //mostra os nomes por ordem crescente (alfabética) do apelido
     //como a lista está na ordem decrescente, também está o contador (para ser crescente)
 
+    printf("\n%i\n",strcmp("Higgs","Costa"));
     for (int i=size_base-1, rep=0; i>=0; i--) {
         int posicao = vet_organizado[i]; //determina qual o índice a considerar
         if (lista_estudantes[posicao].ocupado==1) {
