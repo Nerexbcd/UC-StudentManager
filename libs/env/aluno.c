@@ -19,22 +19,18 @@
 
 
 
-ALUNO * criar_lista(txtFile *txt_estudantes) {
+ALUNO * criar_lista(int size_alunos) {
 
-    //alocar memória necessária para todos os elementos da lista
-    ALUNO *lista_estudantes; //estrutura com informacao dos alunos
-    lista_estudantes = malloc(sizeof(ALUNO)*((txt_estudantes->size)+1));
+    STUDENT *lista_estudantes; //estrutura com informacao dos alunos
+    lista_estudantes = malloc(sizeof(STUDENT)*((size_alunos)+1));
 
     if (sizeof(lista_estudantes)==0) {
         printf("ERRO!");
         return 0;
     }
 
-    for (int i=0 ; i<=(txt_estudantes->size) ; i++) {
-        int z=0;
-        lista_estudantes[i].ocupado=0; //indica que está livre
-        lista_estudantes[i].nome=NULL;
-        lista_estudantes[i].nacionalidade=NULL;
+    for (int i = 0; i<size_alunos; i++) {
+        lista_estudantes[i].ocupado = 0;
     }
 
     return lista_estudantes;
