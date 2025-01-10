@@ -63,19 +63,16 @@ int main(void)
         txtFile txt_situacao   = files_init(path_situacao); //estrutura que armazena a informacao do ficheiro da situacao escolar
    
 
-        file_load(&txt_estudantes);
+        txt_load_file(&txt_estudantes);
 
         int size_alunos = file_get_size(txt_estudantes); //tamanho da lista de alunos
 
-        file_unload(&txt_estudantes);
+        txt_unload_file(&txt_estudantes);
 
         ALUNO * dados_alunos = criar_lista(size_alunos); //estrutura que armazena a informacao dos alunos
 
 
-        size_t size_alunos = 0; //tamanho total da informaçao na estrutura dados_alunos (bytes)
-
         int size_base = seek_data(txt_estudantes, txt_situacao,dados_alunos, &size_alunos); //tamanho inicial da estrutura
-
        
     //fim da inicializacao  
     

@@ -77,12 +77,11 @@ void txt_load_file(txtFile *txt){
 
     printf(CYAN("File %s loaded\n"), w_txt.path);
 
-    string[fileSize] = 0;
-
+    string[fileSize] = '\0';
     w_txt.data = str_split(string, '\n', &w_txt.size);
+
     free(string);
     w_txt.loaded = 1;
-
     *txt = w_txt;
 }
 
@@ -124,7 +123,7 @@ void txt_append_data(txtFile *txt, char *data){
     *txt = w_txt;
 }
 
-void txt_update_data(txtFile *txt, char *data, size_t index){
+void txt_update_data(txtFile *txt, char *data, int index){
     txtFile w_txt = *txt;
 
     if (w_txt.loaded == 0) txt_error_not_loaded(w_txt.path);
@@ -136,7 +135,7 @@ void txt_update_data(txtFile *txt, char *data, size_t index){
     *txt = w_txt;
 }
 
-void txt_remove_data(txtFile *txt, size_t index){
+void txt_remove_data(txtFile *txt, int index){
     txtFile w_txt = *txt;
 
     if (w_txt.loaded == 0) txt_error_not_loaded(w_txt.path);

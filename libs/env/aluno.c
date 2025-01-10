@@ -22,7 +22,7 @@
 ALUNO * criar_lista(int size_alunos) {
 
     ALUNO * lista_estudantes; //estrutura com informacao dos alunos
-    lista_estudantes = malloc(sizeof(ALUNO)*((size_alunos)+1));
+    lista_estudantes = malloc(sizeof(ALUNO)*((size_alunos)+2));
 
     if (sizeof(lista_estudantes)==0) {
         printf("ERRO!");
@@ -42,12 +42,12 @@ ALUNO * criar_lista(int size_alunos) {
 int seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, size_t *size_alunos)
 {
     size_t wrt_size_alunos = 0;
-    int tamanho = 0; //tamanho da estrutura
 
     //Atribuição dos dados do ficheiro estudantes.txt à struct
     txt_load_file(&file_estudante);
-    for (int i=0; i < txt_get_size(file_estudante) ; i++) {
-        printf("\n%s\n",file_estudante.data[i]);
+    int tamanho = file_get_size(file_estudante)-1;
+    for (int i=0; i < file_get_size(file_estudante)-1 ; i++) {
+        
         if ((base_dados[i]).ocupado==0) {
 
             base_dados[i].ocupado=1;
@@ -65,45 +65,44 @@ int seek_data(txtFile file_estudante, txtFile file_situacao, ALUNO *base_dados, 
             base_dados[i].data_n.dia= atoi(strdup(ptr_dn[0]));
             base_dados[i].data_n.mes= atoi(strdup(ptr_dn[1]));
             base_dados[i].data_n.ano= atoi(strdup(ptr_dn[2]));
-
+            
             base_dados[i].nacionalidade = strdup(dados[3]);
-
+            
             wrt_size_alunos++;
-            tamanho++;
         }
     }
-
+    printf("\nsize %i\n",tamanho);
     txt_unload_file(&file_estudante);
     
     //Atribuição dos dados do ficheiro situaçao_Escolar_Estudantes.txt à struct
     //É efetuada a sua correta colocação por comparação dos números de código
     txt_load_file(&file_situacao);
 
-    for (int i=0; i < txt_get_size(file_situacao) ; i++) {
+    for (int i=0; i < tamanho && i < file_get_size(file_situacao); i++) {
         char *linha = file_situacao.data[i];
         char **dados = str_split(linha, '\t', NULL);
-        for (int j=0 ; j<wrt_size_alunos ; j++) {
+        for (int j=0 ; j<tamanho ; j++) {
             if (atoi(dados[0]) == base_dados[j].codigo) {
-                
                 base_dados[i].n_matriculas= atoi(strdup(dados[1]));
-
+                
                 base_dados[i].ects_concluidos= atoi(strdup(dados[2]));
-
+            
                 base_dados[i].ano_curso= atoi(strdup(dados[3]));
-
+                
                 char * carater = strdup(dados[4]);
                 for (int k=0; k<strlen(carater); k++) {
                     if (carater[k]== '.') {
                         carater[k] = ',';
                     }
                 }
+                
                 base_dados[i].media_atual= atof(strdup(carater));
             }
         }
     }
     txt_unload_file(&file_situacao);
 
-    if (size_alunos != NULL) *size_alunos = wrt_size_alunos;
+    if (size_alunos != NULL) *size_alunos = tamanho;
     return tamanho;
 }
 
@@ -641,10 +640,10 @@ void mostrar_um_aluno(ALUNO *lista_estudantes,int posicao)
     printf("Nome: %s\n",lista_estudantes[posicao].nome);
     printf("Nacionalidade: %s\n",lista_estudantes[posicao].nacionalidade);
     printf("Data de nascimento: %d-%d-%d\n", lista_estudantes[posicao].data_n.dia, lista_estudantes[posicao].data_n.mes, lista_estudantes[posicao].data_n.ano);
-    printf("Numero de matriculas: %d\n",lista_estudantes[posicao].n_matriculas);
-    printf("Ano do curso: %d\n",lista_estudantes[posicao].ano_curso);
+    printf("Numero de matriculas: %i\n",lista_estudantes[posicao].n_matriculas);
+    printf("Ano do curso: %i\n",lista_estudantes[posicao].ano_curso);
     printf("Media atual: %.1f\n",lista_estudantes[posicao].media_atual);
-    printf("ECTS concluidos: %d\n\n",lista_estudantes[posicao].ects_concluidos);
+    printf("ECTS concluidos: %i\n\n",lista_estudantes[posicao].ects_concluidos);
     fflush(stdin);
 
 }
