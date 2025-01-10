@@ -117,7 +117,7 @@ int inserir_estudante(ALUNO *lista_estudantes, int size_base)
         printf("erro\n");
         free(ptr);
     }
-
+    
     //procurar posição livre
     int j = 0;
     while((lista_estudantes[j]).ocupado==1) {
@@ -131,6 +131,7 @@ int inserir_estudante(ALUNO *lista_estudantes, int size_base)
     //procura o maior código já utilizado e soma-lhe uma unidade
     int maior_codigo = 0;
     for (int i=0;i<size_base;i++) {
+        printf("\n%i\n",lista_estudantes[i].codigo);
         if (lista_estudantes[i].codigo>maior_codigo) {
             maior_codigo = lista_estudantes[i].codigo;
         }
@@ -1000,10 +1001,10 @@ void pesquisar(ALUNO *lista_estudantes,char *pesquisa, int size_base)
       
         for (int k=0; k<sizeof(*(lista_estudantes->nome)); k++) { //vai comparar elemento a elemento
            
-            int repeticao=k;
+            int repeticao=k; //indica se houve repeticao de procura no vetor do nome
            
             do {
-                int posicao=0;
+                int posicao=0; //posicao no vetor
                 int matches=0;
 
                 //procura o primeiro elemento que seja igual ao primeiro elemento do vetor pesquisa
